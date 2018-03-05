@@ -1,0 +1,7 @@
+C:\Users\riveraes\Documents\LaptopPublic\Maestria\MP6157_Adquisicion y procesamiento de datos\DualToneMultiFrequency\DTMF_Projects\DTMF_RX.cydsn\DTMF_RX.cyprj|78e2f2ce-ee35-4a11-8191-d97c40cb9bb2
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|7169b339-8c98-4d3e-aab5-ca8781ecfecd
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|6e6742cf-e444-4913-8d48-330f922a282d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|e1d78137-3ebf-4c69-974e-9d05c2e4b829
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|8ae40d9e-2e3e-49c5-9436-3196458e59af
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|35c2f1e4-582e-45b0-a28e-21f613f3198a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|d533ad94-4ded-49b1-a54f-617f04bea868

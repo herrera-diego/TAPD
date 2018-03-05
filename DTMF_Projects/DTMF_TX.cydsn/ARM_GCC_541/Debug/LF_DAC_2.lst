@@ -1,0 +1,3483 @@
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"LF_DAC_2.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	LF_DAC_2_initVar
+  20              		.bss
+  21              		.type	LF_DAC_2_initVar, %object
+  22              		.size	LF_DAC_2_initVar, 1
+  23              	LF_DAC_2_initVar:
+  24 0000 00       		.space	1
+  25              		.global	LF_DAC_2_wave1
+  26              		.section	.rodata
+  27              		.align	2
+  28              		.type	LF_DAC_2_wave1, %object
+  29              		.size	LF_DAC_2_wave1, 938
+  30              	LF_DAC_2_wave1:
+  31 0000 80       		.byte	-128
+  32 0001 80       		.byte	-128
+  33 0002 80       		.byte	-128
+  34 0003 81       		.byte	-127
+  35 0004 81       		.byte	-127
+  36 0005 82       		.byte	-126
+  37 0006 82       		.byte	-126
+  38 0007 82       		.byte	-126
+  39 0008 83       		.byte	-125
+  40 0009 83       		.byte	-125
+  41 000a 84       		.byte	-124
+  42 000b 84       		.byte	-124
+  43 000c 85       		.byte	-123
+  44 000d 85       		.byte	-123
+  45 000e 85       		.byte	-123
+  46 000f 86       		.byte	-122
+  47 0010 86       		.byte	-122
+  48 0011 87       		.byte	-121
+  49 0012 87       		.byte	-121
+  50 0013 87       		.byte	-121
+  51 0014 88       		.byte	-120
+  52 0015 88       		.byte	-120
+  53 0016 89       		.byte	-119
+  54 0017 89       		.byte	-119
+  55 0018 8A       		.byte	-118
+  56 0019 8A       		.byte	-118
+  57 001a 8A       		.byte	-118
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 2
+
+
+  58 001b 8B       		.byte	-117
+  59 001c 8B       		.byte	-117
+  60 001d 8C       		.byte	-116
+  61 001e 8C       		.byte	-116
+  62 001f 8C       		.byte	-116
+  63 0020 8D       		.byte	-115
+  64 0021 8D       		.byte	-115
+  65 0022 8E       		.byte	-114
+  66 0023 8E       		.byte	-114
+  67 0024 8E       		.byte	-114
+  68 0025 8F       		.byte	-113
+  69 0026 8F       		.byte	-113
+  70 0027 90       		.byte	-112
+  71 0028 90       		.byte	-112
+  72 0029 90       		.byte	-112
+  73 002a 91       		.byte	-111
+  74 002b 91       		.byte	-111
+  75 002c 92       		.byte	-110
+  76 002d 92       		.byte	-110
+  77 002e 92       		.byte	-110
+  78 002f 93       		.byte	-109
+  79 0030 93       		.byte	-109
+  80 0031 94       		.byte	-108
+  81 0032 94       		.byte	-108
+  82 0033 94       		.byte	-108
+  83 0034 95       		.byte	-107
+  84 0035 95       		.byte	-107
+  85 0036 96       		.byte	-106
+  86 0037 96       		.byte	-106
+  87 0038 96       		.byte	-106
+  88 0039 97       		.byte	-105
+  89 003a 97       		.byte	-105
+  90 003b 98       		.byte	-104
+  91 003c 98       		.byte	-104
+  92 003d 98       		.byte	-104
+  93 003e 99       		.byte	-103
+  94 003f 99       		.byte	-103
+  95 0040 99       		.byte	-103
+  96 0041 9A       		.byte	-102
+  97 0042 9A       		.byte	-102
+  98 0043 9B       		.byte	-101
+  99 0044 9B       		.byte	-101
+ 100 0045 9B       		.byte	-101
+ 101 0046 9C       		.byte	-100
+ 102 0047 9C       		.byte	-100
+ 103 0048 9C       		.byte	-100
+ 104 0049 9D       		.byte	-99
+ 105 004a 9D       		.byte	-99
+ 106 004b 9E       		.byte	-98
+ 107 004c 9E       		.byte	-98
+ 108 004d 9E       		.byte	-98
+ 109 004e 9F       		.byte	-97
+ 110 004f 9F       		.byte	-97
+ 111 0050 9F       		.byte	-97
+ 112 0051 A0       		.byte	-96
+ 113 0052 A0       		.byte	-96
+ 114 0053 A0       		.byte	-96
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 3
+
+
+ 115 0054 A1       		.byte	-95
+ 116 0055 A1       		.byte	-95
+ 117 0056 A2       		.byte	-94
+ 118 0057 A2       		.byte	-94
+ 119 0058 A2       		.byte	-94
+ 120 0059 A3       		.byte	-93
+ 121 005a A3       		.byte	-93
+ 122 005b A3       		.byte	-93
+ 123 005c A4       		.byte	-92
+ 124 005d A4       		.byte	-92
+ 125 005e A4       		.byte	-92
+ 126 005f A5       		.byte	-91
+ 127 0060 A5       		.byte	-91
+ 128 0061 A5       		.byte	-91
+ 129 0062 A6       		.byte	-90
+ 130 0063 A6       		.byte	-90
+ 131 0064 A6       		.byte	-90
+ 132 0065 A7       		.byte	-89
+ 133 0066 A7       		.byte	-89
+ 134 0067 A7       		.byte	-89
+ 135 0068 A8       		.byte	-88
+ 136 0069 A8       		.byte	-88
+ 137 006a A8       		.byte	-88
+ 138 006b A9       		.byte	-87
+ 139 006c A9       		.byte	-87
+ 140 006d A9       		.byte	-87
+ 141 006e A9       		.byte	-87
+ 142 006f AA       		.byte	-86
+ 143 0070 AA       		.byte	-86
+ 144 0071 AA       		.byte	-86
+ 145 0072 AB       		.byte	-85
+ 146 0073 AB       		.byte	-85
+ 147 0074 AB       		.byte	-85
+ 148 0075 AC       		.byte	-84
+ 149 0076 AC       		.byte	-84
+ 150 0077 AC       		.byte	-84
+ 151 0078 AD       		.byte	-83
+ 152 0079 AD       		.byte	-83
+ 153 007a AD       		.byte	-83
+ 154 007b AD       		.byte	-83
+ 155 007c AE       		.byte	-82
+ 156 007d AE       		.byte	-82
+ 157 007e AE       		.byte	-82
+ 158 007f AE       		.byte	-82
+ 159 0080 AF       		.byte	-81
+ 160 0081 AF       		.byte	-81
+ 161 0082 AF       		.byte	-81
+ 162 0083 B0       		.byte	-80
+ 163 0084 B0       		.byte	-80
+ 164 0085 B0       		.byte	-80
+ 165 0086 B0       		.byte	-80
+ 166 0087 B1       		.byte	-79
+ 167 0088 B1       		.byte	-79
+ 168 0089 B1       		.byte	-79
+ 169 008a B1       		.byte	-79
+ 170 008b B2       		.byte	-78
+ 171 008c B2       		.byte	-78
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 4
+
+
+ 172 008d B2       		.byte	-78
+ 173 008e B2       		.byte	-78
+ 174 008f B3       		.byte	-77
+ 175 0090 B3       		.byte	-77
+ 176 0091 B3       		.byte	-77
+ 177 0092 B3       		.byte	-77
+ 178 0093 B4       		.byte	-76
+ 179 0094 B4       		.byte	-76
+ 180 0095 B4       		.byte	-76
+ 181 0096 B4       		.byte	-76
+ 182 0097 B4       		.byte	-76
+ 183 0098 B5       		.byte	-75
+ 184 0099 B5       		.byte	-75
+ 185 009a B5       		.byte	-75
+ 186 009b B5       		.byte	-75
+ 187 009c B6       		.byte	-74
+ 188 009d B6       		.byte	-74
+ 189 009e B6       		.byte	-74
+ 190 009f B6       		.byte	-74
+ 191 00a0 B6       		.byte	-74
+ 192 00a1 B7       		.byte	-73
+ 193 00a2 B7       		.byte	-73
+ 194 00a3 B7       		.byte	-73
+ 195 00a4 B7       		.byte	-73
+ 196 00a5 B7       		.byte	-73
+ 197 00a6 B8       		.byte	-72
+ 198 00a7 B8       		.byte	-72
+ 199 00a8 B8       		.byte	-72
+ 200 00a9 B8       		.byte	-72
+ 201 00aa B8       		.byte	-72
+ 202 00ab B8       		.byte	-72
+ 203 00ac B9       		.byte	-71
+ 204 00ad B9       		.byte	-71
+ 205 00ae B9       		.byte	-71
+ 206 00af B9       		.byte	-71
+ 207 00b0 B9       		.byte	-71
+ 208 00b1 B9       		.byte	-71
+ 209 00b2 BA       		.byte	-70
+ 210 00b3 BA       		.byte	-70
+ 211 00b4 BA       		.byte	-70
+ 212 00b5 BA       		.byte	-70
+ 213 00b6 BA       		.byte	-70
+ 214 00b7 BA       		.byte	-70
+ 215 00b8 BA       		.byte	-70
+ 216 00b9 BB       		.byte	-69
+ 217 00ba BB       		.byte	-69
+ 218 00bb BB       		.byte	-69
+ 219 00bc BB       		.byte	-69
+ 220 00bd BB       		.byte	-69
+ 221 00be BB       		.byte	-69
+ 222 00bf BB       		.byte	-69
+ 223 00c0 BB       		.byte	-69
+ 224 00c1 BC       		.byte	-68
+ 225 00c2 BC       		.byte	-68
+ 226 00c3 BC       		.byte	-68
+ 227 00c4 BC       		.byte	-68
+ 228 00c5 BC       		.byte	-68
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 5
+
+
+ 229 00c6 BC       		.byte	-68
+ 230 00c7 BC       		.byte	-68
+ 231 00c8 BC       		.byte	-68
+ 232 00c9 BC       		.byte	-68
+ 233 00ca BD       		.byte	-67
+ 234 00cb BD       		.byte	-67
+ 235 00cc BD       		.byte	-67
+ 236 00cd BD       		.byte	-67
+ 237 00ce BD       		.byte	-67
+ 238 00cf BD       		.byte	-67
+ 239 00d0 BD       		.byte	-67
+ 240 00d1 BD       		.byte	-67
+ 241 00d2 BD       		.byte	-67
+ 242 00d3 BD       		.byte	-67
+ 243 00d4 BD       		.byte	-67
+ 244 00d5 BD       		.byte	-67
+ 245 00d6 BD       		.byte	-67
+ 246 00d7 BD       		.byte	-67
+ 247 00d8 BE       		.byte	-66
+ 248 00d9 BE       		.byte	-66
+ 249 00da BE       		.byte	-66
+ 250 00db BE       		.byte	-66
+ 251 00dc BE       		.byte	-66
+ 252 00dd BE       		.byte	-66
+ 253 00de BE       		.byte	-66
+ 254 00df BE       		.byte	-66
+ 255 00e0 BE       		.byte	-66
+ 256 00e1 BE       		.byte	-66
+ 257 00e2 BE       		.byte	-66
+ 258 00e3 BE       		.byte	-66
+ 259 00e4 BE       		.byte	-66
+ 260 00e5 BE       		.byte	-66
+ 261 00e6 BE       		.byte	-66
+ 262 00e7 BE       		.byte	-66
+ 263 00e8 BE       		.byte	-66
+ 264 00e9 BE       		.byte	-66
+ 265 00ea BE       		.byte	-66
+ 266 00eb BE       		.byte	-66
+ 267 00ec BE       		.byte	-66
+ 268 00ed BE       		.byte	-66
+ 269 00ee BE       		.byte	-66
+ 270 00ef BE       		.byte	-66
+ 271 00f0 BE       		.byte	-66
+ 272 00f1 BE       		.byte	-66
+ 273 00f2 BE       		.byte	-66
+ 274 00f3 BE       		.byte	-66
+ 275 00f4 BE       		.byte	-66
+ 276 00f5 BE       		.byte	-66
+ 277 00f6 BE       		.byte	-66
+ 278 00f7 BE       		.byte	-66
+ 279 00f8 BE       		.byte	-66
+ 280 00f9 BE       		.byte	-66
+ 281 00fa BE       		.byte	-66
+ 282 00fb BE       		.byte	-66
+ 283 00fc BE       		.byte	-66
+ 284 00fd BE       		.byte	-66
+ 285 00fe BD       		.byte	-67
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 6
+
+
+ 286 00ff BD       		.byte	-67
+ 287 0100 BD       		.byte	-67
+ 288 0101 BD       		.byte	-67
+ 289 0102 BD       		.byte	-67
+ 290 0103 BD       		.byte	-67
+ 291 0104 BD       		.byte	-67
+ 292 0105 BD       		.byte	-67
+ 293 0106 BD       		.byte	-67
+ 294 0107 BD       		.byte	-67
+ 295 0108 BD       		.byte	-67
+ 296 0109 BD       		.byte	-67
+ 297 010a BD       		.byte	-67
+ 298 010b BD       		.byte	-67
+ 299 010c BC       		.byte	-68
+ 300 010d BC       		.byte	-68
+ 301 010e BC       		.byte	-68
+ 302 010f BC       		.byte	-68
+ 303 0110 BC       		.byte	-68
+ 304 0111 BC       		.byte	-68
+ 305 0112 BC       		.byte	-68
+ 306 0113 BC       		.byte	-68
+ 307 0114 BC       		.byte	-68
+ 308 0115 BB       		.byte	-69
+ 309 0116 BB       		.byte	-69
+ 310 0117 BB       		.byte	-69
+ 311 0118 BB       		.byte	-69
+ 312 0119 BB       		.byte	-69
+ 313 011a BB       		.byte	-69
+ 314 011b BB       		.byte	-69
+ 315 011c BB       		.byte	-69
+ 316 011d BA       		.byte	-70
+ 317 011e BA       		.byte	-70
+ 318 011f BA       		.byte	-70
+ 319 0120 BA       		.byte	-70
+ 320 0121 BA       		.byte	-70
+ 321 0122 BA       		.byte	-70
+ 322 0123 BA       		.byte	-70
+ 323 0124 B9       		.byte	-71
+ 324 0125 B9       		.byte	-71
+ 325 0126 B9       		.byte	-71
+ 326 0127 B9       		.byte	-71
+ 327 0128 B9       		.byte	-71
+ 328 0129 B9       		.byte	-71
+ 329 012a B8       		.byte	-72
+ 330 012b B8       		.byte	-72
+ 331 012c B8       		.byte	-72
+ 332 012d B8       		.byte	-72
+ 333 012e B8       		.byte	-72
+ 334 012f B8       		.byte	-72
+ 335 0130 B7       		.byte	-73
+ 336 0131 B7       		.byte	-73
+ 337 0132 B7       		.byte	-73
+ 338 0133 B7       		.byte	-73
+ 339 0134 B7       		.byte	-73
+ 340 0135 B6       		.byte	-74
+ 341 0136 B6       		.byte	-74
+ 342 0137 B6       		.byte	-74
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 7
+
+
+ 343 0138 B6       		.byte	-74
+ 344 0139 B6       		.byte	-74
+ 345 013a B5       		.byte	-75
+ 346 013b B5       		.byte	-75
+ 347 013c B5       		.byte	-75
+ 348 013d B5       		.byte	-75
+ 349 013e B4       		.byte	-76
+ 350 013f B4       		.byte	-76
+ 351 0140 B4       		.byte	-76
+ 352 0141 B4       		.byte	-76
+ 353 0142 B4       		.byte	-76
+ 354 0143 B3       		.byte	-77
+ 355 0144 B3       		.byte	-77
+ 356 0145 B3       		.byte	-77
+ 357 0146 B3       		.byte	-77
+ 358 0147 B2       		.byte	-78
+ 359 0148 B2       		.byte	-78
+ 360 0149 B2       		.byte	-78
+ 361 014a B2       		.byte	-78
+ 362 014b B1       		.byte	-79
+ 363 014c B1       		.byte	-79
+ 364 014d B1       		.byte	-79
+ 365 014e B1       		.byte	-79
+ 366 014f B0       		.byte	-80
+ 367 0150 B0       		.byte	-80
+ 368 0151 B0       		.byte	-80
+ 369 0152 B0       		.byte	-80
+ 370 0153 AF       		.byte	-81
+ 371 0154 AF       		.byte	-81
+ 372 0155 AF       		.byte	-81
+ 373 0156 AE       		.byte	-82
+ 374 0157 AE       		.byte	-82
+ 375 0158 AE       		.byte	-82
+ 376 0159 AE       		.byte	-82
+ 377 015a AD       		.byte	-83
+ 378 015b AD       		.byte	-83
+ 379 015c AD       		.byte	-83
+ 380 015d AD       		.byte	-83
+ 381 015e AC       		.byte	-84
+ 382 015f AC       		.byte	-84
+ 383 0160 AC       		.byte	-84
+ 384 0161 AB       		.byte	-85
+ 385 0162 AB       		.byte	-85
+ 386 0163 AB       		.byte	-85
+ 387 0164 AA       		.byte	-86
+ 388 0165 AA       		.byte	-86
+ 389 0166 AA       		.byte	-86
+ 390 0167 A9       		.byte	-87
+ 391 0168 A9       		.byte	-87
+ 392 0169 A9       		.byte	-87
+ 393 016a A9       		.byte	-87
+ 394 016b A8       		.byte	-88
+ 395 016c A8       		.byte	-88
+ 396 016d A8       		.byte	-88
+ 397 016e A7       		.byte	-89
+ 398 016f A7       		.byte	-89
+ 399 0170 A7       		.byte	-89
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 8
+
+
+ 400 0171 A6       		.byte	-90
+ 401 0172 A6       		.byte	-90
+ 402 0173 A6       		.byte	-90
+ 403 0174 A5       		.byte	-91
+ 404 0175 A5       		.byte	-91
+ 405 0176 A5       		.byte	-91
+ 406 0177 A4       		.byte	-92
+ 407 0178 A4       		.byte	-92
+ 408 0179 A4       		.byte	-92
+ 409 017a A3       		.byte	-93
+ 410 017b A3       		.byte	-93
+ 411 017c A3       		.byte	-93
+ 412 017d A2       		.byte	-94
+ 413 017e A2       		.byte	-94
+ 414 017f A2       		.byte	-94
+ 415 0180 A1       		.byte	-95
+ 416 0181 A1       		.byte	-95
+ 417 0182 A0       		.byte	-96
+ 418 0183 A0       		.byte	-96
+ 419 0184 A0       		.byte	-96
+ 420 0185 9F       		.byte	-97
+ 421 0186 9F       		.byte	-97
+ 422 0187 9F       		.byte	-97
+ 423 0188 9E       		.byte	-98
+ 424 0189 9E       		.byte	-98
+ 425 018a 9E       		.byte	-98
+ 426 018b 9D       		.byte	-99
+ 427 018c 9D       		.byte	-99
+ 428 018d 9C       		.byte	-100
+ 429 018e 9C       		.byte	-100
+ 430 018f 9C       		.byte	-100
+ 431 0190 9B       		.byte	-101
+ 432 0191 9B       		.byte	-101
+ 433 0192 9B       		.byte	-101
+ 434 0193 9A       		.byte	-102
+ 435 0194 9A       		.byte	-102
+ 436 0195 99       		.byte	-103
+ 437 0196 99       		.byte	-103
+ 438 0197 99       		.byte	-103
+ 439 0198 98       		.byte	-104
+ 440 0199 98       		.byte	-104
+ 441 019a 98       		.byte	-104
+ 442 019b 97       		.byte	-105
+ 443 019c 97       		.byte	-105
+ 444 019d 96       		.byte	-106
+ 445 019e 96       		.byte	-106
+ 446 019f 96       		.byte	-106
+ 447 01a0 95       		.byte	-107
+ 448 01a1 95       		.byte	-107
+ 449 01a2 94       		.byte	-108
+ 450 01a3 94       		.byte	-108
+ 451 01a4 94       		.byte	-108
+ 452 01a5 93       		.byte	-109
+ 453 01a6 93       		.byte	-109
+ 454 01a7 92       		.byte	-110
+ 455 01a8 92       		.byte	-110
+ 456 01a9 92       		.byte	-110
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 9
+
+
+ 457 01aa 91       		.byte	-111
+ 458 01ab 91       		.byte	-111
+ 459 01ac 90       		.byte	-112
+ 460 01ad 90       		.byte	-112
+ 461 01ae 90       		.byte	-112
+ 462 01af 8F       		.byte	-113
+ 463 01b0 8F       		.byte	-113
+ 464 01b1 8E       		.byte	-114
+ 465 01b2 8E       		.byte	-114
+ 466 01b3 8E       		.byte	-114
+ 467 01b4 8D       		.byte	-115
+ 468 01b5 8D       		.byte	-115
+ 469 01b6 8C       		.byte	-116
+ 470 01b7 8C       		.byte	-116
+ 471 01b8 8C       		.byte	-116
+ 472 01b9 8B       		.byte	-117
+ 473 01ba 8B       		.byte	-117
+ 474 01bb 8A       		.byte	-118
+ 475 01bc 8A       		.byte	-118
+ 476 01bd 8A       		.byte	-118
+ 477 01be 89       		.byte	-119
+ 478 01bf 89       		.byte	-119
+ 479 01c0 88       		.byte	-120
+ 480 01c1 88       		.byte	-120
+ 481 01c2 87       		.byte	-121
+ 482 01c3 87       		.byte	-121
+ 483 01c4 87       		.byte	-121
+ 484 01c5 86       		.byte	-122
+ 485 01c6 86       		.byte	-122
+ 486 01c7 85       		.byte	-123
+ 487 01c8 85       		.byte	-123
+ 488 01c9 85       		.byte	-123
+ 489 01ca 84       		.byte	-124
+ 490 01cb 84       		.byte	-124
+ 491 01cc 83       		.byte	-125
+ 492 01cd 83       		.byte	-125
+ 493 01ce 82       		.byte	-126
+ 494 01cf 82       		.byte	-126
+ 495 01d0 82       		.byte	-126
+ 496 01d1 81       		.byte	-127
+ 497 01d2 81       		.byte	-127
+ 498 01d3 80       		.byte	-128
+ 499 01d4 80       		.byte	-128
+ 500 01d5 80       		.byte	-128
+ 501 01d6 7F       		.byte	127
+ 502 01d7 7F       		.byte	127
+ 503 01d8 7E       		.byte	126
+ 504 01d9 7E       		.byte	126
+ 505 01da 7D       		.byte	125
+ 506 01db 7D       		.byte	125
+ 507 01dc 7D       		.byte	125
+ 508 01dd 7C       		.byte	124
+ 509 01de 7C       		.byte	124
+ 510 01df 7B       		.byte	123
+ 511 01e0 7B       		.byte	123
+ 512 01e1 7A       		.byte	122
+ 513 01e2 7A       		.byte	122
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 10
+
+
+ 514 01e3 7A       		.byte	122
+ 515 01e4 79       		.byte	121
+ 516 01e5 79       		.byte	121
+ 517 01e6 78       		.byte	120
+ 518 01e7 78       		.byte	120
+ 519 01e8 78       		.byte	120
+ 520 01e9 77       		.byte	119
+ 521 01ea 77       		.byte	119
+ 522 01eb 76       		.byte	118
+ 523 01ec 76       		.byte	118
+ 524 01ed 75       		.byte	117
+ 525 01ee 75       		.byte	117
+ 526 01ef 75       		.byte	117
+ 527 01f0 74       		.byte	116
+ 528 01f1 74       		.byte	116
+ 529 01f2 73       		.byte	115
+ 530 01f3 73       		.byte	115
+ 531 01f4 73       		.byte	115
+ 532 01f5 72       		.byte	114
+ 533 01f6 72       		.byte	114
+ 534 01f7 71       		.byte	113
+ 535 01f8 71       		.byte	113
+ 536 01f9 71       		.byte	113
+ 537 01fa 70       		.byte	112
+ 538 01fb 70       		.byte	112
+ 539 01fc 6F       		.byte	111
+ 540 01fd 6F       		.byte	111
+ 541 01fe 6F       		.byte	111
+ 542 01ff 6E       		.byte	110
+ 543 0200 6E       		.byte	110
+ 544 0201 6D       		.byte	109
+ 545 0202 6D       		.byte	109
+ 546 0203 6D       		.byte	109
+ 547 0204 6C       		.byte	108
+ 548 0205 6C       		.byte	108
+ 549 0206 6B       		.byte	107
+ 550 0207 6B       		.byte	107
+ 551 0208 6B       		.byte	107
+ 552 0209 6A       		.byte	106
+ 553 020a 6A       		.byte	106
+ 554 020b 69       		.byte	105
+ 555 020c 69       		.byte	105
+ 556 020d 69       		.byte	105
+ 557 020e 68       		.byte	104
+ 558 020f 68       		.byte	104
+ 559 0210 67       		.byte	103
+ 560 0211 67       		.byte	103
+ 561 0212 67       		.byte	103
+ 562 0213 66       		.byte	102
+ 563 0214 66       		.byte	102
+ 564 0215 66       		.byte	102
+ 565 0216 65       		.byte	101
+ 566 0217 65       		.byte	101
+ 567 0218 64       		.byte	100
+ 568 0219 64       		.byte	100
+ 569 021a 64       		.byte	100
+ 570 021b 63       		.byte	99
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 11
+
+
+ 571 021c 63       		.byte	99
+ 572 021d 63       		.byte	99
+ 573 021e 62       		.byte	98
+ 574 021f 62       		.byte	98
+ 575 0220 61       		.byte	97
+ 576 0221 61       		.byte	97
+ 577 0222 61       		.byte	97
+ 578 0223 60       		.byte	96
+ 579 0224 60       		.byte	96
+ 580 0225 60       		.byte	96
+ 581 0226 5F       		.byte	95
+ 582 0227 5F       		.byte	95
+ 583 0228 5F       		.byte	95
+ 584 0229 5E       		.byte	94
+ 585 022a 5E       		.byte	94
+ 586 022b 5D       		.byte	93
+ 587 022c 5D       		.byte	93
+ 588 022d 5D       		.byte	93
+ 589 022e 5C       		.byte	92
+ 590 022f 5C       		.byte	92
+ 591 0230 5C       		.byte	92
+ 592 0231 5B       		.byte	91
+ 593 0232 5B       		.byte	91
+ 594 0233 5B       		.byte	91
+ 595 0234 5A       		.byte	90
+ 596 0235 5A       		.byte	90
+ 597 0236 5A       		.byte	90
+ 598 0237 59       		.byte	89
+ 599 0238 59       		.byte	89
+ 600 0239 59       		.byte	89
+ 601 023a 58       		.byte	88
+ 602 023b 58       		.byte	88
+ 603 023c 58       		.byte	88
+ 604 023d 57       		.byte	87
+ 605 023e 57       		.byte	87
+ 606 023f 57       		.byte	87
+ 607 0240 56       		.byte	86
+ 608 0241 56       		.byte	86
+ 609 0242 56       		.byte	86
+ 610 0243 56       		.byte	86
+ 611 0244 55       		.byte	85
+ 612 0245 55       		.byte	85
+ 613 0246 55       		.byte	85
+ 614 0247 54       		.byte	84
+ 615 0248 54       		.byte	84
+ 616 0249 54       		.byte	84
+ 617 024a 53       		.byte	83
+ 618 024b 53       		.byte	83
+ 619 024c 53       		.byte	83
+ 620 024d 52       		.byte	82
+ 621 024e 52       		.byte	82
+ 622 024f 52       		.byte	82
+ 623 0250 52       		.byte	82
+ 624 0251 51       		.byte	81
+ 625 0252 51       		.byte	81
+ 626 0253 51       		.byte	81
+ 627 0254 51       		.byte	81
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 12
+
+
+ 628 0255 50       		.byte	80
+ 629 0256 50       		.byte	80
+ 630 0257 50       		.byte	80
+ 631 0258 4F       		.byte	79
+ 632 0259 4F       		.byte	79
+ 633 025a 4F       		.byte	79
+ 634 025b 4F       		.byte	79
+ 635 025c 4E       		.byte	78
+ 636 025d 4E       		.byte	78
+ 637 025e 4E       		.byte	78
+ 638 025f 4E       		.byte	78
+ 639 0260 4D       		.byte	77
+ 640 0261 4D       		.byte	77
+ 641 0262 4D       		.byte	77
+ 642 0263 4D       		.byte	77
+ 643 0264 4C       		.byte	76
+ 644 0265 4C       		.byte	76
+ 645 0266 4C       		.byte	76
+ 646 0267 4C       		.byte	76
+ 647 0268 4B       		.byte	75
+ 648 0269 4B       		.byte	75
+ 649 026a 4B       		.byte	75
+ 650 026b 4B       		.byte	75
+ 651 026c 4B       		.byte	75
+ 652 026d 4A       		.byte	74
+ 653 026e 4A       		.byte	74
+ 654 026f 4A       		.byte	74
+ 655 0270 4A       		.byte	74
+ 656 0271 49       		.byte	73
+ 657 0272 49       		.byte	73
+ 658 0273 49       		.byte	73
+ 659 0274 49       		.byte	73
+ 660 0275 49       		.byte	73
+ 661 0276 48       		.byte	72
+ 662 0277 48       		.byte	72
+ 663 0278 48       		.byte	72
+ 664 0279 48       		.byte	72
+ 665 027a 48       		.byte	72
+ 666 027b 47       		.byte	71
+ 667 027c 47       		.byte	71
+ 668 027d 47       		.byte	71
+ 669 027e 47       		.byte	71
+ 670 027f 47       		.byte	71
+ 671 0280 47       		.byte	71
+ 672 0281 46       		.byte	70
+ 673 0282 46       		.byte	70
+ 674 0283 46       		.byte	70
+ 675 0284 46       		.byte	70
+ 676 0285 46       		.byte	70
+ 677 0286 46       		.byte	70
+ 678 0287 45       		.byte	69
+ 679 0288 45       		.byte	69
+ 680 0289 45       		.byte	69
+ 681 028a 45       		.byte	69
+ 682 028b 45       		.byte	69
+ 683 028c 45       		.byte	69
+ 684 028d 45       		.byte	69
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 13
+
+
+ 685 028e 44       		.byte	68
+ 686 028f 44       		.byte	68
+ 687 0290 44       		.byte	68
+ 688 0291 44       		.byte	68
+ 689 0292 44       		.byte	68
+ 690 0293 44       		.byte	68
+ 691 0294 44       		.byte	68
+ 692 0295 44       		.byte	68
+ 693 0296 43       		.byte	67
+ 694 0297 43       		.byte	67
+ 695 0298 43       		.byte	67
+ 696 0299 43       		.byte	67
+ 697 029a 43       		.byte	67
+ 698 029b 43       		.byte	67
+ 699 029c 43       		.byte	67
+ 700 029d 43       		.byte	67
+ 701 029e 43       		.byte	67
+ 702 029f 42       		.byte	66
+ 703 02a0 42       		.byte	66
+ 704 02a1 42       		.byte	66
+ 705 02a2 42       		.byte	66
+ 706 02a3 42       		.byte	66
+ 707 02a4 42       		.byte	66
+ 708 02a5 42       		.byte	66
+ 709 02a6 42       		.byte	66
+ 710 02a7 42       		.byte	66
+ 711 02a8 42       		.byte	66
+ 712 02a9 42       		.byte	66
+ 713 02aa 42       		.byte	66
+ 714 02ab 42       		.byte	66
+ 715 02ac 42       		.byte	66
+ 716 02ad 41       		.byte	65
+ 717 02ae 41       		.byte	65
+ 718 02af 41       		.byte	65
+ 719 02b0 41       		.byte	65
+ 720 02b1 41       		.byte	65
+ 721 02b2 41       		.byte	65
+ 722 02b3 41       		.byte	65
+ 723 02b4 41       		.byte	65
+ 724 02b5 41       		.byte	65
+ 725 02b6 41       		.byte	65
+ 726 02b7 41       		.byte	65
+ 727 02b8 41       		.byte	65
+ 728 02b9 41       		.byte	65
+ 729 02ba 41       		.byte	65
+ 730 02bb 41       		.byte	65
+ 731 02bc 41       		.byte	65
+ 732 02bd 41       		.byte	65
+ 733 02be 41       		.byte	65
+ 734 02bf 41       		.byte	65
+ 735 02c0 41       		.byte	65
+ 736 02c1 41       		.byte	65
+ 737 02c2 41       		.byte	65
+ 738 02c3 41       		.byte	65
+ 739 02c4 41       		.byte	65
+ 740 02c5 41       		.byte	65
+ 741 02c6 41       		.byte	65
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 14
+
+
+ 742 02c7 41       		.byte	65
+ 743 02c8 41       		.byte	65
+ 744 02c9 41       		.byte	65
+ 745 02ca 41       		.byte	65
+ 746 02cb 41       		.byte	65
+ 747 02cc 41       		.byte	65
+ 748 02cd 41       		.byte	65
+ 749 02ce 41       		.byte	65
+ 750 02cf 41       		.byte	65
+ 751 02d0 41       		.byte	65
+ 752 02d1 41       		.byte	65
+ 753 02d2 41       		.byte	65
+ 754 02d3 42       		.byte	66
+ 755 02d4 42       		.byte	66
+ 756 02d5 42       		.byte	66
+ 757 02d6 42       		.byte	66
+ 758 02d7 42       		.byte	66
+ 759 02d8 42       		.byte	66
+ 760 02d9 42       		.byte	66
+ 761 02da 42       		.byte	66
+ 762 02db 42       		.byte	66
+ 763 02dc 42       		.byte	66
+ 764 02dd 42       		.byte	66
+ 765 02de 42       		.byte	66
+ 766 02df 42       		.byte	66
+ 767 02e0 42       		.byte	66
+ 768 02e1 43       		.byte	67
+ 769 02e2 43       		.byte	67
+ 770 02e3 43       		.byte	67
+ 771 02e4 43       		.byte	67
+ 772 02e5 43       		.byte	67
+ 773 02e6 43       		.byte	67
+ 774 02e7 43       		.byte	67
+ 775 02e8 43       		.byte	67
+ 776 02e9 43       		.byte	67
+ 777 02ea 44       		.byte	68
+ 778 02eb 44       		.byte	68
+ 779 02ec 44       		.byte	68
+ 780 02ed 44       		.byte	68
+ 781 02ee 44       		.byte	68
+ 782 02ef 44       		.byte	68
+ 783 02f0 44       		.byte	68
+ 784 02f1 44       		.byte	68
+ 785 02f2 45       		.byte	69
+ 786 02f3 45       		.byte	69
+ 787 02f4 45       		.byte	69
+ 788 02f5 45       		.byte	69
+ 789 02f6 45       		.byte	69
+ 790 02f7 45       		.byte	69
+ 791 02f8 45       		.byte	69
+ 792 02f9 46       		.byte	70
+ 793 02fa 46       		.byte	70
+ 794 02fb 46       		.byte	70
+ 795 02fc 46       		.byte	70
+ 796 02fd 46       		.byte	70
+ 797 02fe 46       		.byte	70
+ 798 02ff 47       		.byte	71
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 15
+
+
+ 799 0300 47       		.byte	71
+ 800 0301 47       		.byte	71
+ 801 0302 47       		.byte	71
+ 802 0303 47       		.byte	71
+ 803 0304 47       		.byte	71
+ 804 0305 48       		.byte	72
+ 805 0306 48       		.byte	72
+ 806 0307 48       		.byte	72
+ 807 0308 48       		.byte	72
+ 808 0309 48       		.byte	72
+ 809 030a 49       		.byte	73
+ 810 030b 49       		.byte	73
+ 811 030c 49       		.byte	73
+ 812 030d 49       		.byte	73
+ 813 030e 49       		.byte	73
+ 814 030f 4A       		.byte	74
+ 815 0310 4A       		.byte	74
+ 816 0311 4A       		.byte	74
+ 817 0312 4A       		.byte	74
+ 818 0313 4B       		.byte	75
+ 819 0314 4B       		.byte	75
+ 820 0315 4B       		.byte	75
+ 821 0316 4B       		.byte	75
+ 822 0317 4B       		.byte	75
+ 823 0318 4C       		.byte	76
+ 824 0319 4C       		.byte	76
+ 825 031a 4C       		.byte	76
+ 826 031b 4C       		.byte	76
+ 827 031c 4D       		.byte	77
+ 828 031d 4D       		.byte	77
+ 829 031e 4D       		.byte	77
+ 830 031f 4D       		.byte	77
+ 831 0320 4E       		.byte	78
+ 832 0321 4E       		.byte	78
+ 833 0322 4E       		.byte	78
+ 834 0323 4E       		.byte	78
+ 835 0324 4F       		.byte	79
+ 836 0325 4F       		.byte	79
+ 837 0326 4F       		.byte	79
+ 838 0327 4F       		.byte	79
+ 839 0328 50       		.byte	80
+ 840 0329 50       		.byte	80
+ 841 032a 50       		.byte	80
+ 842 032b 51       		.byte	81
+ 843 032c 51       		.byte	81
+ 844 032d 51       		.byte	81
+ 845 032e 51       		.byte	81
+ 846 032f 52       		.byte	82
+ 847 0330 52       		.byte	82
+ 848 0331 52       		.byte	82
+ 849 0332 52       		.byte	82
+ 850 0333 53       		.byte	83
+ 851 0334 53       		.byte	83
+ 852 0335 53       		.byte	83
+ 853 0336 54       		.byte	84
+ 854 0337 54       		.byte	84
+ 855 0338 54       		.byte	84
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 16
+
+
+ 856 0339 55       		.byte	85
+ 857 033a 55       		.byte	85
+ 858 033b 55       		.byte	85
+ 859 033c 56       		.byte	86
+ 860 033d 56       		.byte	86
+ 861 033e 56       		.byte	86
+ 862 033f 56       		.byte	86
+ 863 0340 57       		.byte	87
+ 864 0341 57       		.byte	87
+ 865 0342 57       		.byte	87
+ 866 0343 58       		.byte	88
+ 867 0344 58       		.byte	88
+ 868 0345 58       		.byte	88
+ 869 0346 59       		.byte	89
+ 870 0347 59       		.byte	89
+ 871 0348 59       		.byte	89
+ 872 0349 5A       		.byte	90
+ 873 034a 5A       		.byte	90
+ 874 034b 5A       		.byte	90
+ 875 034c 5B       		.byte	91
+ 876 034d 5B       		.byte	91
+ 877 034e 5B       		.byte	91
+ 878 034f 5C       		.byte	92
+ 879 0350 5C       		.byte	92
+ 880 0351 5C       		.byte	92
+ 881 0352 5D       		.byte	93
+ 882 0353 5D       		.byte	93
+ 883 0354 5D       		.byte	93
+ 884 0355 5E       		.byte	94
+ 885 0356 5E       		.byte	94
+ 886 0357 5F       		.byte	95
+ 887 0358 5F       		.byte	95
+ 888 0359 5F       		.byte	95
+ 889 035a 60       		.byte	96
+ 890 035b 60       		.byte	96
+ 891 035c 60       		.byte	96
+ 892 035d 61       		.byte	97
+ 893 035e 61       		.byte	97
+ 894 035f 61       		.byte	97
+ 895 0360 62       		.byte	98
+ 896 0361 62       		.byte	98
+ 897 0362 63       		.byte	99
+ 898 0363 63       		.byte	99
+ 899 0364 63       		.byte	99
+ 900 0365 64       		.byte	100
+ 901 0366 64       		.byte	100
+ 902 0367 64       		.byte	100
+ 903 0368 65       		.byte	101
+ 904 0369 65       		.byte	101
+ 905 036a 66       		.byte	102
+ 906 036b 66       		.byte	102
+ 907 036c 66       		.byte	102
+ 908 036d 67       		.byte	103
+ 909 036e 67       		.byte	103
+ 910 036f 67       		.byte	103
+ 911 0370 68       		.byte	104
+ 912 0371 68       		.byte	104
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 17
+
+
+ 913 0372 69       		.byte	105
+ 914 0373 69       		.byte	105
+ 915 0374 69       		.byte	105
+ 916 0375 6A       		.byte	106
+ 917 0376 6A       		.byte	106
+ 918 0377 6B       		.byte	107
+ 919 0378 6B       		.byte	107
+ 920 0379 6B       		.byte	107
+ 921 037a 6C       		.byte	108
+ 922 037b 6C       		.byte	108
+ 923 037c 6D       		.byte	109
+ 924 037d 6D       		.byte	109
+ 925 037e 6D       		.byte	109
+ 926 037f 6E       		.byte	110
+ 927 0380 6E       		.byte	110
+ 928 0381 6F       		.byte	111
+ 929 0382 6F       		.byte	111
+ 930 0383 6F       		.byte	111
+ 931 0384 70       		.byte	112
+ 932 0385 70       		.byte	112
+ 933 0386 71       		.byte	113
+ 934 0387 71       		.byte	113
+ 935 0388 71       		.byte	113
+ 936 0389 72       		.byte	114
+ 937 038a 72       		.byte	114
+ 938 038b 73       		.byte	115
+ 939 038c 73       		.byte	115
+ 940 038d 73       		.byte	115
+ 941 038e 74       		.byte	116
+ 942 038f 74       		.byte	116
+ 943 0390 75       		.byte	117
+ 944 0391 75       		.byte	117
+ 945 0392 75       		.byte	117
+ 946 0393 76       		.byte	118
+ 947 0394 76       		.byte	118
+ 948 0395 77       		.byte	119
+ 949 0396 77       		.byte	119
+ 950 0397 78       		.byte	120
+ 951 0398 78       		.byte	120
+ 952 0399 78       		.byte	120
+ 953 039a 79       		.byte	121
+ 954 039b 79       		.byte	121
+ 955 039c 7A       		.byte	122
+ 956 039d 7A       		.byte	122
+ 957 039e 7A       		.byte	122
+ 958 039f 7B       		.byte	123
+ 959 03a0 7B       		.byte	123
+ 960 03a1 7C       		.byte	124
+ 961 03a2 7C       		.byte	124
+ 962 03a3 7D       		.byte	125
+ 963 03a4 7D       		.byte	125
+ 964 03a5 7D       		.byte	125
+ 965 03a6 7E       		.byte	126
+ 966 03a7 7E       		.byte	126
+ 967 03a8 7F       		.byte	127
+ 968 03a9 7F       		.byte	127
+ 969              		.global	LF_DAC_2_wave2
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 18
+
+
+ 970 03aa 0000     		.align	2
+ 971              		.type	LF_DAC_2_wave2, %object
+ 972              		.size	LF_DAC_2_wave2, 850
+ 973              	LF_DAC_2_wave2:
+ 974 03ac 80       		.byte	-128
+ 975 03ad 80       		.byte	-128
+ 976 03ae 80       		.byte	-128
+ 977 03af 81       		.byte	-127
+ 978 03b0 81       		.byte	-127
+ 979 03b1 82       		.byte	-126
+ 980 03b2 82       		.byte	-126
+ 981 03b3 83       		.byte	-125
+ 982 03b4 83       		.byte	-125
+ 983 03b5 84       		.byte	-124
+ 984 03b6 84       		.byte	-124
+ 985 03b7 85       		.byte	-123
+ 986 03b8 85       		.byte	-123
+ 987 03b9 85       		.byte	-123
+ 988 03ba 86       		.byte	-122
+ 989 03bb 86       		.byte	-122
+ 990 03bc 87       		.byte	-121
+ 991 03bd 87       		.byte	-121
+ 992 03be 88       		.byte	-120
+ 993 03bf 88       		.byte	-120
+ 994 03c0 89       		.byte	-119
+ 995 03c1 89       		.byte	-119
+ 996 03c2 8A       		.byte	-118
+ 997 03c3 8A       		.byte	-118
+ 998 03c4 8B       		.byte	-117
+ 999 03c5 8B       		.byte	-117
+ 1000 03c6 8B       		.byte	-117
+ 1001 03c7 8C       		.byte	-116
+ 1002 03c8 8C       		.byte	-116
+ 1003 03c9 8D       		.byte	-115
+ 1004 03ca 8D       		.byte	-115
+ 1005 03cb 8E       		.byte	-114
+ 1006 03cc 8E       		.byte	-114
+ 1007 03cd 8F       		.byte	-113
+ 1008 03ce 8F       		.byte	-113
+ 1009 03cf 8F       		.byte	-113
+ 1010 03d0 90       		.byte	-112
+ 1011 03d1 90       		.byte	-112
+ 1012 03d2 91       		.byte	-111
+ 1013 03d3 91       		.byte	-111
+ 1014 03d4 92       		.byte	-110
+ 1015 03d5 92       		.byte	-110
+ 1016 03d6 93       		.byte	-109
+ 1017 03d7 93       		.byte	-109
+ 1018 03d8 93       		.byte	-109
+ 1019 03d9 94       		.byte	-108
+ 1020 03da 94       		.byte	-108
+ 1021 03db 95       		.byte	-107
+ 1022 03dc 95       		.byte	-107
+ 1023 03dd 96       		.byte	-106
+ 1024 03de 96       		.byte	-106
+ 1025 03df 97       		.byte	-105
+ 1026 03e0 97       		.byte	-105
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 19
+
+
+ 1027 03e1 97       		.byte	-105
+ 1028 03e2 98       		.byte	-104
+ 1029 03e3 98       		.byte	-104
+ 1030 03e4 99       		.byte	-103
+ 1031 03e5 99       		.byte	-103
+ 1032 03e6 99       		.byte	-103
+ 1033 03e7 9A       		.byte	-102
+ 1034 03e8 9A       		.byte	-102
+ 1035 03e9 9B       		.byte	-101
+ 1036 03ea 9B       		.byte	-101
+ 1037 03eb 9C       		.byte	-100
+ 1038 03ec 9C       		.byte	-100
+ 1039 03ed 9C       		.byte	-100
+ 1040 03ee 9D       		.byte	-99
+ 1041 03ef 9D       		.byte	-99
+ 1042 03f0 9E       		.byte	-98
+ 1043 03f1 9E       		.byte	-98
+ 1044 03f2 9E       		.byte	-98
+ 1045 03f3 9F       		.byte	-97
+ 1046 03f4 9F       		.byte	-97
+ 1047 03f5 A0       		.byte	-96
+ 1048 03f6 A0       		.byte	-96
+ 1049 03f7 A0       		.byte	-96
+ 1050 03f8 A1       		.byte	-95
+ 1051 03f9 A1       		.byte	-95
+ 1052 03fa A2       		.byte	-94
+ 1053 03fb A2       		.byte	-94
+ 1054 03fc A2       		.byte	-94
+ 1055 03fd A3       		.byte	-93
+ 1056 03fe A3       		.byte	-93
+ 1057 03ff A3       		.byte	-93
+ 1058 0400 A4       		.byte	-92
+ 1059 0401 A4       		.byte	-92
+ 1060 0402 A5       		.byte	-91
+ 1061 0403 A5       		.byte	-91
+ 1062 0404 A5       		.byte	-91
+ 1063 0405 A6       		.byte	-90
+ 1064 0406 A6       		.byte	-90
+ 1065 0407 A6       		.byte	-90
+ 1066 0408 A7       		.byte	-89
+ 1067 0409 A7       		.byte	-89
+ 1068 040a A8       		.byte	-88
+ 1069 040b A8       		.byte	-88
+ 1070 040c A8       		.byte	-88
+ 1071 040d A9       		.byte	-87
+ 1072 040e A9       		.byte	-87
+ 1073 040f A9       		.byte	-87
+ 1074 0410 AA       		.byte	-86
+ 1075 0411 AA       		.byte	-86
+ 1076 0412 AA       		.byte	-86
+ 1077 0413 AB       		.byte	-85
+ 1078 0414 AB       		.byte	-85
+ 1079 0415 AB       		.byte	-85
+ 1080 0416 AC       		.byte	-84
+ 1081 0417 AC       		.byte	-84
+ 1082 0418 AC       		.byte	-84
+ 1083 0419 AD       		.byte	-83
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 20
+
+
+ 1084 041a AD       		.byte	-83
+ 1085 041b AD       		.byte	-83
+ 1086 041c AE       		.byte	-82
+ 1087 041d AE       		.byte	-82
+ 1088 041e AE       		.byte	-82
+ 1089 041f AE       		.byte	-82
+ 1090 0420 AF       		.byte	-81
+ 1091 0421 AF       		.byte	-81
+ 1092 0422 AF       		.byte	-81
+ 1093 0423 B0       		.byte	-80
+ 1094 0424 B0       		.byte	-80
+ 1095 0425 B0       		.byte	-80
+ 1096 0426 B1       		.byte	-79
+ 1097 0427 B1       		.byte	-79
+ 1098 0428 B1       		.byte	-79
+ 1099 0429 B1       		.byte	-79
+ 1100 042a B2       		.byte	-78
+ 1101 042b B2       		.byte	-78
+ 1102 042c B2       		.byte	-78
+ 1103 042d B2       		.byte	-78
+ 1104 042e B3       		.byte	-77
+ 1105 042f B3       		.byte	-77
+ 1106 0430 B3       		.byte	-77
+ 1107 0431 B4       		.byte	-76
+ 1108 0432 B4       		.byte	-76
+ 1109 0433 B4       		.byte	-76
+ 1110 0434 B4       		.byte	-76
+ 1111 0435 B5       		.byte	-75
+ 1112 0436 B5       		.byte	-75
+ 1113 0437 B5       		.byte	-75
+ 1114 0438 B5       		.byte	-75
+ 1115 0439 B5       		.byte	-75
+ 1116 043a B6       		.byte	-74
+ 1117 043b B6       		.byte	-74
+ 1118 043c B6       		.byte	-74
+ 1119 043d B6       		.byte	-74
+ 1120 043e B7       		.byte	-73
+ 1121 043f B7       		.byte	-73
+ 1122 0440 B7       		.byte	-73
+ 1123 0441 B7       		.byte	-73
+ 1124 0442 B7       		.byte	-73
+ 1125 0443 B8       		.byte	-72
+ 1126 0444 B8       		.byte	-72
+ 1127 0445 B8       		.byte	-72
+ 1128 0446 B8       		.byte	-72
+ 1129 0447 B8       		.byte	-72
+ 1130 0448 B9       		.byte	-71
+ 1131 0449 B9       		.byte	-71
+ 1132 044a B9       		.byte	-71
+ 1133 044b B9       		.byte	-71
+ 1134 044c B9       		.byte	-71
+ 1135 044d BA       		.byte	-70
+ 1136 044e BA       		.byte	-70
+ 1137 044f BA       		.byte	-70
+ 1138 0450 BA       		.byte	-70
+ 1139 0451 BA       		.byte	-70
+ 1140 0452 BA       		.byte	-70
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 21
+
+
+ 1141 0453 BA       		.byte	-70
+ 1142 0454 BB       		.byte	-69
+ 1143 0455 BB       		.byte	-69
+ 1144 0456 BB       		.byte	-69
+ 1145 0457 BB       		.byte	-69
+ 1146 0458 BB       		.byte	-69
+ 1147 0459 BB       		.byte	-69
+ 1148 045a BB       		.byte	-69
+ 1149 045b BC       		.byte	-68
+ 1150 045c BC       		.byte	-68
+ 1151 045d BC       		.byte	-68
+ 1152 045e BC       		.byte	-68
+ 1153 045f BC       		.byte	-68
+ 1154 0460 BC       		.byte	-68
+ 1155 0461 BC       		.byte	-68
+ 1156 0462 BC       		.byte	-68
+ 1157 0463 BD       		.byte	-67
+ 1158 0464 BD       		.byte	-67
+ 1159 0465 BD       		.byte	-67
+ 1160 0466 BD       		.byte	-67
+ 1161 0467 BD       		.byte	-67
+ 1162 0468 BD       		.byte	-67
+ 1163 0469 BD       		.byte	-67
+ 1164 046a BD       		.byte	-67
+ 1165 046b BD       		.byte	-67
+ 1166 046c BD       		.byte	-67
+ 1167 046d BD       		.byte	-67
+ 1168 046e BD       		.byte	-67
+ 1169 046f BD       		.byte	-67
+ 1170 0470 BE       		.byte	-66
+ 1171 0471 BE       		.byte	-66
+ 1172 0472 BE       		.byte	-66
+ 1173 0473 BE       		.byte	-66
+ 1174 0474 BE       		.byte	-66
+ 1175 0475 BE       		.byte	-66
+ 1176 0476 BE       		.byte	-66
+ 1177 0477 BE       		.byte	-66
+ 1178 0478 BE       		.byte	-66
+ 1179 0479 BE       		.byte	-66
+ 1180 047a BE       		.byte	-66
+ 1181 047b BE       		.byte	-66
+ 1182 047c BE       		.byte	-66
+ 1183 047d BE       		.byte	-66
+ 1184 047e BE       		.byte	-66
+ 1185 047f BE       		.byte	-66
+ 1186 0480 BE       		.byte	-66
+ 1187 0481 BE       		.byte	-66
+ 1188 0482 BE       		.byte	-66
+ 1189 0483 BE       		.byte	-66
+ 1190 0484 BE       		.byte	-66
+ 1191 0485 BE       		.byte	-66
+ 1192 0486 BE       		.byte	-66
+ 1193 0487 BE       		.byte	-66
+ 1194 0488 BE       		.byte	-66
+ 1195 0489 BE       		.byte	-66
+ 1196 048a BE       		.byte	-66
+ 1197 048b BE       		.byte	-66
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 22
+
+
+ 1198 048c BE       		.byte	-66
+ 1199 048d BE       		.byte	-66
+ 1200 048e BE       		.byte	-66
+ 1201 048f BE       		.byte	-66
+ 1202 0490 BE       		.byte	-66
+ 1203 0491 BE       		.byte	-66
+ 1204 0492 BD       		.byte	-67
+ 1205 0493 BD       		.byte	-67
+ 1206 0494 BD       		.byte	-67
+ 1207 0495 BD       		.byte	-67
+ 1208 0496 BD       		.byte	-67
+ 1209 0497 BD       		.byte	-67
+ 1210 0498 BD       		.byte	-67
+ 1211 0499 BD       		.byte	-67
+ 1212 049a BD       		.byte	-67
+ 1213 049b BD       		.byte	-67
+ 1214 049c BD       		.byte	-67
+ 1215 049d BD       		.byte	-67
+ 1216 049e BD       		.byte	-67
+ 1217 049f BC       		.byte	-68
+ 1218 04a0 BC       		.byte	-68
+ 1219 04a1 BC       		.byte	-68
+ 1220 04a2 BC       		.byte	-68
+ 1221 04a3 BC       		.byte	-68
+ 1222 04a4 BC       		.byte	-68
+ 1223 04a5 BC       		.byte	-68
+ 1224 04a6 BC       		.byte	-68
+ 1225 04a7 BB       		.byte	-69
+ 1226 04a8 BB       		.byte	-69
+ 1227 04a9 BB       		.byte	-69
+ 1228 04aa BB       		.byte	-69
+ 1229 04ab BB       		.byte	-69
+ 1230 04ac BB       		.byte	-69
+ 1231 04ad BB       		.byte	-69
+ 1232 04ae BA       		.byte	-70
+ 1233 04af BA       		.byte	-70
+ 1234 04b0 BA       		.byte	-70
+ 1235 04b1 BA       		.byte	-70
+ 1236 04b2 BA       		.byte	-70
+ 1237 04b3 BA       		.byte	-70
+ 1238 04b4 BA       		.byte	-70
+ 1239 04b5 B9       		.byte	-71
+ 1240 04b6 B9       		.byte	-71
+ 1241 04b7 B9       		.byte	-71
+ 1242 04b8 B9       		.byte	-71
+ 1243 04b9 B9       		.byte	-71
+ 1244 04ba B8       		.byte	-72
+ 1245 04bb B8       		.byte	-72
+ 1246 04bc B8       		.byte	-72
+ 1247 04bd B8       		.byte	-72
+ 1248 04be B8       		.byte	-72
+ 1249 04bf B7       		.byte	-73
+ 1250 04c0 B7       		.byte	-73
+ 1251 04c1 B7       		.byte	-73
+ 1252 04c2 B7       		.byte	-73
+ 1253 04c3 B7       		.byte	-73
+ 1254 04c4 B6       		.byte	-74
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 23
+
+
+ 1255 04c5 B6       		.byte	-74
+ 1256 04c6 B6       		.byte	-74
+ 1257 04c7 B6       		.byte	-74
+ 1258 04c8 B5       		.byte	-75
+ 1259 04c9 B5       		.byte	-75
+ 1260 04ca B5       		.byte	-75
+ 1261 04cb B5       		.byte	-75
+ 1262 04cc B5       		.byte	-75
+ 1263 04cd B4       		.byte	-76
+ 1264 04ce B4       		.byte	-76
+ 1265 04cf B4       		.byte	-76
+ 1266 04d0 B4       		.byte	-76
+ 1267 04d1 B3       		.byte	-77
+ 1268 04d2 B3       		.byte	-77
+ 1269 04d3 B3       		.byte	-77
+ 1270 04d4 B2       		.byte	-78
+ 1271 04d5 B2       		.byte	-78
+ 1272 04d6 B2       		.byte	-78
+ 1273 04d7 B2       		.byte	-78
+ 1274 04d8 B1       		.byte	-79
+ 1275 04d9 B1       		.byte	-79
+ 1276 04da B1       		.byte	-79
+ 1277 04db B1       		.byte	-79
+ 1278 04dc B0       		.byte	-80
+ 1279 04dd B0       		.byte	-80
+ 1280 04de B0       		.byte	-80
+ 1281 04df AF       		.byte	-81
+ 1282 04e0 AF       		.byte	-81
+ 1283 04e1 AF       		.byte	-81
+ 1284 04e2 AE       		.byte	-82
+ 1285 04e3 AE       		.byte	-82
+ 1286 04e4 AE       		.byte	-82
+ 1287 04e5 AE       		.byte	-82
+ 1288 04e6 AD       		.byte	-83
+ 1289 04e7 AD       		.byte	-83
+ 1290 04e8 AD       		.byte	-83
+ 1291 04e9 AC       		.byte	-84
+ 1292 04ea AC       		.byte	-84
+ 1293 04eb AC       		.byte	-84
+ 1294 04ec AB       		.byte	-85
+ 1295 04ed AB       		.byte	-85
+ 1296 04ee AB       		.byte	-85
+ 1297 04ef AA       		.byte	-86
+ 1298 04f0 AA       		.byte	-86
+ 1299 04f1 AA       		.byte	-86
+ 1300 04f2 A9       		.byte	-87
+ 1301 04f3 A9       		.byte	-87
+ 1302 04f4 A9       		.byte	-87
+ 1303 04f5 A8       		.byte	-88
+ 1304 04f6 A8       		.byte	-88
+ 1305 04f7 A8       		.byte	-88
+ 1306 04f8 A7       		.byte	-89
+ 1307 04f9 A7       		.byte	-89
+ 1308 04fa A6       		.byte	-90
+ 1309 04fb A6       		.byte	-90
+ 1310 04fc A6       		.byte	-90
+ 1311 04fd A5       		.byte	-91
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 24
+
+
+ 1312 04fe A5       		.byte	-91
+ 1313 04ff A5       		.byte	-91
+ 1314 0500 A4       		.byte	-92
+ 1315 0501 A4       		.byte	-92
+ 1316 0502 A3       		.byte	-93
+ 1317 0503 A3       		.byte	-93
+ 1318 0504 A3       		.byte	-93
+ 1319 0505 A2       		.byte	-94
+ 1320 0506 A2       		.byte	-94
+ 1321 0507 A2       		.byte	-94
+ 1322 0508 A1       		.byte	-95
+ 1323 0509 A1       		.byte	-95
+ 1324 050a A0       		.byte	-96
+ 1325 050b A0       		.byte	-96
+ 1326 050c A0       		.byte	-96
+ 1327 050d 9F       		.byte	-97
+ 1328 050e 9F       		.byte	-97
+ 1329 050f 9E       		.byte	-98
+ 1330 0510 9E       		.byte	-98
+ 1331 0511 9E       		.byte	-98
+ 1332 0512 9D       		.byte	-99
+ 1333 0513 9D       		.byte	-99
+ 1334 0514 9C       		.byte	-100
+ 1335 0515 9C       		.byte	-100
+ 1336 0516 9C       		.byte	-100
+ 1337 0517 9B       		.byte	-101
+ 1338 0518 9B       		.byte	-101
+ 1339 0519 9A       		.byte	-102
+ 1340 051a 9A       		.byte	-102
+ 1341 051b 99       		.byte	-103
+ 1342 051c 99       		.byte	-103
+ 1343 051d 99       		.byte	-103
+ 1344 051e 98       		.byte	-104
+ 1345 051f 98       		.byte	-104
+ 1346 0520 97       		.byte	-105
+ 1347 0521 97       		.byte	-105
+ 1348 0522 97       		.byte	-105
+ 1349 0523 96       		.byte	-106
+ 1350 0524 96       		.byte	-106
+ 1351 0525 95       		.byte	-107
+ 1352 0526 95       		.byte	-107
+ 1353 0527 94       		.byte	-108
+ 1354 0528 94       		.byte	-108
+ 1355 0529 93       		.byte	-109
+ 1356 052a 93       		.byte	-109
+ 1357 052b 93       		.byte	-109
+ 1358 052c 92       		.byte	-110
+ 1359 052d 92       		.byte	-110
+ 1360 052e 91       		.byte	-111
+ 1361 052f 91       		.byte	-111
+ 1362 0530 90       		.byte	-112
+ 1363 0531 90       		.byte	-112
+ 1364 0532 8F       		.byte	-113
+ 1365 0533 8F       		.byte	-113
+ 1366 0534 8F       		.byte	-113
+ 1367 0535 8E       		.byte	-114
+ 1368 0536 8E       		.byte	-114
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 25
+
+
+ 1369 0537 8D       		.byte	-115
+ 1370 0538 8D       		.byte	-115
+ 1371 0539 8C       		.byte	-116
+ 1372 053a 8C       		.byte	-116
+ 1373 053b 8B       		.byte	-117
+ 1374 053c 8B       		.byte	-117
+ 1375 053d 8B       		.byte	-117
+ 1376 053e 8A       		.byte	-118
+ 1377 053f 8A       		.byte	-118
+ 1378 0540 89       		.byte	-119
+ 1379 0541 89       		.byte	-119
+ 1380 0542 88       		.byte	-120
+ 1381 0543 88       		.byte	-120
+ 1382 0544 87       		.byte	-121
+ 1383 0545 87       		.byte	-121
+ 1384 0546 86       		.byte	-122
+ 1385 0547 86       		.byte	-122
+ 1386 0548 85       		.byte	-123
+ 1387 0549 85       		.byte	-123
+ 1388 054a 85       		.byte	-123
+ 1389 054b 84       		.byte	-124
+ 1390 054c 84       		.byte	-124
+ 1391 054d 83       		.byte	-125
+ 1392 054e 83       		.byte	-125
+ 1393 054f 82       		.byte	-126
+ 1394 0550 82       		.byte	-126
+ 1395 0551 81       		.byte	-127
+ 1396 0552 81       		.byte	-127
+ 1397 0553 80       		.byte	-128
+ 1398 0554 80       		.byte	-128
+ 1399 0555 80       		.byte	-128
+ 1400 0556 7F       		.byte	127
+ 1401 0557 7F       		.byte	127
+ 1402 0558 7E       		.byte	126
+ 1403 0559 7E       		.byte	126
+ 1404 055a 7D       		.byte	125
+ 1405 055b 7D       		.byte	125
+ 1406 055c 7C       		.byte	124
+ 1407 055d 7C       		.byte	124
+ 1408 055e 7B       		.byte	123
+ 1409 055f 7B       		.byte	123
+ 1410 0560 7A       		.byte	122
+ 1411 0561 7A       		.byte	122
+ 1412 0562 7A       		.byte	122
+ 1413 0563 79       		.byte	121
+ 1414 0564 79       		.byte	121
+ 1415 0565 78       		.byte	120
+ 1416 0566 78       		.byte	120
+ 1417 0567 77       		.byte	119
+ 1418 0568 77       		.byte	119
+ 1419 0569 76       		.byte	118
+ 1420 056a 76       		.byte	118
+ 1421 056b 75       		.byte	117
+ 1422 056c 75       		.byte	117
+ 1423 056d 74       		.byte	116
+ 1424 056e 74       		.byte	116
+ 1425 056f 74       		.byte	116
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 26
+
+
+ 1426 0570 73       		.byte	115
+ 1427 0571 73       		.byte	115
+ 1428 0572 72       		.byte	114
+ 1429 0573 72       		.byte	114
+ 1430 0574 71       		.byte	113
+ 1431 0575 71       		.byte	113
+ 1432 0576 70       		.byte	112
+ 1433 0577 70       		.byte	112
+ 1434 0578 70       		.byte	112
+ 1435 0579 6F       		.byte	111
+ 1436 057a 6F       		.byte	111
+ 1437 057b 6E       		.byte	110
+ 1438 057c 6E       		.byte	110
+ 1439 057d 6D       		.byte	109
+ 1440 057e 6D       		.byte	109
+ 1441 057f 6C       		.byte	108
+ 1442 0580 6C       		.byte	108
+ 1443 0581 6C       		.byte	108
+ 1444 0582 6B       		.byte	107
+ 1445 0583 6B       		.byte	107
+ 1446 0584 6A       		.byte	106
+ 1447 0585 6A       		.byte	106
+ 1448 0586 69       		.byte	105
+ 1449 0587 69       		.byte	105
+ 1450 0588 68       		.byte	104
+ 1451 0589 68       		.byte	104
+ 1452 058a 68       		.byte	104
+ 1453 058b 67       		.byte	103
+ 1454 058c 67       		.byte	103
+ 1455 058d 66       		.byte	102
+ 1456 058e 66       		.byte	102
+ 1457 058f 66       		.byte	102
+ 1458 0590 65       		.byte	101
+ 1459 0591 65       		.byte	101
+ 1460 0592 64       		.byte	100
+ 1461 0593 64       		.byte	100
+ 1462 0594 63       		.byte	99
+ 1463 0595 63       		.byte	99
+ 1464 0596 63       		.byte	99
+ 1465 0597 62       		.byte	98
+ 1466 0598 62       		.byte	98
+ 1467 0599 61       		.byte	97
+ 1468 059a 61       		.byte	97
+ 1469 059b 61       		.byte	97
+ 1470 059c 60       		.byte	96
+ 1471 059d 60       		.byte	96
+ 1472 059e 5F       		.byte	95
+ 1473 059f 5F       		.byte	95
+ 1474 05a0 5F       		.byte	95
+ 1475 05a1 5E       		.byte	94
+ 1476 05a2 5E       		.byte	94
+ 1477 05a3 5D       		.byte	93
+ 1478 05a4 5D       		.byte	93
+ 1479 05a5 5D       		.byte	93
+ 1480 05a6 5C       		.byte	92
+ 1481 05a7 5C       		.byte	92
+ 1482 05a8 5C       		.byte	92
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 27
+
+
+ 1483 05a9 5B       		.byte	91
+ 1484 05aa 5B       		.byte	91
+ 1485 05ab 5A       		.byte	90
+ 1486 05ac 5A       		.byte	90
+ 1487 05ad 5A       		.byte	90
+ 1488 05ae 59       		.byte	89
+ 1489 05af 59       		.byte	89
+ 1490 05b0 59       		.byte	89
+ 1491 05b1 58       		.byte	88
+ 1492 05b2 58       		.byte	88
+ 1493 05b3 57       		.byte	87
+ 1494 05b4 57       		.byte	87
+ 1495 05b5 57       		.byte	87
+ 1496 05b6 56       		.byte	86
+ 1497 05b7 56       		.byte	86
+ 1498 05b8 56       		.byte	86
+ 1499 05b9 55       		.byte	85
+ 1500 05ba 55       		.byte	85
+ 1501 05bb 55       		.byte	85
+ 1502 05bc 54       		.byte	84
+ 1503 05bd 54       		.byte	84
+ 1504 05be 54       		.byte	84
+ 1505 05bf 53       		.byte	83
+ 1506 05c0 53       		.byte	83
+ 1507 05c1 53       		.byte	83
+ 1508 05c2 52       		.byte	82
+ 1509 05c3 52       		.byte	82
+ 1510 05c4 52       		.byte	82
+ 1511 05c5 51       		.byte	81
+ 1512 05c6 51       		.byte	81
+ 1513 05c7 51       		.byte	81
+ 1514 05c8 51       		.byte	81
+ 1515 05c9 50       		.byte	80
+ 1516 05ca 50       		.byte	80
+ 1517 05cb 50       		.byte	80
+ 1518 05cc 4F       		.byte	79
+ 1519 05cd 4F       		.byte	79
+ 1520 05ce 4F       		.byte	79
+ 1521 05cf 4E       		.byte	78
+ 1522 05d0 4E       		.byte	78
+ 1523 05d1 4E       		.byte	78
+ 1524 05d2 4E       		.byte	78
+ 1525 05d3 4D       		.byte	77
+ 1526 05d4 4D       		.byte	77
+ 1527 05d5 4D       		.byte	77
+ 1528 05d6 4D       		.byte	77
+ 1529 05d7 4C       		.byte	76
+ 1530 05d8 4C       		.byte	76
+ 1531 05d9 4C       		.byte	76
+ 1532 05da 4B       		.byte	75
+ 1533 05db 4B       		.byte	75
+ 1534 05dc 4B       		.byte	75
+ 1535 05dd 4B       		.byte	75
+ 1536 05de 4A       		.byte	74
+ 1537 05df 4A       		.byte	74
+ 1538 05e0 4A       		.byte	74
+ 1539 05e1 4A       		.byte	74
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 28
+
+
+ 1540 05e2 4A       		.byte	74
+ 1541 05e3 49       		.byte	73
+ 1542 05e4 49       		.byte	73
+ 1543 05e5 49       		.byte	73
+ 1544 05e6 49       		.byte	73
+ 1545 05e7 48       		.byte	72
+ 1546 05e8 48       		.byte	72
+ 1547 05e9 48       		.byte	72
+ 1548 05ea 48       		.byte	72
+ 1549 05eb 48       		.byte	72
+ 1550 05ec 47       		.byte	71
+ 1551 05ed 47       		.byte	71
+ 1552 05ee 47       		.byte	71
+ 1553 05ef 47       		.byte	71
+ 1554 05f0 47       		.byte	71
+ 1555 05f1 46       		.byte	70
+ 1556 05f2 46       		.byte	70
+ 1557 05f3 46       		.byte	70
+ 1558 05f4 46       		.byte	70
+ 1559 05f5 46       		.byte	70
+ 1560 05f6 45       		.byte	69
+ 1561 05f7 45       		.byte	69
+ 1562 05f8 45       		.byte	69
+ 1563 05f9 45       		.byte	69
+ 1564 05fa 45       		.byte	69
+ 1565 05fb 45       		.byte	69
+ 1566 05fc 45       		.byte	69
+ 1567 05fd 44       		.byte	68
+ 1568 05fe 44       		.byte	68
+ 1569 05ff 44       		.byte	68
+ 1570 0600 44       		.byte	68
+ 1571 0601 44       		.byte	68
+ 1572 0602 44       		.byte	68
+ 1573 0603 44       		.byte	68
+ 1574 0604 43       		.byte	67
+ 1575 0605 43       		.byte	67
+ 1576 0606 43       		.byte	67
+ 1577 0607 43       		.byte	67
+ 1578 0608 43       		.byte	67
+ 1579 0609 43       		.byte	67
+ 1580 060a 43       		.byte	67
+ 1581 060b 43       		.byte	67
+ 1582 060c 42       		.byte	66
+ 1583 060d 42       		.byte	66
+ 1584 060e 42       		.byte	66
+ 1585 060f 42       		.byte	66
+ 1586 0610 42       		.byte	66
+ 1587 0611 42       		.byte	66
+ 1588 0612 42       		.byte	66
+ 1589 0613 42       		.byte	66
+ 1590 0614 42       		.byte	66
+ 1591 0615 42       		.byte	66
+ 1592 0616 42       		.byte	66
+ 1593 0617 42       		.byte	66
+ 1594 0618 42       		.byte	66
+ 1595 0619 41       		.byte	65
+ 1596 061a 41       		.byte	65
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 29
+
+
+ 1597 061b 41       		.byte	65
+ 1598 061c 41       		.byte	65
+ 1599 061d 41       		.byte	65
+ 1600 061e 41       		.byte	65
+ 1601 061f 41       		.byte	65
+ 1602 0620 41       		.byte	65
+ 1603 0621 41       		.byte	65
+ 1604 0622 41       		.byte	65
+ 1605 0623 41       		.byte	65
+ 1606 0624 41       		.byte	65
+ 1607 0625 41       		.byte	65
+ 1608 0626 41       		.byte	65
+ 1609 0627 41       		.byte	65
+ 1610 0628 41       		.byte	65
+ 1611 0629 41       		.byte	65
+ 1612 062a 41       		.byte	65
+ 1613 062b 41       		.byte	65
+ 1614 062c 41       		.byte	65
+ 1615 062d 41       		.byte	65
+ 1616 062e 41       		.byte	65
+ 1617 062f 41       		.byte	65
+ 1618 0630 41       		.byte	65
+ 1619 0631 41       		.byte	65
+ 1620 0632 41       		.byte	65
+ 1621 0633 41       		.byte	65
+ 1622 0634 41       		.byte	65
+ 1623 0635 41       		.byte	65
+ 1624 0636 41       		.byte	65
+ 1625 0637 41       		.byte	65
+ 1626 0638 41       		.byte	65
+ 1627 0639 41       		.byte	65
+ 1628 063a 41       		.byte	65
+ 1629 063b 42       		.byte	66
+ 1630 063c 42       		.byte	66
+ 1631 063d 42       		.byte	66
+ 1632 063e 42       		.byte	66
+ 1633 063f 42       		.byte	66
+ 1634 0640 42       		.byte	66
+ 1635 0641 42       		.byte	66
+ 1636 0642 42       		.byte	66
+ 1637 0643 42       		.byte	66
+ 1638 0644 42       		.byte	66
+ 1639 0645 42       		.byte	66
+ 1640 0646 42       		.byte	66
+ 1641 0647 42       		.byte	66
+ 1642 0648 43       		.byte	67
+ 1643 0649 43       		.byte	67
+ 1644 064a 43       		.byte	67
+ 1645 064b 43       		.byte	67
+ 1646 064c 43       		.byte	67
+ 1647 064d 43       		.byte	67
+ 1648 064e 43       		.byte	67
+ 1649 064f 43       		.byte	67
+ 1650 0650 44       		.byte	68
+ 1651 0651 44       		.byte	68
+ 1652 0652 44       		.byte	68
+ 1653 0653 44       		.byte	68
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 30
+
+
+ 1654 0654 44       		.byte	68
+ 1655 0655 44       		.byte	68
+ 1656 0656 44       		.byte	68
+ 1657 0657 45       		.byte	69
+ 1658 0658 45       		.byte	69
+ 1659 0659 45       		.byte	69
+ 1660 065a 45       		.byte	69
+ 1661 065b 45       		.byte	69
+ 1662 065c 45       		.byte	69
+ 1663 065d 45       		.byte	69
+ 1664 065e 46       		.byte	70
+ 1665 065f 46       		.byte	70
+ 1666 0660 46       		.byte	70
+ 1667 0661 46       		.byte	70
+ 1668 0662 46       		.byte	70
+ 1669 0663 47       		.byte	71
+ 1670 0664 47       		.byte	71
+ 1671 0665 47       		.byte	71
+ 1672 0666 47       		.byte	71
+ 1673 0667 47       		.byte	71
+ 1674 0668 48       		.byte	72
+ 1675 0669 48       		.byte	72
+ 1676 066a 48       		.byte	72
+ 1677 066b 48       		.byte	72
+ 1678 066c 48       		.byte	72
+ 1679 066d 49       		.byte	73
+ 1680 066e 49       		.byte	73
+ 1681 066f 49       		.byte	73
+ 1682 0670 49       		.byte	73
+ 1683 0671 4A       		.byte	74
+ 1684 0672 4A       		.byte	74
+ 1685 0673 4A       		.byte	74
+ 1686 0674 4A       		.byte	74
+ 1687 0675 4A       		.byte	74
+ 1688 0676 4B       		.byte	75
+ 1689 0677 4B       		.byte	75
+ 1690 0678 4B       		.byte	75
+ 1691 0679 4B       		.byte	75
+ 1692 067a 4C       		.byte	76
+ 1693 067b 4C       		.byte	76
+ 1694 067c 4C       		.byte	76
+ 1695 067d 4D       		.byte	77
+ 1696 067e 4D       		.byte	77
+ 1697 067f 4D       		.byte	77
+ 1698 0680 4D       		.byte	77
+ 1699 0681 4E       		.byte	78
+ 1700 0682 4E       		.byte	78
+ 1701 0683 4E       		.byte	78
+ 1702 0684 4E       		.byte	78
+ 1703 0685 4F       		.byte	79
+ 1704 0686 4F       		.byte	79
+ 1705 0687 4F       		.byte	79
+ 1706 0688 50       		.byte	80
+ 1707 0689 50       		.byte	80
+ 1708 068a 50       		.byte	80
+ 1709 068b 51       		.byte	81
+ 1710 068c 51       		.byte	81
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 31
+
+
+ 1711 068d 51       		.byte	81
+ 1712 068e 51       		.byte	81
+ 1713 068f 52       		.byte	82
+ 1714 0690 52       		.byte	82
+ 1715 0691 52       		.byte	82
+ 1716 0692 53       		.byte	83
+ 1717 0693 53       		.byte	83
+ 1718 0694 53       		.byte	83
+ 1719 0695 54       		.byte	84
+ 1720 0696 54       		.byte	84
+ 1721 0697 54       		.byte	84
+ 1722 0698 55       		.byte	85
+ 1723 0699 55       		.byte	85
+ 1724 069a 55       		.byte	85
+ 1725 069b 56       		.byte	86
+ 1726 069c 56       		.byte	86
+ 1727 069d 56       		.byte	86
+ 1728 069e 57       		.byte	87
+ 1729 069f 57       		.byte	87
+ 1730 06a0 57       		.byte	87
+ 1731 06a1 58       		.byte	88
+ 1732 06a2 58       		.byte	88
+ 1733 06a3 59       		.byte	89
+ 1734 06a4 59       		.byte	89
+ 1735 06a5 59       		.byte	89
+ 1736 06a6 5A       		.byte	90
+ 1737 06a7 5A       		.byte	90
+ 1738 06a8 5A       		.byte	90
+ 1739 06a9 5B       		.byte	91
+ 1740 06aa 5B       		.byte	91
+ 1741 06ab 5C       		.byte	92
+ 1742 06ac 5C       		.byte	92
+ 1743 06ad 5C       		.byte	92
+ 1744 06ae 5D       		.byte	93
+ 1745 06af 5D       		.byte	93
+ 1746 06b0 5D       		.byte	93
+ 1747 06b1 5E       		.byte	94
+ 1748 06b2 5E       		.byte	94
+ 1749 06b3 5F       		.byte	95
+ 1750 06b4 5F       		.byte	95
+ 1751 06b5 5F       		.byte	95
+ 1752 06b6 60       		.byte	96
+ 1753 06b7 60       		.byte	96
+ 1754 06b8 61       		.byte	97
+ 1755 06b9 61       		.byte	97
+ 1756 06ba 61       		.byte	97
+ 1757 06bb 62       		.byte	98
+ 1758 06bc 62       		.byte	98
+ 1759 06bd 63       		.byte	99
+ 1760 06be 63       		.byte	99
+ 1761 06bf 63       		.byte	99
+ 1762 06c0 64       		.byte	100
+ 1763 06c1 64       		.byte	100
+ 1764 06c2 65       		.byte	101
+ 1765 06c3 65       		.byte	101
+ 1766 06c4 66       		.byte	102
+ 1767 06c5 66       		.byte	102
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 32
+
+
+ 1768 06c6 66       		.byte	102
+ 1769 06c7 67       		.byte	103
+ 1770 06c8 67       		.byte	103
+ 1771 06c9 68       		.byte	104
+ 1772 06ca 68       		.byte	104
+ 1773 06cb 68       		.byte	104
+ 1774 06cc 69       		.byte	105
+ 1775 06cd 69       		.byte	105
+ 1776 06ce 6A       		.byte	106
+ 1777 06cf 6A       		.byte	106
+ 1778 06d0 6B       		.byte	107
+ 1779 06d1 6B       		.byte	107
+ 1780 06d2 6C       		.byte	108
+ 1781 06d3 6C       		.byte	108
+ 1782 06d4 6C       		.byte	108
+ 1783 06d5 6D       		.byte	109
+ 1784 06d6 6D       		.byte	109
+ 1785 06d7 6E       		.byte	110
+ 1786 06d8 6E       		.byte	110
+ 1787 06d9 6F       		.byte	111
+ 1788 06da 6F       		.byte	111
+ 1789 06db 70       		.byte	112
+ 1790 06dc 70       		.byte	112
+ 1791 06dd 70       		.byte	112
+ 1792 06de 71       		.byte	113
+ 1793 06df 71       		.byte	113
+ 1794 06e0 72       		.byte	114
+ 1795 06e1 72       		.byte	114
+ 1796 06e2 73       		.byte	115
+ 1797 06e3 73       		.byte	115
+ 1798 06e4 74       		.byte	116
+ 1799 06e5 74       		.byte	116
+ 1800 06e6 74       		.byte	116
+ 1801 06e7 75       		.byte	117
+ 1802 06e8 75       		.byte	117
+ 1803 06e9 76       		.byte	118
+ 1804 06ea 76       		.byte	118
+ 1805 06eb 77       		.byte	119
+ 1806 06ec 77       		.byte	119
+ 1807 06ed 78       		.byte	120
+ 1808 06ee 78       		.byte	120
+ 1809 06ef 79       		.byte	121
+ 1810 06f0 79       		.byte	121
+ 1811 06f1 7A       		.byte	122
+ 1812 06f2 7A       		.byte	122
+ 1813 06f3 7A       		.byte	122
+ 1814 06f4 7B       		.byte	123
+ 1815 06f5 7B       		.byte	123
+ 1816 06f6 7C       		.byte	124
+ 1817 06f7 7C       		.byte	124
+ 1818 06f8 7D       		.byte	125
+ 1819 06f9 7D       		.byte	125
+ 1820 06fa 7E       		.byte	126
+ 1821 06fb 7E       		.byte	126
+ 1822 06fc 7F       		.byte	127
+ 1823 06fd 7F       		.byte	127
+ 1824              		.bss
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 33
+
+
+ 1825              	LF_DAC_2_Wave1Chan:
+ 1826 0001 00       		.space	1
+ 1827              	LF_DAC_2_Wave2Chan:
+ 1828 0002 00       		.space	1
+ 1829              	LF_DAC_2_Wave1TD:
+ 1830 0003 00       		.space	1
+ 1831              	LF_DAC_2_Wave2TD:
+ 1832 0004 00       		.space	1
+ 1833              		.section	.text.LF_DAC_2_Init,"ax",%progbits
+ 1834              		.align	2
+ 1835              		.global	LF_DAC_2_Init
+ 1836              		.thumb
+ 1837              		.thumb_func
+ 1838              		.type	LF_DAC_2_Init, %function
+ 1839              	LF_DAC_2_Init:
+ 1840              	.LFB0:
+ 1841              		.file 1 "Generated_Source\\PSoC5\\LF_DAC_2.c"
+   1:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/LF_DAC_2.c **** * File Name: LF_DAC_2.c
+   3:Generated_Source\PSoC5/LF_DAC_2.c **** * Version 2.10
+   4:Generated_Source\PSoC5/LF_DAC_2.c **** *
+   5:Generated_Source\PSoC5/LF_DAC_2.c **** * Description:
+   6:Generated_Source\PSoC5/LF_DAC_2.c **** *  This file provides the source code for the 8-bit Waveform DAC 
+   7:Generated_Source\PSoC5/LF_DAC_2.c **** *  (WaveDAC8) Component.
+   8:Generated_Source\PSoC5/LF_DAC_2.c **** *
+   9:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+  10:Generated_Source\PSoC5/LF_DAC_2.c **** * Copyright 2013, Cypress Semiconductor Corporation.  All rights reserved.
+  11:Generated_Source\PSoC5/LF_DAC_2.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC5/LF_DAC_2.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC5/LF_DAC_2.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+  15:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  16:Generated_Source\PSoC5/LF_DAC_2.c **** #include "LF_DAC_2.h"
+  17:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  18:Generated_Source\PSoC5/LF_DAC_2.c **** uint8  LF_DAC_2_initVar = 0u;
+  19:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  20:Generated_Source\PSoC5/LF_DAC_2.c **** const uint8 CYCODE LF_DAC_2_wave1[LF_DAC_2_WAVE1_LENGTH] = { 128u,128u,128u,129u,129u,130u,130u,130
+  21:Generated_Source\PSoC5/LF_DAC_2.c **** const uint8 CYCODE LF_DAC_2_wave2[LF_DAC_2_WAVE2_LENGTH] = { 128u,128u,128u,129u,129u,130u,130u,131
+  22:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  23:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave1Chan;
+  24:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave2Chan;
+  25:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave1TD;
+  26:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave2TD;
+  27:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  28:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  29:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+  30:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Init
+  31:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+  32:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  33:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+  34:Generated_Source\PSoC5/LF_DAC_2.c **** *  Initializes component with parameters set in the customizer.
+  35:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  36:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+  37:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  38:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  39:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+  40:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 34
+
+
+  41:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  42:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+  43:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Init(void) 
+  44:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1842              		.loc 1 44 0
+ 1843              		.cfi_startproc
+ 1844              		@ args = 0, pretend = 0, frame = 0
+ 1845              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1846 0000 80B5     		push	{r7, lr}
+ 1847              		.cfi_def_cfa_offset 8
+ 1848              		.cfi_offset 7, -8
+ 1849              		.cfi_offset 14, -4
+ 1850 0002 00AF     		add	r7, sp, #0
+ 1851              		.cfi_def_cfa_register 7
+  45:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_Init();
+ 1852              		.loc 1 45 0
+ 1853 0004 FFF7FEFF 		bl	LF_DAC_2_VDAC8_Init
+  46:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_SetSpeed(LF_DAC_2_HIGHSPEED);
+ 1854              		.loc 1 46 0
+ 1855 0008 0220     		movs	r0, #2
+ 1856 000a FFF7FEFF 		bl	LF_DAC_2_VDAC8_SetSpeed
+  47:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_SetRange(LF_DAC_2_DAC_RANGE);
+ 1857              		.loc 1 47 0
+ 1858 000e 0020     		movs	r0, #0
+ 1859 0010 FFF7FEFF 		bl	LF_DAC_2_VDAC8_SetRange
+  48:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  49:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_DAC_MODE == LF_DAC_2_CURRENT_MODE)
+  50:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_IDAC8_SetPolarity(LF_DAC_2_DAC_POL);
+  51:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_DAC_MODE == LF_DAC_2_CURRENT_MODE */
+  52:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  53:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE)
+  54:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_BuffAmp_Init();
+  55:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE */
+  56:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  57:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Get the TD Number for the DMA channel 1 and 2   */
+  58:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave1TD = CyDmaTdAllocate();
+ 1860              		.loc 1 58 0
+ 1861 0014 FFF7FEFF 		bl	CyDmaTdAllocate
+ 1862 0018 0346     		mov	r3, r0
+ 1863 001a 1A46     		mov	r2, r3
+ 1864 001c 094B     		ldr	r3, .L2
+ 1865 001e 1A70     		strb	r2, [r3]
+  59:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave2TD = CyDmaTdAllocate();
+ 1866              		.loc 1 59 0
+ 1867 0020 FFF7FEFF 		bl	CyDmaTdAllocate
+ 1868 0024 0346     		mov	r3, r0
+ 1869 0026 1A46     		mov	r2, r3
+ 1870 0028 074B     		ldr	r3, .L2+4
+ 1871 002a 1A70     		strb	r2, [r3]
+  60:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+  61:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Initialize waveform pointers  */
+  62:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave1Setup(LF_DAC_2_wave1, LF_DAC_2_WAVE1_LENGTH) ;
+ 1872              		.loc 1 62 0
+ 1873 002c 40F2AA31 		movw	r1, #938
+ 1874 0030 0648     		ldr	r0, .L2+8
+ 1875 0032 FFF7FEFF 		bl	LF_DAC_2_Wave1Setup
+  63:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave2Setup(LF_DAC_2_wave2, LF_DAC_2_WAVE2_LENGTH) ;
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 35
+
+
+ 1876              		.loc 1 63 0
+ 1877 0036 40F25231 		movw	r1, #850
+ 1878 003a 0548     		ldr	r0, .L2+12
+ 1879 003c FFF7FEFF 		bl	LF_DAC_2_Wave2Setup
+  64:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+  65:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Initialize the internal clock if one present  */
+  66:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if defined(LF_DAC_2_DacClk_PHASE)
+  67:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_DacClk_SetPhase(LF_DAC_2_CLK_PHASE_0nS);
+  68:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* defined(LF_DAC_2_DacClk_PHASE) */
+  69:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 1880              		.loc 1 69 0
+ 1881 0040 00BF     		nop
+ 1882 0042 80BD     		pop	{r7, pc}
+ 1883              	.L3:
+ 1884              		.align	2
+ 1885              	.L2:
+ 1886 0044 03000000 		.word	LF_DAC_2_Wave1TD
+ 1887 0048 04000000 		.word	LF_DAC_2_Wave2TD
+ 1888 004c 00000000 		.word	LF_DAC_2_wave1
+ 1889 0050 00000000 		.word	LF_DAC_2_wave2
+ 1890              		.cfi_endproc
+ 1891              	.LFE0:
+ 1892              		.size	LF_DAC_2_Init, .-LF_DAC_2_Init
+ 1893              		.section	.text.LF_DAC_2_Enable,"ax",%progbits
+ 1894              		.align	2
+ 1895              		.global	LF_DAC_2_Enable
+ 1896              		.thumb
+ 1897              		.thumb_func
+ 1898              		.type	LF_DAC_2_Enable, %function
+ 1899              	LF_DAC_2_Enable:
+ 1900              	.LFB1:
+  70:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  71:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  72:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+  73:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Enable
+  74:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+  75:Generated_Source\PSoC5/LF_DAC_2.c **** *  
+  76:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary: 
+  77:Generated_Source\PSoC5/LF_DAC_2.c **** *  Enables the DAC block and DMA operation.
+  78:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  79:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+  80:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  81:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  82:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+  83:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  84:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  85:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+  86:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Enable(void) 
+  87:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1901              		.loc 1 87 0
+ 1902              		.cfi_startproc
+ 1903              		@ args = 0, pretend = 0, frame = 0
+ 1904              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1905 0000 80B5     		push	{r7, lr}
+ 1906              		.cfi_def_cfa_offset 8
+ 1907              		.cfi_offset 7, -8
+ 1908              		.cfi_offset 14, -4
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 36
+
+
+ 1909 0002 00AF     		add	r7, sp, #0
+ 1910              		.cfi_def_cfa_register 7
+  88:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_Enable();
+ 1911              		.loc 1 88 0
+ 1912 0004 FFF7FEFF 		bl	LF_DAC_2_VDAC8_Enable
+  89:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  90:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE)
+  91:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_BuffAmp_Enable();
+  92:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE */
+  93:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  94:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* 
+  95:Generated_Source\PSoC5/LF_DAC_2.c **** 	* Enable the channel. It is configured to remember the TD value so that
+  96:Generated_Source\PSoC5/LF_DAC_2.c **** 	* it can be restored from the place where it has been stopped.
+  97:Generated_Source\PSoC5/LF_DAC_2.c **** 	*/
+  98:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChEnable(LF_DAC_2_Wave1Chan, 1u);
+ 1913              		.loc 1 98 0
+ 1914 0008 094B     		ldr	r3, .L5
+ 1915 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1916 000c 0121     		movs	r1, #1
+ 1917 000e 1846     		mov	r0, r3
+ 1918 0010 FFF7FEFF 		bl	CyDmaChEnable
+  99:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChEnable(LF_DAC_2_Wave2Chan, 1u);
+ 1919              		.loc 1 99 0
+ 1920 0014 074B     		ldr	r3, .L5+4
+ 1921 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1922 0018 0121     		movs	r1, #1
+ 1923 001a 1846     		mov	r0, r3
+ 1924 001c FFF7FEFF 		bl	CyDmaChEnable
+ 100:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 101:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* set the initial value */
+ 102:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_SetValue(0u);
+ 1925              		.loc 1 102 0
+ 1926 0020 0020     		movs	r0, #0
+ 1927 0022 FFF7FEFF 		bl	LF_DAC_2_VDAC8_SetValue
+ 103:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 104:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT)  	
+ 105:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_DacClk_Start();
+ 1928              		.loc 1 105 0
+ 1929 0026 FFF7FEFF 		bl	LF_DAC_2_DacClk_Start
+ 106:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT */
+ 107:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 1930              		.loc 1 107 0
+ 1931 002a 00BF     		nop
+ 1932 002c 80BD     		pop	{r7, pc}
+ 1933              	.L6:
+ 1934 002e 00BF     		.align	2
+ 1935              	.L5:
+ 1936 0030 01000000 		.word	LF_DAC_2_Wave1Chan
+ 1937 0034 02000000 		.word	LF_DAC_2_Wave2Chan
+ 1938              		.cfi_endproc
+ 1939              	.LFE1:
+ 1940              		.size	LF_DAC_2_Enable, .-LF_DAC_2_Enable
+ 1941              		.section	.text.LF_DAC_2_Start,"ax",%progbits
+ 1942              		.align	2
+ 1943              		.global	LF_DAC_2_Start
+ 1944              		.thumb
+ 1945              		.thumb_func
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 37
+
+
+ 1946              		.type	LF_DAC_2_Start, %function
+ 1947              	LF_DAC_2_Start:
+ 1948              	.LFB2:
+ 108:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 109:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 110:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 111:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Start
+ 112:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 113:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 114:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 115:Generated_Source\PSoC5/LF_DAC_2.c **** *  The start function initializes the voltage DAC with the default values, 
+ 116:Generated_Source\PSoC5/LF_DAC_2.c **** *  and sets the power to the given level.  A power level of 0, is the same as 
+ 117:Generated_Source\PSoC5/LF_DAC_2.c **** *  executing the stop function.
+ 118:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 119:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 120:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 121:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 122:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 123:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 124:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 125:Generated_Source\PSoC5/LF_DAC_2.c **** * Reentrant:
+ 126:Generated_Source\PSoC5/LF_DAC_2.c **** *  No
+ 127:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 128:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 129:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Start(void) 
+ 130:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1949              		.loc 1 130 0
+ 1950              		.cfi_startproc
+ 1951              		@ args = 0, pretend = 0, frame = 0
+ 1952              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1953 0000 80B5     		push	{r7, lr}
+ 1954              		.cfi_def_cfa_offset 8
+ 1955              		.cfi_offset 7, -8
+ 1956              		.cfi_offset 14, -4
+ 1957 0002 00AF     		add	r7, sp, #0
+ 1958              		.cfi_def_cfa_register 7
+ 131:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* If not Initialized then initialize all required hardware and software */
+ 132:Generated_Source\PSoC5/LF_DAC_2.c **** 	if(LF_DAC_2_initVar == 0u)
+ 1959              		.loc 1 132 0
+ 1960 0004 064B     		ldr	r3, .L9
+ 1961 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1962 0008 002B     		cmp	r3, #0
+ 1963 000a 04D1     		bne	.L8
+ 133:Generated_Source\PSoC5/LF_DAC_2.c **** 	{
+ 134:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Init();
+ 1964              		.loc 1 134 0
+ 1965 000c FFF7FEFF 		bl	LF_DAC_2_Init
+ 135:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_initVar = 1u;
+ 1966              		.loc 1 135 0
+ 1967 0010 034B     		ldr	r3, .L9
+ 1968 0012 0122     		movs	r2, #1
+ 1969 0014 1A70     		strb	r2, [r3]
+ 1970              	.L8:
+ 136:Generated_Source\PSoC5/LF_DAC_2.c **** 	}
+ 137:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 138:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Enable();
+ 1971              		.loc 1 138 0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 38
+
+
+ 1972 0016 FFF7FEFF 		bl	LF_DAC_2_Enable
+ 139:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 1973              		.loc 1 139 0
+ 1974 001a 00BF     		nop
+ 1975 001c 80BD     		pop	{r7, pc}
+ 1976              	.L10:
+ 1977 001e 00BF     		.align	2
+ 1978              	.L9:
+ 1979 0020 00000000 		.word	LF_DAC_2_initVar
+ 1980              		.cfi_endproc
+ 1981              	.LFE2:
+ 1982              		.size	LF_DAC_2_Start, .-LF_DAC_2_Start
+ 1983              		.section	.text.LF_DAC_2_StartEx,"ax",%progbits
+ 1984              		.align	2
+ 1985              		.global	LF_DAC_2_StartEx
+ 1986              		.thumb
+ 1987              		.thumb_func
+ 1988              		.type	LF_DAC_2_StartEx, %function
+ 1989              	LF_DAC_2_StartEx:
+ 1990              	.LFB3:
+ 140:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 141:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 142:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 143:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_StartEx
+ 144:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 145:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 146:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 147:Generated_Source\PSoC5/LF_DAC_2.c **** *  The StartEx function sets pointers and sizes for both waveforms
+ 148:Generated_Source\PSoC5/LF_DAC_2.c **** *  and then starts the component.
+ 149:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 150:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 151:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint8 * wavePtr1:     Pointer to the waveform 1 array.
+ 152:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint16  sampleSize1:  The amount of samples in the waveform 1.
+ 153:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint8 * wavePtr2:     Pointer to the waveform 2 array.
+ 154:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint16  sampleSize2:  The amount of samples in the waveform 2.
+ 155:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 156:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 157:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 158:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 159:Generated_Source\PSoC5/LF_DAC_2.c **** * Reentrant:
+ 160:Generated_Source\PSoC5/LF_DAC_2.c **** *  No
+ 161:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 162:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 163:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_StartEx(const uint8 * wavePtr1, uint16 sampleSize1, const uint8 * wavePtr2, uint16 sa
+ 164:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 165:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1991              		.loc 1 165 0
+ 1992              		.cfi_startproc
+ 1993              		@ args = 0, pretend = 0, frame = 16
+ 1994              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1995 0000 80B5     		push	{r7, lr}
+ 1996              		.cfi_def_cfa_offset 8
+ 1997              		.cfi_offset 7, -8
+ 1998              		.cfi_offset 14, -4
+ 1999 0002 84B0     		sub	sp, sp, #16
+ 2000              		.cfi_def_cfa_offset 24
+ 2001 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 39
+
+
+ 2002              		.cfi_def_cfa_register 7
+ 2003 0006 F860     		str	r0, [r7, #12]
+ 2004 0008 7A60     		str	r2, [r7, #4]
+ 2005 000a 1A46     		mov	r2, r3
+ 2006 000c 0B46     		mov	r3, r1	@ movhi
+ 2007 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 2008 0010 1346     		mov	r3, r2	@ movhi
+ 2009 0012 3B81     		strh	r3, [r7, #8]	@ movhi
+ 166:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave1Setup(wavePtr1, sampleSize1);
+ 2010              		.loc 1 166 0
+ 2011 0014 7B89     		ldrh	r3, [r7, #10]
+ 2012 0016 1946     		mov	r1, r3
+ 2013 0018 F868     		ldr	r0, [r7, #12]
+ 2014 001a FFF7FEFF 		bl	LF_DAC_2_Wave1Setup
+ 167:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave2Setup(wavePtr2, sampleSize2);
+ 2015              		.loc 1 167 0
+ 2016 001e 3B89     		ldrh	r3, [r7, #8]
+ 2017 0020 1946     		mov	r1, r3
+ 2018 0022 7868     		ldr	r0, [r7, #4]
+ 2019 0024 FFF7FEFF 		bl	LF_DAC_2_Wave2Setup
+ 168:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Start();
+ 2020              		.loc 1 168 0
+ 2021 0028 FFF7FEFF 		bl	LF_DAC_2_Start
+ 169:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2022              		.loc 1 169 0
+ 2023 002c 00BF     		nop
+ 2024 002e 1037     		adds	r7, r7, #16
+ 2025              		.cfi_def_cfa_offset 8
+ 2026 0030 BD46     		mov	sp, r7
+ 2027              		.cfi_def_cfa_register 13
+ 2028              		@ sp needed
+ 2029 0032 80BD     		pop	{r7, pc}
+ 2030              		.cfi_endproc
+ 2031              	.LFE3:
+ 2032              		.size	LF_DAC_2_StartEx, .-LF_DAC_2_StartEx
+ 2033              		.section	.text.LF_DAC_2_Stop,"ax",%progbits
+ 2034              		.align	2
+ 2035              		.global	LF_DAC_2_Stop
+ 2036              		.thumb
+ 2037              		.thumb_func
+ 2038              		.type	LF_DAC_2_Stop, %function
+ 2039              	LF_DAC_2_Stop:
+ 2040              	.LFB4:
+ 170:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 171:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 172:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 173:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Stop
+ 174:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 175:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 176:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 177:Generated_Source\PSoC5/LF_DAC_2.c **** *  Stops the clock (if internal), disables the DMA channels
+ 178:Generated_Source\PSoC5/LF_DAC_2.c **** *  and powers down the DAC.
+ 179:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 180:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 181:Generated_Source\PSoC5/LF_DAC_2.c **** *  None  
+ 182:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 183:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 40
+
+
+ 184:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 185:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 186:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 187:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Stop(void) 
+ 188:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 2041              		.loc 1 188 0
+ 2042              		.cfi_startproc
+ 2043              		@ args = 0, pretend = 0, frame = 0
+ 2044              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2045 0000 80B5     		push	{r7, lr}
+ 2046              		.cfi_def_cfa_offset 8
+ 2047              		.cfi_offset 7, -8
+ 2048              		.cfi_offset 14, -4
+ 2049 0002 00AF     		add	r7, sp, #0
+ 2050              		.cfi_def_cfa_register 7
+ 189:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Turn off internal clock, if one present */
+ 190:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT)  	
+ 191:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_DacClk_Stop();
+ 2051              		.loc 1 191 0
+ 2052 0004 FFF7FEFF 		bl	LF_DAC_2_DacClk_Stop
+ 192:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT */
+ 193:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 194:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Disble DMA channels */
+ 195:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChDisable(LF_DAC_2_Wave1Chan);
+ 2053              		.loc 1 195 0
+ 2054 0008 064B     		ldr	r3, .L13
+ 2055 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2056 000c 1846     		mov	r0, r3
+ 2057 000e FFF7FEFF 		bl	CyDmaChDisable
+ 196:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChDisable(LF_DAC_2_Wave2Chan);
+ 2058              		.loc 1 196 0
+ 2059 0012 054B     		ldr	r3, .L13+4
+ 2060 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2061 0016 1846     		mov	r0, r3
+ 2062 0018 FFF7FEFF 		bl	CyDmaChDisable
+ 197:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 198:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Disable power to DAC */
+ 199:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_Stop();
+ 2063              		.loc 1 199 0
+ 2064 001c FFF7FEFF 		bl	LF_DAC_2_VDAC8_Stop
+ 200:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2065              		.loc 1 200 0
+ 2066 0020 00BF     		nop
+ 2067 0022 80BD     		pop	{r7, pc}
+ 2068              	.L14:
+ 2069              		.align	2
+ 2070              	.L13:
+ 2071 0024 01000000 		.word	LF_DAC_2_Wave1Chan
+ 2072 0028 02000000 		.word	LF_DAC_2_Wave2Chan
+ 2073              		.cfi_endproc
+ 2074              	.LFE4:
+ 2075              		.size	LF_DAC_2_Stop, .-LF_DAC_2_Stop
+ 2076              		.section	.text.LF_DAC_2_Wave1Setup,"ax",%progbits
+ 2077              		.align	2
+ 2078              		.global	LF_DAC_2_Wave1Setup
+ 2079              		.thumb
+ 2080              		.thumb_func
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 41
+
+
+ 2081              		.type	LF_DAC_2_Wave1Setup, %function
+ 2082              	LF_DAC_2_Wave1Setup:
+ 2083              	.LFB5:
+ 201:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 202:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 203:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 204:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Wave1Setup
+ 205:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 206:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 207:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 208:Generated_Source\PSoC5/LF_DAC_2.c **** *  Sets pointer and size for waveform 1.                                    
+ 209:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 210:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 211:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint8 * WavePtr:     Pointer to the waveform array.
+ 212:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint16  SampleSize:  The amount of samples in the waveform.
+ 213:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 214:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 215:Generated_Source\PSoC5/LF_DAC_2.c **** *  None 
+ 216:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 217:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 218:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Wave1Setup(const uint8 * wavePtr, uint16 sampleSize)
+ 219:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 220:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 2084              		.loc 1 220 0
+ 2085              		.cfi_startproc
+ 2086              		@ args = 0, pretend = 0, frame = 8
+ 2087              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2088 0000 80B5     		push	{r7, lr}
+ 2089              		.cfi_def_cfa_offset 8
+ 2090              		.cfi_offset 7, -8
+ 2091              		.cfi_offset 14, -4
+ 2092 0002 82B0     		sub	sp, sp, #8
+ 2093              		.cfi_def_cfa_offset 16
+ 2094 0004 00AF     		add	r7, sp, #0
+ 2095              		.cfi_def_cfa_register 7
+ 2096 0006 7860     		str	r0, [r7, #4]
+ 2097 0008 0B46     		mov	r3, r1
+ 2098 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 221:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if (CY_PSOC3)
+ 222:Generated_Source\PSoC5/LF_DAC_2.c **** 		uint16 memoryType; /* determining the source memory type */
+ 223:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType = (LF_DAC_2_HI16FLASHPTR == HI16(wavePtr)) ? HI16(CYDEV_FLS_BASE) : HI16(CYDEV_SRAM_BA
+ 224:Generated_Source\PSoC5/LF_DAC_2.c **** 		
+ 225:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1Chan = LF_DAC_2_Wave1_DMA_DmaInitialize(
+ 226:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1_DMA_BYTES_PER_BURST, LF_DAC_2_Wave1_DMA_REQUEST_PER_BURST,
+ 227:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType, HI16(CYDEV_PERIPH_BASE));
+ 228:Generated_Source\PSoC5/LF_DAC_2.c **** 	#else /* PSoC 5 */
+ 229:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1Chan = LF_DAC_2_Wave1_DMA_DmaInitialize(
+ 230:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1_DMA_BYTES_PER_BURST, LF_DAC_2_Wave1_DMA_REQUEST_PER_BURST,
+ 231:Generated_Source\PSoC5/LF_DAC_2.c **** 		HI16(wavePtr), HI16(LF_DAC_2_DAC8__D));
+ 2099              		.loc 1 231 0
+ 2100 000c 7B68     		ldr	r3, [r7, #4]
+ 2101 000e 1B0C     		lsrs	r3, r3, #16
+ 229:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1_DMA_BYTES_PER_BURST, LF_DAC_2_Wave1_DMA_REQUEST_PER_BURST,
+ 2102              		.loc 1 229 0
+ 2103 0010 9AB2     		uxth	r2, r3
+ 2104 0012 4FF48043 		mov	r3, #16384
+ 2105 0016 0121     		movs	r1, #1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 42
+
+
+ 2106 0018 0120     		movs	r0, #1
+ 2107 001a FFF7FEFF 		bl	LF_DAC_2_Wave1_DMA_DmaInitialize
+ 2108 001e 0346     		mov	r3, r0
+ 2109 0020 1A46     		mov	r2, r3
+ 2110 0022 0F4B     		ldr	r3, .L16
+ 2111 0024 1A70     		strb	r2, [r3]
+ 232:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* CY_PSOC3 */
+ 233:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 234:Generated_Source\PSoC5/LF_DAC_2.c **** 	/*
+ 235:Generated_Source\PSoC5/LF_DAC_2.c **** 	* TD is looping on itself. 
+ 236:Generated_Source\PSoC5/LF_DAC_2.c ****     * Increment the source address, but not the destination address. 
+ 237:Generated_Source\PSoC5/LF_DAC_2.c **** 	*/
+ 238:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetConfiguration(LF_DAC_2_Wave1TD, sampleSize, LF_DAC_2_Wave1TD, 
+ 2112              		.loc 1 238 0
+ 2113 0026 0F4B     		ldr	r3, .L16+4
+ 2114 0028 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 2115 002a 0E4B     		ldr	r3, .L16+4
+ 2116 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2117 002e 7988     		ldrh	r1, [r7, #2]
+ 2118 0030 0123     		movs	r3, #1
+ 2119 0032 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 239:Generated_Source\PSoC5/LF_DAC_2.c ****                                     (uint8)CY_DMA_TD_INC_SRC_ADR | (uint8)LF_DAC_2_Wave1_DMA__TD_TE
+ 240:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 241:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Set the TD source and destination address */
+ 242:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetAddress(LF_DAC_2_Wave1TD, LO16((uint32)wavePtr), LO16(LF_DAC_2_DAC8__D));
+ 2120              		.loc 1 242 0
+ 2121 0036 0B4B     		ldr	r3, .L16+4
+ 2122 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2123 003a 7A68     		ldr	r2, [r7, #4]
+ 2124 003c 91B2     		uxth	r1, r2
+ 2125 003e 4FF4B742 		mov	r2, #23424
+ 2126 0042 1846     		mov	r0, r3
+ 2127 0044 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 243:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 244:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Associate the TD with the channel */
+ 245:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChSetInitialTd(LF_DAC_2_Wave1Chan, LF_DAC_2_Wave1TD);
+ 2128              		.loc 1 245 0
+ 2129 0048 054B     		ldr	r3, .L16
+ 2130 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2131 004c 054B     		ldr	r3, .L16+4
+ 2132 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2133 0050 1946     		mov	r1, r3
+ 2134 0052 1046     		mov	r0, r2
+ 2135 0054 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 246:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2136              		.loc 1 246 0
+ 2137 0058 00BF     		nop
+ 2138 005a 0837     		adds	r7, r7, #8
+ 2139              		.cfi_def_cfa_offset 8
+ 2140 005c BD46     		mov	sp, r7
+ 2141              		.cfi_def_cfa_register 13
+ 2142              		@ sp needed
+ 2143 005e 80BD     		pop	{r7, pc}
+ 2144              	.L17:
+ 2145              		.align	2
+ 2146              	.L16:
+ 2147 0060 01000000 		.word	LF_DAC_2_Wave1Chan
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 43
+
+
+ 2148 0064 03000000 		.word	LF_DAC_2_Wave1TD
+ 2149              		.cfi_endproc
+ 2150              	.LFE5:
+ 2151              		.size	LF_DAC_2_Wave1Setup, .-LF_DAC_2_Wave1Setup
+ 2152              		.section	.text.LF_DAC_2_Wave2Setup,"ax",%progbits
+ 2153              		.align	2
+ 2154              		.global	LF_DAC_2_Wave2Setup
+ 2155              		.thumb
+ 2156              		.thumb_func
+ 2157              		.type	LF_DAC_2_Wave2Setup, %function
+ 2158              	LF_DAC_2_Wave2Setup:
+ 2159              	.LFB6:
+ 247:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 248:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 249:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 250:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Wave2Setup
+ 251:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 252:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 253:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 254:Generated_Source\PSoC5/LF_DAC_2.c **** *  Sets pointer and size for waveform 2.                                    
+ 255:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 256:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 257:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint8 * WavePtr:     Pointer to the waveform array.
+ 258:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint16  SampleSize:  The amount of samples in the waveform.
+ 259:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 260:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 261:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 262:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 263:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 264:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Wave2Setup(const uint8 * wavePtr, uint16 sampleSize)
+ 265:Generated_Source\PSoC5/LF_DAC_2.c ****  
+ 266:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 2160              		.loc 1 266 0
+ 2161              		.cfi_startproc
+ 2162              		@ args = 0, pretend = 0, frame = 8
+ 2163              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2164 0000 80B5     		push	{r7, lr}
+ 2165              		.cfi_def_cfa_offset 8
+ 2166              		.cfi_offset 7, -8
+ 2167              		.cfi_offset 14, -4
+ 2168 0002 82B0     		sub	sp, sp, #8
+ 2169              		.cfi_def_cfa_offset 16
+ 2170 0004 00AF     		add	r7, sp, #0
+ 2171              		.cfi_def_cfa_register 7
+ 2172 0006 7860     		str	r0, [r7, #4]
+ 2173 0008 0B46     		mov	r3, r1
+ 2174 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 267:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if (CY_PSOC3)
+ 268:Generated_Source\PSoC5/LF_DAC_2.c **** 		uint16 memoryType; /* determining the source memory type */
+ 269:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType = (LF_DAC_2_HI16FLASHPTR == HI16(wavePtr)) ? HI16(CYDEV_FLS_BASE) : HI16(CYDEV_SRAM_BA
+ 270:Generated_Source\PSoC5/LF_DAC_2.c **** 			
+ 271:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2Chan = LF_DAC_2_Wave2_DMA_DmaInitialize(
+ 272:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2_DMA_BYTES_PER_BURST, LF_DAC_2_Wave2_DMA_REQUEST_PER_BURST,
+ 273:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType, HI16(CYDEV_PERIPH_BASE));
+ 274:Generated_Source\PSoC5/LF_DAC_2.c **** 	#else /* PSoC 5 */
+ 275:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2Chan = LF_DAC_2_Wave2_DMA_DmaInitialize(
+ 276:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2_DMA_BYTES_PER_BURST, LF_DAC_2_Wave2_DMA_REQUEST_PER_BURST,
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 44
+
+
+ 277:Generated_Source\PSoC5/LF_DAC_2.c **** 		HI16(wavePtr), HI16(LF_DAC_2_DAC8__D));
+ 2175              		.loc 1 277 0
+ 2176 000c 7B68     		ldr	r3, [r7, #4]
+ 2177 000e 1B0C     		lsrs	r3, r3, #16
+ 275:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2_DMA_BYTES_PER_BURST, LF_DAC_2_Wave2_DMA_REQUEST_PER_BURST,
+ 2178              		.loc 1 275 0
+ 2179 0010 9AB2     		uxth	r2, r3
+ 2180 0012 4FF48043 		mov	r3, #16384
+ 2181 0016 0121     		movs	r1, #1
+ 2182 0018 0120     		movs	r0, #1
+ 2183 001a FFF7FEFF 		bl	LF_DAC_2_Wave2_DMA_DmaInitialize
+ 2184 001e 0346     		mov	r3, r0
+ 2185 0020 1A46     		mov	r2, r3
+ 2186 0022 0F4B     		ldr	r3, .L19
+ 2187 0024 1A70     		strb	r2, [r3]
+ 278:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* CY_PSOC3 */
+ 279:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 280:Generated_Source\PSoC5/LF_DAC_2.c **** 	/*
+ 281:Generated_Source\PSoC5/LF_DAC_2.c **** 	* TD is looping on itself. 
+ 282:Generated_Source\PSoC5/LF_DAC_2.c **** 	* Increment the source address, but not the destination address. 
+ 283:Generated_Source\PSoC5/LF_DAC_2.c **** 	*/
+ 284:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetConfiguration(LF_DAC_2_Wave2TD, sampleSize, LF_DAC_2_Wave2TD, 
+ 2188              		.loc 1 284 0
+ 2189 0026 0F4B     		ldr	r3, .L19+4
+ 2190 0028 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 2191 002a 0E4B     		ldr	r3, .L19+4
+ 2192 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2193 002e 7988     		ldrh	r1, [r7, #2]
+ 2194 0030 0123     		movs	r3, #1
+ 2195 0032 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 285:Generated_Source\PSoC5/LF_DAC_2.c ****                                     (uint8)CY_DMA_TD_INC_SRC_ADR | (uint8)LF_DAC_2_Wave2_DMA__TD_TE
+ 286:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 287:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Set the TD source and destination address */
+ 288:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetAddress(LF_DAC_2_Wave2TD, LO16((uint32)wavePtr), LO16(LF_DAC_2_DAC8__D));
+ 2196              		.loc 1 288 0
+ 2197 0036 0B4B     		ldr	r3, .L19+4
+ 2198 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2199 003a 7A68     		ldr	r2, [r7, #4]
+ 2200 003c 91B2     		uxth	r1, r2
+ 2201 003e 4FF4B742 		mov	r2, #23424
+ 2202 0042 1846     		mov	r0, r3
+ 2203 0044 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 289:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 290:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Associate the TD with the channel */
+ 291:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChSetInitialTd(LF_DAC_2_Wave2Chan, LF_DAC_2_Wave2TD);
+ 2204              		.loc 1 291 0
+ 2205 0048 054B     		ldr	r3, .L19
+ 2206 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2207 004c 054B     		ldr	r3, .L19+4
+ 2208 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2209 0050 1946     		mov	r1, r3
+ 2210 0052 1046     		mov	r0, r2
+ 2211 0054 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 292:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2212              		.loc 1 292 0
+ 2213 0058 00BF     		nop
+ 2214 005a 0837     		adds	r7, r7, #8
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 45
+
+
+ 2215              		.cfi_def_cfa_offset 8
+ 2216 005c BD46     		mov	sp, r7
+ 2217              		.cfi_def_cfa_register 13
+ 2218              		@ sp needed
+ 2219 005e 80BD     		pop	{r7, pc}
+ 2220              	.L20:
+ 2221              		.align	2
+ 2222              	.L19:
+ 2223 0060 02000000 		.word	LF_DAC_2_Wave2Chan
+ 2224 0064 04000000 		.word	LF_DAC_2_Wave2TD
+ 2225              		.cfi_endproc
+ 2226              	.LFE6:
+ 2227              		.size	LF_DAC_2_Wave2Setup, .-LF_DAC_2_Wave2Setup
+ 2228              		.text
+ 2229              	.Letext0:
+ 2230              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 2231              		.section	.debug_info,"",%progbits
+ 2232              	.Ldebug_info0:
+ 2233 0000 56020000 		.4byte	0x256
+ 2234 0004 0400     		.2byte	0x4
+ 2235 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 2236 000a 04       		.byte	0x4
+ 2237 000b 01       		.uleb128 0x1
+ 2238 000c 00000000 		.4byte	.LASF37
+ 2239 0010 0C       		.byte	0xc
+ 2240 0011 CF000000 		.4byte	.LASF38
+ 2241 0015 86020000 		.4byte	.LASF39
+ 2242 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 2243 001d 00000000 		.4byte	0
+ 2244 0021 00000000 		.4byte	.Ldebug_line0
+ 2245 0025 02       		.uleb128 0x2
+ 2246 0026 01       		.byte	0x1
+ 2247 0027 06       		.byte	0x6
+ 2248 0028 20010000 		.4byte	.LASF0
+ 2249 002c 02       		.uleb128 0x2
+ 2250 002d 01       		.byte	0x1
+ 2251 002e 08       		.byte	0x8
+ 2252 002f 80010000 		.4byte	.LASF1
+ 2253 0033 02       		.uleb128 0x2
+ 2254 0034 02       		.byte	0x2
+ 2255 0035 05       		.byte	0x5
+ 2256 0036 28020000 		.4byte	.LASF2
+ 2257 003a 02       		.uleb128 0x2
+ 2258 003b 02       		.byte	0x2
+ 2259 003c 07       		.byte	0x7
+ 2260 003d BC000000 		.4byte	.LASF3
+ 2261 0041 02       		.uleb128 0x2
+ 2262 0042 04       		.byte	0x4
+ 2263 0043 05       		.byte	0x5
+ 2264 0044 42020000 		.4byte	.LASF4
+ 2265 0048 02       		.uleb128 0x2
+ 2266 0049 04       		.byte	0x4
+ 2267 004a 07       		.byte	0x7
+ 2268 004b 48010000 		.4byte	.LASF5
+ 2269 004f 02       		.uleb128 0x2
+ 2270 0050 08       		.byte	0x8
+ 2271 0051 05       		.byte	0x5
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 46
+
+
+ 2272 0052 0C020000 		.4byte	.LASF6
+ 2273 0056 02       		.uleb128 0x2
+ 2274 0057 08       		.byte	0x8
+ 2275 0058 07       		.byte	0x7
+ 2276 0059 D1010000 		.4byte	.LASF7
+ 2277 005d 03       		.uleb128 0x3
+ 2278 005e 04       		.byte	0x4
+ 2279 005f 05       		.byte	0x5
+ 2280 0060 696E7400 		.ascii	"int\000"
+ 2281 0064 02       		.uleb128 0x2
+ 2282 0065 04       		.byte	0x4
+ 2283 0066 07       		.byte	0x7
+ 2284 0067 B6010000 		.4byte	.LASF8
+ 2285 006b 04       		.uleb128 0x4
+ 2286 006c 62010000 		.4byte	.LASF9
+ 2287 0070 02       		.byte	0x2
+ 2288 0071 9201     		.2byte	0x192
+ 2289 0073 2C000000 		.4byte	0x2c
+ 2290 0077 04       		.uleb128 0x4
+ 2291 0078 A8010000 		.4byte	.LASF10
+ 2292 007c 02       		.byte	0x2
+ 2293 007d 9301     		.2byte	0x193
+ 2294 007f 3A000000 		.4byte	0x3a
+ 2295 0083 04       		.uleb128 0x4
+ 2296 0084 AF010000 		.4byte	.LASF11
+ 2297 0088 02       		.byte	0x2
+ 2298 0089 9401     		.2byte	0x194
+ 2299 008b 48000000 		.4byte	0x48
+ 2300 008f 02       		.uleb128 0x2
+ 2301 0090 04       		.byte	0x4
+ 2302 0091 04       		.byte	0x4
+ 2303 0092 A2000000 		.4byte	.LASF12
+ 2304 0096 02       		.uleb128 0x2
+ 2305 0097 08       		.byte	0x8
+ 2306 0098 04       		.byte	0x4
+ 2307 0099 A1010000 		.4byte	.LASF13
+ 2308 009d 02       		.uleb128 0x2
+ 2309 009e 01       		.byte	0x1
+ 2310 009f 08       		.byte	0x8
+ 2311 00a0 23020000 		.4byte	.LASF14
+ 2312 00a4 02       		.uleb128 0x2
+ 2313 00a5 08       		.byte	0x8
+ 2314 00a6 04       		.byte	0x4
+ 2315 00a7 4B020000 		.4byte	.LASF15
+ 2316 00ab 02       		.uleb128 0x2
+ 2317 00ac 04       		.byte	0x4
+ 2318 00ad 07       		.byte	0x7
+ 2319 00ae 1A020000 		.4byte	.LASF16
+ 2320 00b2 05       		.uleb128 0x5
+ 2321 00b3 03010000 		.4byte	.LASF17
+ 2322 00b7 01       		.byte	0x1
+ 2323 00b8 2B       		.byte	0x2b
+ 2324 00b9 00000000 		.4byte	.LFB0
+ 2325 00bd 54000000 		.4byte	.LFE0-.LFB0
+ 2326 00c1 01       		.uleb128 0x1
+ 2327 00c2 9C       		.byte	0x9c
+ 2328 00c3 05       		.uleb128 0x5
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 47
+
+
+ 2329 00c4 32020000 		.4byte	.LASF18
+ 2330 00c8 01       		.byte	0x1
+ 2331 00c9 56       		.byte	0x56
+ 2332 00ca 00000000 		.4byte	.LFB1
+ 2333 00ce 38000000 		.4byte	.LFE1-.LFB1
+ 2334 00d2 01       		.uleb128 0x1
+ 2335 00d3 9C       		.byte	0x9c
+ 2336 00d4 05       		.uleb128 0x5
+ 2337 00d5 11010000 		.4byte	.LASF19
+ 2338 00d9 01       		.byte	0x1
+ 2339 00da 81       		.byte	0x81
+ 2340 00db 00000000 		.4byte	.LFB2
+ 2341 00df 24000000 		.4byte	.LFE2-.LFB2
+ 2342 00e3 01       		.uleb128 0x1
+ 2343 00e4 9C       		.byte	0x9c
+ 2344 00e5 06       		.uleb128 0x6
+ 2345 00e6 75020000 		.4byte	.LASF25
+ 2346 00ea 01       		.byte	0x1
+ 2347 00eb A3       		.byte	0xa3
+ 2348 00ec 00000000 		.4byte	.LFB3
+ 2349 00f0 34000000 		.4byte	.LFE3-.LFB3
+ 2350 00f4 01       		.uleb128 0x1
+ 2351 00f5 9C       		.byte	0x9c
+ 2352 00f6 33010000 		.4byte	0x133
+ 2353 00fa 07       		.uleb128 0x7
+ 2354 00fb F1000000 		.4byte	.LASF20
+ 2355 00ff 01       		.byte	0x1
+ 2356 0100 A3       		.byte	0xa3
+ 2357 0101 33010000 		.4byte	0x133
+ 2358 0105 02       		.uleb128 0x2
+ 2359 0106 91       		.byte	0x91
+ 2360 0107 74       		.sleb128 -12
+ 2361 0108 07       		.uleb128 0x7
+ 2362 0109 68010000 		.4byte	.LASF21
+ 2363 010d 01       		.byte	0x1
+ 2364 010e A3       		.byte	0xa3
+ 2365 010f 77000000 		.4byte	0x77
+ 2366 0113 02       		.uleb128 0x2
+ 2367 0114 91       		.byte	0x91
+ 2368 0115 72       		.sleb128 -14
+ 2369 0116 07       		.uleb128 0x7
+ 2370 0117 FA000000 		.4byte	.LASF22
+ 2371 011b 01       		.byte	0x1
+ 2372 011c A3       		.byte	0xa3
+ 2373 011d 33010000 		.4byte	0x133
+ 2374 0121 02       		.uleb128 0x2
+ 2375 0122 91       		.byte	0x91
+ 2376 0123 6C       		.sleb128 -20
+ 2377 0124 07       		.uleb128 0x7
+ 2378 0125 74010000 		.4byte	.LASF23
+ 2379 0129 01       		.byte	0x1
+ 2380 012a A3       		.byte	0xa3
+ 2381 012b 77000000 		.4byte	0x77
+ 2382 012f 02       		.uleb128 0x2
+ 2383 0130 91       		.byte	0x91
+ 2384 0131 70       		.sleb128 -16
+ 2385 0132 00       		.byte	0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 48
+
+
+ 2386 0133 08       		.uleb128 0x8
+ 2387 0134 04       		.byte	0x4
+ 2388 0135 39010000 		.4byte	0x139
+ 2389 0139 09       		.uleb128 0x9
+ 2390 013a 6B000000 		.4byte	0x6b
+ 2391 013e 05       		.uleb128 0x5
+ 2392 013f C3010000 		.4byte	.LASF24
+ 2393 0143 01       		.byte	0x1
+ 2394 0144 BB       		.byte	0xbb
+ 2395 0145 00000000 		.4byte	.LFB4
+ 2396 0149 2C000000 		.4byte	.LFE4-.LFB4
+ 2397 014d 01       		.uleb128 0x1
+ 2398 014e 9C       		.byte	0x9c
+ 2399 014f 06       		.uleb128 0x6
+ 2400 0150 8E000000 		.4byte	.LASF26
+ 2401 0154 01       		.byte	0x1
+ 2402 0155 DA       		.byte	0xda
+ 2403 0156 00000000 		.4byte	.LFB5
+ 2404 015a 68000000 		.4byte	.LFE5-.LFB5
+ 2405 015e 01       		.uleb128 0x1
+ 2406 015f 9C       		.byte	0x9c
+ 2407 0160 81010000 		.4byte	0x181
+ 2408 0164 07       		.uleb128 0x7
+ 2409 0165 5A010000 		.4byte	.LASF27
+ 2410 0169 01       		.byte	0x1
+ 2411 016a DA       		.byte	0xda
+ 2412 016b 33010000 		.4byte	0x133
+ 2413 016f 02       		.uleb128 0x2
+ 2414 0170 91       		.byte	0x91
+ 2415 0171 74       		.sleb128 -12
+ 2416 0172 07       		.uleb128 0x7
+ 2417 0173 2C010000 		.4byte	.LASF28
+ 2418 0177 01       		.byte	0x1
+ 2419 0178 DA       		.byte	0xda
+ 2420 0179 77000000 		.4byte	0x77
+ 2421 017d 02       		.uleb128 0x2
+ 2422 017e 91       		.byte	0x91
+ 2423 017f 72       		.sleb128 -14
+ 2424 0180 00       		.byte	0
+ 2425 0181 0A       		.uleb128 0xa
+ 2426 0182 A8000000 		.4byte	.LASF29
+ 2427 0186 01       		.byte	0x1
+ 2428 0187 0801     		.2byte	0x108
+ 2429 0189 00000000 		.4byte	.LFB6
+ 2430 018d 68000000 		.4byte	.LFE6-.LFB6
+ 2431 0191 01       		.uleb128 0x1
+ 2432 0192 9C       		.byte	0x9c
+ 2433 0193 B6010000 		.4byte	0x1b6
+ 2434 0197 0B       		.uleb128 0xb
+ 2435 0198 5A010000 		.4byte	.LASF27
+ 2436 019c 01       		.byte	0x1
+ 2437 019d 0801     		.2byte	0x108
+ 2438 019f 33010000 		.4byte	0x133
+ 2439 01a3 02       		.uleb128 0x2
+ 2440 01a4 91       		.byte	0x91
+ 2441 01a5 74       		.sleb128 -12
+ 2442 01a6 0B       		.uleb128 0xb
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 49
+
+
+ 2443 01a7 2C010000 		.4byte	.LASF28
+ 2444 01ab 01       		.byte	0x1
+ 2445 01ac 0801     		.2byte	0x108
+ 2446 01ae 77000000 		.4byte	0x77
+ 2447 01b2 02       		.uleb128 0x2
+ 2448 01b3 91       		.byte	0x91
+ 2449 01b4 72       		.sleb128 -14
+ 2450 01b5 00       		.byte	0
+ 2451 01b6 0C       		.uleb128 0xc
+ 2452 01b7 8E010000 		.4byte	.LASF30
+ 2453 01bb 01       		.byte	0x1
+ 2454 01bc 17       		.byte	0x17
+ 2455 01bd 6B000000 		.4byte	0x6b
+ 2456 01c1 05       		.uleb128 0x5
+ 2457 01c2 03       		.byte	0x3
+ 2458 01c3 01000000 		.4byte	LF_DAC_2_Wave1Chan
+ 2459 01c7 0C       		.uleb128 0xc
+ 2460 01c8 E8010000 		.4byte	.LASF31
+ 2461 01cc 01       		.byte	0x1
+ 2462 01cd 18       		.byte	0x18
+ 2463 01ce 6B000000 		.4byte	0x6b
+ 2464 01d2 05       		.uleb128 0x5
+ 2465 01d3 03       		.byte	0x3
+ 2466 01d4 02000000 		.4byte	LF_DAC_2_Wave2Chan
+ 2467 01d8 0C       		.uleb128 0xc
+ 2468 01d9 17030000 		.4byte	.LASF32
+ 2469 01dd 01       		.byte	0x1
+ 2470 01de 19       		.byte	0x19
+ 2471 01df 6B000000 		.4byte	0x6b
+ 2472 01e3 05       		.uleb128 0x5
+ 2473 01e4 03       		.byte	0x3
+ 2474 01e5 03000000 		.4byte	LF_DAC_2_Wave1TD
+ 2475 01e9 0C       		.uleb128 0xc
+ 2476 01ea 37010000 		.4byte	.LASF33
+ 2477 01ee 01       		.byte	0x1
+ 2478 01ef 1A       		.byte	0x1a
+ 2479 01f0 6B000000 		.4byte	0x6b
+ 2480 01f4 05       		.uleb128 0x5
+ 2481 01f5 03       		.byte	0x3
+ 2482 01f6 04000000 		.4byte	LF_DAC_2_Wave2TD
+ 2483 01fa 0D       		.uleb128 0xd
+ 2484 01fb FB010000 		.4byte	.LASF34
+ 2485 01ff 01       		.byte	0x1
+ 2486 0200 12       		.byte	0x12
+ 2487 0201 6B000000 		.4byte	0x6b
+ 2488 0205 05       		.uleb128 0x5
+ 2489 0206 03       		.byte	0x3
+ 2490 0207 00000000 		.4byte	LF_DAC_2_initVar
+ 2491 020b 0E       		.uleb128 0xe
+ 2492 020c 39010000 		.4byte	0x139
+ 2493 0210 1C020000 		.4byte	0x21c
+ 2494 0214 0F       		.uleb128 0xf
+ 2495 0215 AB000000 		.4byte	0xab
+ 2496 0219 A903     		.2byte	0x3a9
+ 2497 021b 00       		.byte	0
+ 2498 021c 0D       		.uleb128 0xd
+ 2499 021d 57020000 		.4byte	.LASF35
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 50
+
+
+ 2500 0221 01       		.byte	0x1
+ 2501 0222 14       		.byte	0x14
+ 2502 0223 2D020000 		.4byte	0x22d
+ 2503 0227 05       		.uleb128 0x5
+ 2504 0228 03       		.byte	0x3
+ 2505 0229 00000000 		.4byte	LF_DAC_2_wave1
+ 2506 022d 09       		.uleb128 0x9
+ 2507 022e 0B020000 		.4byte	0x20b
+ 2508 0232 0E       		.uleb128 0xe
+ 2509 0233 39010000 		.4byte	0x139
+ 2510 0237 43020000 		.4byte	0x243
+ 2511 023b 0F       		.uleb128 0xf
+ 2512 023c AB000000 		.4byte	0xab
+ 2513 0240 5103     		.2byte	0x351
+ 2514 0242 00       		.byte	0
+ 2515 0243 0D       		.uleb128 0xd
+ 2516 0244 66020000 		.4byte	.LASF36
+ 2517 0248 01       		.byte	0x1
+ 2518 0249 15       		.byte	0x15
+ 2519 024a 54020000 		.4byte	0x254
+ 2520 024e 05       		.uleb128 0x5
+ 2521 024f 03       		.byte	0x3
+ 2522 0250 00000000 		.4byte	LF_DAC_2_wave2
+ 2523 0254 09       		.uleb128 0x9
+ 2524 0255 32020000 		.4byte	0x232
+ 2525 0259 00       		.byte	0
+ 2526              		.section	.debug_abbrev,"",%progbits
+ 2527              	.Ldebug_abbrev0:
+ 2528 0000 01       		.uleb128 0x1
+ 2529 0001 11       		.uleb128 0x11
+ 2530 0002 01       		.byte	0x1
+ 2531 0003 25       		.uleb128 0x25
+ 2532 0004 0E       		.uleb128 0xe
+ 2533 0005 13       		.uleb128 0x13
+ 2534 0006 0B       		.uleb128 0xb
+ 2535 0007 03       		.uleb128 0x3
+ 2536 0008 0E       		.uleb128 0xe
+ 2537 0009 1B       		.uleb128 0x1b
+ 2538 000a 0E       		.uleb128 0xe
+ 2539 000b 55       		.uleb128 0x55
+ 2540 000c 17       		.uleb128 0x17
+ 2541 000d 11       		.uleb128 0x11
+ 2542 000e 01       		.uleb128 0x1
+ 2543 000f 10       		.uleb128 0x10
+ 2544 0010 17       		.uleb128 0x17
+ 2545 0011 00       		.byte	0
+ 2546 0012 00       		.byte	0
+ 2547 0013 02       		.uleb128 0x2
+ 2548 0014 24       		.uleb128 0x24
+ 2549 0015 00       		.byte	0
+ 2550 0016 0B       		.uleb128 0xb
+ 2551 0017 0B       		.uleb128 0xb
+ 2552 0018 3E       		.uleb128 0x3e
+ 2553 0019 0B       		.uleb128 0xb
+ 2554 001a 03       		.uleb128 0x3
+ 2555 001b 0E       		.uleb128 0xe
+ 2556 001c 00       		.byte	0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 51
+
+
+ 2557 001d 00       		.byte	0
+ 2558 001e 03       		.uleb128 0x3
+ 2559 001f 24       		.uleb128 0x24
+ 2560 0020 00       		.byte	0
+ 2561 0021 0B       		.uleb128 0xb
+ 2562 0022 0B       		.uleb128 0xb
+ 2563 0023 3E       		.uleb128 0x3e
+ 2564 0024 0B       		.uleb128 0xb
+ 2565 0025 03       		.uleb128 0x3
+ 2566 0026 08       		.uleb128 0x8
+ 2567 0027 00       		.byte	0
+ 2568 0028 00       		.byte	0
+ 2569 0029 04       		.uleb128 0x4
+ 2570 002a 16       		.uleb128 0x16
+ 2571 002b 00       		.byte	0
+ 2572 002c 03       		.uleb128 0x3
+ 2573 002d 0E       		.uleb128 0xe
+ 2574 002e 3A       		.uleb128 0x3a
+ 2575 002f 0B       		.uleb128 0xb
+ 2576 0030 3B       		.uleb128 0x3b
+ 2577 0031 05       		.uleb128 0x5
+ 2578 0032 49       		.uleb128 0x49
+ 2579 0033 13       		.uleb128 0x13
+ 2580 0034 00       		.byte	0
+ 2581 0035 00       		.byte	0
+ 2582 0036 05       		.uleb128 0x5
+ 2583 0037 2E       		.uleb128 0x2e
+ 2584 0038 00       		.byte	0
+ 2585 0039 3F       		.uleb128 0x3f
+ 2586 003a 19       		.uleb128 0x19
+ 2587 003b 03       		.uleb128 0x3
+ 2588 003c 0E       		.uleb128 0xe
+ 2589 003d 3A       		.uleb128 0x3a
+ 2590 003e 0B       		.uleb128 0xb
+ 2591 003f 3B       		.uleb128 0x3b
+ 2592 0040 0B       		.uleb128 0xb
+ 2593 0041 27       		.uleb128 0x27
+ 2594 0042 19       		.uleb128 0x19
+ 2595 0043 11       		.uleb128 0x11
+ 2596 0044 01       		.uleb128 0x1
+ 2597 0045 12       		.uleb128 0x12
+ 2598 0046 06       		.uleb128 0x6
+ 2599 0047 40       		.uleb128 0x40
+ 2600 0048 18       		.uleb128 0x18
+ 2601 0049 9642     		.uleb128 0x2116
+ 2602 004b 19       		.uleb128 0x19
+ 2603 004c 00       		.byte	0
+ 2604 004d 00       		.byte	0
+ 2605 004e 06       		.uleb128 0x6
+ 2606 004f 2E       		.uleb128 0x2e
+ 2607 0050 01       		.byte	0x1
+ 2608 0051 3F       		.uleb128 0x3f
+ 2609 0052 19       		.uleb128 0x19
+ 2610 0053 03       		.uleb128 0x3
+ 2611 0054 0E       		.uleb128 0xe
+ 2612 0055 3A       		.uleb128 0x3a
+ 2613 0056 0B       		.uleb128 0xb
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 52
+
+
+ 2614 0057 3B       		.uleb128 0x3b
+ 2615 0058 0B       		.uleb128 0xb
+ 2616 0059 27       		.uleb128 0x27
+ 2617 005a 19       		.uleb128 0x19
+ 2618 005b 11       		.uleb128 0x11
+ 2619 005c 01       		.uleb128 0x1
+ 2620 005d 12       		.uleb128 0x12
+ 2621 005e 06       		.uleb128 0x6
+ 2622 005f 40       		.uleb128 0x40
+ 2623 0060 18       		.uleb128 0x18
+ 2624 0061 9642     		.uleb128 0x2116
+ 2625 0063 19       		.uleb128 0x19
+ 2626 0064 01       		.uleb128 0x1
+ 2627 0065 13       		.uleb128 0x13
+ 2628 0066 00       		.byte	0
+ 2629 0067 00       		.byte	0
+ 2630 0068 07       		.uleb128 0x7
+ 2631 0069 05       		.uleb128 0x5
+ 2632 006a 00       		.byte	0
+ 2633 006b 03       		.uleb128 0x3
+ 2634 006c 0E       		.uleb128 0xe
+ 2635 006d 3A       		.uleb128 0x3a
+ 2636 006e 0B       		.uleb128 0xb
+ 2637 006f 3B       		.uleb128 0x3b
+ 2638 0070 0B       		.uleb128 0xb
+ 2639 0071 49       		.uleb128 0x49
+ 2640 0072 13       		.uleb128 0x13
+ 2641 0073 02       		.uleb128 0x2
+ 2642 0074 18       		.uleb128 0x18
+ 2643 0075 00       		.byte	0
+ 2644 0076 00       		.byte	0
+ 2645 0077 08       		.uleb128 0x8
+ 2646 0078 0F       		.uleb128 0xf
+ 2647 0079 00       		.byte	0
+ 2648 007a 0B       		.uleb128 0xb
+ 2649 007b 0B       		.uleb128 0xb
+ 2650 007c 49       		.uleb128 0x49
+ 2651 007d 13       		.uleb128 0x13
+ 2652 007e 00       		.byte	0
+ 2653 007f 00       		.byte	0
+ 2654 0080 09       		.uleb128 0x9
+ 2655 0081 26       		.uleb128 0x26
+ 2656 0082 00       		.byte	0
+ 2657 0083 49       		.uleb128 0x49
+ 2658 0084 13       		.uleb128 0x13
+ 2659 0085 00       		.byte	0
+ 2660 0086 00       		.byte	0
+ 2661 0087 0A       		.uleb128 0xa
+ 2662 0088 2E       		.uleb128 0x2e
+ 2663 0089 01       		.byte	0x1
+ 2664 008a 3F       		.uleb128 0x3f
+ 2665 008b 19       		.uleb128 0x19
+ 2666 008c 03       		.uleb128 0x3
+ 2667 008d 0E       		.uleb128 0xe
+ 2668 008e 3A       		.uleb128 0x3a
+ 2669 008f 0B       		.uleb128 0xb
+ 2670 0090 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 53
+
+
+ 2671 0091 05       		.uleb128 0x5
+ 2672 0092 27       		.uleb128 0x27
+ 2673 0093 19       		.uleb128 0x19
+ 2674 0094 11       		.uleb128 0x11
+ 2675 0095 01       		.uleb128 0x1
+ 2676 0096 12       		.uleb128 0x12
+ 2677 0097 06       		.uleb128 0x6
+ 2678 0098 40       		.uleb128 0x40
+ 2679 0099 18       		.uleb128 0x18
+ 2680 009a 9642     		.uleb128 0x2116
+ 2681 009c 19       		.uleb128 0x19
+ 2682 009d 01       		.uleb128 0x1
+ 2683 009e 13       		.uleb128 0x13
+ 2684 009f 00       		.byte	0
+ 2685 00a0 00       		.byte	0
+ 2686 00a1 0B       		.uleb128 0xb
+ 2687 00a2 05       		.uleb128 0x5
+ 2688 00a3 00       		.byte	0
+ 2689 00a4 03       		.uleb128 0x3
+ 2690 00a5 0E       		.uleb128 0xe
+ 2691 00a6 3A       		.uleb128 0x3a
+ 2692 00a7 0B       		.uleb128 0xb
+ 2693 00a8 3B       		.uleb128 0x3b
+ 2694 00a9 05       		.uleb128 0x5
+ 2695 00aa 49       		.uleb128 0x49
+ 2696 00ab 13       		.uleb128 0x13
+ 2697 00ac 02       		.uleb128 0x2
+ 2698 00ad 18       		.uleb128 0x18
+ 2699 00ae 00       		.byte	0
+ 2700 00af 00       		.byte	0
+ 2701 00b0 0C       		.uleb128 0xc
+ 2702 00b1 34       		.uleb128 0x34
+ 2703 00b2 00       		.byte	0
+ 2704 00b3 03       		.uleb128 0x3
+ 2705 00b4 0E       		.uleb128 0xe
+ 2706 00b5 3A       		.uleb128 0x3a
+ 2707 00b6 0B       		.uleb128 0xb
+ 2708 00b7 3B       		.uleb128 0x3b
+ 2709 00b8 0B       		.uleb128 0xb
+ 2710 00b9 49       		.uleb128 0x49
+ 2711 00ba 13       		.uleb128 0x13
+ 2712 00bb 02       		.uleb128 0x2
+ 2713 00bc 18       		.uleb128 0x18
+ 2714 00bd 00       		.byte	0
+ 2715 00be 00       		.byte	0
+ 2716 00bf 0D       		.uleb128 0xd
+ 2717 00c0 34       		.uleb128 0x34
+ 2718 00c1 00       		.byte	0
+ 2719 00c2 03       		.uleb128 0x3
+ 2720 00c3 0E       		.uleb128 0xe
+ 2721 00c4 3A       		.uleb128 0x3a
+ 2722 00c5 0B       		.uleb128 0xb
+ 2723 00c6 3B       		.uleb128 0x3b
+ 2724 00c7 0B       		.uleb128 0xb
+ 2725 00c8 49       		.uleb128 0x49
+ 2726 00c9 13       		.uleb128 0x13
+ 2727 00ca 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 54
+
+
+ 2728 00cb 19       		.uleb128 0x19
+ 2729 00cc 02       		.uleb128 0x2
+ 2730 00cd 18       		.uleb128 0x18
+ 2731 00ce 00       		.byte	0
+ 2732 00cf 00       		.byte	0
+ 2733 00d0 0E       		.uleb128 0xe
+ 2734 00d1 01       		.uleb128 0x1
+ 2735 00d2 01       		.byte	0x1
+ 2736 00d3 49       		.uleb128 0x49
+ 2737 00d4 13       		.uleb128 0x13
+ 2738 00d5 01       		.uleb128 0x1
+ 2739 00d6 13       		.uleb128 0x13
+ 2740 00d7 00       		.byte	0
+ 2741 00d8 00       		.byte	0
+ 2742 00d9 0F       		.uleb128 0xf
+ 2743 00da 21       		.uleb128 0x21
+ 2744 00db 00       		.byte	0
+ 2745 00dc 49       		.uleb128 0x49
+ 2746 00dd 13       		.uleb128 0x13
+ 2747 00de 2F       		.uleb128 0x2f
+ 2748 00df 05       		.uleb128 0x5
+ 2749 00e0 00       		.byte	0
+ 2750 00e1 00       		.byte	0
+ 2751 00e2 00       		.byte	0
+ 2752              		.section	.debug_aranges,"",%progbits
+ 2753 0000 4C000000 		.4byte	0x4c
+ 2754 0004 0200     		.2byte	0x2
+ 2755 0006 00000000 		.4byte	.Ldebug_info0
+ 2756 000a 04       		.byte	0x4
+ 2757 000b 00       		.byte	0
+ 2758 000c 0000     		.2byte	0
+ 2759 000e 0000     		.2byte	0
+ 2760 0010 00000000 		.4byte	.LFB0
+ 2761 0014 54000000 		.4byte	.LFE0-.LFB0
+ 2762 0018 00000000 		.4byte	.LFB1
+ 2763 001c 38000000 		.4byte	.LFE1-.LFB1
+ 2764 0020 00000000 		.4byte	.LFB2
+ 2765 0024 24000000 		.4byte	.LFE2-.LFB2
+ 2766 0028 00000000 		.4byte	.LFB3
+ 2767 002c 34000000 		.4byte	.LFE3-.LFB3
+ 2768 0030 00000000 		.4byte	.LFB4
+ 2769 0034 2C000000 		.4byte	.LFE4-.LFB4
+ 2770 0038 00000000 		.4byte	.LFB5
+ 2771 003c 68000000 		.4byte	.LFE5-.LFB5
+ 2772 0040 00000000 		.4byte	.LFB6
+ 2773 0044 68000000 		.4byte	.LFE6-.LFB6
+ 2774 0048 00000000 		.4byte	0
+ 2775 004c 00000000 		.4byte	0
+ 2776              		.section	.debug_ranges,"",%progbits
+ 2777              	.Ldebug_ranges0:
+ 2778 0000 00000000 		.4byte	.LFB0
+ 2779 0004 54000000 		.4byte	.LFE0
+ 2780 0008 00000000 		.4byte	.LFB1
+ 2781 000c 38000000 		.4byte	.LFE1
+ 2782 0010 00000000 		.4byte	.LFB2
+ 2783 0014 24000000 		.4byte	.LFE2
+ 2784 0018 00000000 		.4byte	.LFB3
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 55
+
+
+ 2785 001c 34000000 		.4byte	.LFE3
+ 2786 0020 00000000 		.4byte	.LFB4
+ 2787 0024 2C000000 		.4byte	.LFE4
+ 2788 0028 00000000 		.4byte	.LFB5
+ 2789 002c 68000000 		.4byte	.LFE5
+ 2790 0030 00000000 		.4byte	.LFB6
+ 2791 0034 68000000 		.4byte	.LFE6
+ 2792 0038 00000000 		.4byte	0
+ 2793 003c 00000000 		.4byte	0
+ 2794              		.section	.debug_line,"",%progbits
+ 2795              	.Ldebug_line0:
+ 2796 0000 EE000000 		.section	.debug_str,"MS",%progbits,1
+ 2796      02004500 
+ 2796      00000201 
+ 2796      FB0E0D00 
+ 2796      01010101 
+ 2797              	.LASF37:
+ 2798 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2798      43313120 
+ 2798      352E342E 
+ 2798      31203230 
+ 2798      31363036 
+ 2799 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2799      20726576 
+ 2799      6973696F 
+ 2799      6E203233 
+ 2799      37373135 
+ 2800 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2800      66756E63 
+ 2800      74696F6E 
+ 2800      2D736563 
+ 2800      74696F6E 
+ 2801              	.LASF26:
+ 2802 008e 4C465F44 		.ascii	"LF_DAC_2_Wave1Setup\000"
+ 2802      41435F32 
+ 2802      5F576176 
+ 2802      65315365 
+ 2802      74757000 
+ 2803              	.LASF12:
+ 2804 00a2 666C6F61 		.ascii	"float\000"
+ 2804      7400
+ 2805              	.LASF29:
+ 2806 00a8 4C465F44 		.ascii	"LF_DAC_2_Wave2Setup\000"
+ 2806      41435F32 
+ 2806      5F576176 
+ 2806      65325365 
+ 2806      74757000 
+ 2807              	.LASF3:
+ 2808 00bc 73686F72 		.ascii	"short unsigned int\000"
+ 2808      7420756E 
+ 2808      7369676E 
+ 2808      65642069 
+ 2808      6E7400
+ 2809              	.LASF38:
+ 2810 00cf 47656E65 		.ascii	"Generated_Source\\PSoC5\\LF_DAC_2.c\000"
+ 2810      72617465 
+ 2810      645F536F 
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 56
+
+
+ 2810      75726365 
+ 2810      5C50536F 
+ 2811              	.LASF20:
+ 2812 00f1 77617665 		.ascii	"wavePtr1\000"
+ 2812      50747231 
+ 2812      00
+ 2813              	.LASF22:
+ 2814 00fa 77617665 		.ascii	"wavePtr2\000"
+ 2814      50747232 
+ 2814      00
+ 2815              	.LASF17:
+ 2816 0103 4C465F44 		.ascii	"LF_DAC_2_Init\000"
+ 2816      41435F32 
+ 2816      5F496E69 
+ 2816      7400
+ 2817              	.LASF19:
+ 2818 0111 4C465F44 		.ascii	"LF_DAC_2_Start\000"
+ 2818      41435F32 
+ 2818      5F537461 
+ 2818      727400
+ 2819              	.LASF0:
+ 2820 0120 7369676E 		.ascii	"signed char\000"
+ 2820      65642063 
+ 2820      68617200 
+ 2821              	.LASF28:
+ 2822 012c 73616D70 		.ascii	"sampleSize\000"
+ 2822      6C655369 
+ 2822      7A6500
+ 2823              	.LASF33:
+ 2824 0137 4C465F44 		.ascii	"LF_DAC_2_Wave2TD\000"
+ 2824      41435F32 
+ 2824      5F576176 
+ 2824      65325444 
+ 2824      00
+ 2825              	.LASF5:
+ 2826 0148 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2826      20756E73 
+ 2826      69676E65 
+ 2826      6420696E 
+ 2826      7400
+ 2827              	.LASF27:
+ 2828 015a 77617665 		.ascii	"wavePtr\000"
+ 2828      50747200 
+ 2829              	.LASF9:
+ 2830 0162 75696E74 		.ascii	"uint8\000"
+ 2830      3800
+ 2831              	.LASF21:
+ 2832 0168 73616D70 		.ascii	"sampleSize1\000"
+ 2832      6C655369 
+ 2832      7A653100 
+ 2833              	.LASF23:
+ 2834 0174 73616D70 		.ascii	"sampleSize2\000"
+ 2834      6C655369 
+ 2834      7A653200 
+ 2835              	.LASF1:
+ 2836 0180 756E7369 		.ascii	"unsigned char\000"
+ 2836      676E6564 
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 57
+
+
+ 2836      20636861 
+ 2836      7200
+ 2837              	.LASF30:
+ 2838 018e 4C465F44 		.ascii	"LF_DAC_2_Wave1Chan\000"
+ 2838      41435F32 
+ 2838      5F576176 
+ 2838      65314368 
+ 2838      616E00
+ 2839              	.LASF13:
+ 2840 01a1 646F7562 		.ascii	"double\000"
+ 2840      6C6500
+ 2841              	.LASF10:
+ 2842 01a8 75696E74 		.ascii	"uint16\000"
+ 2842      313600
+ 2843              	.LASF11:
+ 2844 01af 75696E74 		.ascii	"uint32\000"
+ 2844      333200
+ 2845              	.LASF8:
+ 2846 01b6 756E7369 		.ascii	"unsigned int\000"
+ 2846      676E6564 
+ 2846      20696E74 
+ 2846      00
+ 2847              	.LASF24:
+ 2848 01c3 4C465F44 		.ascii	"LF_DAC_2_Stop\000"
+ 2848      41435F32 
+ 2848      5F53746F 
+ 2848      7000
+ 2849              	.LASF7:
+ 2850 01d1 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2850      206C6F6E 
+ 2850      6720756E 
+ 2850      7369676E 
+ 2850      65642069 
+ 2851              	.LASF31:
+ 2852 01e8 4C465F44 		.ascii	"LF_DAC_2_Wave2Chan\000"
+ 2852      41435F32 
+ 2852      5F576176 
+ 2852      65324368 
+ 2852      616E00
+ 2853              	.LASF34:
+ 2854 01fb 4C465F44 		.ascii	"LF_DAC_2_initVar\000"
+ 2854      41435F32 
+ 2854      5F696E69 
+ 2854      74566172 
+ 2854      00
+ 2855              	.LASF6:
+ 2856 020c 6C6F6E67 		.ascii	"long long int\000"
+ 2856      206C6F6E 
+ 2856      6720696E 
+ 2856      7400
+ 2857              	.LASF16:
+ 2858 021a 73697A65 		.ascii	"sizetype\000"
+ 2858      74797065 
+ 2858      00
+ 2859              	.LASF14:
+ 2860 0223 63686172 		.ascii	"char\000"
+ 2860      00
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 58
+
+
+ 2861              	.LASF2:
+ 2862 0228 73686F72 		.ascii	"short int\000"
+ 2862      7420696E 
+ 2862      7400
+ 2863              	.LASF18:
+ 2864 0232 4C465F44 		.ascii	"LF_DAC_2_Enable\000"
+ 2864      41435F32 
+ 2864      5F456E61 
+ 2864      626C6500 
+ 2865              	.LASF4:
+ 2866 0242 6C6F6E67 		.ascii	"long int\000"
+ 2866      20696E74 
+ 2866      00
+ 2867              	.LASF15:
+ 2868 024b 6C6F6E67 		.ascii	"long double\000"
+ 2868      20646F75 
+ 2868      626C6500 
+ 2869              	.LASF35:
+ 2870 0257 4C465F44 		.ascii	"LF_DAC_2_wave1\000"
+ 2870      41435F32 
+ 2870      5F776176 
+ 2870      653100
+ 2871              	.LASF36:
+ 2872 0266 4C465F44 		.ascii	"LF_DAC_2_wave2\000"
+ 2872      41435F32 
+ 2872      5F776176 
+ 2872      653200
+ 2873              	.LASF25:
+ 2874 0275 4C465F44 		.ascii	"LF_DAC_2_StartEx\000"
+ 2874      41435F32 
+ 2874      5F537461 
+ 2874      72744578 
+ 2874      00
+ 2875              	.LASF39:
+ 2876 0286 433A5C55 		.ascii	"C:\\Users\\riveraes\\Documents\\LaptopPublic\\Maest"
+ 2876      73657273 
+ 2876      5C726976 
+ 2876      65726165 
+ 2876      735C446F 
+ 2877 02b4 7269615C 		.ascii	"ria\\MP6157_Adquisicion y procesamiento de datos\\D"
+ 2877      4D503631 
+ 2877      35375F41 
+ 2877      64717569 
+ 2877      73696369 
+ 2878 02e5 75616C54 		.ascii	"ualToneMultiFrequency\\DTMF_Projects\\DTMF_TX.cydsn"
+ 2878      6F6E654D 
+ 2878      756C7469 
+ 2878      46726571 
+ 2878      75656E63 
+ 2879 0316 00       		.ascii	"\000"
+ 2880              	.LASF32:
+ 2881 0317 4C465F44 		.ascii	"LF_DAC_2_Wave1TD\000"
+ 2881      41435F32 
+ 2881      5F576176 
+ 2881      65315444 
+ 2881      00
+ 2882              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\ccuTxHkg.s 			page 59
+
+

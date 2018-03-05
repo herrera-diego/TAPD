@@ -1,0 +1,3880 @@
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	TransmitBuffer,16,4
+  20              		.comm	Output,2,2
+  21              		.comm	array,1300,4
+  22              		.global	loFrequency
+  23              		.data
+  24              		.align	2
+  25              		.type	loFrequency, %object
+  26              		.size	loFrequency, 20
+  27              	loFrequency:
+  28 0000 96000000 		.word	150
+  29 0004 B9020000 		.word	697
+  30 0008 02030000 		.word	770
+  31 000c 54030000 		.word	852
+  32 0010 AD030000 		.word	941
+  33              		.global	hiFrequency
+  34              		.align	2
+  35              		.type	hiFrequency, %object
+  36              		.size	hiFrequency, 16
+  37              	hiFrequency:
+  38 0014 96000000 		.word	150
+  39 0018 B9040000 		.word	1209
+  40 001c 38050000 		.word	1336
+  41 0020 C5050000 		.word	1477
+  42              		.section	.text.Transmit,"ax",%progbits
+  43              		.align	2
+  44              		.global	Transmit
+  45              		.thumb
+  46              		.thumb_func
+  47              		.type	Transmit, %function
+  48              	Transmit:
+  49              	.LFB64:
+  50              		.file 1 "main.c"
+   1:main.c        **** /******************************************************************************
+   2:main.c        **** * Project Name		: DualToneMultiFrequency TX
+   3:main.c        **** * File Name			: main.c
+   4:main.c        **** *
+   5:main.c        **** *******************************************************************************/
+   6:main.c        **** 
+   7:main.c        **** #include <device.h>
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 2
+
+
+   8:main.c        **** #include "stdio.h"
+   9:main.c        **** #include "math.h"
+  10:main.c        **** 
+  11:main.c        **** /* Project Defines */
+  12:main.c        **** #define FALSE  0
+  13:main.c        **** #define TRUE   1
+  14:main.c        **** #define TRANSMIT_BUFFER_SIZE  16
+  15:main.c        **** #define NUMBER_OF_SAMPLES 650
+  16:main.c        **** #define SAMPLING_RATE 10000
+  17:main.c        **** #define LOW_FREQ_DAC_NUMBER_OF_SAMPLES 200
+  18:main.c        **** #define HIGH_FREQ_DAC_NUMBER_OF_SAMPLES 300
+  19:main.c        **** #define MASTER_CLOCK_FREQUENCY 24000000
+  20:main.c        **** #define LOW_FREQUENCIES_ANALIZED 5
+  21:main.c        **** #define HIGH_FREQUENCIES_ANALIZED 4
+  22:main.c        **** 
+  23:main.c        **** /* Transmit Buffer */
+  24:main.c        **** char TransmitBuffer[TRANSMIT_BUFFER_SIZE];
+  25:main.c        **** // Variables to store ADC data
+  26:main.c        **** uint16 Output;
+  27:main.c        **** int16 array[NUMBER_OF_SAMPLES];
+  28:main.c        **** // DualTone Frequencies
+  29:main.c        **** int loFrequency[LOW_FREQUENCIES_ANALIZED] = {150, 697, 770, 852, 941};
+  30:main.c        **** int hiFrequency[HIGH_FREQUENCIES_ANALIZED] = {150, 1209, 1336, 1477};
+  31:main.c        **** 
+  32:main.c        **** // Function prototypes
+  33:main.c        **** void InitSettings(void);
+  34:main.c        **** void SetHighFrequencyDacOutput(int OutputFrequency);
+  35:main.c        **** void SetLowFrequencyDacOutput(int OutputFrequency);
+  36:main.c        **** double Goertzel(int numSamples, int tFrequency, int tSamplingRate, double data[]);
+  37:main.c        **** uint16 getMaxValue(double arrayData[], uint8 size);
+  38:main.c        **** void DTMF(void);
+  39:main.c        **** void DecodeInput(int loFrequency, int hiFrecuency);
+  40:main.c        **** 
+  41:main.c        **** 
+  42:main.c        **** /*******************************************************************************
+  43:main.c        **** * Interrupt routine
+  44:main.c        **** *******************************************************************************/
+  45:main.c        **** CY_ISR(Transmit)
+  46:main.c        **** {
+  51              		.loc 1 46 0
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 1, uses_anonymous_args = 0
+  55              		@ link register save eliminated.
+  56 0000 80B4     		push	{r7}
+  57              		.cfi_def_cfa_offset 4
+  58              		.cfi_offset 7, -4
+  59 0002 00AF     		add	r7, sp, #0
+  60              		.cfi_def_cfa_register 7
+  47:main.c        ****     // Not used
+  48:main.c        **** }
+  61              		.loc 1 48 0
+  62 0004 00BF     		nop
+  63 0006 BD46     		mov	sp, r7
+  64              		.cfi_def_cfa_register 13
+  65              		@ sp needed
+  66 0008 80BC     		pop	{r7}
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 3
+
+
+  67              		.cfi_restore 7
+  68              		.cfi_def_cfa_offset 0
+  69 000a 7047     		bx	lr
+  70              		.cfi_endproc
+  71              	.LFE64:
+  72              		.size	Transmit, .-Transmit
+  73              		.section	.text.UserInput,"ax",%progbits
+  74              		.align	2
+  75              		.global	UserInput
+  76              		.thumb
+  77              		.thumb_func
+  78              		.type	UserInput, %function
+  79              	UserInput:
+  80              	.LFB65:
+  49:main.c        **** 
+  50:main.c        **** 
+  51:main.c        **** /*******************************************************************************
+  52:main.c        **** * Interrupt routine
+  53:main.c        **** *******************************************************************************/
+  54:main.c        **** CY_ISR(UserInput)
+  55:main.c        **** {
+  81              		.loc 1 55 0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 0
+  84              		@ frame_needed = 1, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86 0000 80B4     		push	{r7}
+  87              		.cfi_def_cfa_offset 4
+  88              		.cfi_offset 7, -4
+  89 0002 00AF     		add	r7, sp, #0
+  90              		.cfi_def_cfa_register 7
+  56:main.c        ****     //UART_1_PutString("Input Detected!\r\n");
+  57:main.c        **** }
+  91              		.loc 1 57 0
+  92 0004 00BF     		nop
+  93 0006 BD46     		mov	sp, r7
+  94              		.cfi_def_cfa_register 13
+  95              		@ sp needed
+  96 0008 80BC     		pop	{r7}
+  97              		.cfi_restore 7
+  98              		.cfi_def_cfa_offset 0
+  99 000a 7047     		bx	lr
+ 100              		.cfi_endproc
+ 101              	.LFE65:
+ 102              		.size	UserInput, .-UserInput
+ 103              		.section	.rodata
+ 104              		.align	2
+ 105              	.LC0:
+ 106 0000 5458202D 		.ascii	"TX - Ready\015\012\000"
+ 106      20526561 
+ 106      64790D0A 
+ 106      00
+ 107 000d 000000   		.align	2
+ 108              	.LC1:
+ 109 0010 300D0A00 		.ascii	"0\015\012\000"
+ 110              		.align	2
+ 111              	.LC2:
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 4
+
+
+ 112 0014 310D0A00 		.ascii	"1\015\012\000"
+ 113              		.align	2
+ 114              	.LC3:
+ 115 0018 320D0A00 		.ascii	"2\015\012\000"
+ 116              		.align	2
+ 117              	.LC4:
+ 118 001c 330D0A00 		.ascii	"3\015\012\000"
+ 119              		.align	2
+ 120              	.LC5:
+ 121 0020 340D0A00 		.ascii	"4\015\012\000"
+ 122              		.align	2
+ 123              	.LC6:
+ 124 0024 350D0A00 		.ascii	"5\015\012\000"
+ 125              		.align	2
+ 126              	.LC7:
+ 127 0028 360D0A00 		.ascii	"6\015\012\000"
+ 128              		.align	2
+ 129              	.LC8:
+ 130 002c 370D0A00 		.ascii	"7\015\012\000"
+ 131              		.align	2
+ 132              	.LC9:
+ 133 0030 380D0A00 		.ascii	"8\015\012\000"
+ 134              		.align	2
+ 135              	.LC10:
+ 136 0034 390D0A00 		.ascii	"9\015\012\000"
+ 137              		.align	2
+ 138              	.LC11:
+ 139 0038 2A0D0A00 		.ascii	"*\015\012\000"
+ 140              		.align	2
+ 141              	.LC12:
+ 142 003c 230D0A00 		.ascii	"#\015\012\000"
+ 143              		.align	2
+ 144              	.LC13:
+ 145 0040 2D2D2D2D 		.ascii	"-----> Samples Init\015\012\000"
+ 145      2D3E2053 
+ 145      616D706C 
+ 145      65732049 
+ 145      6E69740D 
+ 146 0056 0000     		.align	2
+ 147              	.LC14:
+ 148 0058 25640D0A 		.ascii	"%d\015\012\000"
+ 148      00
+ 149 005d 000000   		.align	2
+ 150              	.LC15:
+ 151 0060 2D2D2D2D 		.ascii	"-----> Samples End\015\012\000"
+ 151      2D3E2053 
+ 151      616D706C 
+ 151      65732045 
+ 151      6E640D0A 
+ 152 0075 000000   		.align	2
+ 153              	.LC16:
+ 154 0078 44756D6D 		.ascii	"Dummy Frequency ...\015\012\000"
+ 154      79204672 
+ 154      65717565 
+ 154      6E637920 
+ 154      2E2E2E0D 
+ 155              		.section	.text.main,"ax",%progbits
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 5
+
+
+ 156              		.align	2
+ 157              		.global	main
+ 158              		.thumb
+ 159              		.thumb_func
+ 160              		.type	main, %function
+ 161              	main:
+ 162              	.LFB66:
+  58:main.c        **** 
+  59:main.c        **** 
+  60:main.c        **** /*******************************************************************************
+  61:main.c        **** * Function Name: main
+  62:main.c        **** *******************************************************************************/
+  63:main.c        **** int main()
+  64:main.c        **** {
+ 163              		.loc 1 64 0
+ 164              		.cfi_startproc
+ 165              		@ args = 0, pretend = 0, frame = 8
+ 166              		@ frame_needed = 1, uses_anonymous_args = 0
+ 167 0000 80B5     		push	{r7, lr}
+ 168              		.cfi_def_cfa_offset 8
+ 169              		.cfi_offset 7, -8
+ 170              		.cfi_offset 14, -4
+ 171 0002 82B0     		sub	sp, sp, #8
+ 172              		.cfi_def_cfa_offset 16
+ 173 0004 00AF     		add	r7, sp, #0
+ 174              		.cfi_def_cfa_register 7
+  65:main.c        ****     /* Variable to store UART received character */
+  66:main.c        ****     uint8 Ch;
+  67:main.c        ****     
+  68:main.c        ****     /* Start the components */
+  69:main.c        ****     ADC_DelSig_1_Start();
+ 175              		.loc 1 69 0
+ 176 0006 FFF7FEFF 		bl	ADC_DelSig_1_Start
+  70:main.c        ****     UART_1_Start();
+ 177              		.loc 1 70 0
+ 178 000a FFF7FEFF 		bl	UART_1_Start
+  71:main.c        ****         
+  72:main.c        ****     /* Start the ADC conversion */
+  73:main.c        ****     ADC_DelSig_1_StartConvert();
+ 179              		.loc 1 73 0
+ 180 000e FFF7FEFF 		bl	ADC_DelSig_1_StartConvert
+  74:main.c        ****     
+  75:main.c        ****     /* Send message to verify COM port is connected properly */
+  76:main.c        ****     UART_1_PutString("TX - Ready\r\n");
+ 181              		.loc 1 76 0
+ 182 0012 CD48     		ldr	r0, .L32
+ 183 0014 FFF7FEFF 		bl	UART_1_PutString
+  77:main.c        ****     
+  78:main.c        ****     // Enable Interrupts
+  79:main.c        ****     CyGlobalIntEnable;
+ 184              		.loc 1 79 0
+ 185              		.syntax unified
+ 186              	@ 79 "main.c" 1
+ 187 0018 62B6     		CPSIE   i
+ 188              	@ 0 "" 2
+  80:main.c        ****     
+  81:main.c        ****     // Init Settings
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 6
+
+
+  82:main.c        ****     // - Output dummy 4KHz sine wave
+  83:main.c        ****     // - Turn off blue LED
+  84:main.c        ****     InitSettings();  
+ 189              		.loc 1 84 0
+ 190              		.thumb
+ 191              		.syntax unified
+ 192 001a FFF7FEFF 		bl	InitSettings
+ 193              	.L30:
+  85:main.c        ****     
+  86:main.c        ****     for(;;)
+  87:main.c        ****     {        
+  88:main.c        ****         /* Non-blocking call to get the latest data recieved  */
+  89:main.c        ****         Ch = UART_1_GetChar();
+ 194              		.loc 1 89 0
+ 195 001e FFF7FEFF 		bl	UART_1_GetChar
+ 196 0022 0346     		mov	r3, r0
+ 197 0024 7B70     		strb	r3, [r7, #1]
+  90:main.c        ****         
+  91:main.c        ****         /* Set flags based on UART command */
+  92:main.c        ****         switch(Ch)
+ 198              		.loc 1 92 0
+ 199 0026 7B78     		ldrb	r3, [r7, #1]	@ zero_extendqisi2
+ 200 0028 233B     		subs	r3, r3, #35
+ 201 002a 552B     		cmp	r3, #85
+ 202 002c 00F2DF81 		bhi	.L31
+ 203 0030 01A2     		adr	r2, .L6
+ 204 0032 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 205 0036 00BF     		.p2align 2
+ 206              	.L6:
+ 207 0038 99020000 		.word	.L5+1
+ 208 003c EF030000 		.word	.L31+1
+ 209 0040 EF030000 		.word	.L31+1
+ 210 0044 EF030000 		.word	.L31+1
+ 211 0048 EF030000 		.word	.L31+1
+ 212 004c EF030000 		.word	.L31+1
+ 213 0050 EF030000 		.word	.L31+1
+ 214 0054 81020000 		.word	.L7+1
+ 215 0058 EF030000 		.word	.L31+1
+ 216 005c EF030000 		.word	.L31+1
+ 217 0060 EF030000 		.word	.L31+1
+ 218 0064 EF030000 		.word	.L31+1
+ 219 0068 EF030000 		.word	.L31+1
+ 220 006c 91010000 		.word	.L8+1
+ 221 0070 A9010000 		.word	.L9+1
+ 222 0074 C1010000 		.word	.L10+1
+ 223 0078 D9010000 		.word	.L11+1
+ 224 007c F1010000 		.word	.L12+1
+ 225 0080 09020000 		.word	.L13+1
+ 226 0084 21020000 		.word	.L14+1
+ 227 0088 39020000 		.word	.L15+1
+ 228 008c 51020000 		.word	.L16+1
+ 229 0090 69020000 		.word	.L17+1
+ 230 0094 EF030000 		.word	.L31+1
+ 231 0098 EF030000 		.word	.L31+1
+ 232 009c EF030000 		.word	.L31+1
+ 233 00a0 EF030000 		.word	.L31+1
+ 234 00a4 EF030000 		.word	.L31+1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 7
+
+
+ 235 00a8 EF030000 		.word	.L31+1
+ 236 00ac EF030000 		.word	.L31+1
+ 237 00b0 EF030000 		.word	.L31+1
+ 238 00b4 EF030000 		.word	.L31+1
+ 239 00b8 EF030000 		.word	.L31+1
+ 240 00bc B1020000 		.word	.L18+1
+ 241 00c0 EF030000 		.word	.L31+1
+ 242 00c4 EF030000 		.word	.L31+1
+ 243 00c8 EF030000 		.word	.L31+1
+ 244 00cc EF030000 		.word	.L31+1
+ 245 00d0 EF030000 		.word	.L31+1
+ 246 00d4 EF030000 		.word	.L31+1
+ 247 00d8 EF030000 		.word	.L31+1
+ 248 00dc EF030000 		.word	.L31+1
+ 249 00e0 EF030000 		.word	.L31+1
+ 250 00e4 EF030000 		.word	.L31+1
+ 251 00e8 EF030000 		.word	.L31+1
+ 252 00ec EF030000 		.word	.L31+1
+ 253 00f0 EF030000 		.word	.L31+1
+ 254 00f4 EF030000 		.word	.L31+1
+ 255 00f8 41030000 		.word	.L19+1
+ 256 00fc EF030000 		.word	.L31+1
+ 257 0100 EF030000 		.word	.L31+1
+ 258 0104 EF030000 		.word	.L31+1
+ 259 0108 EF030000 		.word	.L31+1
+ 260 010c DB030000 		.word	.L20+1
+ 261 0110 EF030000 		.word	.L31+1
+ 262 0114 EF030000 		.word	.L31+1
+ 263 0118 EF030000 		.word	.L31+1
+ 264 011c EF030000 		.word	.L31+1
+ 265 0120 EF030000 		.word	.L31+1
+ 266 0124 EF030000 		.word	.L31+1
+ 267 0128 EF030000 		.word	.L31+1
+ 268 012c EF030000 		.word	.L31+1
+ 269 0130 EF030000 		.word	.L31+1
+ 270 0134 EF030000 		.word	.L31+1
+ 271 0138 EF030000 		.word	.L31+1
+ 272 013c B1020000 		.word	.L18+1
+ 273 0140 EF030000 		.word	.L31+1
+ 274 0144 EF030000 		.word	.L31+1
+ 275 0148 EF030000 		.word	.L31+1
+ 276 014c EF030000 		.word	.L31+1
+ 277 0150 EF030000 		.word	.L31+1
+ 278 0154 EF030000 		.word	.L31+1
+ 279 0158 EF030000 		.word	.L31+1
+ 280 015c EF030000 		.word	.L31+1
+ 281 0160 EF030000 		.word	.L31+1
+ 282 0164 EF030000 		.word	.L31+1
+ 283 0168 EF030000 		.word	.L31+1
+ 284 016c EF030000 		.word	.L31+1
+ 285 0170 EF030000 		.word	.L31+1
+ 286 0174 EF030000 		.word	.L31+1
+ 287 0178 41030000 		.word	.L19+1
+ 288 017c EF030000 		.word	.L31+1
+ 289 0180 EF030000 		.word	.L31+1
+ 290 0184 EF030000 		.word	.L31+1
+ 291 0188 EF030000 		.word	.L31+1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 8
+
+
+ 292 018c DB030000 		.word	.L20+1
+ 293              		.p2align 1
+ 294              	.L8:
+  93:main.c        ****         {
+  94:main.c        ****             case '0':
+  95:main.c        ****                 UART_1_PutString("0\r\n");
+ 295              		.loc 1 95 0
+ 296 0190 6E48     		ldr	r0, .L32+4
+ 297 0192 FFF7FEFF 		bl	UART_1_PutString
+  96:main.c        ****                 SetLowFrequencyDacOutput(941);
+ 298              		.loc 1 96 0
+ 299 0196 40F2AD30 		movw	r0, #941
+ 300 019a FFF7FEFF 		bl	SetLowFrequencyDacOutput
+  97:main.c        ****                 SetHighFrequencyDacOutput(1336);
+ 301              		.loc 1 97 0
+ 302 019e 4FF4A760 		mov	r0, #1336
+ 303 01a2 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+  98:main.c        ****                 
+  99:main.c        ****                 break;
+ 304              		.loc 1 99 0
+ 305 01a6 23E1     		b	.L21
+ 306              	.L9:
+ 100:main.c        ****                 
+ 101:main.c        ****             case '1':
+ 102:main.c        ****                 UART_1_PutString("1\r\n");
+ 307              		.loc 1 102 0
+ 308 01a8 6948     		ldr	r0, .L32+8
+ 309 01aa FFF7FEFF 		bl	UART_1_PutString
+ 103:main.c        ****                 SetLowFrequencyDacOutput(697);
+ 310              		.loc 1 103 0
+ 311 01ae 40F2B920 		movw	r0, #697
+ 312 01b2 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 104:main.c        ****                 SetHighFrequencyDacOutput(1209);
+ 313              		.loc 1 104 0
+ 314 01b6 40F2B940 		movw	r0, #1209
+ 315 01ba FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 105:main.c        ****                 
+ 106:main.c        ****                 break;
+ 316              		.loc 1 106 0
+ 317 01be 17E1     		b	.L21
+ 318              	.L10:
+ 107:main.c        ****                 
+ 108:main.c        ****             case '2':
+ 109:main.c        ****                 UART_1_PutString("2\r\n");
+ 319              		.loc 1 109 0
+ 320 01c0 6448     		ldr	r0, .L32+12
+ 321 01c2 FFF7FEFF 		bl	UART_1_PutString
+ 110:main.c        ****                 SetLowFrequencyDacOutput(697);
+ 322              		.loc 1 110 0
+ 323 01c6 40F2B920 		movw	r0, #697
+ 324 01ca FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 111:main.c        ****                 SetHighFrequencyDacOutput(1336);
+ 325              		.loc 1 111 0
+ 326 01ce 4FF4A760 		mov	r0, #1336
+ 327 01d2 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 112:main.c        ****                 
+ 113:main.c        ****                 break;
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 9
+
+
+ 328              		.loc 1 113 0
+ 329 01d6 0BE1     		b	.L21
+ 330              	.L11:
+ 114:main.c        ****                 
+ 115:main.c        ****             case '3':
+ 116:main.c        ****                 UART_1_PutString("3\r\n");
+ 331              		.loc 1 116 0
+ 332 01d8 5F48     		ldr	r0, .L32+16
+ 333 01da FFF7FEFF 		bl	UART_1_PutString
+ 117:main.c        ****                 SetLowFrequencyDacOutput(697);
+ 334              		.loc 1 117 0
+ 335 01de 40F2B920 		movw	r0, #697
+ 336 01e2 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 118:main.c        ****                 SetHighFrequencyDacOutput(1477);
+ 337              		.loc 1 118 0
+ 338 01e6 40F2C550 		movw	r0, #1477
+ 339 01ea FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 119:main.c        ****                 
+ 120:main.c        ****                 break;
+ 340              		.loc 1 120 0
+ 341 01ee FFE0     		b	.L21
+ 342              	.L12:
+ 121:main.c        ****                 
+ 122:main.c        ****             case '4':
+ 123:main.c        ****                 UART_1_PutString("4\r\n");
+ 343              		.loc 1 123 0
+ 344 01f0 5A48     		ldr	r0, .L32+20
+ 345 01f2 FFF7FEFF 		bl	UART_1_PutString
+ 124:main.c        ****                 SetLowFrequencyDacOutput(770);
+ 346              		.loc 1 124 0
+ 347 01f6 40F20230 		movw	r0, #770
+ 348 01fa FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 125:main.c        ****                 SetHighFrequencyDacOutput(1209);
+ 349              		.loc 1 125 0
+ 350 01fe 40F2B940 		movw	r0, #1209
+ 351 0202 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 126:main.c        ****                 
+ 127:main.c        ****                 break;
+ 352              		.loc 1 127 0
+ 353 0206 F3E0     		b	.L21
+ 354              	.L13:
+ 128:main.c        ****                 
+ 129:main.c        ****             case '5':
+ 130:main.c        ****                 UART_1_PutString("5\r\n");
+ 355              		.loc 1 130 0
+ 356 0208 5548     		ldr	r0, .L32+24
+ 357 020a FFF7FEFF 		bl	UART_1_PutString
+ 131:main.c        ****                 SetLowFrequencyDacOutput(770);
+ 358              		.loc 1 131 0
+ 359 020e 40F20230 		movw	r0, #770
+ 360 0212 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 132:main.c        ****                 SetHighFrequencyDacOutput(1336);
+ 361              		.loc 1 132 0
+ 362 0216 4FF4A760 		mov	r0, #1336
+ 363 021a FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 133:main.c        ****                 
+ 134:main.c        ****                 break;
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 10
+
+
+ 364              		.loc 1 134 0
+ 365 021e E7E0     		b	.L21
+ 366              	.L14:
+ 135:main.c        ****                 
+ 136:main.c        ****             case '6':
+ 137:main.c        ****                 UART_1_PutString("6\r\n");
+ 367              		.loc 1 137 0
+ 368 0220 5048     		ldr	r0, .L32+28
+ 369 0222 FFF7FEFF 		bl	UART_1_PutString
+ 138:main.c        ****                 SetLowFrequencyDacOutput(770);
+ 370              		.loc 1 138 0
+ 371 0226 40F20230 		movw	r0, #770
+ 372 022a FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 139:main.c        ****                 SetHighFrequencyDacOutput(1477);
+ 373              		.loc 1 139 0
+ 374 022e 40F2C550 		movw	r0, #1477
+ 375 0232 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 140:main.c        ****                 
+ 141:main.c        ****                 break;
+ 376              		.loc 1 141 0
+ 377 0236 DBE0     		b	.L21
+ 378              	.L15:
+ 142:main.c        ****                 
+ 143:main.c        ****             case '7':
+ 144:main.c        ****                 UART_1_PutString("7\r\n");
+ 379              		.loc 1 144 0
+ 380 0238 4B48     		ldr	r0, .L32+32
+ 381 023a FFF7FEFF 		bl	UART_1_PutString
+ 145:main.c        ****                 SetLowFrequencyDacOutput(852);
+ 382              		.loc 1 145 0
+ 383 023e 4FF45570 		mov	r0, #852
+ 384 0242 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 146:main.c        ****                 SetHighFrequencyDacOutput(1209);
+ 385              		.loc 1 146 0
+ 386 0246 40F2B940 		movw	r0, #1209
+ 387 024a FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 147:main.c        ****                 
+ 148:main.c        ****                 break;
+ 388              		.loc 1 148 0
+ 389 024e CFE0     		b	.L21
+ 390              	.L16:
+ 149:main.c        ****                 
+ 150:main.c        ****             case '8':
+ 151:main.c        ****                 UART_1_PutString("8\r\n");
+ 391              		.loc 1 151 0
+ 392 0250 4648     		ldr	r0, .L32+36
+ 393 0252 FFF7FEFF 		bl	UART_1_PutString
+ 152:main.c        ****                 SetLowFrequencyDacOutput(852);
+ 394              		.loc 1 152 0
+ 395 0256 4FF45570 		mov	r0, #852
+ 396 025a FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 153:main.c        ****                 SetHighFrequencyDacOutput(1336);
+ 397              		.loc 1 153 0
+ 398 025e 4FF4A760 		mov	r0, #1336
+ 399 0262 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 154:main.c        ****                 
+ 155:main.c        ****                 break;
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 11
+
+
+ 400              		.loc 1 155 0
+ 401 0266 C3E0     		b	.L21
+ 402              	.L17:
+ 156:main.c        ****                 
+ 157:main.c        ****             case '9':
+ 158:main.c        ****                 UART_1_PutString("9\r\n");
+ 403              		.loc 1 158 0
+ 404 0268 4148     		ldr	r0, .L32+40
+ 405 026a FFF7FEFF 		bl	UART_1_PutString
+ 159:main.c        ****                 SetLowFrequencyDacOutput(852);
+ 406              		.loc 1 159 0
+ 407 026e 4FF45570 		mov	r0, #852
+ 408 0272 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 160:main.c        ****                 SetHighFrequencyDacOutput(1477);
+ 409              		.loc 1 160 0
+ 410 0276 40F2C550 		movw	r0, #1477
+ 411 027a FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 161:main.c        ****                 
+ 162:main.c        ****                 break;
+ 412              		.loc 1 162 0
+ 413 027e B7E0     		b	.L21
+ 414              	.L7:
+ 163:main.c        ****                 
+ 164:main.c        ****             case '*':
+ 165:main.c        ****                 UART_1_PutString("*\r\n");
+ 415              		.loc 1 165 0
+ 416 0280 3C48     		ldr	r0, .L32+44
+ 417 0282 FFF7FEFF 		bl	UART_1_PutString
+ 166:main.c        ****                 SetLowFrequencyDacOutput(941);
+ 418              		.loc 1 166 0
+ 419 0286 40F2AD30 		movw	r0, #941
+ 420 028a FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 167:main.c        ****                 SetHighFrequencyDacOutput(1209);
+ 421              		.loc 1 167 0
+ 422 028e 40F2B940 		movw	r0, #1209
+ 423 0292 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 168:main.c        ****                 
+ 169:main.c        ****                 break;
+ 424              		.loc 1 169 0
+ 425 0296 ABE0     		b	.L21
+ 426              	.L5:
+ 170:main.c        ****                 
+ 171:main.c        ****             case '#':
+ 172:main.c        ****                 UART_1_PutString("#\r\n");
+ 427              		.loc 1 172 0
+ 428 0298 3748     		ldr	r0, .L32+48
+ 429 029a FFF7FEFF 		bl	UART_1_PutString
+ 173:main.c        ****                 SetLowFrequencyDacOutput(941);
+ 430              		.loc 1 173 0
+ 431 029e 40F2AD30 		movw	r0, #941
+ 432 02a2 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 174:main.c        ****                 SetHighFrequencyDacOutput(1477);
+ 433              		.loc 1 174 0
+ 434 02a6 40F2C550 		movw	r0, #1477
+ 435 02aa FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 175:main.c        ****                 
+ 176:main.c        ****                 break;
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 12
+
+
+ 436              		.loc 1 176 0
+ 437 02ae 9FE0     		b	.L21
+ 438              	.L18:
+ 439              	.LBB2:
+ 177:main.c        ****             
+ 178:main.c        ****             case 'D':
+ 179:main.c        ****             case 'd':
+ 180:main.c        ****                 //Get Samples
+ 181:main.c        ****                 for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
+ 440              		.loc 1 181 0
+ 441 02b0 0023     		movs	r3, #0
+ 442 02b2 FB80     		strh	r3, [r7, #6]	@ movhi
+ 443 02b4 19E0     		b	.L22
+ 444              	.L24:
+ 182:main.c        ****                 {                 
+ 183:main.c        ****                     /* Check to see if an ADC conversion has completed */
+ 184:main.c        ****                     if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
+ 445              		.loc 1 184 0
+ 446 02b6 0120     		movs	r0, #1
+ 447 02b8 FFF7FEFF 		bl	ADC_DelSig_1_IsEndConversion
+ 448 02bc 0346     		mov	r3, r0
+ 449 02be 002B     		cmp	r3, #0
+ 450 02c0 13D0     		beq	.L22
+ 185:main.c        ****                     {
+ 186:main.c        ****                         Output = ADC_DelSig_1_GetResult16();
+ 451              		.loc 1 186 0
+ 452 02c2 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+ 453 02c6 0346     		mov	r3, r0
+ 454 02c8 9AB2     		uxth	r2, r3
+ 455 02ca 2C4B     		ldr	r3, .L32+52
+ 456 02cc 1A80     		strh	r2, [r3]	@ movhi
+ 187:main.c        ****                         array[sampleNumber] = Output;                       
+ 457              		.loc 1 187 0
+ 458 02ce B7F90630 		ldrsh	r3, [r7, #6]
+ 459 02d2 2A4A     		ldr	r2, .L32+52
+ 460 02d4 1288     		ldrh	r2, [r2]
+ 461 02d6 11B2     		sxth	r1, r2
+ 462 02d8 294A     		ldr	r2, .L32+56
+ 463 02da 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+ 188:main.c        ****                         sampleNumber ++;
+ 464              		.loc 1 188 0
+ 465 02de B7F90630 		ldrsh	r3, [r7, #6]
+ 466 02e2 9BB2     		uxth	r3, r3
+ 467 02e4 0133     		adds	r3, r3, #1
+ 468 02e6 9BB2     		uxth	r3, r3
+ 469 02e8 FB80     		strh	r3, [r7, #6]	@ movhi
+ 470              	.L22:
+ 181:main.c        ****                 {                 
+ 471              		.loc 1 181 0 discriminator 1
+ 472 02ea B7F90630 		ldrsh	r3, [r7, #6]
+ 473 02ee 40F28922 		movw	r2, #649
+ 474 02f2 9342     		cmp	r3, r2
+ 475 02f4 DFDD     		ble	.L24
+ 476              	.LBE2:
+ 189:main.c        ****                     }
+ 190:main.c        ****                 }
+ 191:main.c        ****                 
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 13
+
+
+ 192:main.c        ****                 // Print samples
+ 193:main.c        ****                 UART_1_PutString("-----> Samples Init\r\n");
+ 477              		.loc 1 193 0
+ 478 02f6 2348     		ldr	r0, .L32+60
+ 479 02f8 FFF7FEFF 		bl	UART_1_PutString
+ 480              	.LBB3:
+ 194:main.c        ****                 for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber ++)
+ 481              		.loc 1 194 0
+ 482 02fc 0023     		movs	r3, #0
+ 483 02fe BB80     		strh	r3, [r7, #4]	@ movhi
+ 484 0300 12E0     		b	.L25
+ 485              	.L26:
+ 195:main.c        ****                 {
+ 196:main.c        ****                     sprintf(TransmitBuffer, "%d\r\n", array[sampleNumber]);
+ 486              		.loc 1 196 0 discriminator 3
+ 487 0302 B7F90430 		ldrsh	r3, [r7, #4]
+ 488 0306 1E4A     		ldr	r2, .L32+56
+ 489 0308 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ 490 030c 1A46     		mov	r2, r3
+ 491 030e 1E49     		ldr	r1, .L32+64
+ 492 0310 1E48     		ldr	r0, .L32+68
+ 493 0312 FFF7FEFF 		bl	sprintf
+ 197:main.c        ****                     UART_1_PutString(TransmitBuffer);
+ 494              		.loc 1 197 0 discriminator 3
+ 495 0316 1D48     		ldr	r0, .L32+68
+ 496 0318 FFF7FEFF 		bl	UART_1_PutString
+ 194:main.c        ****                 for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber ++)
+ 497              		.loc 1 194 0 discriminator 3
+ 498 031c B7F90430 		ldrsh	r3, [r7, #4]
+ 499 0320 9BB2     		uxth	r3, r3
+ 500 0322 0133     		adds	r3, r3, #1
+ 501 0324 9BB2     		uxth	r3, r3
+ 502 0326 BB80     		strh	r3, [r7, #4]	@ movhi
+ 503              	.L25:
+ 194:main.c        ****                 for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber ++)
+ 504              		.loc 1 194 0 is_stmt 0 discriminator 1
+ 505 0328 B7F90430 		ldrsh	r3, [r7, #4]
+ 506 032c 40F28922 		movw	r2, #649
+ 507 0330 9342     		cmp	r3, r2
+ 508 0332 E6DD     		ble	.L26
+ 509              	.LBE3:
+ 198:main.c        ****                 }
+ 199:main.c        ****                 UART_1_PutString("-----> Samples End\r\n");
+ 510              		.loc 1 199 0 is_stmt 1
+ 511 0334 1648     		ldr	r0, .L32+72
+ 512 0336 FFF7FEFF 		bl	UART_1_PutString
+ 200:main.c        ****                 
+ 201:main.c        ****                 // Decode data              
+ 202:main.c        ****                 DTMF();            
+ 513              		.loc 1 202 0
+ 514 033a FFF7FEFF 		bl	DTMF
+ 203:main.c        ****                 
+ 204:main.c        ****                 break;
+ 515              		.loc 1 204 0
+ 516 033e 57E0     		b	.L21
+ 517              	.L19:
+ 518              	.LBB4:
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 14
+
+
+ 205:main.c        ****                 
+ 206:main.c        ****             case 'S':
+ 207:main.c        ****             case 's':
+ 208:main.c        ****                 //Get Samples
+ 209:main.c        ****                 for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
+ 519              		.loc 1 209 0
+ 520 0340 0023     		movs	r3, #0
+ 521 0342 7B80     		strh	r3, [r7, #2]	@ movhi
+ 522 0344 40E0     		b	.L27
+ 523              	.L33:
+ 524 0346 00BF     		.align	2
+ 525              	.L32:
+ 526 0348 00000000 		.word	.LC0
+ 527 034c 10000000 		.word	.LC1
+ 528 0350 14000000 		.word	.LC2
+ 529 0354 18000000 		.word	.LC3
+ 530 0358 1C000000 		.word	.LC4
+ 531 035c 20000000 		.word	.LC5
+ 532 0360 24000000 		.word	.LC6
+ 533 0364 28000000 		.word	.LC7
+ 534 0368 2C000000 		.word	.LC8
+ 535 036c 30000000 		.word	.LC9
+ 536 0370 34000000 		.word	.LC10
+ 537 0374 38000000 		.word	.LC11
+ 538 0378 3C000000 		.word	.LC12
+ 539 037c 00000000 		.word	Output
+ 540 0380 00000000 		.word	array
+ 541 0384 40000000 		.word	.LC13
+ 542 0388 58000000 		.word	.LC14
+ 543 038c 00000000 		.word	TransmitBuffer
+ 544 0390 60000000 		.word	.LC15
+ 545              	.L29:
+ 210:main.c        ****                 {                 
+ 211:main.c        ****                     /* Check to see if an ADC conversion has completed */
+ 212:main.c        ****                     if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
+ 546              		.loc 1 212 0
+ 547 0394 0120     		movs	r0, #1
+ 548 0396 FFF7FEFF 		bl	ADC_DelSig_1_IsEndConversion
+ 549 039a 0346     		mov	r3, r0
+ 550 039c 002B     		cmp	r3, #0
+ 551 039e 13D0     		beq	.L27
+ 213:main.c        ****                     {
+ 214:main.c        ****                         Output = ADC_DelSig_1_GetResult16();
+ 552              		.loc 1 214 0
+ 553 03a0 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+ 554 03a4 0346     		mov	r3, r0
+ 555 03a6 9AB2     		uxth	r2, r3
+ 556 03a8 124B     		ldr	r3, .L34
+ 557 03aa 1A80     		strh	r2, [r3]	@ movhi
+ 215:main.c        ****                         array[sampleNumber] = Output;                       
+ 558              		.loc 1 215 0
+ 559 03ac B7F90230 		ldrsh	r3, [r7, #2]
+ 560 03b0 104A     		ldr	r2, .L34
+ 561 03b2 1288     		ldrh	r2, [r2]
+ 562 03b4 11B2     		sxth	r1, r2
+ 563 03b6 104A     		ldr	r2, .L34+4
+ 564 03b8 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 15
+
+
+ 216:main.c        ****                         sampleNumber ++;
+ 565              		.loc 1 216 0
+ 566 03bc B7F90230 		ldrsh	r3, [r7, #2]
+ 567 03c0 9BB2     		uxth	r3, r3
+ 568 03c2 0133     		adds	r3, r3, #1
+ 569 03c4 9BB2     		uxth	r3, r3
+ 570 03c6 7B80     		strh	r3, [r7, #2]	@ movhi
+ 571              	.L27:
+ 209:main.c        ****                 {                 
+ 572              		.loc 1 209 0 discriminator 1
+ 573 03c8 B7F90230 		ldrsh	r3, [r7, #2]
+ 574 03cc 40F28922 		movw	r2, #649
+ 575 03d0 9342     		cmp	r3, r2
+ 576 03d2 DFDD     		ble	.L29
+ 577              	.LBE4:
+ 217:main.c        ****                     }
+ 218:main.c        ****                 }
+ 219:main.c        ****                 
+ 220:main.c        ****                 // Decode data              
+ 221:main.c        ****                 DTMF();              
+ 578              		.loc 1 221 0
+ 579 03d4 FFF7FEFF 		bl	DTMF
+ 222:main.c        ****                 
+ 223:main.c        ****                 break;
+ 580              		.loc 1 223 0
+ 581 03d8 0AE0     		b	.L21
+ 582              	.L20:
+ 224:main.c        ****             
+ 225:main.c        ****             case 'X':    
+ 226:main.c        ****             case 'x':
+ 227:main.c        ****                 UART_1_PutString("Dummy Frequency ...\r\n");                             
+ 583              		.loc 1 227 0
+ 584 03da 0848     		ldr	r0, .L34+8
+ 585 03dc FFF7FEFF 		bl	UART_1_PutString
+ 228:main.c        ****                 SetLowFrequencyDacOutput(150);
+ 586              		.loc 1 228 0
+ 587 03e0 9620     		movs	r0, #150
+ 588 03e2 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 229:main.c        ****                 SetHighFrequencyDacOutput(150);
+ 589              		.loc 1 229 0
+ 590 03e6 9620     		movs	r0, #150
+ 591 03e8 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 230:main.c        ****                 
+ 231:main.c        ****                 break;
+ 592              		.loc 1 231 0
+ 593 03ec 00E0     		b	.L21
+ 594              	.L31:
+ 232:main.c        ****                 
+ 233:main.c        ****             default:
+ 234:main.c        ****                 /* Place error handling code here */
+ 235:main.c        ****                 break;    
+ 595              		.loc 1 235 0
+ 596 03ee 00BF     		nop
+ 597              	.L21:
+ 236:main.c        ****         }
+ 237:main.c        ****         
+ 238:main.c        ****     }
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 16
+
+
+ 598              		.loc 1 238 0 discriminator 1
+ 599 03f0 15E6     		b	.L30
+ 600              	.L35:
+ 601 03f2 00BF     		.align	2
+ 602              	.L34:
+ 603 03f4 00000000 		.word	Output
+ 604 03f8 00000000 		.word	array
+ 605 03fc 78000000 		.word	.LC16
+ 606              		.cfi_endproc
+ 607              	.LFE66:
+ 608              		.size	main, .-main
+ 609              		.global	__aeabi_i2d
+ 610              		.global	__aeabi_ddiv
+ 611              		.global	__aeabi_d2iz
+ 612              		.section	.text.SetHighFrequencyDacOutput,"ax",%progbits
+ 613              		.align	2
+ 614              		.global	SetHighFrequencyDacOutput
+ 615              		.thumb
+ 616              		.thumb_func
+ 617              		.type	SetHighFrequencyDacOutput, %function
+ 618              	SetHighFrequencyDacOutput:
+ 619              	.LFB67:
+ 239:main.c        **** }
+ 240:main.c        **** 
+ 241:main.c        **** /*******************************************************************************
+ 242:main.c        **** * Function - Init Settings
+ 243:main.c        **** *******************************************************************************/
+ 244:main.c        **** void SetHighFrequencyDacOutput(int OutputFrequency)
+ 245:main.c        **** {   
+ 620              		.loc 1 245 0
+ 621              		.cfi_startproc
+ 622              		@ args = 0, pretend = 0, frame = 24
+ 623              		@ frame_needed = 1, uses_anonymous_args = 0
+ 624 0000 90B5     		push	{r4, r7, lr}
+ 625              		.cfi_def_cfa_offset 12
+ 626              		.cfi_offset 4, -12
+ 627              		.cfi_offset 7, -8
+ 628              		.cfi_offset 14, -4
+ 629 0002 87B0     		sub	sp, sp, #28
+ 630              		.cfi_def_cfa_offset 40
+ 631 0004 00AF     		add	r7, sp, #0
+ 632              		.cfi_def_cfa_register 7
+ 633 0006 7860     		str	r0, [r7, #4]
+ 246:main.c        ****     double KSPS = HIGH_FREQ_DAC_NUMBER_OF_SAMPLES * OutputFrequency;
+ 634              		.loc 1 246 0
+ 635 0008 7B68     		ldr	r3, [r7, #4]
+ 636 000a 4FF49672 		mov	r2, #300
+ 637 000e 02FB03F3 		mul	r3, r2, r3
+ 638 0012 1846     		mov	r0, r3
+ 639 0014 FFF7FEFF 		bl	__aeabi_i2d
+ 640 0018 0346     		mov	r3, r0
+ 641 001a 0C46     		mov	r4, r1
+ 642 001c C7E90434 		strd	r3, [r7, #16]
+ 247:main.c        ****     double ClockDivider = MASTER_CLOCK_FREQUENCY / KSPS;
+ 643              		.loc 1 247 0
+ 644 0020 D7E90423 		ldrd	r2, [r7, #16]
+ 645 0024 0CA1     		adr	r1, .L37
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 17
+
+
+ 646 0026 D1E90001 		ldrd	r0, [r1]
+ 647 002a FFF7FEFF 		bl	__aeabi_ddiv
+ 648 002e 0346     		mov	r3, r0
+ 649 0030 0C46     		mov	r4, r1
+ 650 0032 C7E90234 		strd	r3, [r7, #8]
+ 248:main.c        ****     HF_DAC_CLK_SetDividerValue((int)ClockDivider);
+ 651              		.loc 1 248 0
+ 652 0036 D7E90201 		ldrd	r0, [r7, #8]
+ 653 003a FFF7FEFF 		bl	__aeabi_d2iz
+ 654 003e 0346     		mov	r3, r0
+ 655 0040 9BB2     		uxth	r3, r3
+ 656 0042 013B     		subs	r3, r3, #1
+ 657 0044 9BB2     		uxth	r3, r3
+ 658 0046 0121     		movs	r1, #1
+ 659 0048 1846     		mov	r0, r3
+ 660 004a FFF7FEFF 		bl	HF_DAC_CLK_SetDividerRegister
+ 249:main.c        **** }
+ 661              		.loc 1 249 0
+ 662 004e 00BF     		nop
+ 663 0050 1C37     		adds	r7, r7, #28
+ 664              		.cfi_def_cfa_offset 12
+ 665 0052 BD46     		mov	sp, r7
+ 666              		.cfi_def_cfa_register 13
+ 667              		@ sp needed
+ 668 0054 90BD     		pop	{r4, r7, pc}
+ 669              	.L38:
+ 670 0056 00BF     		.align	3
+ 671              	.L37:
+ 672 0058 00000000 		.word	0
+ 673 005c 60E37641 		.word	1098310496
+ 674              		.cfi_endproc
+ 675              	.LFE67:
+ 676              		.size	SetHighFrequencyDacOutput, .-SetHighFrequencyDacOutput
+ 677              		.section	.text.SetLowFrequencyDacOutput,"ax",%progbits
+ 678              		.align	2
+ 679              		.global	SetLowFrequencyDacOutput
+ 680              		.thumb
+ 681              		.thumb_func
+ 682              		.type	SetLowFrequencyDacOutput, %function
+ 683              	SetLowFrequencyDacOutput:
+ 684              	.LFB68:
+ 250:main.c        **** 
+ 251:main.c        **** /*******************************************************************************
+ 252:main.c        **** * Function - Init Settings
+ 253:main.c        **** *******************************************************************************/
+ 254:main.c        **** void SetLowFrequencyDacOutput(int OutputFrequency)
+ 255:main.c        **** {   
+ 685              		.loc 1 255 0
+ 686              		.cfi_startproc
+ 687              		@ args = 0, pretend = 0, frame = 24
+ 688              		@ frame_needed = 1, uses_anonymous_args = 0
+ 689 0000 90B5     		push	{r4, r7, lr}
+ 690              		.cfi_def_cfa_offset 12
+ 691              		.cfi_offset 4, -12
+ 692              		.cfi_offset 7, -8
+ 693              		.cfi_offset 14, -4
+ 694 0002 87B0     		sub	sp, sp, #28
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 18
+
+
+ 695              		.cfi_def_cfa_offset 40
+ 696 0004 00AF     		add	r7, sp, #0
+ 697              		.cfi_def_cfa_register 7
+ 698 0006 7860     		str	r0, [r7, #4]
+ 256:main.c        ****     double KSPS = LOW_FREQ_DAC_NUMBER_OF_SAMPLES * OutputFrequency; 
+ 699              		.loc 1 256 0
+ 700 0008 7B68     		ldr	r3, [r7, #4]
+ 701 000a C822     		movs	r2, #200
+ 702 000c 02FB03F3 		mul	r3, r2, r3
+ 703 0010 1846     		mov	r0, r3
+ 704 0012 FFF7FEFF 		bl	__aeabi_i2d
+ 705 0016 0346     		mov	r3, r0
+ 706 0018 0C46     		mov	r4, r1
+ 707 001a C7E90434 		strd	r3, [r7, #16]
+ 257:main.c        ****     double ClockDivider = MASTER_CLOCK_FREQUENCY / KSPS;
+ 708              		.loc 1 257 0
+ 709 001e D7E90423 		ldrd	r2, [r7, #16]
+ 710 0022 0DA1     		adr	r1, .L40
+ 711 0024 D1E90001 		ldrd	r0, [r1]
+ 712 0028 FFF7FEFF 		bl	__aeabi_ddiv
+ 713 002c 0346     		mov	r3, r0
+ 714 002e 0C46     		mov	r4, r1
+ 715 0030 C7E90234 		strd	r3, [r7, #8]
+ 258:main.c        ****     LF_DAC_CLK_SetDividerValue((int)ClockDivider);
+ 716              		.loc 1 258 0
+ 717 0034 D7E90201 		ldrd	r0, [r7, #8]
+ 718 0038 FFF7FEFF 		bl	__aeabi_d2iz
+ 719 003c 0346     		mov	r3, r0
+ 720 003e 9BB2     		uxth	r3, r3
+ 721 0040 013B     		subs	r3, r3, #1
+ 722 0042 9BB2     		uxth	r3, r3
+ 723 0044 0121     		movs	r1, #1
+ 724 0046 1846     		mov	r0, r3
+ 725 0048 FFF7FEFF 		bl	LF_DAC_CLK_SetDividerRegister
+ 259:main.c        **** }
+ 726              		.loc 1 259 0
+ 727 004c 00BF     		nop
+ 728 004e 1C37     		adds	r7, r7, #28
+ 729              		.cfi_def_cfa_offset 12
+ 730 0050 BD46     		mov	sp, r7
+ 731              		.cfi_def_cfa_register 13
+ 732              		@ sp needed
+ 733 0052 90BD     		pop	{r4, r7, pc}
+ 734              	.L41:
+ 735 0054 AFF30080 		.align	3
+ 736              	.L40:
+ 737 0058 00000000 		.word	0
+ 738 005c 60E37641 		.word	1098310496
+ 739              		.cfi_endproc
+ 740              	.LFE68:
+ 741              		.size	SetLowFrequencyDacOutput, .-SetLowFrequencyDacOutput
+ 742              		.section	.text.InitSettings,"ax",%progbits
+ 743              		.align	2
+ 744              		.global	InitSettings
+ 745              		.thumb
+ 746              		.thumb_func
+ 747              		.type	InitSettings, %function
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 19
+
+
+ 748              	InitSettings:
+ 749              	.LFB69:
+ 260:main.c        **** 
+ 261:main.c        **** /*******************************************************************************
+ 262:main.c        **** * Function - Init Settings
+ 263:main.c        **** *******************************************************************************/
+ 264:main.c        **** void InitSettings(void)
+ 265:main.c        **** {   
+ 750              		.loc 1 265 0
+ 751              		.cfi_startproc
+ 752              		@ args = 0, pretend = 0, frame = 0
+ 753              		@ frame_needed = 1, uses_anonymous_args = 0
+ 754 0000 80B5     		push	{r7, lr}
+ 755              		.cfi_def_cfa_offset 8
+ 756              		.cfi_offset 7, -8
+ 757              		.cfi_offset 14, -4
+ 758 0002 00AF     		add	r7, sp, #0
+ 759              		.cfi_def_cfa_register 7
+ 266:main.c        ****     // Configure Muxes
+ 267:main.c        ****     HF_SW1_Write(0);    
+ 760              		.loc 1 267 0
+ 761 0004 0020     		movs	r0, #0
+ 762 0006 FFF7FEFF 		bl	HF_SW1_Write
+ 268:main.c        ****     LF_SW1_Write(0);
+ 763              		.loc 1 268 0
+ 764 000a 0020     		movs	r0, #0
+ 765 000c FFF7FEFF 		bl	LF_SW1_Write
+ 269:main.c        ****     
+ 270:main.c        ****     // Configure DAC's external clocks
+ 271:main.c        ****     SetLowFrequencyDacOutput(150);
+ 766              		.loc 1 271 0
+ 767 0010 9620     		movs	r0, #150
+ 768 0012 FFF7FEFF 		bl	SetLowFrequencyDacOutput
+ 272:main.c        ****     SetHighFrequencyDacOutput(150);
+ 769              		.loc 1 272 0
+ 770 0016 9620     		movs	r0, #150
+ 771 0018 FFF7FEFF 		bl	SetHighFrequencyDacOutput
+ 273:main.c        ****     
+ 274:main.c        ****     // Enable Components
+ 275:main.c        ****     HF_DAC_1_Start();   // (3,6,9,#,Dummy)
+ 772              		.loc 1 275 0
+ 773 001c FFF7FEFF 		bl	HF_DAC_1_Start
+ 276:main.c        ****     LF_DAC_1_Start();   // (7,8,9,*,0,#)
+ 774              		.loc 1 276 0
+ 775 0020 FFF7FEFF 		bl	LF_DAC_1_Start
+ 277:main.c        **** }
+ 776              		.loc 1 277 0
+ 777 0024 00BF     		nop
+ 778 0026 80BD     		pop	{r7, pc}
+ 779              		.cfi_endproc
+ 780              	.LFE69:
+ 781              		.size	InitSettings, .-InitSettings
+ 782              		.global	__aeabi_dmul
+ 783              		.section	.rodata
+ 784 008e 0000     		.align	2
+ 785              	.LC17:
+ 786 0090 4C6F3D25 		.ascii	"Lo=%dHz\000"
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 20
+
+
+ 786      64487A00 
+ 787              		.align	2
+ 788              	.LC18:
+ 789 0098 202D2000 		.ascii	" - \000"
+ 790              		.align	2
+ 791              	.LC19:
+ 792 009c 48693D25 		.ascii	"Hi=%dHz\015\012\000"
+ 792      64487A0D 
+ 792      0A00
+ 793              		.section	.text.DTMF,"ax",%progbits
+ 794              		.align	2
+ 795              		.global	DTMF
+ 796              		.thumb
+ 797              		.thumb_func
+ 798              		.type	DTMF, %function
+ 799              	DTMF:
+ 800              	.LFB70:
+ 278:main.c        **** 
+ 279:main.c        **** /*******************************************************************************
+ 280:main.c        **** * Function - Find DTMF Frequencies
+ 281:main.c        **** *******************************************************************************/
+ 282:main.c        **** void DTMF()
+ 283:main.c        **** {
+ 801              		.loc 1 283 0
+ 802              		.cfi_startproc
+ 803              		@ args = 0, pretend = 0, frame = 5296
+ 804              		@ frame_needed = 1, uses_anonymous_args = 0
+ 805 0000 90B5     		push	{r4, r7, lr}
+ 806              		.cfi_def_cfa_offset 12
+ 807              		.cfi_offset 4, -12
+ 808              		.cfi_offset 7, -8
+ 809              		.cfi_offset 14, -4
+ 810 0002 ADF5A55D 		sub	sp, sp, #5280
+ 811              		.cfi_def_cfa_offset 5292
+ 812 0006 85B0     		sub	sp, sp, #20
+ 813              		.cfi_def_cfa_offset 5312
+ 814 0008 00AF     		add	r7, sp, #0
+ 815              		.cfi_def_cfa_register 7
+ 816              	.LBB5:
+ 284:main.c        ****     double signal[NUMBER_OF_SAMPLES];
+ 285:main.c        ****     for(int i = 0; i < NUMBER_OF_SAMPLES; i++)
+ 817              		.loc 1 285 0
+ 818 000a 0023     		movs	r3, #0
+ 819 000c 07F5A552 		add	r2, r7, #5280
+ 820 0010 02F10C02 		add	r2, r2, #12
+ 821 0014 1360     		str	r3, [r2]
+ 822 0016 48E0     		b	.L44
+ 823              	.L45:
+ 824              	.LBB6:
+ 286:main.c        ****     {
+ 287:main.c        ****         double pdata = (double)array[i];
+ 825              		.loc 1 287 0 discriminator 3
+ 826 0018 944A     		ldr	r2, .L50
+ 827 001a 07F5A553 		add	r3, r7, #5280
+ 828 001e 03F10C03 		add	r3, r3, #12
+ 829 0022 1B68     		ldr	r3, [r3]
+ 830 0024 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 21
+
+
+ 831 0028 1846     		mov	r0, r3
+ 832 002a FFF7FEFF 		bl	__aeabi_i2d
+ 833 002e 0346     		mov	r3, r0
+ 834 0030 0C46     		mov	r4, r1
+ 835 0032 07F5A552 		add	r2, r7, #5280
+ 836 0036 C2E90034 		strd	r3, [r2]
+ 288:main.c        ****         pdata = pdata*0.5;
+ 837              		.loc 1 288 0 discriminator 3
+ 838 003a 4FF00002 		mov	r2, #0
+ 839 003e 8C4B     		ldr	r3, .L50+4
+ 840 0040 07F5A551 		add	r1, r7, #5280
+ 841 0044 D1E90001 		ldrd	r0, [r1]
+ 842 0048 FFF7FEFF 		bl	__aeabi_dmul
+ 843 004c 0346     		mov	r3, r0
+ 844 004e 0C46     		mov	r4, r1
+ 845 0050 07F5A552 		add	r2, r7, #5280
+ 846 0054 C2E90034 		strd	r3, [r2]
+ 289:main.c        ****         pdata = pdata/128;
+ 847              		.loc 1 289 0 discriminator 3
+ 848 0058 4FF00002 		mov	r2, #0
+ 849 005c 854B     		ldr	r3, .L50+8
+ 850 005e 07F5A551 		add	r1, r7, #5280
+ 851 0062 D1E90001 		ldrd	r0, [r1]
+ 852 0066 FFF7FEFF 		bl	__aeabi_ddiv
+ 853 006a 0346     		mov	r3, r0
+ 854 006c 0C46     		mov	r4, r1
+ 855 006e 07F5A552 		add	r2, r7, #5280
+ 856 0072 C2E90034 		strd	r3, [r2]
+ 290:main.c        ****         signal[i] = pdata;
+ 857              		.loc 1 290 0 discriminator 3
+ 858 0076 07F15003 		add	r3, r7, #80
+ 859 007a 083B     		subs	r3, r3, #8
+ 860 007c 07F5A552 		add	r2, r7, #5280
+ 861 0080 02F10C02 		add	r2, r2, #12
+ 862 0084 1268     		ldr	r2, [r2]
+ 863 0086 D200     		lsls	r2, r2, #3
+ 864 0088 1A44     		add	r2, r2, r3
+ 865 008a 07F5A553 		add	r3, r7, #5280
+ 866 008e 18CB     		ldmia	r3, {r3-r4}
+ 867 0090 C2E90034 		strd	r3, [r2]
+ 868              	.LBE6:
+ 285:main.c        ****     {
+ 869              		.loc 1 285 0 discriminator 3
+ 870 0094 07F5A553 		add	r3, r7, #5280
+ 871 0098 03F10C03 		add	r3, r3, #12
+ 872 009c 1B68     		ldr	r3, [r3]
+ 873 009e 0133     		adds	r3, r3, #1
+ 874 00a0 07F5A552 		add	r2, r7, #5280
+ 875 00a4 02F10C02 		add	r2, r2, #12
+ 876 00a8 1360     		str	r3, [r2]
+ 877              	.L44:
+ 285:main.c        ****     {
+ 878              		.loc 1 285 0 is_stmt 0 discriminator 1
+ 879 00aa 07F5A553 		add	r3, r7, #5280
+ 880 00ae 03F10C03 		add	r3, r3, #12
+ 881 00b2 1B68     		ldr	r3, [r3]
+ 882 00b4 40F28922 		movw	r2, #649
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 22
+
+
+ 883 00b8 9342     		cmp	r3, r2
+ 884 00ba ADDD     		ble	.L45
+ 885              	.LBE5:
+ 291:main.c        ****     }
+ 292:main.c        ****     
+ 293:main.c        ****     double loAmplitudes[LOW_FREQUENCIES_ANALIZED] = {0, 0, 0, 0, 0};
+ 886              		.loc 1 293 0 is_stmt 1
+ 887 00bc 07F13003 		add	r3, r7, #48
+ 888 00c0 103B     		subs	r3, r3, #16
+ 889 00c2 1846     		mov	r0, r3
+ 890 00c4 2823     		movs	r3, #40
+ 891 00c6 1A46     		mov	r2, r3
+ 892 00c8 0021     		movs	r1, #0
+ 893 00ca FFF7FEFF 		bl	memset
+ 294:main.c        ****     double hiAmplitudes[HIGH_FREQUENCIES_ANALIZED] = {0, 0, 0, 0};
+ 894              		.loc 1 294 0
+ 895 00ce 07F11003 		add	r3, r7, #16
+ 896 00d2 103B     		subs	r3, r3, #16
+ 897 00d4 1846     		mov	r0, r3
+ 898 00d6 2023     		movs	r3, #32
+ 899 00d8 1A46     		mov	r2, r3
+ 900 00da 0021     		movs	r1, #0
+ 901 00dc FFF7FEFF 		bl	memset
+ 902              	.LBB7:
+ 295:main.c        ****     
+ 296:main.c        ****     for(uint8 i = 0; i < LOW_FREQUENCIES_ANALIZED; i++)
+ 903              		.loc 1 296 0
+ 904 00e0 0023     		movs	r3, #0
+ 905 00e2 07F5A552 		add	r2, r7, #5280
+ 906 00e6 02F10B02 		add	r2, r2, #11
+ 907 00ea 1370     		strb	r3, [r2]
+ 908 00ec 29E0     		b	.L46
+ 909              	.L47:
+ 297:main.c        ****     {
+ 298:main.c        ****         loAmplitudes[i] = Goertzel(NUMBER_OF_SAMPLES,loFrequency[i],SAMPLING_RATE, signal);
+ 910              		.loc 1 298 0 discriminator 3
+ 911 00ee 07F5A553 		add	r3, r7, #5280
+ 912 00f2 03F10B03 		add	r3, r3, #11
+ 913 00f6 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
+ 914 00f8 07F5A553 		add	r3, r7, #5280
+ 915 00fc 03F10B03 		add	r3, r3, #11
+ 916 0100 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 917 0102 5D4A     		ldr	r2, .L50+12
+ 918 0104 52F82310 		ldr	r1, [r2, r3, lsl #2]
+ 919 0108 07F15003 		add	r3, r7, #80
+ 920 010c 083B     		subs	r3, r3, #8
+ 921 010e 42F21072 		movw	r2, #10000
+ 922 0112 40F28A20 		movw	r0, #650
+ 923 0116 FFF7FEFF 		bl	Goertzel
+ 924 011a 0A46     		mov	r2, r1
+ 925 011c 0146     		mov	r1, r0
+ 926 011e 07F13003 		add	r3, r7, #48
+ 927 0122 103B     		subs	r3, r3, #16
+ 928 0124 E000     		lsls	r0, r4, #3
+ 929 0126 0344     		add	r3, r3, r0
+ 930 0128 C3E90012 		strd	r1, [r3]
+ 296:main.c        ****     {
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 23
+
+
+ 931              		.loc 1 296 0 discriminator 3
+ 932 012c 07F5A553 		add	r3, r7, #5280
+ 933 0130 03F10B03 		add	r3, r3, #11
+ 934 0134 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 935 0136 0133     		adds	r3, r3, #1
+ 936 0138 07F5A552 		add	r2, r7, #5280
+ 937 013c 02F10B02 		add	r2, r2, #11
+ 938 0140 1370     		strb	r3, [r2]
+ 939              	.L46:
+ 296:main.c        ****     {
+ 940              		.loc 1 296 0 is_stmt 0 discriminator 1
+ 941 0142 07F5A553 		add	r3, r7, #5280
+ 942 0146 03F10B03 		add	r3, r3, #11
+ 943 014a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 944 014c 042B     		cmp	r3, #4
+ 945 014e CED9     		bls	.L47
+ 946              	.LBE7:
+ 947              	.LBB8:
+ 299:main.c        ****     }
+ 300:main.c        ****     
+ 301:main.c        ****     for(uint8 i = 0; i < HIGH_FREQUENCIES_ANALIZED; i++)
+ 948              		.loc 1 301 0 is_stmt 1
+ 949 0150 0023     		movs	r3, #0
+ 950 0152 07F5A552 		add	r2, r7, #5280
+ 951 0156 02F10A02 		add	r2, r2, #10
+ 952 015a 1370     		strb	r3, [r2]
+ 953 015c 29E0     		b	.L48
+ 954              	.L49:
+ 302:main.c        ****     {
+ 303:main.c        ****         hiAmplitudes[i] = Goertzel(NUMBER_OF_SAMPLES,hiFrequency[i],SAMPLING_RATE, signal);
+ 955              		.loc 1 303 0 discriminator 3
+ 956 015e 07F5A553 		add	r3, r7, #5280
+ 957 0162 03F10A03 		add	r3, r3, #10
+ 958 0166 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
+ 959 0168 07F5A553 		add	r3, r7, #5280
+ 960 016c 03F10A03 		add	r3, r3, #10
+ 961 0170 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 962 0172 424A     		ldr	r2, .L50+16
+ 963 0174 52F82310 		ldr	r1, [r2, r3, lsl #2]
+ 964 0178 07F15003 		add	r3, r7, #80
+ 965 017c 083B     		subs	r3, r3, #8
+ 966 017e 42F21072 		movw	r2, #10000
+ 967 0182 40F28A20 		movw	r0, #650
+ 968 0186 FFF7FEFF 		bl	Goertzel
+ 969 018a 0A46     		mov	r2, r1
+ 970 018c 0146     		mov	r1, r0
+ 971 018e 07F11003 		add	r3, r7, #16
+ 972 0192 103B     		subs	r3, r3, #16
+ 973 0194 E000     		lsls	r0, r4, #3
+ 974 0196 0344     		add	r3, r3, r0
+ 975 0198 C3E90012 		strd	r1, [r3]
+ 301:main.c        ****     {
+ 976              		.loc 1 301 0 discriminator 3
+ 977 019c 07F5A553 		add	r3, r7, #5280
+ 978 01a0 03F10A03 		add	r3, r3, #10
+ 979 01a4 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 980 01a6 0133     		adds	r3, r3, #1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 24
+
+
+ 981 01a8 07F5A552 		add	r2, r7, #5280
+ 982 01ac 02F10A02 		add	r2, r2, #10
+ 983 01b0 1370     		strb	r3, [r2]
+ 984              	.L48:
+ 301:main.c        ****     {
+ 985              		.loc 1 301 0 is_stmt 0 discriminator 1
+ 986 01b2 07F5A553 		add	r3, r7, #5280
+ 987 01b6 03F10A03 		add	r3, r3, #10
+ 988 01ba 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 989 01bc 032B     		cmp	r3, #3
+ 990 01be CED9     		bls	.L49
+ 991              	.LBE8:
+ 304:main.c        ****     }
+ 305:main.c        ****     
+ 306:main.c        ****     uint16 loAmp = getMaxValue(loAmplitudes, LOW_FREQUENCIES_ANALIZED);
+ 992              		.loc 1 306 0 is_stmt 1
+ 993 01c0 07F13003 		add	r3, r7, #48
+ 994 01c4 103B     		subs	r3, r3, #16
+ 995 01c6 0521     		movs	r1, #5
+ 996 01c8 1846     		mov	r0, r3
+ 997 01ca FFF7FEFF 		bl	getMaxValue
+ 998 01ce 0346     		mov	r3, r0
+ 999 01d0 07F5A452 		add	r2, r7, #5248
+ 1000 01d4 02F11E02 		add	r2, r2, #30
+ 1001 01d8 1380     		strh	r3, [r2]	@ movhi
+ 307:main.c        ****     uint16 hiAmp = getMaxValue(hiAmplitudes, HIGH_FREQUENCIES_ANALIZED);   
+ 1002              		.loc 1 307 0
+ 1003 01da 07F11003 		add	r3, r7, #16
+ 1004 01de 103B     		subs	r3, r3, #16
+ 1005 01e0 0421     		movs	r1, #4
+ 1006 01e2 1846     		mov	r0, r3
+ 1007 01e4 FFF7FEFF 		bl	getMaxValue
+ 1008 01e8 0346     		mov	r3, r0
+ 1009 01ea 07F5A452 		add	r2, r7, #5248
+ 1010 01ee 02F11C02 		add	r2, r2, #28
+ 1011 01f2 1380     		strh	r3, [r2]	@ movhi
+ 308:main.c        ****     
+ 309:main.c        ****     // Print the low and High frequencies found
+ 310:main.c        ****     sprintf(TransmitBuffer, "Lo=%dHz", loFrequency[loAmp]);
+ 1012              		.loc 1 310 0
+ 1013 01f4 07F5A453 		add	r3, r7, #5248
+ 1014 01f8 03F11E03 		add	r3, r3, #30
+ 1015 01fc 1B88     		ldrh	r3, [r3]
+ 1016 01fe 1E4A     		ldr	r2, .L50+12
+ 1017 0200 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1018 0204 1A46     		mov	r2, r3
+ 1019 0206 1E49     		ldr	r1, .L50+20
+ 1020 0208 1E48     		ldr	r0, .L50+24
+ 1021 020a FFF7FEFF 		bl	sprintf
+ 311:main.c        ****     UART_1_PutString(TransmitBuffer);
+ 1022              		.loc 1 311 0
+ 1023 020e 1D48     		ldr	r0, .L50+24
+ 1024 0210 FFF7FEFF 		bl	UART_1_PutString
+ 312:main.c        ****     UART_1_PutString(" - ");
+ 1025              		.loc 1 312 0
+ 1026 0214 1C48     		ldr	r0, .L50+28
+ 1027 0216 FFF7FEFF 		bl	UART_1_PutString
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 25
+
+
+ 313:main.c        ****     sprintf(TransmitBuffer, "Hi=%dHz\r\n", hiFrequency[hiAmp]);
+ 1028              		.loc 1 313 0
+ 1029 021a 07F5A453 		add	r3, r7, #5248
+ 1030 021e 03F11C03 		add	r3, r3, #28
+ 1031 0222 1B88     		ldrh	r3, [r3]
+ 1032 0224 154A     		ldr	r2, .L50+16
+ 1033 0226 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1034 022a 1A46     		mov	r2, r3
+ 1035 022c 1749     		ldr	r1, .L50+32
+ 1036 022e 1548     		ldr	r0, .L50+24
+ 1037 0230 FFF7FEFF 		bl	sprintf
+ 314:main.c        ****     UART_1_PutString(TransmitBuffer);
+ 1038              		.loc 1 314 0
+ 1039 0234 1348     		ldr	r0, .L50+24
+ 1040 0236 FFF7FEFF 		bl	UART_1_PutString
+ 315:main.c        ****     
+ 316:main.c        ****     // Decode the pressed key value
+ 317:main.c        ****     DecodeInput(loFrequency[loAmp], hiFrequency[hiAmp]);
+ 1041              		.loc 1 317 0
+ 1042 023a 07F5A453 		add	r3, r7, #5248
+ 1043 023e 03F11E03 		add	r3, r3, #30
+ 1044 0242 1B88     		ldrh	r3, [r3]
+ 1045 0244 0C4A     		ldr	r2, .L50+12
+ 1046 0246 52F82300 		ldr	r0, [r2, r3, lsl #2]
+ 1047 024a 07F5A453 		add	r3, r7, #5248
+ 1048 024e 03F11C03 		add	r3, r3, #28
+ 1049 0252 1B88     		ldrh	r3, [r3]
+ 1050 0254 094A     		ldr	r2, .L50+16
+ 1051 0256 52F82330 		ldr	r3, [r2, r3, lsl #2]
+ 1052 025a 1946     		mov	r1, r3
+ 1053 025c FFF7FEFF 		bl	DecodeInput
+ 318:main.c        **** }
+ 1054              		.loc 1 318 0
+ 1055 0260 00BF     		nop
+ 1056 0262 07F5A557 		add	r7, r7, #5280
+ 1057 0266 1437     		adds	r7, r7, #20
+ 1058              		.cfi_def_cfa_offset 12
+ 1059 0268 BD46     		mov	sp, r7
+ 1060              		.cfi_def_cfa_register 13
+ 1061              		@ sp needed
+ 1062 026a 90BD     		pop	{r4, r7, pc}
+ 1063              	.L51:
+ 1064              		.align	2
+ 1065              	.L50:
+ 1066 026c 00000000 		.word	array
+ 1067 0270 0000E03F 		.word	1071644672
+ 1068 0274 00006040 		.word	1080033280
+ 1069 0278 00000000 		.word	loFrequency
+ 1070 027c 00000000 		.word	hiFrequency
+ 1071 0280 90000000 		.word	.LC17
+ 1072 0284 00000000 		.word	TransmitBuffer
+ 1073 0288 98000000 		.word	.LC18
+ 1074 028c 9C000000 		.word	.LC19
+ 1075              		.cfi_endproc
+ 1076              	.LFE70:
+ 1077              		.size	DTMF, .-DTMF
+ 1078              		.global	__aeabi_dadd
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 26
+
+
+ 1079              		.global	__aeabi_dsub
+ 1080              		.section	.text.Goertzel,"ax",%progbits
+ 1081              		.align	2
+ 1082              		.global	Goertzel
+ 1083              		.thumb
+ 1084              		.thumb_func
+ 1085              		.type	Goertzel, %function
+ 1086              	Goertzel:
+ 1087              	.LFB71:
+ 319:main.c        **** 
+ 320:main.c        **** /*******************************************************************************
+ 321:main.c        **** * Function - Goertzel algorithm
+ 322:main.c        **** *******************************************************************************/
+ 323:main.c        **** double Goertzel(int numSamples, int tFrequency,int tSamplingRate, double data[])
+ 324:main.c        **** {
+ 1088              		.loc 1 324 0
+ 1089              		.cfi_startproc
+ 1090              		@ args = 0, pretend = 0, frame = 136
+ 1091              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1092 0000 B0B5     		push	{r4, r5, r7, lr}
+ 1093              		.cfi_def_cfa_offset 16
+ 1094              		.cfi_offset 4, -16
+ 1095              		.cfi_offset 5, -12
+ 1096              		.cfi_offset 7, -8
+ 1097              		.cfi_offset 14, -4
+ 1098 0002 A2B0     		sub	sp, sp, #136
+ 1099              		.cfi_def_cfa_offset 152
+ 1100 0004 00AF     		add	r7, sp, #0
+ 1101              		.cfi_def_cfa_register 7
+ 1102 0006 F860     		str	r0, [r7, #12]
+ 1103 0008 B960     		str	r1, [r7, #8]
+ 1104 000a 7A60     		str	r2, [r7, #4]
+ 1105 000c 3B60     		str	r3, [r7]
+ 325:main.c        ****     int k;
+ 326:main.c        ****     int i;
+ 327:main.c        ****     double floatnumSamples;
+ 328:main.c        ****     double omega;
+ 329:main.c        ****     double sine;
+ 330:main.c        ****     double cosine;
+ 331:main.c        ****     double coeff;
+ 332:main.c        ****     double q0;
+ 333:main.c        ****     double q1;
+ 334:main.c        ****     double q2;
+ 335:main.c        ****     double magnitude;
+ 336:main.c        ****     double real;
+ 337:main.c        ****     double imag;
+ 338:main.c        ****     
+ 339:main.c        ****     double scalingFactor = numSamples / 2.0;
+ 1106              		.loc 1 339 0
+ 1107 000e F868     		ldr	r0, [r7, #12]
+ 1108 0010 FFF7FEFF 		bl	__aeabi_i2d
+ 1109 0014 4FF00002 		mov	r2, #0
+ 1110 0018 4FF08043 		mov	r3, #1073741824
+ 1111 001c FFF7FEFF 		bl	__aeabi_ddiv
+ 1112 0020 0346     		mov	r3, r0
+ 1113 0022 0C46     		mov	r4, r1
+ 1114 0024 C7E91A34 		strd	r3, [r7, #104]
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 27
+
+
+ 340:main.c        **** 
+ 341:main.c        ****     floatnumSamples = numSamples;
+ 1115              		.loc 1 341 0
+ 1116 0028 F868     		ldr	r0, [r7, #12]
+ 1117 002a FFF7FEFF 		bl	__aeabi_i2d
+ 1118 002e 0346     		mov	r3, r0
+ 1119 0030 0C46     		mov	r4, r1
+ 1120 0032 C7E91834 		strd	r3, [r7, #96]
+ 342:main.c        ****     k = (0.5 + ((floatnumSamples * tFrequency) / tSamplingRate));
+ 1121              		.loc 1 342 0
+ 1122 0036 B868     		ldr	r0, [r7, #8]
+ 1123 0038 FFF7FEFF 		bl	__aeabi_i2d
+ 1124 003c D7E91823 		ldrd	r2, [r7, #96]
+ 1125 0040 FFF7FEFF 		bl	__aeabi_dmul
+ 1126 0044 0346     		mov	r3, r0
+ 1127 0046 0C46     		mov	r4, r1
+ 1128 0048 2546     		mov	r5, r4
+ 1129 004a 1C46     		mov	r4, r3
+ 1130 004c 7868     		ldr	r0, [r7, #4]
+ 1131 004e FFF7FEFF 		bl	__aeabi_i2d
+ 1132 0052 0246     		mov	r2, r0
+ 1133 0054 0B46     		mov	r3, r1
+ 1134 0056 2046     		mov	r0, r4
+ 1135 0058 2946     		mov	r1, r5
+ 1136 005a FFF7FEFF 		bl	__aeabi_ddiv
+ 1137 005e 0346     		mov	r3, r0
+ 1138 0060 0C46     		mov	r4, r1
+ 1139 0062 1846     		mov	r0, r3
+ 1140 0064 2146     		mov	r1, r4
+ 1141 0066 4FF00002 		mov	r2, #0
+ 1142 006a 6B4B     		ldr	r3, .L56+8
+ 1143 006c FFF7FEFF 		bl	__aeabi_dadd
+ 1144 0070 0346     		mov	r3, r0
+ 1145 0072 0C46     		mov	r4, r1
+ 1146 0074 1846     		mov	r0, r3
+ 1147 0076 2146     		mov	r1, r4
+ 1148 0078 FFF7FEFF 		bl	__aeabi_d2iz
+ 1149 007c 0346     		mov	r3, r0
+ 1150 007e FB65     		str	r3, [r7, #92]
+ 343:main.c        ****     omega = (2.0 * M_PI * k) / floatnumSamples;
+ 1151              		.loc 1 343 0
+ 1152 0080 F86D     		ldr	r0, [r7, #92]
+ 1153 0082 FFF7FEFF 		bl	__aeabi_i2d
+ 1154 0086 62A3     		adr	r3, .L56
+ 1155 0088 D3E90023 		ldrd	r2, [r3]
+ 1156 008c FFF7FEFF 		bl	__aeabi_dmul
+ 1157 0090 0346     		mov	r3, r0
+ 1158 0092 0C46     		mov	r4, r1
+ 1159 0094 1846     		mov	r0, r3
+ 1160 0096 2146     		mov	r1, r4
+ 1161 0098 D7E91823 		ldrd	r2, [r7, #96]
+ 1162 009c FFF7FEFF 		bl	__aeabi_ddiv
+ 1163 00a0 0346     		mov	r3, r0
+ 1164 00a2 0C46     		mov	r4, r1
+ 1165 00a4 C7E91434 		strd	r3, [r7, #80]
+ 344:main.c        ****     sine = sin(omega);
+ 1166              		.loc 1 344 0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 28
+
+
+ 1167 00a8 D7E91401 		ldrd	r0, [r7, #80]
+ 1168 00ac FFF7FEFF 		bl	sin
+ 1169 00b0 C7E91201 		strd	r0, [r7, #72]
+ 345:main.c        ****     cosine = cos(omega);
+ 1170              		.loc 1 345 0
+ 1171 00b4 D7E91401 		ldrd	r0, [r7, #80]
+ 1172 00b8 FFF7FEFF 		bl	cos
+ 1173 00bc C7E91001 		strd	r0, [r7, #64]
+ 346:main.c        ****     coeff = 2.0 * cosine;
+ 1174              		.loc 1 346 0
+ 1175 00c0 D7E91001 		ldrd	r0, [r7, #64]
+ 1176 00c4 0246     		mov	r2, r0
+ 1177 00c6 0B46     		mov	r3, r1
+ 1178 00c8 FFF7FEFF 		bl	__aeabi_dadd
+ 1179 00cc 0346     		mov	r3, r0
+ 1180 00ce 0C46     		mov	r4, r1
+ 1181 00d0 C7E90E34 		strd	r3, [r7, #56]
+ 347:main.c        ****     q0=0;
+ 1182              		.loc 1 347 0
+ 1183 00d4 4FF00003 		mov	r3, #0
+ 1184 00d8 4FF00004 		mov	r4, #0
+ 1185 00dc C7E90C34 		strd	r3, [r7, #48]
+ 348:main.c        ****     q1=0;
+ 1186              		.loc 1 348 0
+ 1187 00e0 4FF00003 		mov	r3, #0
+ 1188 00e4 4FF00004 		mov	r4, #0
+ 1189 00e8 C7E92034 		strd	r3, [r7, #128]
+ 349:main.c        ****     q2=0;
+ 1190              		.loc 1 349 0
+ 1191 00ec 4FF00003 		mov	r3, #0
+ 1192 00f0 4FF00004 		mov	r4, #0
+ 1193 00f4 C7E91E34 		strd	r3, [r7, #120]
+ 1194              	.LBB9:
+ 350:main.c        ****     
+ 351:main.c        ****     for(uint16 i = 0; i < numSamples; i++)
+ 1195              		.loc 1 351 0
+ 1196 00f8 0023     		movs	r3, #0
+ 1197 00fa A7F87630 		strh	r3, [r7, #118]	@ movhi
+ 1198 00fe 2EE0     		b	.L53
+ 1199              	.L54:
+ 1200              	.LBB10:
+ 352:main.c        ****     {
+ 353:main.c        ****         double mdata =  data[i];
+ 1201              		.loc 1 353 0 discriminator 3
+ 1202 0100 B7F87630 		ldrh	r3, [r7, #118]
+ 1203 0104 DB00     		lsls	r3, r3, #3
+ 1204 0106 3A68     		ldr	r2, [r7]
+ 1205 0108 1344     		add	r3, r3, r2
+ 1206 010a 18CB     		ldmia	r3, {r3-r4}
+ 1207 010c C7E90A34 		strd	r3, [r7, #40]
+ 354:main.c        ****         
+ 355:main.c        ****         q0 = coeff * q1 - q2 + mdata;
+ 1208              		.loc 1 355 0 discriminator 3
+ 1209 0110 D7E92023 		ldrd	r2, [r7, #128]
+ 1210 0114 D7E90E01 		ldrd	r0, [r7, #56]
+ 1211 0118 FFF7FEFF 		bl	__aeabi_dmul
+ 1212 011c 0346     		mov	r3, r0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 29
+
+
+ 1213 011e 0C46     		mov	r4, r1
+ 1214 0120 1846     		mov	r0, r3
+ 1215 0122 2146     		mov	r1, r4
+ 1216 0124 D7E91E23 		ldrd	r2, [r7, #120]
+ 1217 0128 FFF7FEFF 		bl	__aeabi_dsub
+ 1218 012c 0346     		mov	r3, r0
+ 1219 012e 0C46     		mov	r4, r1
+ 1220 0130 1846     		mov	r0, r3
+ 1221 0132 2146     		mov	r1, r4
+ 1222 0134 D7E90A23 		ldrd	r2, [r7, #40]
+ 1223 0138 FFF7FEFF 		bl	__aeabi_dadd
+ 1224 013c 0346     		mov	r3, r0
+ 1225 013e 0C46     		mov	r4, r1
+ 1226 0140 C7E90C34 		strd	r3, [r7, #48]
+ 356:main.c        ****         q2 = q1;
+ 1227              		.loc 1 356 0 discriminator 3
+ 1228 0144 D7E92034 		ldrd	r3, [r7, #128]
+ 1229 0148 C7E91E34 		strd	r3, [r7, #120]
+ 357:main.c        ****         q1 = q0;
+ 1230              		.loc 1 357 0 discriminator 3
+ 1231 014c D7E90C34 		ldrd	r3, [r7, #48]
+ 1232 0150 C7E92034 		strd	r3, [r7, #128]
+ 1233              	.LBE10:
+ 351:main.c        ****     {
+ 1234              		.loc 1 351 0 discriminator 3
+ 1235 0154 B7F87630 		ldrh	r3, [r7, #118]
+ 1236 0158 0133     		adds	r3, r3, #1
+ 1237 015a A7F87630 		strh	r3, [r7, #118]	@ movhi
+ 1238              	.L53:
+ 351:main.c        ****     {
+ 1239              		.loc 1 351 0 is_stmt 0 discriminator 1
+ 1240 015e B7F87620 		ldrh	r2, [r7, #118]
+ 1241 0162 FB68     		ldr	r3, [r7, #12]
+ 1242 0164 9A42     		cmp	r2, r3
+ 1243 0166 CBDB     		blt	.L54
+ 1244              	.LBE9:
+ 358:main.c        ****     }
+ 359:main.c        **** 
+ 360:main.c        ****     // calculate the real and imaginary results
+ 361:main.c        ****     // scaling appropriately
+ 362:main.c        ****     real = (q1 - q2 * cosine) / scalingFactor;
+ 1245              		.loc 1 362 0 is_stmt 1
+ 1246 0168 D7E91023 		ldrd	r2, [r7, #64]
+ 1247 016c D7E91E01 		ldrd	r0, [r7, #120]
+ 1248 0170 FFF7FEFF 		bl	__aeabi_dmul
+ 1249 0174 0346     		mov	r3, r0
+ 1250 0176 0C46     		mov	r4, r1
+ 1251 0178 1A46     		mov	r2, r3
+ 1252 017a 2346     		mov	r3, r4
+ 1253 017c D7E92001 		ldrd	r0, [r7, #128]
+ 1254 0180 FFF7FEFF 		bl	__aeabi_dsub
+ 1255 0184 0346     		mov	r3, r0
+ 1256 0186 0C46     		mov	r4, r1
+ 1257 0188 1846     		mov	r0, r3
+ 1258 018a 2146     		mov	r1, r4
+ 1259 018c D7E91A23 		ldrd	r2, [r7, #104]
+ 1260 0190 FFF7FEFF 		bl	__aeabi_ddiv
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 30
+
+
+ 1261 0194 0346     		mov	r3, r0
+ 1262 0196 0C46     		mov	r4, r1
+ 1263 0198 C7E90834 		strd	r3, [r7, #32]
+ 363:main.c        ****     imag = (q2 * sine) / scalingFactor;
+ 1264              		.loc 1 363 0
+ 1265 019c D7E91223 		ldrd	r2, [r7, #72]
+ 1266 01a0 D7E91E01 		ldrd	r0, [r7, #120]
+ 1267 01a4 FFF7FEFF 		bl	__aeabi_dmul
+ 1268 01a8 0346     		mov	r3, r0
+ 1269 01aa 0C46     		mov	r4, r1
+ 1270 01ac 1846     		mov	r0, r3
+ 1271 01ae 2146     		mov	r1, r4
+ 1272 01b0 D7E91A23 		ldrd	r2, [r7, #104]
+ 1273 01b4 FFF7FEFF 		bl	__aeabi_ddiv
+ 1274 01b8 0346     		mov	r3, r0
+ 1275 01ba 0C46     		mov	r4, r1
+ 1276 01bc C7E90634 		strd	r3, [r7, #24]
+ 364:main.c        **** 
+ 365:main.c        ****     magnitude = sqrt(real*real + imag*imag);
+ 1277              		.loc 1 365 0
+ 1278 01c0 D7E90823 		ldrd	r2, [r7, #32]
+ 1279 01c4 D7E90801 		ldrd	r0, [r7, #32]
+ 1280 01c8 FFF7FEFF 		bl	__aeabi_dmul
+ 1281 01cc 0346     		mov	r3, r0
+ 1282 01ce 0C46     		mov	r4, r1
+ 1283 01d0 2546     		mov	r5, r4
+ 1284 01d2 1C46     		mov	r4, r3
+ 1285 01d4 D7E90623 		ldrd	r2, [r7, #24]
+ 1286 01d8 D7E90601 		ldrd	r0, [r7, #24]
+ 1287 01dc FFF7FEFF 		bl	__aeabi_dmul
+ 1288 01e0 0246     		mov	r2, r0
+ 1289 01e2 0B46     		mov	r3, r1
+ 1290 01e4 2046     		mov	r0, r4
+ 1291 01e6 2946     		mov	r1, r5
+ 1292 01e8 FFF7FEFF 		bl	__aeabi_dadd
+ 1293 01ec 0346     		mov	r3, r0
+ 1294 01ee 0C46     		mov	r4, r1
+ 1295 01f0 1846     		mov	r0, r3
+ 1296 01f2 2146     		mov	r1, r4
+ 1297 01f4 FFF7FEFF 		bl	sqrt
+ 1298 01f8 C7E90401 		strd	r0, [r7, #16]
+ 366:main.c        ****     return magnitude;
+ 1299              		.loc 1 366 0
+ 1300 01fc D7E90434 		ldrd	r3, [r7, #16]
+ 367:main.c        **** }
+ 1301              		.loc 1 367 0
+ 1302 0200 1846     		mov	r0, r3
+ 1303 0202 2146     		mov	r1, r4
+ 1304 0204 8837     		adds	r7, r7, #136
+ 1305              		.cfi_def_cfa_offset 16
+ 1306 0206 BD46     		mov	sp, r7
+ 1307              		.cfi_def_cfa_register 13
+ 1308              		@ sp needed
+ 1309 0208 B0BD     		pop	{r4, r5, r7, pc}
+ 1310              	.L57:
+ 1311 020a 00BFAFF3 		.align	3
+ 1311      0080
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 31
+
+
+ 1312              	.L56:
+ 1313 0210 182D4454 		.word	1413754136
+ 1314 0214 FB211940 		.word	1075388923
+ 1315 0218 0000E03F 		.word	1071644672
+ 1316              		.cfi_endproc
+ 1317              	.LFE71:
+ 1318              		.size	Goertzel, .-Goertzel
+ 1319              		.global	__aeabi_dcmpgt
+ 1320              		.section	.text.getMaxValue,"ax",%progbits
+ 1321              		.align	2
+ 1322              		.global	getMaxValue
+ 1323              		.thumb
+ 1324              		.thumb_func
+ 1325              		.type	getMaxValue, %function
+ 1326              	getMaxValue:
+ 1327              	.LFB72:
+ 368:main.c        **** 
+ 369:main.c        **** /*******************************************************************************
+ 370:main.c        **** * Function - Find max value of given array
+ 371:main.c        **** *******************************************************************************/
+ 372:main.c        **** uint16 getMaxValue(double *arrayData, uint8 size)
+ 373:main.c        **** {
+ 1328              		.loc 1 373 0
+ 1329              		.cfi_startproc
+ 1330              		@ args = 0, pretend = 0, frame = 24
+ 1331              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1332 0000 90B5     		push	{r4, r7, lr}
+ 1333              		.cfi_def_cfa_offset 12
+ 1334              		.cfi_offset 4, -12
+ 1335              		.cfi_offset 7, -8
+ 1336              		.cfi_offset 14, -4
+ 1337 0002 87B0     		sub	sp, sp, #28
+ 1338              		.cfi_def_cfa_offset 40
+ 1339 0004 00AF     		add	r7, sp, #0
+ 1340              		.cfi_def_cfa_register 7
+ 1341 0006 7860     		str	r0, [r7, #4]
+ 1342 0008 0B46     		mov	r3, r1
+ 1343 000a FB70     		strb	r3, [r7, #3]
+ 374:main.c        ****     double maxValue = arrayData[0];
+ 1344              		.loc 1 374 0
+ 1345 000c 7B68     		ldr	r3, [r7, #4]
+ 1346 000e 18CB     		ldmia	r3, {r3-r4}
+ 1347 0010 C7E90434 		strd	r3, [r7, #16]
+ 375:main.c        ****     uint16 index = 0;
+ 1348              		.loc 1 375 0
+ 1349 0014 0023     		movs	r3, #0
+ 1350 0016 FB81     		strh	r3, [r7, #14]	@ movhi
+ 1351              	.LBB11:
+ 376:main.c        ****     for (uint16 i = 1; i < size; ++i) 
+ 1352              		.loc 1 376 0
+ 1353 0018 0123     		movs	r3, #1
+ 1354 001a BB81     		strh	r3, [r7, #12]	@ movhi
+ 1355 001c 18E0     		b	.L59
+ 1356              	.L62:
+ 377:main.c        ****     {
+ 378:main.c        ****         if ( arrayData[i] > maxValue ) 
+ 1357              		.loc 1 378 0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 32
+
+
+ 1358 001e BB89     		ldrh	r3, [r7, #12]
+ 1359 0020 DB00     		lsls	r3, r3, #3
+ 1360 0022 7A68     		ldr	r2, [r7, #4]
+ 1361 0024 1344     		add	r3, r3, r2
+ 1362 0026 D3E90001 		ldrd	r0, [r3]
+ 1363 002a D7E90423 		ldrd	r2, [r7, #16]
+ 1364 002e FFF7FEFF 		bl	__aeabi_dcmpgt
+ 1365 0032 0346     		mov	r3, r0
+ 1366 0034 002B     		cmp	r3, #0
+ 1367 0036 08D0     		beq	.L60
+ 379:main.c        ****         {
+ 380:main.c        ****             maxValue = arrayData[i];
+ 1368              		.loc 1 380 0
+ 1369 0038 BB89     		ldrh	r3, [r7, #12]
+ 1370 003a DB00     		lsls	r3, r3, #3
+ 1371 003c 7A68     		ldr	r2, [r7, #4]
+ 1372 003e 1344     		add	r3, r3, r2
+ 1373 0040 18CB     		ldmia	r3, {r3-r4}
+ 1374 0042 C7E90434 		strd	r3, [r7, #16]
+ 381:main.c        ****             index = i;
+ 1375              		.loc 1 381 0
+ 1376 0046 BB89     		ldrh	r3, [r7, #12]	@ movhi
+ 1377 0048 FB81     		strh	r3, [r7, #14]	@ movhi
+ 1378              	.L60:
+ 376:main.c        ****     {
+ 1379              		.loc 1 376 0 discriminator 2
+ 1380 004a BB89     		ldrh	r3, [r7, #12]	@ movhi
+ 1381 004c 0133     		adds	r3, r3, #1
+ 1382 004e BB81     		strh	r3, [r7, #12]	@ movhi
+ 1383              	.L59:
+ 376:main.c        ****     {
+ 1384              		.loc 1 376 0 is_stmt 0 discriminator 1
+ 1385 0050 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1386 0052 9BB2     		uxth	r3, r3
+ 1387 0054 BA89     		ldrh	r2, [r7, #12]
+ 1388 0056 9A42     		cmp	r2, r3
+ 1389 0058 E1D3     		bcc	.L62
+ 1390              	.LBE11:
+ 382:main.c        ****         }
+ 383:main.c        ****     }
+ 384:main.c        ****     
+ 385:main.c        ****     return index;
+ 1391              		.loc 1 385 0 is_stmt 1
+ 1392 005a FB89     		ldrh	r3, [r7, #14]
+ 386:main.c        **** }
+ 1393              		.loc 1 386 0
+ 1394 005c 1846     		mov	r0, r3
+ 1395 005e 1C37     		adds	r7, r7, #28
+ 1396              		.cfi_def_cfa_offset 12
+ 1397 0060 BD46     		mov	sp, r7
+ 1398              		.cfi_def_cfa_register 13
+ 1399              		@ sp needed
+ 1400 0062 90BD     		pop	{r4, r7, pc}
+ 1401              		.cfi_endproc
+ 1402              	.LFE72:
+ 1403              		.size	getMaxValue, .-getMaxValue
+ 1404              		.section	.rodata
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 33
+
+
+ 1405 00a6 0000     		.align	2
+ 1406              	.LC20:
+ 1407 00a8 4465636F 		.ascii	"Decoded=1\015\012\000"
+ 1407      6465643D 
+ 1407      310D0A00 
+ 1408              		.align	2
+ 1409              	.LC21:
+ 1410 00b4 4465636F 		.ascii	"Decoded=2\015\012\000"
+ 1410      6465643D 
+ 1410      320D0A00 
+ 1411              		.align	2
+ 1412              	.LC22:
+ 1413 00c0 4465636F 		.ascii	"Decoded=3\015\012\000"
+ 1413      6465643D 
+ 1413      330D0A00 
+ 1414              		.align	2
+ 1415              	.LC23:
+ 1416 00cc 4465636F 		.ascii	"Decoded=4\015\012\000"
+ 1416      6465643D 
+ 1416      340D0A00 
+ 1417              		.align	2
+ 1418              	.LC24:
+ 1419 00d8 4465636F 		.ascii	"Decoded=5\015\012\000"
+ 1419      6465643D 
+ 1419      350D0A00 
+ 1420              		.align	2
+ 1421              	.LC25:
+ 1422 00e4 4465636F 		.ascii	"Decoded=6\015\012\000"
+ 1422      6465643D 
+ 1422      360D0A00 
+ 1423              		.align	2
+ 1424              	.LC26:
+ 1425 00f0 4465636F 		.ascii	"Decoded=7\015\012\000"
+ 1425      6465643D 
+ 1425      370D0A00 
+ 1426              		.align	2
+ 1427              	.LC27:
+ 1428 00fc 4465636F 		.ascii	"Decoded=8\015\012\000"
+ 1428      6465643D 
+ 1428      380D0A00 
+ 1429              		.align	2
+ 1430              	.LC28:
+ 1431 0108 4465636F 		.ascii	"Decoded=9\015\012\000"
+ 1431      6465643D 
+ 1431      390D0A00 
+ 1432              		.align	2
+ 1433              	.LC29:
+ 1434 0114 4465636F 		.ascii	"Decoded=*\015\012\000"
+ 1434      6465643D 
+ 1434      2A0D0A00 
+ 1435              		.align	2
+ 1436              	.LC30:
+ 1437 0120 4465636F 		.ascii	"Decoded=0\015\012\000"
+ 1437      6465643D 
+ 1437      300D0A00 
+ 1438              		.align	2
+ 1439              	.LC31:
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 34
+
+
+ 1440 012c 4465636F 		.ascii	"Decoded=#\015\012\000"
+ 1440      6465643D 
+ 1440      230D0A00 
+ 1441              		.align	2
+ 1442              	.LC32:
+ 1443 0138 4465636F 		.ascii	"Decoded=Dummy\015\012\000"
+ 1443      6465643D 
+ 1443      44756D6D 
+ 1443      790D0A00 
+ 1444              		.section	.text.DecodeInput,"ax",%progbits
+ 1445              		.align	2
+ 1446              		.global	DecodeInput
+ 1447              		.thumb
+ 1448              		.thumb_func
+ 1449              		.type	DecodeInput, %function
+ 1450              	DecodeInput:
+ 1451              	.LFB73:
+ 387:main.c        **** 
+ 388:main.c        **** /*******************************************************************************
+ 389:main.c        **** * Function - Decode the frequencies found
+ 390:main.c        **** *******************************************************************************/
+ 391:main.c        **** void DecodeInput(int lo, int hi)
+ 392:main.c        **** {
+ 1452              		.loc 1 392 0
+ 1453              		.cfi_startproc
+ 1454              		@ args = 0, pretend = 0, frame = 8
+ 1455              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1456 0000 80B5     		push	{r7, lr}
+ 1457              		.cfi_def_cfa_offset 8
+ 1458              		.cfi_offset 7, -8
+ 1459              		.cfi_offset 14, -4
+ 1460 0002 82B0     		sub	sp, sp, #8
+ 1461              		.cfi_def_cfa_offset 16
+ 1462 0004 00AF     		add	r7, sp, #0
+ 1463              		.cfi_def_cfa_register 7
+ 1464 0006 7860     		str	r0, [r7, #4]
+ 1465 0008 3960     		str	r1, [r7]
+ 393:main.c        ****     // Keys 1,2,3
+ 394:main.c        ****     if ( (lo == loFrequency[1]) && (hi == hiFrequency[1]))
+ 1466              		.loc 1 394 0
+ 1467 000a 564B     		ldr	r3, .L81
+ 1468 000c 5A68     		ldr	r2, [r3, #4]
+ 1469 000e 7B68     		ldr	r3, [r7, #4]
+ 1470 0010 9A42     		cmp	r2, r3
+ 1471 0012 07D1     		bne	.L66
+ 1472              		.loc 1 394 0 is_stmt 0 discriminator 1
+ 1473 0014 544B     		ldr	r3, .L81+4
+ 1474 0016 5A68     		ldr	r2, [r3, #4]
+ 1475 0018 3B68     		ldr	r3, [r7]
+ 1476 001a 9A42     		cmp	r2, r3
+ 1477 001c 02D1     		bne	.L66
+ 395:main.c        ****         UART_1_PutString("Decoded=1\r\n");
+ 1478              		.loc 1 395 0 is_stmt 1
+ 1479 001e 5348     		ldr	r0, .L81+8
+ 1480 0020 FFF7FEFF 		bl	UART_1_PutString
+ 1481              	.L66:
+ 396:main.c        ****     if ( (lo == loFrequency[1]) && (hi == hiFrequency[2]))
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 35
+
+
+ 1482              		.loc 1 396 0
+ 1483 0024 4F4B     		ldr	r3, .L81
+ 1484 0026 5A68     		ldr	r2, [r3, #4]
+ 1485 0028 7B68     		ldr	r3, [r7, #4]
+ 1486 002a 9A42     		cmp	r2, r3
+ 1487 002c 07D1     		bne	.L67
+ 1488              		.loc 1 396 0 is_stmt 0 discriminator 1
+ 1489 002e 4E4B     		ldr	r3, .L81+4
+ 1490 0030 9A68     		ldr	r2, [r3, #8]
+ 1491 0032 3B68     		ldr	r3, [r7]
+ 1492 0034 9A42     		cmp	r2, r3
+ 1493 0036 02D1     		bne	.L67
+ 397:main.c        ****         UART_1_PutString("Decoded=2\r\n");
+ 1494              		.loc 1 397 0 is_stmt 1
+ 1495 0038 4D48     		ldr	r0, .L81+12
+ 1496 003a FFF7FEFF 		bl	UART_1_PutString
+ 1497              	.L67:
+ 398:main.c        ****     if ( (lo == loFrequency[1]) && (hi == hiFrequency[3]))
+ 1498              		.loc 1 398 0
+ 1499 003e 494B     		ldr	r3, .L81
+ 1500 0040 5A68     		ldr	r2, [r3, #4]
+ 1501 0042 7B68     		ldr	r3, [r7, #4]
+ 1502 0044 9A42     		cmp	r2, r3
+ 1503 0046 07D1     		bne	.L68
+ 1504              		.loc 1 398 0 is_stmt 0 discriminator 1
+ 1505 0048 474B     		ldr	r3, .L81+4
+ 1506 004a DA68     		ldr	r2, [r3, #12]
+ 1507 004c 3B68     		ldr	r3, [r7]
+ 1508 004e 9A42     		cmp	r2, r3
+ 1509 0050 02D1     		bne	.L68
+ 399:main.c        ****         UART_1_PutString("Decoded=3\r\n");
+ 1510              		.loc 1 399 0 is_stmt 1
+ 1511 0052 4848     		ldr	r0, .L81+16
+ 1512 0054 FFF7FEFF 		bl	UART_1_PutString
+ 1513              	.L68:
+ 400:main.c        ****     
+ 401:main.c        ****     // Keys 4,5,6    
+ 402:main.c        ****     if ( (lo == loFrequency[2]) && (hi == hiFrequency[1]))
+ 1514              		.loc 1 402 0
+ 1515 0058 424B     		ldr	r3, .L81
+ 1516 005a 9A68     		ldr	r2, [r3, #8]
+ 1517 005c 7B68     		ldr	r3, [r7, #4]
+ 1518 005e 9A42     		cmp	r2, r3
+ 1519 0060 07D1     		bne	.L69
+ 1520              		.loc 1 402 0 is_stmt 0 discriminator 1
+ 1521 0062 414B     		ldr	r3, .L81+4
+ 1522 0064 5A68     		ldr	r2, [r3, #4]
+ 1523 0066 3B68     		ldr	r3, [r7]
+ 1524 0068 9A42     		cmp	r2, r3
+ 1525 006a 02D1     		bne	.L69
+ 403:main.c        ****         UART_1_PutString("Decoded=4\r\n");
+ 1526              		.loc 1 403 0 is_stmt 1
+ 1527 006c 4248     		ldr	r0, .L81+20
+ 1528 006e FFF7FEFF 		bl	UART_1_PutString
+ 1529              	.L69:
+ 404:main.c        ****     if ( (lo == loFrequency[2]) && (hi == hiFrequency[2]))
+ 1530              		.loc 1 404 0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 36
+
+
+ 1531 0072 3C4B     		ldr	r3, .L81
+ 1532 0074 9A68     		ldr	r2, [r3, #8]
+ 1533 0076 7B68     		ldr	r3, [r7, #4]
+ 1534 0078 9A42     		cmp	r2, r3
+ 1535 007a 07D1     		bne	.L70
+ 1536              		.loc 1 404 0 is_stmt 0 discriminator 1
+ 1537 007c 3A4B     		ldr	r3, .L81+4
+ 1538 007e 9A68     		ldr	r2, [r3, #8]
+ 1539 0080 3B68     		ldr	r3, [r7]
+ 1540 0082 9A42     		cmp	r2, r3
+ 1541 0084 02D1     		bne	.L70
+ 405:main.c        ****         UART_1_PutString("Decoded=5\r\n");
+ 1542              		.loc 1 405 0 is_stmt 1
+ 1543 0086 3D48     		ldr	r0, .L81+24
+ 1544 0088 FFF7FEFF 		bl	UART_1_PutString
+ 1545              	.L70:
+ 406:main.c        ****     if ( (lo == loFrequency[2]) && (hi == hiFrequency[3]))
+ 1546              		.loc 1 406 0
+ 1547 008c 354B     		ldr	r3, .L81
+ 1548 008e 9A68     		ldr	r2, [r3, #8]
+ 1549 0090 7B68     		ldr	r3, [r7, #4]
+ 1550 0092 9A42     		cmp	r2, r3
+ 1551 0094 07D1     		bne	.L71
+ 1552              		.loc 1 406 0 is_stmt 0 discriminator 1
+ 1553 0096 344B     		ldr	r3, .L81+4
+ 1554 0098 DA68     		ldr	r2, [r3, #12]
+ 1555 009a 3B68     		ldr	r3, [r7]
+ 1556 009c 9A42     		cmp	r2, r3
+ 1557 009e 02D1     		bne	.L71
+ 407:main.c        ****         UART_1_PutString("Decoded=6\r\n");
+ 1558              		.loc 1 407 0 is_stmt 1
+ 1559 00a0 3748     		ldr	r0, .L81+28
+ 1560 00a2 FFF7FEFF 		bl	UART_1_PutString
+ 1561              	.L71:
+ 408:main.c        ****     
+ 409:main.c        ****     // Keys 7,8,9   
+ 410:main.c        ****     if ( (lo == loFrequency[3]) && (hi == hiFrequency[1]))
+ 1562              		.loc 1 410 0
+ 1563 00a6 2F4B     		ldr	r3, .L81
+ 1564 00a8 DA68     		ldr	r2, [r3, #12]
+ 1565 00aa 7B68     		ldr	r3, [r7, #4]
+ 1566 00ac 9A42     		cmp	r2, r3
+ 1567 00ae 07D1     		bne	.L72
+ 1568              		.loc 1 410 0 is_stmt 0 discriminator 1
+ 1569 00b0 2D4B     		ldr	r3, .L81+4
+ 1570 00b2 5A68     		ldr	r2, [r3, #4]
+ 1571 00b4 3B68     		ldr	r3, [r7]
+ 1572 00b6 9A42     		cmp	r2, r3
+ 1573 00b8 02D1     		bne	.L72
+ 411:main.c        ****         UART_1_PutString("Decoded=7\r\n");
+ 1574              		.loc 1 411 0 is_stmt 1
+ 1575 00ba 3248     		ldr	r0, .L81+32
+ 1576 00bc FFF7FEFF 		bl	UART_1_PutString
+ 1577              	.L72:
+ 412:main.c        ****     if ( (lo == loFrequency[3]) && (hi == hiFrequency[2]))
+ 1578              		.loc 1 412 0
+ 1579 00c0 284B     		ldr	r3, .L81
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 37
+
+
+ 1580 00c2 DA68     		ldr	r2, [r3, #12]
+ 1581 00c4 7B68     		ldr	r3, [r7, #4]
+ 1582 00c6 9A42     		cmp	r2, r3
+ 1583 00c8 07D1     		bne	.L73
+ 1584              		.loc 1 412 0 is_stmt 0 discriminator 1
+ 1585 00ca 274B     		ldr	r3, .L81+4
+ 1586 00cc 9A68     		ldr	r2, [r3, #8]
+ 1587 00ce 3B68     		ldr	r3, [r7]
+ 1588 00d0 9A42     		cmp	r2, r3
+ 1589 00d2 02D1     		bne	.L73
+ 413:main.c        ****         UART_1_PutString("Decoded=8\r\n");
+ 1590              		.loc 1 413 0 is_stmt 1
+ 1591 00d4 2C48     		ldr	r0, .L81+36
+ 1592 00d6 FFF7FEFF 		bl	UART_1_PutString
+ 1593              	.L73:
+ 414:main.c        ****     if ( (lo == loFrequency[3]) && (hi == hiFrequency[3]))
+ 1594              		.loc 1 414 0
+ 1595 00da 224B     		ldr	r3, .L81
+ 1596 00dc DA68     		ldr	r2, [r3, #12]
+ 1597 00de 7B68     		ldr	r3, [r7, #4]
+ 1598 00e0 9A42     		cmp	r2, r3
+ 1599 00e2 07D1     		bne	.L74
+ 1600              		.loc 1 414 0 is_stmt 0 discriminator 1
+ 1601 00e4 204B     		ldr	r3, .L81+4
+ 1602 00e6 DA68     		ldr	r2, [r3, #12]
+ 1603 00e8 3B68     		ldr	r3, [r7]
+ 1604 00ea 9A42     		cmp	r2, r3
+ 1605 00ec 02D1     		bne	.L74
+ 415:main.c        ****         UART_1_PutString("Decoded=9\r\n");
+ 1606              		.loc 1 415 0 is_stmt 1
+ 1607 00ee 2748     		ldr	r0, .L81+40
+ 1608 00f0 FFF7FEFF 		bl	UART_1_PutString
+ 1609              	.L74:
+ 416:main.c        ****     
+ 417:main.c        ****     // Keys *,0,#    
+ 418:main.c        ****     if ( (lo == loFrequency[4]) && (hi == hiFrequency[1]))
+ 1610              		.loc 1 418 0
+ 1611 00f4 1B4B     		ldr	r3, .L81
+ 1612 00f6 1A69     		ldr	r2, [r3, #16]
+ 1613 00f8 7B68     		ldr	r3, [r7, #4]
+ 1614 00fa 9A42     		cmp	r2, r3
+ 1615 00fc 07D1     		bne	.L75
+ 1616              		.loc 1 418 0 is_stmt 0 discriminator 1
+ 1617 00fe 1A4B     		ldr	r3, .L81+4
+ 1618 0100 5A68     		ldr	r2, [r3, #4]
+ 1619 0102 3B68     		ldr	r3, [r7]
+ 1620 0104 9A42     		cmp	r2, r3
+ 1621 0106 02D1     		bne	.L75
+ 419:main.c        ****         UART_1_PutString("Decoded=*\r\n");
+ 1622              		.loc 1 419 0 is_stmt 1
+ 1623 0108 2148     		ldr	r0, .L81+44
+ 1624 010a FFF7FEFF 		bl	UART_1_PutString
+ 1625              	.L75:
+ 420:main.c        ****     if ( (lo == loFrequency[4]) && (hi == hiFrequency[2]))
+ 1626              		.loc 1 420 0
+ 1627 010e 154B     		ldr	r3, .L81
+ 1628 0110 1A69     		ldr	r2, [r3, #16]
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 38
+
+
+ 1629 0112 7B68     		ldr	r3, [r7, #4]
+ 1630 0114 9A42     		cmp	r2, r3
+ 1631 0116 07D1     		bne	.L76
+ 1632              		.loc 1 420 0 is_stmt 0 discriminator 1
+ 1633 0118 134B     		ldr	r3, .L81+4
+ 1634 011a 9A68     		ldr	r2, [r3, #8]
+ 1635 011c 3B68     		ldr	r3, [r7]
+ 1636 011e 9A42     		cmp	r2, r3
+ 1637 0120 02D1     		bne	.L76
+ 421:main.c        ****         UART_1_PutString("Decoded=0\r\n");
+ 1638              		.loc 1 421 0 is_stmt 1
+ 1639 0122 1C48     		ldr	r0, .L81+48
+ 1640 0124 FFF7FEFF 		bl	UART_1_PutString
+ 1641              	.L76:
+ 422:main.c        ****     if ( (lo == loFrequency[4]) && (hi == hiFrequency[3]))
+ 1642              		.loc 1 422 0
+ 1643 0128 0E4B     		ldr	r3, .L81
+ 1644 012a 1A69     		ldr	r2, [r3, #16]
+ 1645 012c 7B68     		ldr	r3, [r7, #4]
+ 1646 012e 9A42     		cmp	r2, r3
+ 1647 0130 07D1     		bne	.L77
+ 1648              		.loc 1 422 0 is_stmt 0 discriminator 1
+ 1649 0132 0D4B     		ldr	r3, .L81+4
+ 1650 0134 DA68     		ldr	r2, [r3, #12]
+ 1651 0136 3B68     		ldr	r3, [r7]
+ 1652 0138 9A42     		cmp	r2, r3
+ 1653 013a 02D1     		bne	.L77
+ 423:main.c        ****         UART_1_PutString("Decoded=#\r\n");   
+ 1654              		.loc 1 423 0 is_stmt 1
+ 1655 013c 1648     		ldr	r0, .L81+52
+ 1656 013e FFF7FEFF 		bl	UART_1_PutString
+ 1657              	.L77:
+ 424:main.c        ****     
+ 425:main.c        ****     // Dummy Frequencies    
+ 426:main.c        ****     if ( (lo == loFrequency[0]) || (hi == hiFrequency[0]) )
+ 1658              		.loc 1 426 0
+ 1659 0142 084B     		ldr	r3, .L81
+ 1660 0144 1A68     		ldr	r2, [r3]
+ 1661 0146 7B68     		ldr	r3, [r7, #4]
+ 1662 0148 9A42     		cmp	r2, r3
+ 1663 014a 04D0     		beq	.L78
+ 1664              		.loc 1 426 0 is_stmt 0 discriminator 1
+ 1665 014c 064B     		ldr	r3, .L81+4
+ 1666 014e 1A68     		ldr	r2, [r3]
+ 1667 0150 3B68     		ldr	r3, [r7]
+ 1668 0152 9A42     		cmp	r2, r3
+ 1669 0154 02D1     		bne	.L80
+ 1670              	.L78:
+ 427:main.c        ****         UART_1_PutString("Decoded=Dummy\r\n");
+ 1671              		.loc 1 427 0 is_stmt 1
+ 1672 0156 1148     		ldr	r0, .L81+56
+ 1673 0158 FFF7FEFF 		bl	UART_1_PutString
+ 1674              	.L80:
+ 428:main.c        ****  
+ 429:main.c        **** }
+ 1675              		.loc 1 429 0
+ 1676 015c 00BF     		nop
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 39
+
+
+ 1677 015e 0837     		adds	r7, r7, #8
+ 1678              		.cfi_def_cfa_offset 8
+ 1679 0160 BD46     		mov	sp, r7
+ 1680              		.cfi_def_cfa_register 13
+ 1681              		@ sp needed
+ 1682 0162 80BD     		pop	{r7, pc}
+ 1683              	.L82:
+ 1684              		.align	2
+ 1685              	.L81:
+ 1686 0164 00000000 		.word	loFrequency
+ 1687 0168 00000000 		.word	hiFrequency
+ 1688 016c A8000000 		.word	.LC20
+ 1689 0170 B4000000 		.word	.LC21
+ 1690 0174 C0000000 		.word	.LC22
+ 1691 0178 CC000000 		.word	.LC23
+ 1692 017c D8000000 		.word	.LC24
+ 1693 0180 E4000000 		.word	.LC25
+ 1694 0184 F0000000 		.word	.LC26
+ 1695 0188 FC000000 		.word	.LC27
+ 1696 018c 08010000 		.word	.LC28
+ 1697 0190 14010000 		.word	.LC29
+ 1698 0194 20010000 		.word	.LC30
+ 1699 0198 2C010000 		.word	.LC31
+ 1700 019c 38010000 		.word	.LC32
+ 1701              		.cfi_endproc
+ 1702              	.LFE73:
+ 1703              		.size	DecodeInput, .-DecodeInput
+ 1704              		.text
+ 1705              	.Letext0:
+ 1706              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1707              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1708              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 1709              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 1710              		.section	.debug_info,"",%progbits
+ 1711              	.Ldebug_info0:
+ 1712 0000 98050000 		.4byte	0x598
+ 1713 0004 0400     		.2byte	0x4
+ 1714 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1715 000a 04       		.byte	0x4
+ 1716 000b 01       		.uleb128 0x1
+ 1717 000c A4000000 		.4byte	.LASF63
+ 1718 0010 0C       		.byte	0xc
+ 1719 0011 E1020000 		.4byte	.LASF64
+ 1720 0015 06000000 		.4byte	.LASF65
+ 1721 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1722 001d 00000000 		.4byte	0
+ 1723 0021 00000000 		.4byte	.Ldebug_line0
+ 1724 0025 02       		.uleb128 0x2
+ 1725 0026 01       		.byte	0x1
+ 1726 0027 06       		.byte	0x6
+ 1727 0028 22020000 		.4byte	.LASF0
+ 1728 002c 02       		.uleb128 0x2
+ 1729 002d 01       		.byte	0x1
+ 1730 002e 08       		.byte	0x8
+ 1731 002f 07020000 		.4byte	.LASF1
+ 1732 0033 02       		.uleb128 0x2
+ 1733 0034 02       		.byte	0x2
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 40
+
+
+ 1734 0035 05       		.byte	0x5
+ 1735 0036 50010000 		.4byte	.LASF2
+ 1736 003a 02       		.uleb128 0x2
+ 1737 003b 02       		.byte	0x2
+ 1738 003c 07       		.byte	0x7
+ 1739 003d 6E020000 		.4byte	.LASF3
+ 1740 0041 03       		.uleb128 0x3
+ 1741 0042 32030000 		.4byte	.LASF9
+ 1742 0046 02       		.byte	0x2
+ 1743 0047 3F       		.byte	0x3f
+ 1744 0048 4C000000 		.4byte	0x4c
+ 1745 004c 02       		.uleb128 0x2
+ 1746 004d 04       		.byte	0x4
+ 1747 004e 05       		.byte	0x5
+ 1748 004f BC010000 		.4byte	.LASF4
+ 1749 0053 02       		.uleb128 0x2
+ 1750 0054 04       		.byte	0x4
+ 1751 0055 07       		.byte	0x7
+ 1752 0056 02030000 		.4byte	.LASF5
+ 1753 005a 02       		.uleb128 0x2
+ 1754 005b 08       		.byte	0x8
+ 1755 005c 05       		.byte	0x5
+ 1756 005d A3010000 		.4byte	.LASF6
+ 1757 0061 02       		.uleb128 0x2
+ 1758 0062 08       		.byte	0x8
+ 1759 0063 07       		.byte	0x7
+ 1760 0064 36020000 		.4byte	.LASF7
+ 1761 0068 04       		.uleb128 0x4
+ 1762 0069 04       		.byte	0x4
+ 1763 006a 05       		.byte	0x5
+ 1764 006b 696E7400 		.ascii	"int\000"
+ 1765 006f 02       		.uleb128 0x2
+ 1766 0070 04       		.byte	0x4
+ 1767 0071 07       		.byte	0x7
+ 1768 0072 4D020000 		.4byte	.LASF8
+ 1769 0076 03       		.uleb128 0x3
+ 1770 0077 2E020000 		.4byte	.LASF10
+ 1771 007b 03       		.byte	0x3
+ 1772 007c 2C       		.byte	0x2c
+ 1773 007d 41000000 		.4byte	0x41
+ 1774 0081 05       		.uleb128 0x5
+ 1775 0082 84010000 		.4byte	.LASF11
+ 1776 0086 04       		.byte	0x4
+ 1777 0087 9201     		.2byte	0x192
+ 1778 0089 2C000000 		.4byte	0x2c
+ 1779 008d 05       		.uleb128 0x5
+ 1780 008e 77010000 		.4byte	.LASF12
+ 1781 0092 04       		.byte	0x4
+ 1782 0093 9301     		.2byte	0x193
+ 1783 0095 3A000000 		.4byte	0x3a
+ 1784 0099 05       		.uleb128 0x5
+ 1785 009a 7E010000 		.4byte	.LASF13
+ 1786 009e 04       		.byte	0x4
+ 1787 009f 9601     		.2byte	0x196
+ 1788 00a1 33000000 		.4byte	0x33
+ 1789 00a5 02       		.uleb128 0x2
+ 1790 00a6 04       		.byte	0x4
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 41
+
+
+ 1791 00a7 04       		.byte	0x4
+ 1792 00a8 9D010000 		.4byte	.LASF14
+ 1793 00ac 02       		.uleb128 0x2
+ 1794 00ad 08       		.byte	0x8
+ 1795 00ae 04       		.byte	0x4
+ 1796 00af 20030000 		.4byte	.LASF15
+ 1797 00b3 02       		.uleb128 0x2
+ 1798 00b4 01       		.byte	0x1
+ 1799 00b5 08       		.byte	0x8
+ 1800 00b6 92020000 		.4byte	.LASF16
+ 1801 00ba 02       		.uleb128 0x2
+ 1802 00bb 08       		.byte	0x8
+ 1803 00bc 04       		.byte	0x4
+ 1804 00bd 3F010000 		.4byte	.LASF17
+ 1805 00c1 02       		.uleb128 0x2
+ 1806 00c2 04       		.byte	0x4
+ 1807 00c3 07       		.byte	0x7
+ 1808 00c4 3C030000 		.4byte	.LASF18
+ 1809 00c8 06       		.uleb128 0x6
+ 1810 00c9 8C030000 		.4byte	.LASF19
+ 1811 00cd 01       		.byte	0x1
+ 1812 00ce 2D       		.byte	0x2d
+ 1813 00cf 00000000 		.4byte	.LFB64
+ 1814 00d3 0C000000 		.4byte	.LFE64-.LFB64
+ 1815 00d7 01       		.uleb128 0x1
+ 1816 00d8 9C       		.byte	0x9c
+ 1817 00d9 06       		.uleb128 0x6
+ 1818 00da 5A020000 		.4byte	.LASF20
+ 1819 00de 01       		.byte	0x1
+ 1820 00df 36       		.byte	0x36
+ 1821 00e0 00000000 		.4byte	.LFB65
+ 1822 00e4 0C000000 		.4byte	.LFE65-.LFB65
+ 1823 00e8 01       		.uleb128 0x1
+ 1824 00e9 9C       		.byte	0x9c
+ 1825 00ea 07       		.uleb128 0x7
+ 1826 00eb 9E020000 		.4byte	.LASF22
+ 1827 00ef 01       		.byte	0x1
+ 1828 00f0 3F       		.byte	0x3f
+ 1829 00f1 68000000 		.4byte	0x68
+ 1830 00f5 00000000 		.4byte	.LFB66
+ 1831 00f9 00040000 		.4byte	.LFE66-.LFB66
+ 1832 00fd 01       		.uleb128 0x1
+ 1833 00fe 9C       		.byte	0x9c
+ 1834 00ff 61010000 		.4byte	0x161
+ 1835 0103 08       		.uleb128 0x8
+ 1836 0104 436800   		.ascii	"Ch\000"
+ 1837 0107 01       		.byte	0x1
+ 1838 0108 42       		.byte	0x42
+ 1839 0109 81000000 		.4byte	0x81
+ 1840 010d 02       		.uleb128 0x2
+ 1841 010e 91       		.byte	0x91
+ 1842 010f 71       		.sleb128 -15
+ 1843 0110 09       		.uleb128 0x9
+ 1844 0111 B0020000 		.4byte	.LBB2
+ 1845 0115 46000000 		.4byte	.LBE2-.LBB2
+ 1846 0119 2C010000 		.4byte	0x12c
+ 1847 011d 0A       		.uleb128 0xa
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 42
+
+
+ 1848 011e C5010000 		.4byte	.LASF21
+ 1849 0122 01       		.byte	0x1
+ 1850 0123 B5       		.byte	0xb5
+ 1851 0124 99000000 		.4byte	0x99
+ 1852 0128 02       		.uleb128 0x2
+ 1853 0129 91       		.byte	0x91
+ 1854 012a 76       		.sleb128 -10
+ 1855 012b 00       		.byte	0
+ 1856 012c 09       		.uleb128 0x9
+ 1857 012d FC020000 		.4byte	.LBB3
+ 1858 0131 38000000 		.4byte	.LBE3-.LBB3
+ 1859 0135 48010000 		.4byte	0x148
+ 1860 0139 0A       		.uleb128 0xa
+ 1861 013a C5010000 		.4byte	.LASF21
+ 1862 013e 01       		.byte	0x1
+ 1863 013f C2       		.byte	0xc2
+ 1864 0140 99000000 		.4byte	0x99
+ 1865 0144 02       		.uleb128 0x2
+ 1866 0145 91       		.byte	0x91
+ 1867 0146 74       		.sleb128 -12
+ 1868 0147 00       		.byte	0
+ 1869 0148 0B       		.uleb128 0xb
+ 1870 0149 40030000 		.4byte	.LBB4
+ 1871 014d 94000000 		.4byte	.LBE4-.LBB4
+ 1872 0151 0A       		.uleb128 0xa
+ 1873 0152 C5010000 		.4byte	.LASF21
+ 1874 0156 01       		.byte	0x1
+ 1875 0157 D1       		.byte	0xd1
+ 1876 0158 99000000 		.4byte	0x99
+ 1877 015c 02       		.uleb128 0x2
+ 1878 015d 91       		.byte	0x91
+ 1879 015e 72       		.sleb128 -14
+ 1880 015f 00       		.byte	0
+ 1881 0160 00       		.byte	0
+ 1882 0161 0C       		.uleb128 0xc
+ 1883 0162 E8020000 		.4byte	.LASF23
+ 1884 0166 01       		.byte	0x1
+ 1885 0167 F4       		.byte	0xf4
+ 1886 0168 00000000 		.4byte	.LFB67
+ 1887 016c 60000000 		.4byte	.LFE67-.LFB67
+ 1888 0170 01       		.uleb128 0x1
+ 1889 0171 9C       		.byte	0x9c
+ 1890 0172 A1010000 		.4byte	0x1a1
+ 1891 0176 0D       		.uleb128 0xd
+ 1892 0177 5B030000 		.4byte	.LASF27
+ 1893 017b 01       		.byte	0x1
+ 1894 017c F4       		.byte	0xf4
+ 1895 017d 68000000 		.4byte	0x68
+ 1896 0181 02       		.uleb128 0x2
+ 1897 0182 91       		.byte	0x91
+ 1898 0183 5C       		.sleb128 -36
+ 1899 0184 0A       		.uleb128 0xa
+ 1900 0185 4B010000 		.4byte	.LASF24
+ 1901 0189 01       		.byte	0x1
+ 1902 018a F6       		.byte	0xf6
+ 1903 018b AC000000 		.4byte	0xac
+ 1904 018f 02       		.uleb128 0x2
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 43
+
+
+ 1905 0190 91       		.byte	0x91
+ 1906 0191 68       		.sleb128 -24
+ 1907 0192 0A       		.uleb128 0xa
+ 1908 0193 8A010000 		.4byte	.LASF25
+ 1909 0197 01       		.byte	0x1
+ 1910 0198 F7       		.byte	0xf7
+ 1911 0199 AC000000 		.4byte	0xac
+ 1912 019d 02       		.uleb128 0x2
+ 1913 019e 91       		.byte	0x91
+ 1914 019f 60       		.sleb128 -32
+ 1915 01a0 00       		.byte	0
+ 1916 01a1 0C       		.uleb128 0xc
+ 1917 01a2 95030000 		.4byte	.LASF26
+ 1918 01a6 01       		.byte	0x1
+ 1919 01a7 FE       		.byte	0xfe
+ 1920 01a8 00000000 		.4byte	.LFB68
+ 1921 01ac 60000000 		.4byte	.LFE68-.LFB68
+ 1922 01b0 01       		.uleb128 0x1
+ 1923 01b1 9C       		.byte	0x9c
+ 1924 01b2 E3010000 		.4byte	0x1e3
+ 1925 01b6 0D       		.uleb128 0xd
+ 1926 01b7 5B030000 		.4byte	.LASF27
+ 1927 01bb 01       		.byte	0x1
+ 1928 01bc FE       		.byte	0xfe
+ 1929 01bd 68000000 		.4byte	0x68
+ 1930 01c1 02       		.uleb128 0x2
+ 1931 01c2 91       		.byte	0x91
+ 1932 01c3 5C       		.sleb128 -36
+ 1933 01c4 0E       		.uleb128 0xe
+ 1934 01c5 4B010000 		.4byte	.LASF24
+ 1935 01c9 01       		.byte	0x1
+ 1936 01ca 0001     		.2byte	0x100
+ 1937 01cc AC000000 		.4byte	0xac
+ 1938 01d0 02       		.uleb128 0x2
+ 1939 01d1 91       		.byte	0x91
+ 1940 01d2 68       		.sleb128 -24
+ 1941 01d3 0E       		.uleb128 0xe
+ 1942 01d4 8A010000 		.4byte	.LASF25
+ 1943 01d8 01       		.byte	0x1
+ 1944 01d9 0101     		.2byte	0x101
+ 1945 01db AC000000 		.4byte	0xac
+ 1946 01df 02       		.uleb128 0x2
+ 1947 01e0 91       		.byte	0x91
+ 1948 01e1 60       		.sleb128 -32
+ 1949 01e2 00       		.byte	0
+ 1950 01e3 0F       		.uleb128 0xf
+ 1951 01e4 32010000 		.4byte	.LASF28
+ 1952 01e8 01       		.byte	0x1
+ 1953 01e9 0801     		.2byte	0x108
+ 1954 01eb 00000000 		.4byte	.LFB69
+ 1955 01ef 28000000 		.4byte	.LFE69-.LFB69
+ 1956 01f3 01       		.uleb128 0x1
+ 1957 01f4 9C       		.byte	0x9c
+ 1958 01f5 10       		.uleb128 0x10
+ 1959 01f6 81020000 		.4byte	.LASF29
+ 1960 01fa 01       		.byte	0x1
+ 1961 01fb 1A01     		.2byte	0x11a
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 44
+
+
+ 1962 01fd 00000000 		.4byte	.LFB70
+ 1963 0201 90020000 		.4byte	.LFE70-.LFB70
+ 1964 0205 01       		.uleb128 0x1
+ 1965 0206 9C       		.byte	0x9c
+ 1966 0207 C0020000 		.4byte	0x2c0
+ 1967 020b 0E       		.uleb128 0xe
+ 1968 020c 97020000 		.4byte	.LASF30
+ 1969 0210 01       		.byte	0x1
+ 1970 0211 1C01     		.2byte	0x11c
+ 1971 0213 C0020000 		.4byte	0x2c0
+ 1972 0217 03       		.uleb128 0x3
+ 1973 0218 91       		.byte	0x91
+ 1974 0219 8857     		.sleb128 -5240
+ 1975 021b 0E       		.uleb128 0xe
+ 1976 021c 15020000 		.4byte	.LASF31
+ 1977 0220 01       		.byte	0x1
+ 1978 0221 2501     		.2byte	0x125
+ 1979 0223 D1020000 		.4byte	0x2d1
+ 1980 0227 03       		.uleb128 0x3
+ 1981 0228 91       		.byte	0x91
+ 1982 0229 E056     		.sleb128 -5280
+ 1983 022b 0E       		.uleb128 0xe
+ 1984 022c ED010000 		.4byte	.LASF32
+ 1985 0230 01       		.byte	0x1
+ 1986 0231 2601     		.2byte	0x126
+ 1987 0233 E1020000 		.4byte	0x2e1
+ 1988 0237 03       		.uleb128 0x3
+ 1989 0238 91       		.byte	0x91
+ 1990 0239 C056     		.sleb128 -5312
+ 1991 023b 0E       		.uleb128 0xe
+ 1992 023c C8020000 		.4byte	.LASF33
+ 1993 0240 01       		.byte	0x1
+ 1994 0241 3201     		.2byte	0x132
+ 1995 0243 8D000000 		.4byte	0x8d
+ 1996 0247 02       		.uleb128 0x2
+ 1997 0248 91       		.byte	0x91
+ 1998 0249 5E       		.sleb128 -34
+ 1999 024a 0E       		.uleb128 0xe
+ 2000 024b 9E000000 		.4byte	.LASF34
+ 2001 024f 01       		.byte	0x1
+ 2002 0250 3301     		.2byte	0x133
+ 2003 0252 8D000000 		.4byte	0x8d
+ 2004 0256 02       		.uleb128 0x2
+ 2005 0257 91       		.byte	0x91
+ 2006 0258 5C       		.sleb128 -36
+ 2007 0259 09       		.uleb128 0x9
+ 2008 025a 0A000000 		.4byte	.LBB5
+ 2009 025e B2000000 		.4byte	.LBE5-.LBB5
+ 2010 0262 8D020000 		.4byte	0x28d
+ 2011 0266 11       		.uleb128 0x11
+ 2012 0267 6900     		.ascii	"i\000"
+ 2013 0269 01       		.byte	0x1
+ 2014 026a 1D01     		.2byte	0x11d
+ 2015 026c 68000000 		.4byte	0x68
+ 2016 0270 02       		.uleb128 0x2
+ 2017 0271 91       		.byte	0x91
+ 2018 0272 6C       		.sleb128 -20
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 45
+
+
+ 2019 0273 0B       		.uleb128 0xb
+ 2020 0274 18000000 		.4byte	.LBB6
+ 2021 0278 7C000000 		.4byte	.LBE6-.LBB6
+ 2022 027c 0E       		.uleb128 0xe
+ 2023 027d B6010000 		.4byte	.LASF35
+ 2024 0281 01       		.byte	0x1
+ 2025 0282 1F01     		.2byte	0x11f
+ 2026 0284 AC000000 		.4byte	0xac
+ 2027 0288 02       		.uleb128 0x2
+ 2028 0289 91       		.byte	0x91
+ 2029 028a 60       		.sleb128 -32
+ 2030 028b 00       		.byte	0
+ 2031 028c 00       		.byte	0
+ 2032 028d 09       		.uleb128 0x9
+ 2033 028e E0000000 		.4byte	.LBB7
+ 2034 0292 70000000 		.4byte	.LBE7-.LBB7
+ 2035 0296 A8020000 		.4byte	0x2a8
+ 2036 029a 11       		.uleb128 0x11
+ 2037 029b 6900     		.ascii	"i\000"
+ 2038 029d 01       		.byte	0x1
+ 2039 029e 2801     		.2byte	0x128
+ 2040 02a0 81000000 		.4byte	0x81
+ 2041 02a4 02       		.uleb128 0x2
+ 2042 02a5 91       		.byte	0x91
+ 2043 02a6 6B       		.sleb128 -21
+ 2044 02a7 00       		.byte	0
+ 2045 02a8 0B       		.uleb128 0xb
+ 2046 02a9 50010000 		.4byte	.LBB8
+ 2047 02ad 70000000 		.4byte	.LBE8-.LBB8
+ 2048 02b1 11       		.uleb128 0x11
+ 2049 02b2 6900     		.ascii	"i\000"
+ 2050 02b4 01       		.byte	0x1
+ 2051 02b5 2D01     		.2byte	0x12d
+ 2052 02b7 81000000 		.4byte	0x81
+ 2053 02bb 02       		.uleb128 0x2
+ 2054 02bc 91       		.byte	0x91
+ 2055 02bd 6A       		.sleb128 -22
+ 2056 02be 00       		.byte	0
+ 2057 02bf 00       		.byte	0
+ 2058 02c0 12       		.uleb128 0x12
+ 2059 02c1 AC000000 		.4byte	0xac
+ 2060 02c5 D1020000 		.4byte	0x2d1
+ 2061 02c9 13       		.uleb128 0x13
+ 2062 02ca C1000000 		.4byte	0xc1
+ 2063 02ce 8902     		.2byte	0x289
+ 2064 02d0 00       		.byte	0
+ 2065 02d1 12       		.uleb128 0x12
+ 2066 02d2 AC000000 		.4byte	0xac
+ 2067 02d6 E1020000 		.4byte	0x2e1
+ 2068 02da 14       		.uleb128 0x14
+ 2069 02db C1000000 		.4byte	0xc1
+ 2070 02df 04       		.byte	0x4
+ 2071 02e0 00       		.byte	0
+ 2072 02e1 12       		.uleb128 0x12
+ 2073 02e2 AC000000 		.4byte	0xac
+ 2074 02e6 F1020000 		.4byte	0x2f1
+ 2075 02ea 14       		.uleb128 0x14
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 46
+
+
+ 2076 02eb C1000000 		.4byte	0xc1
+ 2077 02ef 03       		.byte	0x3
+ 2078 02f0 00       		.byte	0
+ 2079 02f1 15       		.uleb128 0x15
+ 2080 02f2 6B030000 		.4byte	.LASF50
+ 2081 02f6 01       		.byte	0x1
+ 2082 02f7 4301     		.2byte	0x143
+ 2083 02f9 AC000000 		.4byte	0xac
+ 2084 02fd 00000000 		.4byte	.LFB71
+ 2085 0301 1C020000 		.4byte	.LFE71-.LFB71
+ 2086 0305 01       		.uleb128 0x1
+ 2087 0306 9C       		.byte	0x9c
+ 2088 0307 4D040000 		.4byte	0x44d
+ 2089 030b 16       		.uleb128 0x16
+ 2090 030c BD020000 		.4byte	.LASF36
+ 2091 0310 01       		.byte	0x1
+ 2092 0311 4301     		.2byte	0x143
+ 2093 0313 68000000 		.4byte	0x68
+ 2094 0317 03       		.uleb128 0x3
+ 2095 0318 91       		.byte	0x91
+ 2096 0319 F47E     		.sleb128 -140
+ 2097 031b 16       		.uleb128 0x16
+ 2098 031c 81030000 		.4byte	.LASF37
+ 2099 0320 01       		.byte	0x1
+ 2100 0321 4301     		.2byte	0x143
+ 2101 0323 68000000 		.4byte	0x68
+ 2102 0327 03       		.uleb128 0x3
+ 2103 0328 91       		.byte	0x91
+ 2104 0329 F07E     		.sleb128 -144
+ 2105 032b 16       		.uleb128 0x16
+ 2106 032c 69010000 		.4byte	.LASF38
+ 2107 0330 01       		.byte	0x1
+ 2108 0331 4301     		.2byte	0x143
+ 2109 0333 68000000 		.4byte	0x68
+ 2110 0337 03       		.uleb128 0x3
+ 2111 0338 91       		.byte	0x91
+ 2112 0339 EC7E     		.sleb128 -148
+ 2113 033b 16       		.uleb128 0x16
+ 2114 033c CE020000 		.4byte	.LASF39
+ 2115 0340 01       		.byte	0x1
+ 2116 0341 4301     		.2byte	0x143
+ 2117 0343 4D040000 		.4byte	0x44d
+ 2118 0347 03       		.uleb128 0x3
+ 2119 0348 91       		.byte	0x91
+ 2120 0349 E87E     		.sleb128 -152
+ 2121 034b 11       		.uleb128 0x11
+ 2122 034c 6B00     		.ascii	"k\000"
+ 2123 034e 01       		.byte	0x1
+ 2124 034f 4501     		.2byte	0x145
+ 2125 0351 68000000 		.4byte	0x68
+ 2126 0355 02       		.uleb128 0x2
+ 2127 0356 91       		.byte	0x91
+ 2128 0357 44       		.sleb128 -60
+ 2129 0358 17       		.uleb128 0x17
+ 2130 0359 6900     		.ascii	"i\000"
+ 2131 035b 01       		.byte	0x1
+ 2132 035c 4601     		.2byte	0x146
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 47
+
+
+ 2133 035e 68000000 		.4byte	0x68
+ 2134 0362 0E       		.uleb128 0xe
+ 2135 0363 AD020000 		.4byte	.LASF40
+ 2136 0367 01       		.byte	0x1
+ 2137 0368 4701     		.2byte	0x147
+ 2138 036a AC000000 		.4byte	0xac
+ 2139 036e 02       		.uleb128 0x2
+ 2140 036f 91       		.byte	0x91
+ 2141 0370 48       		.sleb128 -56
+ 2142 0371 0E       		.uleb128 0xe
+ 2143 0372 E7010000 		.4byte	.LASF41
+ 2144 0376 01       		.byte	0x1
+ 2145 0377 4801     		.2byte	0x148
+ 2146 0379 AC000000 		.4byte	0xac
+ 2147 037d 03       		.uleb128 0x3
+ 2148 037e 91       		.byte	0x91
+ 2149 037f B87F     		.sleb128 -72
+ 2150 0381 0E       		.uleb128 0xe
+ 2151 0382 69020000 		.4byte	.LASF42
+ 2152 0386 01       		.byte	0x1
+ 2153 0387 4901     		.2byte	0x149
+ 2154 0389 AC000000 		.4byte	0xac
+ 2155 038d 03       		.uleb128 0x3
+ 2156 038e 91       		.byte	0x91
+ 2157 038f B07F     		.sleb128 -80
+ 2158 0391 0E       		.uleb128 0xe
+ 2159 0392 00020000 		.4byte	.LASF43
+ 2160 0396 01       		.byte	0x1
+ 2161 0397 4A01     		.2byte	0x14a
+ 2162 0399 AC000000 		.4byte	0xac
+ 2163 039d 03       		.uleb128 0x3
+ 2164 039e 91       		.byte	0x91
+ 2165 039f A87F     		.sleb128 -88
+ 2166 03a1 0E       		.uleb128 0xe
+ 2167 03a2 FA010000 		.4byte	.LASF44
+ 2168 03a6 01       		.byte	0x1
+ 2169 03a7 4B01     		.2byte	0x14b
+ 2170 03a9 AC000000 		.4byte	0xac
+ 2171 03ad 03       		.uleb128 0x3
+ 2172 03ae 91       		.byte	0x91
+ 2173 03af A07F     		.sleb128 -96
+ 2174 03b1 11       		.uleb128 0x11
+ 2175 03b2 713000   		.ascii	"q0\000"
+ 2176 03b5 01       		.byte	0x1
+ 2177 03b6 4C01     		.2byte	0x14c
+ 2178 03b8 AC000000 		.4byte	0xac
+ 2179 03bc 03       		.uleb128 0x3
+ 2180 03bd 91       		.byte	0x91
+ 2181 03be 987F     		.sleb128 -104
+ 2182 03c0 11       		.uleb128 0x11
+ 2183 03c1 713100   		.ascii	"q1\000"
+ 2184 03c4 01       		.byte	0x1
+ 2185 03c5 4D01     		.2byte	0x14d
+ 2186 03c7 AC000000 		.4byte	0xac
+ 2187 03cb 02       		.uleb128 0x2
+ 2188 03cc 91       		.byte	0x91
+ 2189 03cd 68       		.sleb128 -24
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 48
+
+
+ 2190 03ce 11       		.uleb128 0x11
+ 2191 03cf 713200   		.ascii	"q2\000"
+ 2192 03d2 01       		.byte	0x1
+ 2193 03d3 4E01     		.2byte	0x14e
+ 2194 03d5 AC000000 		.4byte	0xac
+ 2195 03d9 02       		.uleb128 0x2
+ 2196 03da 91       		.byte	0x91
+ 2197 03db 60       		.sleb128 -32
+ 2198 03dc 0E       		.uleb128 0xe
+ 2199 03dd 45030000 		.4byte	.LASF45
+ 2200 03e1 01       		.byte	0x1
+ 2201 03e2 4F01     		.2byte	0x14f
+ 2202 03e4 AC000000 		.4byte	0xac
+ 2203 03e8 03       		.uleb128 0x3
+ 2204 03e9 91       		.byte	0x91
+ 2205 03ea F87E     		.sleb128 -136
+ 2206 03ec 0E       		.uleb128 0xe
+ 2207 03ed B1010000 		.4byte	.LASF46
+ 2208 03f1 01       		.byte	0x1
+ 2209 03f2 5001     		.2byte	0x150
+ 2210 03f4 AC000000 		.4byte	0xac
+ 2211 03f8 03       		.uleb128 0x3
+ 2212 03f9 91       		.byte	0x91
+ 2213 03fa 887F     		.sleb128 -120
+ 2214 03fc 0E       		.uleb128 0xe
+ 2215 03fd 64020000 		.4byte	.LASF47
+ 2216 0401 01       		.byte	0x1
+ 2217 0402 5101     		.2byte	0x151
+ 2218 0404 AC000000 		.4byte	0xac
+ 2219 0408 03       		.uleb128 0x3
+ 2220 0409 91       		.byte	0x91
+ 2221 040a 807F     		.sleb128 -128
+ 2222 040c 0E       		.uleb128 0xe
+ 2223 040d D3020000 		.4byte	.LASF48
+ 2224 0411 01       		.byte	0x1
+ 2225 0412 5301     		.2byte	0x153
+ 2226 0414 AC000000 		.4byte	0xac
+ 2227 0418 02       		.uleb128 0x2
+ 2228 0419 91       		.byte	0x91
+ 2229 041a 50       		.sleb128 -48
+ 2230 041b 0B       		.uleb128 0xb
+ 2231 041c F8000000 		.4byte	.LBB9
+ 2232 0420 70000000 		.4byte	.LBE9-.LBB9
+ 2233 0424 11       		.uleb128 0x11
+ 2234 0425 6900     		.ascii	"i\000"
+ 2235 0427 01       		.byte	0x1
+ 2236 0428 5F01     		.2byte	0x15f
+ 2237 042a 8D000000 		.4byte	0x8d
+ 2238 042e 02       		.uleb128 0x2
+ 2239 042f 91       		.byte	0x91
+ 2240 0430 5E       		.sleb128 -34
+ 2241 0431 0B       		.uleb128 0xb
+ 2242 0432 00010000 		.4byte	.LBB10
+ 2243 0436 54000000 		.4byte	.LBE10-.LBB10
+ 2244 043a 0E       		.uleb128 0xe
+ 2245 043b 97010000 		.4byte	.LASF49
+ 2246 043f 01       		.byte	0x1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 49
+
+
+ 2247 0440 6101     		.2byte	0x161
+ 2248 0442 AC000000 		.4byte	0xac
+ 2249 0446 03       		.uleb128 0x3
+ 2250 0447 91       		.byte	0x91
+ 2251 0448 907F     		.sleb128 -112
+ 2252 044a 00       		.byte	0
+ 2253 044b 00       		.byte	0
+ 2254 044c 00       		.byte	0
+ 2255 044d 18       		.uleb128 0x18
+ 2256 044e 04       		.byte	0x4
+ 2257 044f AC000000 		.4byte	0xac
+ 2258 0453 15       		.uleb128 0x15
+ 2259 0454 86020000 		.4byte	.LASF51
+ 2260 0458 01       		.byte	0x1
+ 2261 0459 7401     		.2byte	0x174
+ 2262 045b 8D000000 		.4byte	0x8d
+ 2263 045f 00000000 		.4byte	.LFB72
+ 2264 0463 64000000 		.4byte	.LFE72-.LFB72
+ 2265 0467 01       		.uleb128 0x1
+ 2266 0468 9C       		.byte	0x9c
+ 2267 0469 C1040000 		.4byte	0x4c1
+ 2268 046d 16       		.uleb128 0x16
+ 2269 046e A3020000 		.4byte	.LASF52
+ 2270 0472 01       		.byte	0x1
+ 2271 0473 7401     		.2byte	0x174
+ 2272 0475 4D040000 		.4byte	0x44d
+ 2273 0479 02       		.uleb128 0x2
+ 2274 047a 91       		.byte	0x91
+ 2275 047b 5C       		.sleb128 -36
+ 2276 047c 16       		.uleb128 0x16
+ 2277 047d 2D030000 		.4byte	.LASF53
+ 2278 0481 01       		.byte	0x1
+ 2279 0482 7401     		.2byte	0x174
+ 2280 0484 81000000 		.4byte	0x81
+ 2281 0488 02       		.uleb128 0x2
+ 2282 0489 91       		.byte	0x91
+ 2283 048a 5B       		.sleb128 -37
+ 2284 048b 0E       		.uleb128 0xe
+ 2285 048c D2010000 		.4byte	.LASF54
+ 2286 0490 01       		.byte	0x1
+ 2287 0491 7601     		.2byte	0x176
+ 2288 0493 AC000000 		.4byte	0xac
+ 2289 0497 02       		.uleb128 0x2
+ 2290 0498 91       		.byte	0x91
+ 2291 0499 68       		.sleb128 -24
+ 2292 049a 0E       		.uleb128 0xe
+ 2293 049b 00000000 		.4byte	.LASF55
+ 2294 049f 01       		.byte	0x1
+ 2295 04a0 7701     		.2byte	0x177
+ 2296 04a2 8D000000 		.4byte	0x8d
+ 2297 04a6 02       		.uleb128 0x2
+ 2298 04a7 91       		.byte	0x91
+ 2299 04a8 66       		.sleb128 -26
+ 2300 04a9 0B       		.uleb128 0xb
+ 2301 04aa 18000000 		.4byte	.LBB11
+ 2302 04ae 42000000 		.4byte	.LBE11-.LBB11
+ 2303 04b2 11       		.uleb128 0x11
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 50
+
+
+ 2304 04b3 6900     		.ascii	"i\000"
+ 2305 04b5 01       		.byte	0x1
+ 2306 04b6 7801     		.2byte	0x178
+ 2307 04b8 8D000000 		.4byte	0x8d
+ 2308 04bc 02       		.uleb128 0x2
+ 2309 04bd 91       		.byte	0x91
+ 2310 04be 64       		.sleb128 -28
+ 2311 04bf 00       		.byte	0
+ 2312 04c0 00       		.byte	0
+ 2313 04c1 10       		.uleb128 0x10
+ 2314 04c2 14030000 		.4byte	.LASF56
+ 2315 04c6 01       		.byte	0x1
+ 2316 04c7 8701     		.2byte	0x187
+ 2317 04c9 00000000 		.4byte	.LFB73
+ 2318 04cd A0010000 		.4byte	.LFE73-.LFB73
+ 2319 04d1 01       		.uleb128 0x1
+ 2320 04d2 9C       		.byte	0x9c
+ 2321 04d3 F4040000 		.4byte	0x4f4
+ 2322 04d7 19       		.uleb128 0x19
+ 2323 04d8 6C6F00   		.ascii	"lo\000"
+ 2324 04db 01       		.byte	0x1
+ 2325 04dc 8701     		.2byte	0x187
+ 2326 04de 68000000 		.4byte	0x68
+ 2327 04e2 02       		.uleb128 0x2
+ 2328 04e3 91       		.byte	0x91
+ 2329 04e4 74       		.sleb128 -12
+ 2330 04e5 19       		.uleb128 0x19
+ 2331 04e6 686900   		.ascii	"hi\000"
+ 2332 04e9 01       		.byte	0x1
+ 2333 04ea 8701     		.2byte	0x187
+ 2334 04ec 68000000 		.4byte	0x68
+ 2335 04f0 02       		.uleb128 0x2
+ 2336 04f1 91       		.byte	0x91
+ 2337 04f2 70       		.sleb128 -16
+ 2338 04f3 00       		.byte	0
+ 2339 04f4 1A       		.uleb128 0x1a
+ 2340 04f5 74030000 		.4byte	.LASF57
+ 2341 04f9 05       		.byte	0x5
+ 2342 04fa 1207     		.2byte	0x712
+ 2343 04fc 00050000 		.4byte	0x500
+ 2344 0500 1B       		.uleb128 0x1b
+ 2345 0501 76000000 		.4byte	0x76
+ 2346 0505 12       		.uleb128 0x12
+ 2347 0506 B3000000 		.4byte	0xb3
+ 2348 050a 15050000 		.4byte	0x515
+ 2349 050e 14       		.uleb128 0x14
+ 2350 050f C1000000 		.4byte	0xc1
+ 2351 0513 0F       		.byte	0xf
+ 2352 0514 00       		.byte	0
+ 2353 0515 1C       		.uleb128 0x1c
+ 2354 0516 5A010000 		.4byte	.LASF58
+ 2355 051a 01       		.byte	0x1
+ 2356 051b 18       		.byte	0x18
+ 2357 051c 05050000 		.4byte	0x505
+ 2358 0520 05       		.uleb128 0x5
+ 2359 0521 03       		.byte	0x3
+ 2360 0522 00000000 		.4byte	TransmitBuffer
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 51
+
+
+ 2361 0526 1C       		.uleb128 0x1c
+ 2362 0527 97000000 		.4byte	.LASF59
+ 2363 052b 01       		.byte	0x1
+ 2364 052c 1A       		.byte	0x1a
+ 2365 052d 8D000000 		.4byte	0x8d
+ 2366 0531 05       		.uleb128 0x5
+ 2367 0532 03       		.byte	0x3
+ 2368 0533 00000000 		.4byte	Output
+ 2369 0537 12       		.uleb128 0x12
+ 2370 0538 99000000 		.4byte	0x99
+ 2371 053c 48050000 		.4byte	0x548
+ 2372 0540 13       		.uleb128 0x13
+ 2373 0541 C1000000 		.4byte	0xc1
+ 2374 0545 8902     		.2byte	0x289
+ 2375 0547 00       		.byte	0
+ 2376 0548 1C       		.uleb128 0x1c
+ 2377 0549 27030000 		.4byte	.LASF60
+ 2378 054d 01       		.byte	0x1
+ 2379 054e 1B       		.byte	0x1b
+ 2380 054f 37050000 		.4byte	0x537
+ 2381 0553 05       		.uleb128 0x5
+ 2382 0554 03       		.byte	0x3
+ 2383 0555 00000000 		.4byte	array
+ 2384 0559 12       		.uleb128 0x12
+ 2385 055a 68000000 		.4byte	0x68
+ 2386 055e 69050000 		.4byte	0x569
+ 2387 0562 14       		.uleb128 0x14
+ 2388 0563 C1000000 		.4byte	0xc1
+ 2389 0567 04       		.byte	0x4
+ 2390 0568 00       		.byte	0
+ 2391 0569 1C       		.uleb128 0x1c
+ 2392 056a 4F030000 		.4byte	.LASF61
+ 2393 056e 01       		.byte	0x1
+ 2394 056f 1D       		.byte	0x1d
+ 2395 0570 59050000 		.4byte	0x559
+ 2396 0574 05       		.uleb128 0x5
+ 2397 0575 03       		.byte	0x3
+ 2398 0576 00000000 		.4byte	loFrequency
+ 2399 057a 12       		.uleb128 0x12
+ 2400 057b 68000000 		.4byte	0x68
+ 2401 057f 8A050000 		.4byte	0x58a
+ 2402 0583 14       		.uleb128 0x14
+ 2403 0584 C1000000 		.4byte	0xc1
+ 2404 0588 03       		.byte	0x3
+ 2405 0589 00       		.byte	0
+ 2406 058a 1C       		.uleb128 0x1c
+ 2407 058b DB010000 		.4byte	.LASF62
+ 2408 058f 01       		.byte	0x1
+ 2409 0590 1E       		.byte	0x1e
+ 2410 0591 7A050000 		.4byte	0x57a
+ 2411 0595 05       		.uleb128 0x5
+ 2412 0596 03       		.byte	0x3
+ 2413 0597 00000000 		.4byte	hiFrequency
+ 2414 059b 00       		.byte	0
+ 2415              		.section	.debug_abbrev,"",%progbits
+ 2416              	.Ldebug_abbrev0:
+ 2417 0000 01       		.uleb128 0x1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 52
+
+
+ 2418 0001 11       		.uleb128 0x11
+ 2419 0002 01       		.byte	0x1
+ 2420 0003 25       		.uleb128 0x25
+ 2421 0004 0E       		.uleb128 0xe
+ 2422 0005 13       		.uleb128 0x13
+ 2423 0006 0B       		.uleb128 0xb
+ 2424 0007 03       		.uleb128 0x3
+ 2425 0008 0E       		.uleb128 0xe
+ 2426 0009 1B       		.uleb128 0x1b
+ 2427 000a 0E       		.uleb128 0xe
+ 2428 000b 55       		.uleb128 0x55
+ 2429 000c 17       		.uleb128 0x17
+ 2430 000d 11       		.uleb128 0x11
+ 2431 000e 01       		.uleb128 0x1
+ 2432 000f 10       		.uleb128 0x10
+ 2433 0010 17       		.uleb128 0x17
+ 2434 0011 00       		.byte	0
+ 2435 0012 00       		.byte	0
+ 2436 0013 02       		.uleb128 0x2
+ 2437 0014 24       		.uleb128 0x24
+ 2438 0015 00       		.byte	0
+ 2439 0016 0B       		.uleb128 0xb
+ 2440 0017 0B       		.uleb128 0xb
+ 2441 0018 3E       		.uleb128 0x3e
+ 2442 0019 0B       		.uleb128 0xb
+ 2443 001a 03       		.uleb128 0x3
+ 2444 001b 0E       		.uleb128 0xe
+ 2445 001c 00       		.byte	0
+ 2446 001d 00       		.byte	0
+ 2447 001e 03       		.uleb128 0x3
+ 2448 001f 16       		.uleb128 0x16
+ 2449 0020 00       		.byte	0
+ 2450 0021 03       		.uleb128 0x3
+ 2451 0022 0E       		.uleb128 0xe
+ 2452 0023 3A       		.uleb128 0x3a
+ 2453 0024 0B       		.uleb128 0xb
+ 2454 0025 3B       		.uleb128 0x3b
+ 2455 0026 0B       		.uleb128 0xb
+ 2456 0027 49       		.uleb128 0x49
+ 2457 0028 13       		.uleb128 0x13
+ 2458 0029 00       		.byte	0
+ 2459 002a 00       		.byte	0
+ 2460 002b 04       		.uleb128 0x4
+ 2461 002c 24       		.uleb128 0x24
+ 2462 002d 00       		.byte	0
+ 2463 002e 0B       		.uleb128 0xb
+ 2464 002f 0B       		.uleb128 0xb
+ 2465 0030 3E       		.uleb128 0x3e
+ 2466 0031 0B       		.uleb128 0xb
+ 2467 0032 03       		.uleb128 0x3
+ 2468 0033 08       		.uleb128 0x8
+ 2469 0034 00       		.byte	0
+ 2470 0035 00       		.byte	0
+ 2471 0036 05       		.uleb128 0x5
+ 2472 0037 16       		.uleb128 0x16
+ 2473 0038 00       		.byte	0
+ 2474 0039 03       		.uleb128 0x3
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 53
+
+
+ 2475 003a 0E       		.uleb128 0xe
+ 2476 003b 3A       		.uleb128 0x3a
+ 2477 003c 0B       		.uleb128 0xb
+ 2478 003d 3B       		.uleb128 0x3b
+ 2479 003e 05       		.uleb128 0x5
+ 2480 003f 49       		.uleb128 0x49
+ 2481 0040 13       		.uleb128 0x13
+ 2482 0041 00       		.byte	0
+ 2483 0042 00       		.byte	0
+ 2484 0043 06       		.uleb128 0x6
+ 2485 0044 2E       		.uleb128 0x2e
+ 2486 0045 00       		.byte	0
+ 2487 0046 3F       		.uleb128 0x3f
+ 2488 0047 19       		.uleb128 0x19
+ 2489 0048 03       		.uleb128 0x3
+ 2490 0049 0E       		.uleb128 0xe
+ 2491 004a 3A       		.uleb128 0x3a
+ 2492 004b 0B       		.uleb128 0xb
+ 2493 004c 3B       		.uleb128 0x3b
+ 2494 004d 0B       		.uleb128 0xb
+ 2495 004e 27       		.uleb128 0x27
+ 2496 004f 19       		.uleb128 0x19
+ 2497 0050 11       		.uleb128 0x11
+ 2498 0051 01       		.uleb128 0x1
+ 2499 0052 12       		.uleb128 0x12
+ 2500 0053 06       		.uleb128 0x6
+ 2501 0054 40       		.uleb128 0x40
+ 2502 0055 18       		.uleb128 0x18
+ 2503 0056 9742     		.uleb128 0x2117
+ 2504 0058 19       		.uleb128 0x19
+ 2505 0059 00       		.byte	0
+ 2506 005a 00       		.byte	0
+ 2507 005b 07       		.uleb128 0x7
+ 2508 005c 2E       		.uleb128 0x2e
+ 2509 005d 01       		.byte	0x1
+ 2510 005e 3F       		.uleb128 0x3f
+ 2511 005f 19       		.uleb128 0x19
+ 2512 0060 03       		.uleb128 0x3
+ 2513 0061 0E       		.uleb128 0xe
+ 2514 0062 3A       		.uleb128 0x3a
+ 2515 0063 0B       		.uleb128 0xb
+ 2516 0064 3B       		.uleb128 0x3b
+ 2517 0065 0B       		.uleb128 0xb
+ 2518 0066 49       		.uleb128 0x49
+ 2519 0067 13       		.uleb128 0x13
+ 2520 0068 11       		.uleb128 0x11
+ 2521 0069 01       		.uleb128 0x1
+ 2522 006a 12       		.uleb128 0x12
+ 2523 006b 06       		.uleb128 0x6
+ 2524 006c 40       		.uleb128 0x40
+ 2525 006d 18       		.uleb128 0x18
+ 2526 006e 9642     		.uleb128 0x2116
+ 2527 0070 19       		.uleb128 0x19
+ 2528 0071 01       		.uleb128 0x1
+ 2529 0072 13       		.uleb128 0x13
+ 2530 0073 00       		.byte	0
+ 2531 0074 00       		.byte	0
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 54
+
+
+ 2532 0075 08       		.uleb128 0x8
+ 2533 0076 34       		.uleb128 0x34
+ 2534 0077 00       		.byte	0
+ 2535 0078 03       		.uleb128 0x3
+ 2536 0079 08       		.uleb128 0x8
+ 2537 007a 3A       		.uleb128 0x3a
+ 2538 007b 0B       		.uleb128 0xb
+ 2539 007c 3B       		.uleb128 0x3b
+ 2540 007d 0B       		.uleb128 0xb
+ 2541 007e 49       		.uleb128 0x49
+ 2542 007f 13       		.uleb128 0x13
+ 2543 0080 02       		.uleb128 0x2
+ 2544 0081 18       		.uleb128 0x18
+ 2545 0082 00       		.byte	0
+ 2546 0083 00       		.byte	0
+ 2547 0084 09       		.uleb128 0x9
+ 2548 0085 0B       		.uleb128 0xb
+ 2549 0086 01       		.byte	0x1
+ 2550 0087 11       		.uleb128 0x11
+ 2551 0088 01       		.uleb128 0x1
+ 2552 0089 12       		.uleb128 0x12
+ 2553 008a 06       		.uleb128 0x6
+ 2554 008b 01       		.uleb128 0x1
+ 2555 008c 13       		.uleb128 0x13
+ 2556 008d 00       		.byte	0
+ 2557 008e 00       		.byte	0
+ 2558 008f 0A       		.uleb128 0xa
+ 2559 0090 34       		.uleb128 0x34
+ 2560 0091 00       		.byte	0
+ 2561 0092 03       		.uleb128 0x3
+ 2562 0093 0E       		.uleb128 0xe
+ 2563 0094 3A       		.uleb128 0x3a
+ 2564 0095 0B       		.uleb128 0xb
+ 2565 0096 3B       		.uleb128 0x3b
+ 2566 0097 0B       		.uleb128 0xb
+ 2567 0098 49       		.uleb128 0x49
+ 2568 0099 13       		.uleb128 0x13
+ 2569 009a 02       		.uleb128 0x2
+ 2570 009b 18       		.uleb128 0x18
+ 2571 009c 00       		.byte	0
+ 2572 009d 00       		.byte	0
+ 2573 009e 0B       		.uleb128 0xb
+ 2574 009f 0B       		.uleb128 0xb
+ 2575 00a0 01       		.byte	0x1
+ 2576 00a1 11       		.uleb128 0x11
+ 2577 00a2 01       		.uleb128 0x1
+ 2578 00a3 12       		.uleb128 0x12
+ 2579 00a4 06       		.uleb128 0x6
+ 2580 00a5 00       		.byte	0
+ 2581 00a6 00       		.byte	0
+ 2582 00a7 0C       		.uleb128 0xc
+ 2583 00a8 2E       		.uleb128 0x2e
+ 2584 00a9 01       		.byte	0x1
+ 2585 00aa 3F       		.uleb128 0x3f
+ 2586 00ab 19       		.uleb128 0x19
+ 2587 00ac 03       		.uleb128 0x3
+ 2588 00ad 0E       		.uleb128 0xe
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 55
+
+
+ 2589 00ae 3A       		.uleb128 0x3a
+ 2590 00af 0B       		.uleb128 0xb
+ 2591 00b0 3B       		.uleb128 0x3b
+ 2592 00b1 0B       		.uleb128 0xb
+ 2593 00b2 27       		.uleb128 0x27
+ 2594 00b3 19       		.uleb128 0x19
+ 2595 00b4 11       		.uleb128 0x11
+ 2596 00b5 01       		.uleb128 0x1
+ 2597 00b6 12       		.uleb128 0x12
+ 2598 00b7 06       		.uleb128 0x6
+ 2599 00b8 40       		.uleb128 0x40
+ 2600 00b9 18       		.uleb128 0x18
+ 2601 00ba 9642     		.uleb128 0x2116
+ 2602 00bc 19       		.uleb128 0x19
+ 2603 00bd 01       		.uleb128 0x1
+ 2604 00be 13       		.uleb128 0x13
+ 2605 00bf 00       		.byte	0
+ 2606 00c0 00       		.byte	0
+ 2607 00c1 0D       		.uleb128 0xd
+ 2608 00c2 05       		.uleb128 0x5
+ 2609 00c3 00       		.byte	0
+ 2610 00c4 03       		.uleb128 0x3
+ 2611 00c5 0E       		.uleb128 0xe
+ 2612 00c6 3A       		.uleb128 0x3a
+ 2613 00c7 0B       		.uleb128 0xb
+ 2614 00c8 3B       		.uleb128 0x3b
+ 2615 00c9 0B       		.uleb128 0xb
+ 2616 00ca 49       		.uleb128 0x49
+ 2617 00cb 13       		.uleb128 0x13
+ 2618 00cc 02       		.uleb128 0x2
+ 2619 00cd 18       		.uleb128 0x18
+ 2620 00ce 00       		.byte	0
+ 2621 00cf 00       		.byte	0
+ 2622 00d0 0E       		.uleb128 0xe
+ 2623 00d1 34       		.uleb128 0x34
+ 2624 00d2 00       		.byte	0
+ 2625 00d3 03       		.uleb128 0x3
+ 2626 00d4 0E       		.uleb128 0xe
+ 2627 00d5 3A       		.uleb128 0x3a
+ 2628 00d6 0B       		.uleb128 0xb
+ 2629 00d7 3B       		.uleb128 0x3b
+ 2630 00d8 05       		.uleb128 0x5
+ 2631 00d9 49       		.uleb128 0x49
+ 2632 00da 13       		.uleb128 0x13
+ 2633 00db 02       		.uleb128 0x2
+ 2634 00dc 18       		.uleb128 0x18
+ 2635 00dd 00       		.byte	0
+ 2636 00de 00       		.byte	0
+ 2637 00df 0F       		.uleb128 0xf
+ 2638 00e0 2E       		.uleb128 0x2e
+ 2639 00e1 00       		.byte	0
+ 2640 00e2 3F       		.uleb128 0x3f
+ 2641 00e3 19       		.uleb128 0x19
+ 2642 00e4 03       		.uleb128 0x3
+ 2643 00e5 0E       		.uleb128 0xe
+ 2644 00e6 3A       		.uleb128 0x3a
+ 2645 00e7 0B       		.uleb128 0xb
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 56
+
+
+ 2646 00e8 3B       		.uleb128 0x3b
+ 2647 00e9 05       		.uleb128 0x5
+ 2648 00ea 27       		.uleb128 0x27
+ 2649 00eb 19       		.uleb128 0x19
+ 2650 00ec 11       		.uleb128 0x11
+ 2651 00ed 01       		.uleb128 0x1
+ 2652 00ee 12       		.uleb128 0x12
+ 2653 00ef 06       		.uleb128 0x6
+ 2654 00f0 40       		.uleb128 0x40
+ 2655 00f1 18       		.uleb128 0x18
+ 2656 00f2 9642     		.uleb128 0x2116
+ 2657 00f4 19       		.uleb128 0x19
+ 2658 00f5 00       		.byte	0
+ 2659 00f6 00       		.byte	0
+ 2660 00f7 10       		.uleb128 0x10
+ 2661 00f8 2E       		.uleb128 0x2e
+ 2662 00f9 01       		.byte	0x1
+ 2663 00fa 3F       		.uleb128 0x3f
+ 2664 00fb 19       		.uleb128 0x19
+ 2665 00fc 03       		.uleb128 0x3
+ 2666 00fd 0E       		.uleb128 0xe
+ 2667 00fe 3A       		.uleb128 0x3a
+ 2668 00ff 0B       		.uleb128 0xb
+ 2669 0100 3B       		.uleb128 0x3b
+ 2670 0101 05       		.uleb128 0x5
+ 2671 0102 27       		.uleb128 0x27
+ 2672 0103 19       		.uleb128 0x19
+ 2673 0104 11       		.uleb128 0x11
+ 2674 0105 01       		.uleb128 0x1
+ 2675 0106 12       		.uleb128 0x12
+ 2676 0107 06       		.uleb128 0x6
+ 2677 0108 40       		.uleb128 0x40
+ 2678 0109 18       		.uleb128 0x18
+ 2679 010a 9642     		.uleb128 0x2116
+ 2680 010c 19       		.uleb128 0x19
+ 2681 010d 01       		.uleb128 0x1
+ 2682 010e 13       		.uleb128 0x13
+ 2683 010f 00       		.byte	0
+ 2684 0110 00       		.byte	0
+ 2685 0111 11       		.uleb128 0x11
+ 2686 0112 34       		.uleb128 0x34
+ 2687 0113 00       		.byte	0
+ 2688 0114 03       		.uleb128 0x3
+ 2689 0115 08       		.uleb128 0x8
+ 2690 0116 3A       		.uleb128 0x3a
+ 2691 0117 0B       		.uleb128 0xb
+ 2692 0118 3B       		.uleb128 0x3b
+ 2693 0119 05       		.uleb128 0x5
+ 2694 011a 49       		.uleb128 0x49
+ 2695 011b 13       		.uleb128 0x13
+ 2696 011c 02       		.uleb128 0x2
+ 2697 011d 18       		.uleb128 0x18
+ 2698 011e 00       		.byte	0
+ 2699 011f 00       		.byte	0
+ 2700 0120 12       		.uleb128 0x12
+ 2701 0121 01       		.uleb128 0x1
+ 2702 0122 01       		.byte	0x1
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 57
+
+
+ 2703 0123 49       		.uleb128 0x49
+ 2704 0124 13       		.uleb128 0x13
+ 2705 0125 01       		.uleb128 0x1
+ 2706 0126 13       		.uleb128 0x13
+ 2707 0127 00       		.byte	0
+ 2708 0128 00       		.byte	0
+ 2709 0129 13       		.uleb128 0x13
+ 2710 012a 21       		.uleb128 0x21
+ 2711 012b 00       		.byte	0
+ 2712 012c 49       		.uleb128 0x49
+ 2713 012d 13       		.uleb128 0x13
+ 2714 012e 2F       		.uleb128 0x2f
+ 2715 012f 05       		.uleb128 0x5
+ 2716 0130 00       		.byte	0
+ 2717 0131 00       		.byte	0
+ 2718 0132 14       		.uleb128 0x14
+ 2719 0133 21       		.uleb128 0x21
+ 2720 0134 00       		.byte	0
+ 2721 0135 49       		.uleb128 0x49
+ 2722 0136 13       		.uleb128 0x13
+ 2723 0137 2F       		.uleb128 0x2f
+ 2724 0138 0B       		.uleb128 0xb
+ 2725 0139 00       		.byte	0
+ 2726 013a 00       		.byte	0
+ 2727 013b 15       		.uleb128 0x15
+ 2728 013c 2E       		.uleb128 0x2e
+ 2729 013d 01       		.byte	0x1
+ 2730 013e 3F       		.uleb128 0x3f
+ 2731 013f 19       		.uleb128 0x19
+ 2732 0140 03       		.uleb128 0x3
+ 2733 0141 0E       		.uleb128 0xe
+ 2734 0142 3A       		.uleb128 0x3a
+ 2735 0143 0B       		.uleb128 0xb
+ 2736 0144 3B       		.uleb128 0x3b
+ 2737 0145 05       		.uleb128 0x5
+ 2738 0146 27       		.uleb128 0x27
+ 2739 0147 19       		.uleb128 0x19
+ 2740 0148 49       		.uleb128 0x49
+ 2741 0149 13       		.uleb128 0x13
+ 2742 014a 11       		.uleb128 0x11
+ 2743 014b 01       		.uleb128 0x1
+ 2744 014c 12       		.uleb128 0x12
+ 2745 014d 06       		.uleb128 0x6
+ 2746 014e 40       		.uleb128 0x40
+ 2747 014f 18       		.uleb128 0x18
+ 2748 0150 9642     		.uleb128 0x2116
+ 2749 0152 19       		.uleb128 0x19
+ 2750 0153 01       		.uleb128 0x1
+ 2751 0154 13       		.uleb128 0x13
+ 2752 0155 00       		.byte	0
+ 2753 0156 00       		.byte	0
+ 2754 0157 16       		.uleb128 0x16
+ 2755 0158 05       		.uleb128 0x5
+ 2756 0159 00       		.byte	0
+ 2757 015a 03       		.uleb128 0x3
+ 2758 015b 0E       		.uleb128 0xe
+ 2759 015c 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 58
+
+
+ 2760 015d 0B       		.uleb128 0xb
+ 2761 015e 3B       		.uleb128 0x3b
+ 2762 015f 05       		.uleb128 0x5
+ 2763 0160 49       		.uleb128 0x49
+ 2764 0161 13       		.uleb128 0x13
+ 2765 0162 02       		.uleb128 0x2
+ 2766 0163 18       		.uleb128 0x18
+ 2767 0164 00       		.byte	0
+ 2768 0165 00       		.byte	0
+ 2769 0166 17       		.uleb128 0x17
+ 2770 0167 34       		.uleb128 0x34
+ 2771 0168 00       		.byte	0
+ 2772 0169 03       		.uleb128 0x3
+ 2773 016a 08       		.uleb128 0x8
+ 2774 016b 3A       		.uleb128 0x3a
+ 2775 016c 0B       		.uleb128 0xb
+ 2776 016d 3B       		.uleb128 0x3b
+ 2777 016e 05       		.uleb128 0x5
+ 2778 016f 49       		.uleb128 0x49
+ 2779 0170 13       		.uleb128 0x13
+ 2780 0171 00       		.byte	0
+ 2781 0172 00       		.byte	0
+ 2782 0173 18       		.uleb128 0x18
+ 2783 0174 0F       		.uleb128 0xf
+ 2784 0175 00       		.byte	0
+ 2785 0176 0B       		.uleb128 0xb
+ 2786 0177 0B       		.uleb128 0xb
+ 2787 0178 49       		.uleb128 0x49
+ 2788 0179 13       		.uleb128 0x13
+ 2789 017a 00       		.byte	0
+ 2790 017b 00       		.byte	0
+ 2791 017c 19       		.uleb128 0x19
+ 2792 017d 05       		.uleb128 0x5
+ 2793 017e 00       		.byte	0
+ 2794 017f 03       		.uleb128 0x3
+ 2795 0180 08       		.uleb128 0x8
+ 2796 0181 3A       		.uleb128 0x3a
+ 2797 0182 0B       		.uleb128 0xb
+ 2798 0183 3B       		.uleb128 0x3b
+ 2799 0184 05       		.uleb128 0x5
+ 2800 0185 49       		.uleb128 0x49
+ 2801 0186 13       		.uleb128 0x13
+ 2802 0187 02       		.uleb128 0x2
+ 2803 0188 18       		.uleb128 0x18
+ 2804 0189 00       		.byte	0
+ 2805 018a 00       		.byte	0
+ 2806 018b 1A       		.uleb128 0x1a
+ 2807 018c 34       		.uleb128 0x34
+ 2808 018d 00       		.byte	0
+ 2809 018e 03       		.uleb128 0x3
+ 2810 018f 0E       		.uleb128 0xe
+ 2811 0190 3A       		.uleb128 0x3a
+ 2812 0191 0B       		.uleb128 0xb
+ 2813 0192 3B       		.uleb128 0x3b
+ 2814 0193 05       		.uleb128 0x5
+ 2815 0194 49       		.uleb128 0x49
+ 2816 0195 13       		.uleb128 0x13
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 59
+
+
+ 2817 0196 3F       		.uleb128 0x3f
+ 2818 0197 19       		.uleb128 0x19
+ 2819 0198 3C       		.uleb128 0x3c
+ 2820 0199 19       		.uleb128 0x19
+ 2821 019a 00       		.byte	0
+ 2822 019b 00       		.byte	0
+ 2823 019c 1B       		.uleb128 0x1b
+ 2824 019d 35       		.uleb128 0x35
+ 2825 019e 00       		.byte	0
+ 2826 019f 49       		.uleb128 0x49
+ 2827 01a0 13       		.uleb128 0x13
+ 2828 01a1 00       		.byte	0
+ 2829 01a2 00       		.byte	0
+ 2830 01a3 1C       		.uleb128 0x1c
+ 2831 01a4 34       		.uleb128 0x34
+ 2832 01a5 00       		.byte	0
+ 2833 01a6 03       		.uleb128 0x3
+ 2834 01a7 0E       		.uleb128 0xe
+ 2835 01a8 3A       		.uleb128 0x3a
+ 2836 01a9 0B       		.uleb128 0xb
+ 2837 01aa 3B       		.uleb128 0x3b
+ 2838 01ab 0B       		.uleb128 0xb
+ 2839 01ac 49       		.uleb128 0x49
+ 2840 01ad 13       		.uleb128 0x13
+ 2841 01ae 3F       		.uleb128 0x3f
+ 2842 01af 19       		.uleb128 0x19
+ 2843 01b0 02       		.uleb128 0x2
+ 2844 01b1 18       		.uleb128 0x18
+ 2845 01b2 00       		.byte	0
+ 2846 01b3 00       		.byte	0
+ 2847 01b4 00       		.byte	0
+ 2848              		.section	.debug_aranges,"",%progbits
+ 2849 0000 64000000 		.4byte	0x64
+ 2850 0004 0200     		.2byte	0x2
+ 2851 0006 00000000 		.4byte	.Ldebug_info0
+ 2852 000a 04       		.byte	0x4
+ 2853 000b 00       		.byte	0
+ 2854 000c 0000     		.2byte	0
+ 2855 000e 0000     		.2byte	0
+ 2856 0010 00000000 		.4byte	.LFB64
+ 2857 0014 0C000000 		.4byte	.LFE64-.LFB64
+ 2858 0018 00000000 		.4byte	.LFB65
+ 2859 001c 0C000000 		.4byte	.LFE65-.LFB65
+ 2860 0020 00000000 		.4byte	.LFB66
+ 2861 0024 00040000 		.4byte	.LFE66-.LFB66
+ 2862 0028 00000000 		.4byte	.LFB67
+ 2863 002c 60000000 		.4byte	.LFE67-.LFB67
+ 2864 0030 00000000 		.4byte	.LFB68
+ 2865 0034 60000000 		.4byte	.LFE68-.LFB68
+ 2866 0038 00000000 		.4byte	.LFB69
+ 2867 003c 28000000 		.4byte	.LFE69-.LFB69
+ 2868 0040 00000000 		.4byte	.LFB70
+ 2869 0044 90020000 		.4byte	.LFE70-.LFB70
+ 2870 0048 00000000 		.4byte	.LFB71
+ 2871 004c 1C020000 		.4byte	.LFE71-.LFB71
+ 2872 0050 00000000 		.4byte	.LFB72
+ 2873 0054 64000000 		.4byte	.LFE72-.LFB72
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 60
+
+
+ 2874 0058 00000000 		.4byte	.LFB73
+ 2875 005c A0010000 		.4byte	.LFE73-.LFB73
+ 2876 0060 00000000 		.4byte	0
+ 2877 0064 00000000 		.4byte	0
+ 2878              		.section	.debug_ranges,"",%progbits
+ 2879              	.Ldebug_ranges0:
+ 2880 0000 00000000 		.4byte	.LFB64
+ 2881 0004 0C000000 		.4byte	.LFE64
+ 2882 0008 00000000 		.4byte	.LFB65
+ 2883 000c 0C000000 		.4byte	.LFE65
+ 2884 0010 00000000 		.4byte	.LFB66
+ 2885 0014 00040000 		.4byte	.LFE66
+ 2886 0018 00000000 		.4byte	.LFB67
+ 2887 001c 60000000 		.4byte	.LFE67
+ 2888 0020 00000000 		.4byte	.LFB68
+ 2889 0024 60000000 		.4byte	.LFE68
+ 2890 0028 00000000 		.4byte	.LFB69
+ 2891 002c 28000000 		.4byte	.LFE69
+ 2892 0030 00000000 		.4byte	.LFB70
+ 2893 0034 90020000 		.4byte	.LFE70
+ 2894 0038 00000000 		.4byte	.LFB71
+ 2895 003c 1C020000 		.4byte	.LFE71
+ 2896 0040 00000000 		.4byte	.LFB72
+ 2897 0044 64000000 		.4byte	.LFE72
+ 2898 0048 00000000 		.4byte	.LFB73
+ 2899 004c A0010000 		.4byte	.LFE73
+ 2900 0050 00000000 		.4byte	0
+ 2901 0054 00000000 		.4byte	0
+ 2902              		.section	.debug_line,"",%progbits
+ 2903              	.Ldebug_line0:
+ 2904 0000 9D030000 		.section	.debug_str,"MS",%progbits,1
+ 2904      02004C01 
+ 2904      00000201 
+ 2904      FB0E0D00 
+ 2904      01010101 
+ 2905              	.LASF55:
+ 2906 0000 696E6465 		.ascii	"index\000"
+ 2906      7800
+ 2907              	.LASF65:
+ 2908 0006 433A5C55 		.ascii	"C:\\Users\\riveraes\\Documents\\LaptopPublic\\Maest"
+ 2908      73657273 
+ 2908      5C726976 
+ 2908      65726165 
+ 2908      735C446F 
+ 2909 0034 7269615C 		.ascii	"ria\\MP6157_Adquisicion y procesamiento de datos\\D"
+ 2909      4D503631 
+ 2909      35375F41 
+ 2909      64717569 
+ 2909      73696369 
+ 2910 0065 75616C54 		.ascii	"ualToneMultiFrequency\\DTMF_Projects\\DTMF_TX.cydsn"
+ 2910      6F6E654D 
+ 2910      756C7469 
+ 2910      46726571 
+ 2910      75656E63 
+ 2911 0096 00       		.ascii	"\000"
+ 2912              	.LASF59:
+ 2913 0097 4F757470 		.ascii	"Output\000"
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 61
+
+
+ 2913      757400
+ 2914              	.LASF34:
+ 2915 009e 6869416D 		.ascii	"hiAmp\000"
+ 2915      7000
+ 2916              	.LASF63:
+ 2917 00a4 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2917      43313120 
+ 2917      352E342E 
+ 2917      31203230 
+ 2917      31363036 
+ 2918 00d7 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2918      20726576 
+ 2918      6973696F 
+ 2918      6E203233 
+ 2918      37373135 
+ 2919 010a 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2919      66756E63 
+ 2919      74696F6E 
+ 2919      2D736563 
+ 2919      74696F6E 
+ 2920              	.LASF28:
+ 2921 0132 496E6974 		.ascii	"InitSettings\000"
+ 2921      53657474 
+ 2921      696E6773 
+ 2921      00
+ 2922              	.LASF17:
+ 2923 013f 6C6F6E67 		.ascii	"long double\000"
+ 2923      20646F75 
+ 2923      626C6500 
+ 2924              	.LASF24:
+ 2925 014b 4B535053 		.ascii	"KSPS\000"
+ 2925      00
+ 2926              	.LASF2:
+ 2927 0150 73686F72 		.ascii	"short int\000"
+ 2927      7420696E 
+ 2927      7400
+ 2928              	.LASF58:
+ 2929 015a 5472616E 		.ascii	"TransmitBuffer\000"
+ 2929      736D6974 
+ 2929      42756666 
+ 2929      657200
+ 2930              	.LASF38:
+ 2931 0169 7453616D 		.ascii	"tSamplingRate\000"
+ 2931      706C696E 
+ 2931      67526174 
+ 2931      6500
+ 2932              	.LASF12:
+ 2933 0177 75696E74 		.ascii	"uint16\000"
+ 2933      313600
+ 2934              	.LASF13:
+ 2935 017e 696E7431 		.ascii	"int16\000"
+ 2935      3600
+ 2936              	.LASF11:
+ 2937 0184 75696E74 		.ascii	"uint8\000"
+ 2937      3800
+ 2938              	.LASF25:
+ 2939 018a 436C6F63 		.ascii	"ClockDivider\000"
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 62
+
+
+ 2939      6B446976 
+ 2939      69646572 
+ 2939      00
+ 2940              	.LASF49:
+ 2941 0197 6D646174 		.ascii	"mdata\000"
+ 2941      6100
+ 2942              	.LASF14:
+ 2943 019d 666C6F61 		.ascii	"float\000"
+ 2943      7400
+ 2944              	.LASF6:
+ 2945 01a3 6C6F6E67 		.ascii	"long long int\000"
+ 2945      206C6F6E 
+ 2945      6720696E 
+ 2945      7400
+ 2946              	.LASF46:
+ 2947 01b1 7265616C 		.ascii	"real\000"
+ 2947      00
+ 2948              	.LASF35:
+ 2949 01b6 70646174 		.ascii	"pdata\000"
+ 2949      6100
+ 2950              	.LASF4:
+ 2951 01bc 6C6F6E67 		.ascii	"long int\000"
+ 2951      20696E74 
+ 2951      00
+ 2952              	.LASF21:
+ 2953 01c5 73616D70 		.ascii	"sampleNumber\000"
+ 2953      6C654E75 
+ 2953      6D626572 
+ 2953      00
+ 2954              	.LASF54:
+ 2955 01d2 6D617856 		.ascii	"maxValue\000"
+ 2955      616C7565 
+ 2955      00
+ 2956              	.LASF62:
+ 2957 01db 68694672 		.ascii	"hiFrequency\000"
+ 2957      65717565 
+ 2957      6E637900 
+ 2958              	.LASF41:
+ 2959 01e7 6F6D6567 		.ascii	"omega\000"
+ 2959      6100
+ 2960              	.LASF32:
+ 2961 01ed 6869416D 		.ascii	"hiAmplitudes\000"
+ 2961      706C6974 
+ 2961      75646573 
+ 2961      00
+ 2962              	.LASF44:
+ 2963 01fa 636F6566 		.ascii	"coeff\000"
+ 2963      6600
+ 2964              	.LASF43:
+ 2965 0200 636F7369 		.ascii	"cosine\000"
+ 2965      6E6500
+ 2966              	.LASF1:
+ 2967 0207 756E7369 		.ascii	"unsigned char\000"
+ 2967      676E6564 
+ 2967      20636861 
+ 2967      7200
+ 2968              	.LASF31:
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 63
+
+
+ 2969 0215 6C6F416D 		.ascii	"loAmplitudes\000"
+ 2969      706C6974 
+ 2969      75646573 
+ 2969      00
+ 2970              	.LASF0:
+ 2971 0222 7369676E 		.ascii	"signed char\000"
+ 2971      65642063 
+ 2971      68617200 
+ 2972              	.LASF10:
+ 2973 022e 696E7433 		.ascii	"int32_t\000"
+ 2973      325F7400 
+ 2974              	.LASF7:
+ 2975 0236 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2975      206C6F6E 
+ 2975      6720756E 
+ 2975      7369676E 
+ 2975      65642069 
+ 2976              	.LASF8:
+ 2977 024d 756E7369 		.ascii	"unsigned int\000"
+ 2977      676E6564 
+ 2977      20696E74 
+ 2977      00
+ 2978              	.LASF20:
+ 2979 025a 55736572 		.ascii	"UserInput\000"
+ 2979      496E7075 
+ 2979      7400
+ 2980              	.LASF47:
+ 2981 0264 696D6167 		.ascii	"imag\000"
+ 2981      00
+ 2982              	.LASF42:
+ 2983 0269 73696E65 		.ascii	"sine\000"
+ 2983      00
+ 2984              	.LASF3:
+ 2985 026e 73686F72 		.ascii	"short unsigned int\000"
+ 2985      7420756E 
+ 2985      7369676E 
+ 2985      65642069 
+ 2985      6E7400
+ 2986              	.LASF29:
+ 2987 0281 44544D46 		.ascii	"DTMF\000"
+ 2987      00
+ 2988              	.LASF51:
+ 2989 0286 6765744D 		.ascii	"getMaxValue\000"
+ 2989      61785661 
+ 2989      6C756500 
+ 2990              	.LASF16:
+ 2991 0292 63686172 		.ascii	"char\000"
+ 2991      00
+ 2992              	.LASF30:
+ 2993 0297 7369676E 		.ascii	"signal\000"
+ 2993      616C00
+ 2994              	.LASF22:
+ 2995 029e 6D61696E 		.ascii	"main\000"
+ 2995      00
+ 2996              	.LASF52:
+ 2997 02a3 61727261 		.ascii	"arrayData\000"
+ 2997      79446174 
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 64
+
+
+ 2997      6100
+ 2998              	.LASF40:
+ 2999 02ad 666C6F61 		.ascii	"floatnumSamples\000"
+ 2999      746E756D 
+ 2999      53616D70 
+ 2999      6C657300 
+ 3000              	.LASF36:
+ 3001 02bd 6E756D53 		.ascii	"numSamples\000"
+ 3001      616D706C 
+ 3001      657300
+ 3002              	.LASF33:
+ 3003 02c8 6C6F416D 		.ascii	"loAmp\000"
+ 3003      7000
+ 3004              	.LASF39:
+ 3005 02ce 64617461 		.ascii	"data\000"
+ 3005      00
+ 3006              	.LASF48:
+ 3007 02d3 7363616C 		.ascii	"scalingFactor\000"
+ 3007      696E6746 
+ 3007      6163746F 
+ 3007      7200
+ 3008              	.LASF64:
+ 3009 02e1 6D61696E 		.ascii	"main.c\000"
+ 3009      2E6300
+ 3010              	.LASF23:
+ 3011 02e8 53657448 		.ascii	"SetHighFrequencyDacOutput\000"
+ 3011      69676846 
+ 3011      72657175 
+ 3011      656E6379 
+ 3011      4461634F 
+ 3012              	.LASF5:
+ 3013 0302 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3013      20756E73 
+ 3013      69676E65 
+ 3013      6420696E 
+ 3013      7400
+ 3014              	.LASF56:
+ 3015 0314 4465636F 		.ascii	"DecodeInput\000"
+ 3015      6465496E 
+ 3015      70757400 
+ 3016              	.LASF15:
+ 3017 0320 646F7562 		.ascii	"double\000"
+ 3017      6C6500
+ 3018              	.LASF60:
+ 3019 0327 61727261 		.ascii	"array\000"
+ 3019      7900
+ 3020              	.LASF53:
+ 3021 032d 73697A65 		.ascii	"size\000"
+ 3021      00
+ 3022              	.LASF9:
+ 3023 0332 5F5F696E 		.ascii	"__int32_t\000"
+ 3023      7433325F 
+ 3023      7400
+ 3024              	.LASF18:
+ 3025 033c 73697A65 		.ascii	"sizetype\000"
+ 3025      74797065 
+ 3025      00
+ARM GAS  C:\Users\riveraes\AppData\Local\Temp\cchOuINw.s 			page 65
+
+
+ 3026              	.LASF45:
+ 3027 0345 6D61676E 		.ascii	"magnitude\000"
+ 3027      69747564 
+ 3027      6500
+ 3028              	.LASF61:
+ 3029 034f 6C6F4672 		.ascii	"loFrequency\000"
+ 3029      65717565 
+ 3029      6E637900 
+ 3030              	.LASF27:
+ 3031 035b 4F757470 		.ascii	"OutputFrequency\000"
+ 3031      75744672 
+ 3031      65717565 
+ 3031      6E637900 
+ 3032              	.LASF50:
+ 3033 036b 476F6572 		.ascii	"Goertzel\000"
+ 3033      747A656C 
+ 3033      00
+ 3034              	.LASF57:
+ 3035 0374 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 3035      52784275 
+ 3035      66666572 
+ 3035      00
+ 3036              	.LASF37:
+ 3037 0381 74467265 		.ascii	"tFrequency\000"
+ 3037      7175656E 
+ 3037      637900
+ 3038              	.LASF19:
+ 3039 038c 5472616E 		.ascii	"Transmit\000"
+ 3039      736D6974 
+ 3039      00
+ 3040              	.LASF26:
+ 3041 0395 5365744C 		.ascii	"SetLowFrequencyDacOutput\000"
+ 3041      6F774672 
+ 3041      65717565 
+ 3041      6E637944 
+ 3041      61634F75 
+ 3042              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
