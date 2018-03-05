@@ -391,42 +391,50 @@ uint16 getMaxValue(double *arrayData, uint8 size)
 *******************************************************************************/
 void DecodeInput(int lo, int hi)
 {
-    // Keys 1,2,3
-    if ( (lo == loFrequency[1]) && (hi == hiFrequency[1]))
-        UART_1_PutString("1 ");
-    if ( (lo == loFrequency[1]) && (hi == hiFrequency[2]))
-        UART_1_PutString("2 ");
-    if ( (lo == loFrequency[1]) && (hi == hiFrequency[3]))
-        UART_1_PutString("3 ");
     
-    // Keys 4,5,6    
-    if ( (lo == loFrequency[2]) && (hi == hiFrequency[1]))
-        UART_1_PutString("4 ");
-    if ( (lo == loFrequency[2]) && (hi == hiFrequency[2]))
-        UART_1_PutString("5 ");
-    if ( (lo == loFrequency[2]) && (hi == hiFrequency[3]))
-        UART_1_PutString("6 ");
-    
-    // Keys 7,8,9   
-    if ( (lo == loFrequency[3]) && (hi == hiFrequency[1]))
-        UART_1_PutString("7 ");
-    if ( (lo == loFrequency[3]) && (hi == hiFrequency[2]))
-        UART_1_PutString("8 ");
-    if ( (lo == loFrequency[3]) && (hi == hiFrequency[3]))
-        UART_1_PutString("9 ");
-    
-    // Keys *,0,#    
-    if ( (lo == loFrequency[4]) && (hi == hiFrequency[1]))
-        UART_1_PutString("* ");
-    if ( (lo == loFrequency[4]) && (hi == hiFrequency[2]))
-        UART_1_PutString("0 ");
-    if ( (lo == loFrequency[4]) && (hi == hiFrequency[3]))
-        UART_1_PutString("# ");   
-    
-    // Dummy Frequencies    
-    if ( (lo == loFrequency[0]) || (hi == hiFrequency[0]) )
-        UART_1_PutString(".");
- 
+    int dataFreq = lo + hi;
+    switch(dataFreq)
+    {
+        case (loFrequency[1] + hiFrequency[1]):
+            UART_1_PutString("1 \n\r");
+            break;
+        case (loFrequency[1] + hiFrequency[2]):
+            UART_1_PutString("2 \n\r");pus
+            break;
+        case (loFrequency[1] + hiFrequency[3]):
+            UART_1_PutString("3 \n\r");
+            break;
+        case (loFrequency[2] + hiFrequency[1]):
+            UART_1_PutString("4 \n\r");
+            break;
+        case (loFrequency[2] + hiFrequency[2]):
+            UART_1_PutString("5 \n\r");
+            break;
+        case (loFrequency[2] + hiFrequency[3]):
+            UART_1_PutString("6 \n\r");
+            break;
+        case (loFrequency[3] + hiFrequency[1]):
+            UART_1_PutString("7 \n\r");
+            break;
+        case (loFrequency[3] + hiFrequency[2]):
+            UART_1_PutString("8 \n\r");
+            break;
+        case (loFrequency[3] + hiFrequency[3]):
+            UART_1_PutString("9 \n\r");
+            break;
+        case (loFrequency[4] + hiFrequency[1]):
+            UART_1_PutString("0 \n\r");
+            break;
+        case (loFrequency[4] + hiFrequency[2]):
+            UART_1_PutString("* \n\r");
+            break;
+        case (loFrequency[4] + hiFrequency[3]):
+            UART_1_PutString("# \n\r");
+            break;
+        default:
+            UART_1_PutString(".");
+            break;
+    }
 }
 
 
