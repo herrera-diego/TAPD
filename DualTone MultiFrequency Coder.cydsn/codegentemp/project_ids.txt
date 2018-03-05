@@ -1,0 +1,7 @@
+C:\Users\herreral\Documents\Masters\Tecnicas de Adquisicion y Procesamiento de Datos\DualToneMultiFrequencyCoder\DualTone MultiFrequency Coder.cydsn\DualTone MultiFrequency Coder.cyprj|4e3a4826-795f-43dd-8ae4-341310e116a4
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|91373af0-76c2-48ed-b66d-d2cad0c08bb6
+C:\Users\herreral\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|01b88f8a-1160-43a5-9c12-2e90cc852b12
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4da457b2-b671-45c6-89d1-99adad28dd4d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|e6dee2f8-c89e-46ec-a792-00b661dd3db7
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|d3234629-ff54-425b-b3e3-b39fc50ebb31
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|ac608c4c-bbb8-444c-8c14-d6895374ecf4

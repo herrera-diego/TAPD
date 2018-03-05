@@ -1,0 +1,3922 @@
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"main.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.comm	Output,2,2
+  20              		.comm	ContinuouslySendData,1,1
+  21              		.comm	SendSingleByte,1,1
+  22              		.comm	SendEmulatedData,1,1
+  23              		.comm	TransmitBuffer,16,4
+  24              		.comm	EmulatedData,1,1
+  25              		.comm	array,4000,4
+  26              		.section	.rodata
+  27              		.align	2
+  28              	.LC2:
+  29 0000 25580D0A 		.ascii	"%X\015\012\000"
+  29      00
+  30 0005 000000   		.align	2
+  31              	.LC3:
+  32 0008 25780D0A 		.ascii	"%x\015\012\000"
+  32      00
+  33              		.section	.text.Transmit,"ax",%progbits
+  34              		.align	2
+  35              		.global	Transmit
+  36              		.thumb
+  37              		.thumb_func
+  38              		.type	Transmit, %function
+  39              	Transmit:
+  40              	.LFB64:
+  41              		.file 1 "main.c"
+   1:main.c        **** /******************************************************************************
+   2:main.c        **** * Project Name		: CE95277 ADC and UART
+   3:main.c        **** * File Name			: main.c
+   4:main.c        **** * Version 			: **
+   5:main.c        **** * Device Used		: CY8C5888LTI-LP097
+   6:main.c        **** * Software Used		: PSoC Creator 3.1 SP2
+   7:main.c        **** * Compiler    		: ARM GCC 4.8.4, ARM RVDS Generic, ARM MDK Generic
+   8:main.c        **** * Related Hardware	: CY8CKIT059 PSoC 5 LP Prototyping Kit 
+   9:main.c        **** * Owner				: KLMZ
+  10:main.c        **** *
+  11:main.c        **** ********************************************************************************
+  12:main.c        **** * Copyright (2015), Cypress Semiconductor Corporation. All Rights Reserved.
+  13:main.c        **** ********************************************************************************
+  14:main.c        **** * This software is owned by Cypress Semiconductor Corporation (Cypress)
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 2
+
+
+  15:main.c        **** * and is protected by and subject to worldwide patent protection (United
+  16:main.c        **** * States and foreign), United States copyright laws and international treaty
+  17:main.c        **** * provisions. Cypress hereby grants to licensee a personal, non-exclusive,
+  18:main.c        **** * non-transferable license to copy, use, modify, create derivative works of,
+  19:main.c        **** * and compile the Cypress Source Code and derivative works for the sole
+  20:main.c        **** * purpose of creating custom software in support of licensee product to be
+  21:main.c        **** * used only in conjunction with a Cypress integrated circuit as specified in
+  22:main.c        **** * the applicable agreement. Any reproduction, modification, translation,
+  23:main.c        **** * compilation, or representation of this software except as specified above 
+  24:main.c        **** * is prohibited without the express written permission of Cypress.
+  25:main.c        **** *
+  26:main.c        **** * Disclaimer: CYPRESS MAKES NO WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, WITH 
+  27:main.c        **** * REGARD TO THIS MATERIAL, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED 
+  28:main.c        **** * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+  29:main.c        **** * Cypress reserves the right to make changes without further notice to the 
+  30:main.c        **** * materials described herein. Cypress does not assume any liability arising out 
+  31:main.c        **** * of the application or use of any product or circuit described herein. Cypress 
+  32:main.c        **** * does not authorize its products for use as critical components in life-support 
+  33:main.c        **** * systems where a malfunction or failure may reasonably be expected to result in 
+  34:main.c        **** * significant injury to the user. The inclusion of Cypress' product in a life-
+  35:main.c        **** * support systems application implies that the manufacturer assumes all risk of 
+  36:main.c        **** * such use and in doing so indemnifies Cypress against all charges. 
+  37:main.c        **** *
+  38:main.c        **** * Use of this Software may be limited by and subject to the applicable Cypress
+  39:main.c        **** * software license agreement. 
+  40:main.c        **** *******************************************************************************/
+  41:main.c        **** 
+  42:main.c        **** #include <device.h>
+  43:main.c        **** #include "stdio.h"
+  44:main.c        **** #include "math.h"
+  45:main.c        **** 
+  46:main.c        **** /* Project Defines */
+  47:main.c        **** #define FALSE  0
+  48:main.c        **** #define TRUE   1
+  49:main.c        **** #define TRANSMIT_BUFFER_SIZE  16
+  50:main.c        **** #define NUMBER_OF_SAMPLES 2000
+  51:main.c        **** #define SAMPLING_RATE 10000
+  52:main.c        **** 
+  53:main.c        ****     /* Variable to store ADC result */
+  54:main.c        ****     uint16 Output;
+  55:main.c        ****     /* Flags used to store transmit data commands */
+  56:main.c        ****     uint8 ContinuouslySendData;
+  57:main.c        ****     uint8 SendSingleByte;
+  58:main.c        ****     uint8 SendEmulatedData;
+  59:main.c        ****     /* Transmit Buffer */
+  60:main.c        ****     char TransmitBuffer[TRANSMIT_BUFFER_SIZE];
+  61:main.c        ****     /* Variable used to send emulated data */
+  62:main.c        ****     uint8 EmulatedData;
+  63:main.c        ****     int16 array[NUMBER_OF_SAMPLES];
+  64:main.c        ****     
+  65:main.c        **** double Goertzel(int numSamples, int tFrequency,int tSamplingRate, double data[]);
+  66:main.c        **** uint16 getMaxValue(double arrayData[],uint8 size);
+  67:main.c        **** void DTMF(void);
+  68:main.c        **** void Decoder(uint16 loFrec, uint16 hiFrec);
+  69:main.c        **** 
+  70:main.c        **** 
+  71:main.c        **** CY_ISR_PROTO(Transmit);
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 3
+
+
+  72:main.c        **** 
+  73:main.c        **** CY_ISR(Transmit)
+  74:main.c        **** {
+  42              		.loc 1 74 0
+  43              		.cfi_startproc
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 1, uses_anonymous_args = 0
+  46 0000 80B5     		push	{r7, lr}
+  47              		.cfi_def_cfa_offset 8
+  48              		.cfi_offset 7, -8
+  49              		.cfi_offset 14, -4
+  50 0002 00AF     		add	r7, sp, #0
+  51              		.cfi_def_cfa_register 7
+  75:main.c        ****             /* Check to see if an ADC conversion has completed */
+  76:main.c        ****             if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
+  52              		.loc 1 76 0
+  53 0004 0120     		movs	r0, #1
+  54 0006 FFF7FEFF 		bl	ADC_DelSig_1_IsEndConversion
+  55 000a 0346     		mov	r3, r0
+  56 000c 002B     		cmp	r3, #0
+  57 000e 40D0     		beq	.L5
+  77:main.c        ****             {
+  78:main.c        ****                 /* Use the GetResult16 API to get an 8 bit unsigned result in
+  79:main.c        ****                 * single ended mode.  The API CountsTo_mVolts is then used
+  80:main.c        ****                 * to convert the ADC counts into mV before transmitting via
+  81:main.c        ****                 * the UART.  See the datasheet API description for more
+  82:main.c        ****                 * details */
+  83:main.c        ****                 //Output = ADC_DelSig_1_CountsTo_mVolts(ADC_DelSig_1_GetResult16());
+  84:main.c        ****                 Output = ADC_DelSig_1_GetResult16();
+  58              		.loc 1 84 0
+  59 0010 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+  60 0014 0346     		mov	r3, r0
+  61 0016 9AB2     		uxth	r2, r3
+  62 0018 1F4B     		ldr	r3, .L6
+  63 001a 1A80     		strh	r2, [r3]	@ movhi
+  85:main.c        ****                 
+  86:main.c        ****                 /* Send data based on last UART command */
+  87:main.c        ****                 if(ContinuouslySendData)
+  64              		.loc 1 87 0
+  65 001c 1F4B     		ldr	r3, .L6+4
+  66 001e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  67 0020 002B     		cmp	r3, #0
+  68 0022 0DD0     		beq	.L3
+  88:main.c        ****                 {
+  89:main.c        ****                     /* Format ADC result for transmition */
+  90:main.c        ****                     //sprintf(TransmitBuffer, "Sample: %d mV\r\n", Output);
+  91:main.c        ****                     sprintf(TransmitBuffer, "%X\r\n", Output);
+  69              		.loc 1 91 0
+  70 0024 1C4B     		ldr	r3, .L6
+  71 0026 1B88     		ldrh	r3, [r3]
+  72 0028 1A46     		mov	r2, r3
+  73 002a 1D49     		ldr	r1, .L6+8
+  74 002c 1D48     		ldr	r0, .L6+12
+  75 002e FFF7FEFF 		bl	sprintf
+  92:main.c        ****                     /* Send out the data */
+  93:main.c        ****                     UART_1_PutString(TransmitBuffer);
+  76              		.loc 1 93 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 4
+
+
+  77 0032 1C48     		ldr	r0, .L6+12
+  78 0034 FFF7FEFF 		bl	UART_1_PutString
+  94:main.c        ****                     /* Reset the send once flag */
+  95:main.c        ****                     SendSingleByte = FALSE;
+  79              		.loc 1 95 0
+  80 0038 1B4B     		ldr	r3, .L6+16
+  81 003a 0022     		movs	r2, #0
+  82 003c 1A70     		strb	r2, [r3]
+  96:main.c        ****                 }
+  97:main.c        ****                 /* Send data based on last UART command */
+  98:main.c        ****                 else if(SendSingleByte)
+  99:main.c        ****                 {
+ 100:main.c        ****                     /* Format ADC result for transmition */
+ 101:main.c        ****                     //sprintf(TransmitBuffer, "Sample: %d mV\r\n", Output);
+ 102:main.c        ****                     sprintf(TransmitBuffer, "%X\r\n", Output);
+ 103:main.c        ****                     /* Send out the data */
+ 104:main.c        ****                     UART_1_PutString(TransmitBuffer);
+ 105:main.c        ****                     /* Reset the send once flag */
+ 106:main.c        ****                     SendSingleByte = FALSE;
+ 107:main.c        ****                 }
+ 108:main.c        ****                 else if(SendEmulatedData)
+ 109:main.c        ****                 {
+ 110:main.c        ****                     /* Format ADC result for transmition */
+ 111:main.c        ****                     sprintf(TransmitBuffer, "%x\r\n", EmulatedData);
+ 112:main.c        ****                     /* Send out the data */
+ 113:main.c        ****                     UART_1_PutString(TransmitBuffer);
+ 114:main.c        ****                     EmulatedData++;
+ 115:main.c        ****                     /* Reset the send once flag */
+ 116:main.c        ****                     SendEmulatedData = FALSE;
+ 117:main.c        ****                 }
+ 118:main.c        ****             }
+ 119:main.c        ****             
+ 120:main.c        ****     
+ 121:main.c        **** }
+  83              		.loc 1 121 0
+  84 003e 28E0     		b	.L5
+  85              	.L3:
+  98:main.c        ****                 {
+  86              		.loc 1 98 0
+  87 0040 194B     		ldr	r3, .L6+16
+  88 0042 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  89 0044 002B     		cmp	r3, #0
+  90 0046 0DD0     		beq	.L4
+ 102:main.c        ****                     /* Send out the data */
+  91              		.loc 1 102 0
+  92 0048 134B     		ldr	r3, .L6
+  93 004a 1B88     		ldrh	r3, [r3]
+  94 004c 1A46     		mov	r2, r3
+  95 004e 1449     		ldr	r1, .L6+8
+  96 0050 1448     		ldr	r0, .L6+12
+  97 0052 FFF7FEFF 		bl	sprintf
+ 104:main.c        ****                     /* Reset the send once flag */
+  98              		.loc 1 104 0
+  99 0056 1348     		ldr	r0, .L6+12
+ 100 0058 FFF7FEFF 		bl	UART_1_PutString
+ 106:main.c        ****                 }
+ 101              		.loc 1 106 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 5
+
+
+ 102 005c 124B     		ldr	r3, .L6+16
+ 103 005e 0022     		movs	r2, #0
+ 104 0060 1A70     		strb	r2, [r3]
+ 105              		.loc 1 121 0
+ 106 0062 16E0     		b	.L5
+ 107              	.L4:
+ 108:main.c        ****                 {
+ 108              		.loc 1 108 0
+ 109 0064 114B     		ldr	r3, .L6+20
+ 110 0066 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 111 0068 002B     		cmp	r3, #0
+ 112 006a 12D0     		beq	.L5
+ 111:main.c        ****                     /* Send out the data */
+ 113              		.loc 1 111 0
+ 114 006c 104B     		ldr	r3, .L6+24
+ 115 006e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 116 0070 1A46     		mov	r2, r3
+ 117 0072 1049     		ldr	r1, .L6+28
+ 118 0074 0B48     		ldr	r0, .L6+12
+ 119 0076 FFF7FEFF 		bl	sprintf
+ 113:main.c        ****                     EmulatedData++;
+ 120              		.loc 1 113 0
+ 121 007a 0A48     		ldr	r0, .L6+12
+ 122 007c FFF7FEFF 		bl	UART_1_PutString
+ 114:main.c        ****                     /* Reset the send once flag */
+ 123              		.loc 1 114 0
+ 124 0080 0B4B     		ldr	r3, .L6+24
+ 125 0082 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 126 0084 0133     		adds	r3, r3, #1
+ 127 0086 DAB2     		uxtb	r2, r3
+ 128 0088 094B     		ldr	r3, .L6+24
+ 129 008a 1A70     		strb	r2, [r3]
+ 116:main.c        ****                 }
+ 130              		.loc 1 116 0
+ 131 008c 074B     		ldr	r3, .L6+20
+ 132 008e 0022     		movs	r2, #0
+ 133 0090 1A70     		strb	r2, [r3]
+ 134              	.L5:
+ 135              		.loc 1 121 0
+ 136 0092 00BF     		nop
+ 137 0094 80BD     		pop	{r7, pc}
+ 138              	.L7:
+ 139 0096 00BF     		.align	2
+ 140              	.L6:
+ 141 0098 00000000 		.word	Output
+ 142 009c 00000000 		.word	ContinuouslySendData
+ 143 00a0 00000000 		.word	.LC2
+ 144 00a4 00000000 		.word	TransmitBuffer
+ 145 00a8 00000000 		.word	SendSingleByte
+ 146 00ac 00000000 		.word	SendEmulatedData
+ 147 00b0 00000000 		.word	EmulatedData
+ 148 00b4 08000000 		.word	.LC3
+ 149              		.cfi_endproc
+ 150              	.LFE64:
+ 151              		.size	Transmit, .-Transmit
+ 152              		.section	.text.UserInput,"ax",%progbits
+ 153              		.align	2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 6
+
+
+ 154              		.global	UserInput
+ 155              		.thumb
+ 156              		.thumb_func
+ 157              		.type	UserInput, %function
+ 158              	UserInput:
+ 159              	.LFB65:
+ 122:main.c        **** 
+ 123:main.c        **** 
+ 124:main.c        **** 
+ 125:main.c        **** CY_ISR(UserInput)
+ 126:main.c        **** {
+ 160              		.loc 1 126 0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 1, uses_anonymous_args = 0
+ 164              		@ link register save eliminated.
+ 165 0000 80B4     		push	{r7}
+ 166              		.cfi_def_cfa_offset 4
+ 167              		.cfi_offset 7, -4
+ 168 0002 00AF     		add	r7, sp, #0
+ 169              		.cfi_def_cfa_register 7
+ 127:main.c        ****     //UART_1_PutString("Input Detected!\r\n");
+ 128:main.c        **** }
+ 170              		.loc 1 128 0
+ 171 0004 00BF     		nop
+ 172 0006 BD46     		mov	sp, r7
+ 173              		.cfi_def_cfa_register 13
+ 174              		@ sp needed
+ 175 0008 80BC     		pop	{r7}
+ 176              		.cfi_restore 7
+ 177              		.cfi_def_cfa_offset 0
+ 178 000a 7047     		bx	lr
+ 179              		.cfi_endproc
+ 180              	.LFE65:
+ 181              		.size	UserInput, .-UserInput
+ 182              		.section	.text.DisableAllDigitalToAnalogConverters,"ax",%progbits
+ 183              		.align	2
+ 184              		.global	DisableAllDigitalToAnalogConverters
+ 185              		.thumb
+ 186              		.thumb_func
+ 187              		.type	DisableAllDigitalToAnalogConverters, %function
+ 188              	DisableAllDigitalToAnalogConverters:
+ 189              	.LFB66:
+ 129:main.c        **** 
+ 130:main.c        **** 
+ 131:main.c        **** 
+ 132:main.c        **** 
+ 133:main.c        **** void DisableAllDigitalToAnalogConverters()
+ 134:main.c        **** {
+ 190              		.loc 1 134 0
+ 191              		.cfi_startproc
+ 192              		@ args = 0, pretend = 0, frame = 0
+ 193              		@ frame_needed = 1, uses_anonymous_args = 0
+ 194 0000 80B5     		push	{r7, lr}
+ 195              		.cfi_def_cfa_offset 8
+ 196              		.cfi_offset 7, -8
+ 197              		.cfi_offset 14, -4
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 7
+
+
+ 198 0002 00AF     		add	r7, sp, #0
+ 199              		.cfi_def_cfa_register 7
+ 135:main.c        ****     // Disable Components
+ 136:main.c        ****     HF_DAC_1_Sleep();
+ 200              		.loc 1 136 0
+ 201 0004 FFF7FEFF 		bl	HF_DAC_1_Sleep
+ 137:main.c        ****     HF_DAC_2_Sleep();
+ 202              		.loc 1 137 0
+ 203 0008 FFF7FEFF 		bl	HF_DAC_2_Sleep
+ 138:main.c        ****     LF_DAC_1_Sleep(); 
+ 204              		.loc 1 138 0
+ 205 000c FFF7FEFF 		bl	LF_DAC_1_Sleep
+ 139:main.c        ****     LF_DAC_2_Sleep();
+ 206              		.loc 1 139 0
+ 207 0010 FFF7FEFF 		bl	LF_DAC_2_Sleep
+ 140:main.c        ****     // Set Muxes to First Wave Configured
+ 141:main.c        ****     HF_SW1_Write(0);
+ 208              		.loc 1 141 0
+ 209 0014 0020     		movs	r0, #0
+ 210 0016 FFF7FEFF 		bl	HF_SW1_Write
+ 142:main.c        ****     HF_SW2_Write(0);
+ 211              		.loc 1 142 0
+ 212 001a 0020     		movs	r0, #0
+ 213 001c FFF7FEFF 		bl	HF_SW2_Write
+ 143:main.c        ****     LF_SW1_Write(0);
+ 214              		.loc 1 143 0
+ 215 0020 0020     		movs	r0, #0
+ 216 0022 FFF7FEFF 		bl	LF_SW1_Write
+ 144:main.c        ****     LF_SW2_Write(0);
+ 217              		.loc 1 144 0
+ 218 0026 0020     		movs	r0, #0
+ 219 0028 FFF7FEFF 		bl	LF_SW2_Write
+ 145:main.c        ****     // Input Flag
+ 146:main.c        ****     Input_Flag_Write(0);
+ 220              		.loc 1 146 0
+ 221 002c 0020     		movs	r0, #0
+ 222 002e FFF7FEFF 		bl	Input_Flag_Write
+ 147:main.c        **** }
+ 223              		.loc 1 147 0
+ 224 0032 00BF     		nop
+ 225 0034 80BD     		pop	{r7, pc}
+ 226              		.cfi_endproc
+ 227              	.LFE66:
+ 228              		.size	DisableAllDigitalToAnalogConverters, .-DisableAllDigitalToAnalogConverters
+ 229 0036 00BF     		.section	.rodata
+ 230 000d 000000   		.align	2
+ 231              	.LC4:
+ 232 0010 3000     		.ascii	"0\000"
+ 233 0012 0000     		.align	2
+ 234              	.LC5:
+ 235 0014 3100     		.ascii	"1\000"
+ 236 0016 0000     		.align	2
+ 237              	.LC6:
+ 238 0018 3200     		.ascii	"2\000"
+ 239 001a 0000     		.align	2
+ 240              	.LC7:
+ 241 001c 3300     		.ascii	"3\000"
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 8
+
+
+ 242 001e 0000     		.align	2
+ 243              	.LC8:
+ 244 0020 3400     		.ascii	"4\000"
+ 245 0022 0000     		.align	2
+ 246              	.LC9:
+ 247 0024 3500     		.ascii	"5\000"
+ 248 0026 0000     		.align	2
+ 249              	.LC10:
+ 250 0028 3600     		.ascii	"6\000"
+ 251 002a 0000     		.align	2
+ 252              	.LC11:
+ 253 002c 3700     		.ascii	"7\000"
+ 254 002e 0000     		.align	2
+ 255              	.LC12:
+ 256 0030 3800     		.ascii	"8\000"
+ 257 0032 0000     		.align	2
+ 258              	.LC13:
+ 259 0034 3900     		.ascii	"9\000"
+ 260 0036 0000     		.align	2
+ 261              	.LC14:
+ 262 0038 2A00     		.ascii	"*\000"
+ 263 003a 0000     		.align	2
+ 264              	.LC15:
+ 265 003c 2300     		.ascii	"#\000"
+ 266 003e 0000     		.align	2
+ 267              	.LC16:
+ 268 0040 44697361 		.ascii	"Disabling DACs ...\000"
+ 268      626C696E 
+ 268      67204441 
+ 268      4373202E 
+ 268      2E2E00
+ 269              		.section	.text.main,"ax",%progbits
+ 270              		.align	2
+ 271              		.global	main
+ 272              		.thumb
+ 273              		.thumb_func
+ 274              		.type	main, %function
+ 275              	main:
+ 276              	.LFB67:
+ 148:main.c        **** 
+ 149:main.c        **** 
+ 150:main.c        **** 
+ 151:main.c        **** 
+ 152:main.c        **** 
+ 153:main.c        **** 
+ 154:main.c        **** /*******************************************************************************
+ 155:main.c        **** * Function Name: main
+ 156:main.c        **** ********************************************************************************
+ 157:main.c        **** *
+ 158:main.c        **** * Summary:
+ 159:main.c        **** *  main() performs following functions:
+ 160:main.c        **** *  1: Starts the ADC and UART components.
+ 161:main.c        **** *  2: Checks for ADC end of conversion.  Stores latest result in output
+ 162:main.c        **** *     if conversion complete.
+ 163:main.c        **** *  3: Checks for UART input.
+ 164:main.c        **** *     On 'C' or 'c' received: transmits the last sample via the UART.
+ 165:main.c        **** *     On 'S' or 's' received: continuously transmits samples as they are completed.
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 9
+
+
+ 166:main.c        **** *     On 'X' or 'x' received: stops continuously transmitting samples.
+ 167:main.c        **** *     On 'E' or 'e' received: transmits a dummy byte of data.
+ 168:main.c        **** *
+ 169:main.c        **** * Parameters:
+ 170:main.c        **** *  None.
+ 171:main.c        **** *
+ 172:main.c        **** * Return:
+ 173:main.c        **** *  None.
+ 174:main.c        **** *
+ 175:main.c        **** *******************************************************************************/
+ 176:main.c        **** int main()
+ 177:main.c        **** {
+ 277              		.loc 1 177 0
+ 278              		.cfi_startproc
+ 279              		@ args = 0, pretend = 0, frame = 8
+ 280              		@ frame_needed = 1, uses_anonymous_args = 0
+ 281 0000 80B5     		push	{r7, lr}
+ 282              		.cfi_def_cfa_offset 8
+ 283              		.cfi_offset 7, -8
+ 284              		.cfi_offset 14, -4
+ 285 0002 82B0     		sub	sp, sp, #8
+ 286              		.cfi_def_cfa_offset 16
+ 287 0004 00AF     		add	r7, sp, #0
+ 288              		.cfi_def_cfa_register 7
+ 178:main.c        ****     /* Variable to store UART received character */
+ 179:main.c        ****     uint8 Ch;
+ 180:main.c        ****     
+ 181:main.c        ****     /* Start the components */
+ 182:main.c        ****     ADC_DelSig_1_Start();
+ 289              		.loc 1 182 0
+ 290 0006 FFF7FEFF 		bl	ADC_DelSig_1_Start
+ 183:main.c        ****     UART_1_Start();
+ 291              		.loc 1 183 0
+ 292 000a FFF7FEFF 		bl	UART_1_Start
+ 184:main.c        ****     // 1st ADC
+ 185:main.c        ****     HF_DAC_1_Start();
+ 293              		.loc 1 185 0
+ 294 000e FFF7FEFF 		bl	HF_DAC_1_Start
+ 186:main.c        ****     HF_DAC_1_Sleep();
+ 295              		.loc 1 186 0
+ 296 0012 FFF7FEFF 		bl	HF_DAC_1_Sleep
+ 187:main.c        ****     // 2nd ADC
+ 188:main.c        ****     HF_DAC_2_Start();
+ 297              		.loc 1 188 0
+ 298 0016 FFF7FEFF 		bl	HF_DAC_2_Start
+ 189:main.c        ****     HF_DAC_2_Sleep();;
+ 299              		.loc 1 189 0
+ 300 001a FFF7FEFF 		bl	HF_DAC_2_Sleep
+ 190:main.c        ****     // 3rd ADC
+ 191:main.c        ****     LF_DAC_1_Start();
+ 301              		.loc 1 191 0
+ 302 001e FFF7FEFF 		bl	LF_DAC_1_Start
+ 192:main.c        ****     LF_DAC_1_Sleep();
+ 303              		.loc 1 192 0
+ 304 0022 FFF7FEFF 		bl	LF_DAC_1_Sleep
+ 193:main.c        ****     // 4th ADC
+ 194:main.c        ****     LF_DAC_1_Start();
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 10
+
+
+ 305              		.loc 1 194 0
+ 306 0026 FFF7FEFF 		bl	LF_DAC_1_Start
+ 195:main.c        ****     LF_DAC_1_Sleep();
+ 307              		.loc 1 195 0
+ 308 002a FFF7FEFF 		bl	LF_DAC_1_Sleep
+ 196:main.c        ****     
+ 197:main.c        ****     /* Initialize Variables */
+ 198:main.c        ****     ContinuouslySendData = FALSE;
+ 309              		.loc 1 198 0
+ 310 002e DB4B     		ldr	r3, .L33
+ 311 0030 0022     		movs	r2, #0
+ 312 0032 1A70     		strb	r2, [r3]
+ 199:main.c        ****     SendSingleByte = FALSE;
+ 313              		.loc 1 199 0
+ 314 0034 DA4B     		ldr	r3, .L33+4
+ 315 0036 0022     		movs	r2, #0
+ 316 0038 1A70     		strb	r2, [r3]
+ 200:main.c        ****     SendEmulatedData = FALSE;
+ 317              		.loc 1 200 0
+ 318 003a DA4B     		ldr	r3, .L33+8
+ 319 003c 0022     		movs	r2, #0
+ 320 003e 1A70     		strb	r2, [r3]
+ 201:main.c        ****     EmulatedData = 0;
+ 321              		.loc 1 201 0
+ 322 0040 D94B     		ldr	r3, .L33+12
+ 323 0042 0022     		movs	r2, #0
+ 324 0044 1A70     		strb	r2, [r3]
+ 202:main.c        ****     
+ 203:main.c        ****     /* Start the ADC conversion */
+ 204:main.c        ****     ADC_DelSig_1_StartConvert();
+ 325              		.loc 1 204 0
+ 326 0046 FFF7FEFF 		bl	ADC_DelSig_1_StartConvert
+ 205:main.c        ****     
+ 206:main.c        ****     /* Send message to verify COM port is connected properly */
+ 207:main.c        ****     //UART_1_PutString("COM Port Open");
+ 208:main.c        ****     
+ 209:main.c        ****     Timer_Start();
+ 327              		.loc 1 209 0
+ 328 004a FFF7FEFF 		bl	Timer_Start
+ 210:main.c        ****     isr_StartEx(Transmit);
+ 329              		.loc 1 210 0
+ 330 004e D748     		ldr	r0, .L33+16
+ 331 0050 FFF7FEFF 		bl	isr_StartEx
+ 211:main.c        ****     Input_ISR_StartEx(UserInput);
+ 332              		.loc 1 211 0
+ 333 0054 D648     		ldr	r0, .L33+20
+ 334 0056 FFF7FEFF 		bl	Input_ISR_StartEx
+ 212:main.c        ****     CyGlobalIntEnable;
+ 335              		.loc 1 212 0
+ 336              		.syntax unified
+ 337              	@ 212 "main.c" 1
+ 338 005a 62B6     		CPSIE   i
+ 339              	@ 0 "" 2
+ 340              		.thumb
+ 341              		.syntax unified
+ 342              	.L31:
+ 213:main.c        ****     
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 11
+
+
+ 214:main.c        ****     
+ 215:main.c        ****     for(;;)
+ 216:main.c        ****     {        
+ 217:main.c        ****         /* Non-blocking call to get the latest data recieved  */
+ 218:main.c        ****         Ch = UART_1_GetChar();
+ 343              		.loc 1 218 0
+ 344 005c FFF7FEFF 		bl	UART_1_GetChar
+ 345 0060 0346     		mov	r3, r0
+ 346 0062 7B71     		strb	r3, [r7, #5]
+ 219:main.c        ****         
+ 220:main.c        ****         /* Set flags based on UART command */
+ 221:main.c        ****         switch(Ch)
+ 347              		.loc 1 221 0
+ 348 0064 7B79     		ldrb	r3, [r7, #5]	@ zero_extendqisi2
+ 349 0066 233B     		subs	r3, r3, #35
+ 350 0068 552B     		cmp	r3, #85
+ 351 006a 00F2E381 		bhi	.L32
+ 352 006e 01A2     		adr	r2, .L13
+ 353 0070 52F823F0 		ldr	pc, [r2, r3, lsl #2]
+ 354              		.p2align 2
+ 355              	.L13:
+ 356 0074 6F030000 		.word	.L12+1
+ 357 0078 35040000 		.word	.L32+1
+ 358 007c 35040000 		.word	.L32+1
+ 359 0080 35040000 		.word	.L32+1
+ 360 0084 35040000 		.word	.L32+1
+ 361 0088 35040000 		.word	.L32+1
+ 362 008c 35040000 		.word	.L32+1
+ 363 0090 49030000 		.word	.L14+1
+ 364 0094 35040000 		.word	.L32+1
+ 365 0098 35040000 		.word	.L32+1
+ 366 009c 35040000 		.word	.L32+1
+ 367 00a0 35040000 		.word	.L32+1
+ 368 00a4 35040000 		.word	.L32+1
+ 369 00a8 CD010000 		.word	.L15+1
+ 370 00ac F3010000 		.word	.L16+1
+ 371 00b0 19020000 		.word	.L17+1
+ 372 00b4 3F020000 		.word	.L18+1
+ 373 00b8 65020000 		.word	.L19+1
+ 374 00bc 8B020000 		.word	.L20+1
+ 375 00c0 B1020000 		.word	.L21+1
+ 376 00c4 D7020000 		.word	.L22+1
+ 377 00c8 FD020000 		.word	.L23+1
+ 378 00cc 23030000 		.word	.L24+1
+ 379 00d0 35040000 		.word	.L32+1
+ 380 00d4 35040000 		.word	.L32+1
+ 381 00d8 35040000 		.word	.L32+1
+ 382 00dc 35040000 		.word	.L32+1
+ 383 00e0 35040000 		.word	.L32+1
+ 384 00e4 35040000 		.word	.L32+1
+ 385 00e8 35040000 		.word	.L32+1
+ 386 00ec 35040000 		.word	.L32+1
+ 387 00f0 35040000 		.word	.L32+1
+ 388 00f4 35040000 		.word	.L32+1
+ 389 00f8 35040000 		.word	.L32+1
+ 390 00fc 35040000 		.word	.L32+1
+ 391 0100 35040000 		.word	.L32+1
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 12
+
+
+ 392 0104 35040000 		.word	.L32+1
+ 393 0108 35040000 		.word	.L32+1
+ 394 010c 35040000 		.word	.L32+1
+ 395 0110 35040000 		.word	.L32+1
+ 396 0114 35040000 		.word	.L32+1
+ 397 0118 35040000 		.word	.L32+1
+ 398 011c 35040000 		.word	.L32+1
+ 399 0120 35040000 		.word	.L32+1
+ 400 0124 35040000 		.word	.L32+1
+ 401 0128 35040000 		.word	.L32+1
+ 402 012c 35040000 		.word	.L32+1
+ 403 0130 35040000 		.word	.L32+1
+ 404 0134 95030000 		.word	.L25+1
+ 405 0138 35040000 		.word	.L32+1
+ 406 013c 35040000 		.word	.L32+1
+ 407 0140 35040000 		.word	.L32+1
+ 408 0144 35040000 		.word	.L32+1
+ 409 0148 29040000 		.word	.L26+1
+ 410 014c 35040000 		.word	.L32+1
+ 411 0150 35040000 		.word	.L32+1
+ 412 0154 35040000 		.word	.L32+1
+ 413 0158 35040000 		.word	.L32+1
+ 414 015c 35040000 		.word	.L32+1
+ 415 0160 35040000 		.word	.L32+1
+ 416 0164 35040000 		.word	.L32+1
+ 417 0168 35040000 		.word	.L32+1
+ 418 016c 35040000 		.word	.L32+1
+ 419 0170 35040000 		.word	.L32+1
+ 420 0174 35040000 		.word	.L32+1
+ 421 0178 35040000 		.word	.L32+1
+ 422 017c 35040000 		.word	.L32+1
+ 423 0180 35040000 		.word	.L32+1
+ 424 0184 35040000 		.word	.L32+1
+ 425 0188 35040000 		.word	.L32+1
+ 426 018c 35040000 		.word	.L32+1
+ 427 0190 35040000 		.word	.L32+1
+ 428 0194 35040000 		.word	.L32+1
+ 429 0198 35040000 		.word	.L32+1
+ 430 019c 35040000 		.word	.L32+1
+ 431 01a0 35040000 		.word	.L32+1
+ 432 01a4 35040000 		.word	.L32+1
+ 433 01a8 35040000 		.word	.L32+1
+ 434 01ac 35040000 		.word	.L32+1
+ 435 01b0 35040000 		.word	.L32+1
+ 436 01b4 95030000 		.word	.L25+1
+ 437 01b8 35040000 		.word	.L32+1
+ 438 01bc 35040000 		.word	.L32+1
+ 439 01c0 35040000 		.word	.L32+1
+ 440 01c4 35040000 		.word	.L32+1
+ 441 01c8 29040000 		.word	.L26+1
+ 442              		.p2align 1
+ 443              	.L15:
+ 222:main.c        ****         {
+ 223:main.c        ****             case '0':
+ 224:main.c        ****                 UART_1_PutString("0");
+ 444              		.loc 1 224 0
+ 445 01cc 7948     		ldr	r0, .L33+24
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 13
+
+
+ 446 01ce FFF7FEFF 		bl	UART_1_PutString
+ 225:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 447              		.loc 1 225 0
+ 448 01d2 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 226:main.c        ****                 
+ 227:main.c        ****                 // Configure Muxes
+ 228:main.c        ****                 //HF_SW1_Write(0);    // 1209 Hz (1,4,7,*)
+ 229:main.c        ****                 //HF_SW1_Write(1);    // 1336 Hz (2,5,8,0)
+ 230:main.c        ****                 //HF_SW2_Write(0);    // 1477 Hz (3,6,9,#)
+ 231:main.c        ****                 //HF_SW2_Write(1);    // -
+ 232:main.c        ****                 //LF_SW1_Write(0);    // 697  Hz (1,2,3)
+ 233:main.c        ****                 //LF_SW1_Write(1);    // 770  Hz (4,5,6)
+ 234:main.c        ****                 //LF_SW2_Write(0);    // 852  Hz (7,8,9)
+ 235:main.c        ****                 //LF_SW2_Write(1);    // 941  Hz (*,0,#)
+ 236:main.c        ****                 
+ 237:main.c        ****                 // Enable Components
+ 238:main.c        ****                 //HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 239:main.c        ****                 //HF_DAC_2_Start();   // (3,6,9,#)
+ 240:main.c        ****                 //LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 241:main.c        ****                 //LF_DAC_2_Start();   // (7,8,9,*,0,#)             
+ 242:main.c        ****                 
+ 243:main.c        ****                 // Configure Muxes
+ 244:main.c        ****                 HF_SW1_Write(1);    // 1336 Hz (2,5,8,0)
+ 449              		.loc 1 244 0
+ 450 01d6 0120     		movs	r0, #1
+ 451 01d8 FFF7FEFF 		bl	HF_SW1_Write
+ 245:main.c        ****                 LF_SW2_Write(1);    // 941  Hz (*,0,#)
+ 452              		.loc 1 245 0
+ 453 01dc 0120     		movs	r0, #1
+ 454 01de FFF7FEFF 		bl	LF_SW2_Write
+ 246:main.c        ****                 
+ 247:main.c        ****                 // Enable Components
+ 248:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 455              		.loc 1 248 0
+ 456 01e2 FFF7FEFF 		bl	HF_DAC_1_Start
+ 249:main.c        ****                 LF_DAC_2_Start();   // (7,8,9,*,0,#)
+ 457              		.loc 1 249 0
+ 458 01e6 FFF7FEFF 		bl	LF_DAC_2_Start
+ 250:main.c        ****                 
+ 251:main.c        ****                 // Trigger "User Input" Interrupt
+ 252:main.c        ****                 Input_Flag_Write(1);
+ 459              		.loc 1 252 0
+ 460 01ea 0120     		movs	r0, #1
+ 461 01ec FFF7FEFF 		bl	Input_Flag_Write
+ 253:main.c        ****                 
+ 254:main.c        ****                 break;
+ 462              		.loc 1 254 0
+ 463 01f0 21E1     		b	.L27
+ 464              	.L16:
+ 255:main.c        ****                 
+ 256:main.c        ****             case '1':
+ 257:main.c        ****                 UART_1_PutString("1");
+ 465              		.loc 1 257 0
+ 466 01f2 7148     		ldr	r0, .L33+28
+ 467 01f4 FFF7FEFF 		bl	UART_1_PutString
+ 258:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 468              		.loc 1 258 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 14
+
+
+ 469 01f8 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 259:main.c        ****                 
+ 260:main.c        ****                 // Configure Muxes
+ 261:main.c        ****                 HF_SW1_Write(0);    // 1209 Hz (1,4,7,*)
+ 470              		.loc 1 261 0
+ 471 01fc 0020     		movs	r0, #0
+ 472 01fe FFF7FEFF 		bl	HF_SW1_Write
+ 262:main.c        ****                 LF_SW1_Write(0);    // 697  Hz (1,2,3)
+ 473              		.loc 1 262 0
+ 474 0202 0020     		movs	r0, #0
+ 475 0204 FFF7FEFF 		bl	LF_SW1_Write
+ 263:main.c        ****                 
+ 264:main.c        ****                 // Enable Components
+ 265:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 476              		.loc 1 265 0
+ 477 0208 FFF7FEFF 		bl	HF_DAC_1_Start
+ 266:main.c        ****                 LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 478              		.loc 1 266 0
+ 479 020c FFF7FEFF 		bl	LF_DAC_1_Start
+ 267:main.c        ****                 
+ 268:main.c        ****                 // Trigger "User Input" Interrupt
+ 269:main.c        ****                 Input_Flag_Write(1);
+ 480              		.loc 1 269 0
+ 481 0210 0120     		movs	r0, #1
+ 482 0212 FFF7FEFF 		bl	Input_Flag_Write
+ 270:main.c        ****                 
+ 271:main.c        ****                 break;
+ 483              		.loc 1 271 0
+ 484 0216 0EE1     		b	.L27
+ 485              	.L17:
+ 272:main.c        ****                 
+ 273:main.c        ****             case '2':
+ 274:main.c        ****                 UART_1_PutString("2");
+ 486              		.loc 1 274 0
+ 487 0218 6848     		ldr	r0, .L33+32
+ 488 021a FFF7FEFF 		bl	UART_1_PutString
+ 275:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 489              		.loc 1 275 0
+ 490 021e FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 276:main.c        ****                 
+ 277:main.c        ****                 // Configure Muxes
+ 278:main.c        ****                 HF_SW1_Write(1);    // 1336 Hz (2,5,8,0)
+ 491              		.loc 1 278 0
+ 492 0222 0120     		movs	r0, #1
+ 493 0224 FFF7FEFF 		bl	HF_SW1_Write
+ 279:main.c        ****                 LF_SW1_Write(0);    // 697  Hz (1,2,3)
+ 494              		.loc 1 279 0
+ 495 0228 0020     		movs	r0, #0
+ 496 022a FFF7FEFF 		bl	LF_SW1_Write
+ 280:main.c        ****                 
+ 281:main.c        ****                 // Enable Components
+ 282:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 497              		.loc 1 282 0
+ 498 022e FFF7FEFF 		bl	HF_DAC_1_Start
+ 283:main.c        ****                 LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 499              		.loc 1 283 0
+ 500 0232 FFF7FEFF 		bl	LF_DAC_1_Start
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 15
+
+
+ 284:main.c        ****                 
+ 285:main.c        ****                 // Trigger "User Input" Interrupt
+ 286:main.c        ****                 Input_Flag_Write(1);
+ 501              		.loc 1 286 0
+ 502 0236 0120     		movs	r0, #1
+ 503 0238 FFF7FEFF 		bl	Input_Flag_Write
+ 287:main.c        ****                 
+ 288:main.c        ****                 break;
+ 504              		.loc 1 288 0
+ 505 023c FBE0     		b	.L27
+ 506              	.L18:
+ 289:main.c        ****                 
+ 290:main.c        ****             case '3':
+ 291:main.c        ****                 UART_1_PutString("3");
+ 507              		.loc 1 291 0
+ 508 023e 6048     		ldr	r0, .L33+36
+ 509 0240 FFF7FEFF 		bl	UART_1_PutString
+ 292:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 510              		.loc 1 292 0
+ 511 0244 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 293:main.c        ****                 
+ 294:main.c        ****                 // Configure Muxes
+ 295:main.c        ****                 HF_SW2_Write(0);    // 1477 Hz (3,6,9,#)
+ 512              		.loc 1 295 0
+ 513 0248 0020     		movs	r0, #0
+ 514 024a FFF7FEFF 		bl	HF_SW2_Write
+ 296:main.c        ****                 LF_SW1_Write(0);    // 697  Hz (1,2,3)
+ 515              		.loc 1 296 0
+ 516 024e 0020     		movs	r0, #0
+ 517 0250 FFF7FEFF 		bl	LF_SW1_Write
+ 297:main.c        ****                 
+ 298:main.c        ****                 // Enable Components
+ 299:main.c        ****                 HF_DAC_2_Start();   // (3,6,9,#)
+ 518              		.loc 1 299 0
+ 519 0254 FFF7FEFF 		bl	HF_DAC_2_Start
+ 300:main.c        ****                 LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 520              		.loc 1 300 0
+ 521 0258 FFF7FEFF 		bl	LF_DAC_1_Start
+ 301:main.c        ****                 
+ 302:main.c        ****                 // Trigger "User Input" Interrupt
+ 303:main.c        ****                 Input_Flag_Write(1);
+ 522              		.loc 1 303 0
+ 523 025c 0120     		movs	r0, #1
+ 524 025e FFF7FEFF 		bl	Input_Flag_Write
+ 304:main.c        ****                 
+ 305:main.c        ****                 break;
+ 525              		.loc 1 305 0
+ 526 0262 E8E0     		b	.L27
+ 527              	.L19:
+ 306:main.c        ****                 
+ 307:main.c        ****             case '4':
+ 308:main.c        ****                 UART_1_PutString("4");
+ 528              		.loc 1 308 0
+ 529 0264 5748     		ldr	r0, .L33+40
+ 530 0266 FFF7FEFF 		bl	UART_1_PutString
+ 309:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 531              		.loc 1 309 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 16
+
+
+ 532 026a FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 310:main.c        ****                 
+ 311:main.c        ****                 // Configure Muxes
+ 312:main.c        ****                 HF_SW1_Write(0);    // 1209 Hz (1,4,7,*)
+ 533              		.loc 1 312 0
+ 534 026e 0020     		movs	r0, #0
+ 535 0270 FFF7FEFF 		bl	HF_SW1_Write
+ 313:main.c        ****                 LF_SW1_Write(1);    // 770  Hz (4,5,6)
+ 536              		.loc 1 313 0
+ 537 0274 0120     		movs	r0, #1
+ 538 0276 FFF7FEFF 		bl	LF_SW1_Write
+ 314:main.c        ****                 
+ 315:main.c        ****                 // Enable Components
+ 316:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 539              		.loc 1 316 0
+ 540 027a FFF7FEFF 		bl	HF_DAC_1_Start
+ 317:main.c        ****                 LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 541              		.loc 1 317 0
+ 542 027e FFF7FEFF 		bl	LF_DAC_1_Start
+ 318:main.c        ****                 
+ 319:main.c        ****                 // Trigger "User Input" Interrupt
+ 320:main.c        ****                 Input_Flag_Write(1);
+ 543              		.loc 1 320 0
+ 544 0282 0120     		movs	r0, #1
+ 545 0284 FFF7FEFF 		bl	Input_Flag_Write
+ 321:main.c        ****                 
+ 322:main.c        ****                 break;
+ 546              		.loc 1 322 0
+ 547 0288 D5E0     		b	.L27
+ 548              	.L20:
+ 323:main.c        ****                 
+ 324:main.c        ****             case '5':
+ 325:main.c        ****                 UART_1_PutString("5");
+ 549              		.loc 1 325 0
+ 550 028a 4F48     		ldr	r0, .L33+44
+ 551 028c FFF7FEFF 		bl	UART_1_PutString
+ 326:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 552              		.loc 1 326 0
+ 553 0290 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 327:main.c        ****                 
+ 328:main.c        ****                 // Configure Muxes
+ 329:main.c        ****                 HF_SW1_Write(1);    // 1336 Hz (2,5,8,0)
+ 554              		.loc 1 329 0
+ 555 0294 0120     		movs	r0, #1
+ 556 0296 FFF7FEFF 		bl	HF_SW1_Write
+ 330:main.c        ****                 LF_SW1_Write(1);    // 770  Hz (4,5,6)
+ 557              		.loc 1 330 0
+ 558 029a 0120     		movs	r0, #1
+ 559 029c FFF7FEFF 		bl	LF_SW1_Write
+ 331:main.c        ****                 
+ 332:main.c        ****                 // Enable Components
+ 333:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 560              		.loc 1 333 0
+ 561 02a0 FFF7FEFF 		bl	HF_DAC_1_Start
+ 334:main.c        ****                 LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 562              		.loc 1 334 0
+ 563 02a4 FFF7FEFF 		bl	LF_DAC_1_Start
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 17
+
+
+ 335:main.c        ****                 
+ 336:main.c        ****                 // Trigger "User Input" Interrupt
+ 337:main.c        ****                 Input_Flag_Write(1);
+ 564              		.loc 1 337 0
+ 565 02a8 0120     		movs	r0, #1
+ 566 02aa FFF7FEFF 		bl	Input_Flag_Write
+ 338:main.c        ****                 
+ 339:main.c        ****                 break;
+ 567              		.loc 1 339 0
+ 568 02ae C2E0     		b	.L27
+ 569              	.L21:
+ 340:main.c        ****                 
+ 341:main.c        ****             case '6':
+ 342:main.c        ****                 UART_1_PutString("6");
+ 570              		.loc 1 342 0
+ 571 02b0 4648     		ldr	r0, .L33+48
+ 572 02b2 FFF7FEFF 		bl	UART_1_PutString
+ 343:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 573              		.loc 1 343 0
+ 574 02b6 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 344:main.c        ****                 
+ 345:main.c        ****                 // Configure Muxes
+ 346:main.c        ****                 HF_SW2_Write(0);    // 1477 Hz (3,6,9,#)
+ 575              		.loc 1 346 0
+ 576 02ba 0020     		movs	r0, #0
+ 577 02bc FFF7FEFF 		bl	HF_SW2_Write
+ 347:main.c        ****                 LF_SW1_Write(1);    // 770  Hz (4,5,6)
+ 578              		.loc 1 347 0
+ 579 02c0 0120     		movs	r0, #1
+ 580 02c2 FFF7FEFF 		bl	LF_SW1_Write
+ 348:main.c        ****                 
+ 349:main.c        ****                 // Enable Components
+ 350:main.c        ****                 HF_DAC_2_Start();   // (3,6,9,#)
+ 581              		.loc 1 350 0
+ 582 02c6 FFF7FEFF 		bl	HF_DAC_2_Start
+ 351:main.c        ****                 LF_DAC_1_Start();   // (1,2,3,4,5,6)
+ 583              		.loc 1 351 0
+ 584 02ca FFF7FEFF 		bl	LF_DAC_1_Start
+ 352:main.c        ****                 
+ 353:main.c        ****                 // Trigger "User Input" Interrupt
+ 354:main.c        ****                 Input_Flag_Write(1);
+ 585              		.loc 1 354 0
+ 586 02ce 0120     		movs	r0, #1
+ 587 02d0 FFF7FEFF 		bl	Input_Flag_Write
+ 355:main.c        ****                 
+ 356:main.c        ****                 break;
+ 588              		.loc 1 356 0
+ 589 02d4 AFE0     		b	.L27
+ 590              	.L22:
+ 357:main.c        ****                 
+ 358:main.c        ****             case '7':
+ 359:main.c        ****                 UART_1_PutString("7");
+ 591              		.loc 1 359 0
+ 592 02d6 3E48     		ldr	r0, .L33+52
+ 593 02d8 FFF7FEFF 		bl	UART_1_PutString
+ 360:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 594              		.loc 1 360 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 18
+
+
+ 595 02dc FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 361:main.c        ****                 
+ 362:main.c        ****                 // Configure Muxes
+ 363:main.c        ****                 HF_SW1_Write(0);    // 1209 Hz (1,4,7,*)
+ 596              		.loc 1 363 0
+ 597 02e0 0020     		movs	r0, #0
+ 598 02e2 FFF7FEFF 		bl	HF_SW1_Write
+ 364:main.c        ****                 LF_SW2_Write(0);    // 852  Hz (7,8,9)
+ 599              		.loc 1 364 0
+ 600 02e6 0020     		movs	r0, #0
+ 601 02e8 FFF7FEFF 		bl	LF_SW2_Write
+ 365:main.c        ****                 
+ 366:main.c        ****                 // Enable Components
+ 367:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 602              		.loc 1 367 0
+ 603 02ec FFF7FEFF 		bl	HF_DAC_1_Start
+ 368:main.c        ****                 LF_DAC_2_Start();   // (7,8,9,*,0,#)
+ 604              		.loc 1 368 0
+ 605 02f0 FFF7FEFF 		bl	LF_DAC_2_Start
+ 369:main.c        ****                 
+ 370:main.c        ****                 // Trigger "User Input" Interrupt
+ 371:main.c        ****                 Input_Flag_Write(1);
+ 606              		.loc 1 371 0
+ 607 02f4 0120     		movs	r0, #1
+ 608 02f6 FFF7FEFF 		bl	Input_Flag_Write
+ 372:main.c        ****                 
+ 373:main.c        ****                 break;
+ 609              		.loc 1 373 0
+ 610 02fa 9CE0     		b	.L27
+ 611              	.L23:
+ 374:main.c        ****                 
+ 375:main.c        ****             case '8':
+ 376:main.c        ****                 UART_1_PutString("8");
+ 612              		.loc 1 376 0
+ 613 02fc 3548     		ldr	r0, .L33+56
+ 614 02fe FFF7FEFF 		bl	UART_1_PutString
+ 377:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 615              		.loc 1 377 0
+ 616 0302 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 378:main.c        ****                 
+ 379:main.c        ****                 // Configure Muxes
+ 380:main.c        ****                 HF_SW1_Write(1);    // 1336 Hz (2,5,8,0)
+ 617              		.loc 1 380 0
+ 618 0306 0120     		movs	r0, #1
+ 619 0308 FFF7FEFF 		bl	HF_SW1_Write
+ 381:main.c        ****                 LF_SW2_Write(0);    // 852  Hz (7,8,9)
+ 620              		.loc 1 381 0
+ 621 030c 0020     		movs	r0, #0
+ 622 030e FFF7FEFF 		bl	LF_SW2_Write
+ 382:main.c        ****                 
+ 383:main.c        ****                 // Enable Components
+ 384:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 623              		.loc 1 384 0
+ 624 0312 FFF7FEFF 		bl	HF_DAC_1_Start
+ 385:main.c        ****                 LF_DAC_2_Start();   // (7,8,9,*,0,#)
+ 625              		.loc 1 385 0
+ 626 0316 FFF7FEFF 		bl	LF_DAC_2_Start
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 19
+
+
+ 386:main.c        ****                 
+ 387:main.c        ****                 // Trigger "User Input" Interrupt
+ 388:main.c        ****                 Input_Flag_Write(1);
+ 627              		.loc 1 388 0
+ 628 031a 0120     		movs	r0, #1
+ 629 031c FFF7FEFF 		bl	Input_Flag_Write
+ 389:main.c        ****                 
+ 390:main.c        ****                 break;
+ 630              		.loc 1 390 0
+ 631 0320 89E0     		b	.L27
+ 632              	.L24:
+ 391:main.c        ****                 
+ 392:main.c        ****             case '9':
+ 393:main.c        ****                 UART_1_PutString("9");
+ 633              		.loc 1 393 0
+ 634 0322 2D48     		ldr	r0, .L33+60
+ 635 0324 FFF7FEFF 		bl	UART_1_PutString
+ 394:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 636              		.loc 1 394 0
+ 637 0328 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 395:main.c        ****                 
+ 396:main.c        ****                 // Configure Muxes
+ 397:main.c        ****                 HF_SW2_Write(0);    // 1477 Hz (3,6,9,#)
+ 638              		.loc 1 397 0
+ 639 032c 0020     		movs	r0, #0
+ 640 032e FFF7FEFF 		bl	HF_SW2_Write
+ 398:main.c        ****                 LF_SW2_Write(0);    // 852  Hz (7,8,9)
+ 641              		.loc 1 398 0
+ 642 0332 0020     		movs	r0, #0
+ 643 0334 FFF7FEFF 		bl	LF_SW2_Write
+ 399:main.c        ****                 
+ 400:main.c        ****                 // Enable Components
+ 401:main.c        ****                 HF_DAC_2_Start();   // (3,6,9,#)
+ 644              		.loc 1 401 0
+ 645 0338 FFF7FEFF 		bl	HF_DAC_2_Start
+ 402:main.c        ****                 LF_DAC_2_Start();   // (7,8,9,*,0,#)
+ 646              		.loc 1 402 0
+ 647 033c FFF7FEFF 		bl	LF_DAC_2_Start
+ 403:main.c        ****                 
+ 404:main.c        ****                 // Trigger "User Input" Interrupt
+ 405:main.c        ****                 Input_Flag_Write(1);
+ 648              		.loc 1 405 0
+ 649 0340 0120     		movs	r0, #1
+ 650 0342 FFF7FEFF 		bl	Input_Flag_Write
+ 406:main.c        ****                 
+ 407:main.c        ****                 break;
+ 651              		.loc 1 407 0
+ 652 0346 76E0     		b	.L27
+ 653              	.L14:
+ 408:main.c        ****                 
+ 409:main.c        ****             case '*':
+ 410:main.c        ****                 UART_1_PutString("*");
+ 654              		.loc 1 410 0
+ 655 0348 2448     		ldr	r0, .L33+64
+ 656 034a FFF7FEFF 		bl	UART_1_PutString
+ 411:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 657              		.loc 1 411 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 20
+
+
+ 658 034e FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 412:main.c        ****                 
+ 413:main.c        ****                 // Configure Muxes
+ 414:main.c        ****                 HF_SW1_Write(0);    // 1209 Hz (1,4,7,*)
+ 659              		.loc 1 414 0
+ 660 0352 0020     		movs	r0, #0
+ 661 0354 FFF7FEFF 		bl	HF_SW1_Write
+ 415:main.c        ****                 LF_SW2_Write(1);    // 941  Hz (*,0,#)
+ 662              		.loc 1 415 0
+ 663 0358 0120     		movs	r0, #1
+ 664 035a FFF7FEFF 		bl	LF_SW2_Write
+ 416:main.c        ****                 
+ 417:main.c        ****                 // Enable Components
+ 418:main.c        ****                 HF_DAC_1_Start();   // (1,2,4,5,7,8,*,0)
+ 665              		.loc 1 418 0
+ 666 035e FFF7FEFF 		bl	HF_DAC_1_Start
+ 419:main.c        ****                 LF_DAC_2_Start();   // (7,8,9,*,0,#)
+ 667              		.loc 1 419 0
+ 668 0362 FFF7FEFF 		bl	LF_DAC_2_Start
+ 420:main.c        ****                 
+ 421:main.c        ****                 // Trigger "User Input" Interrupt
+ 422:main.c        ****                 Input_Flag_Write(1);
+ 669              		.loc 1 422 0
+ 670 0366 0120     		movs	r0, #1
+ 671 0368 FFF7FEFF 		bl	Input_Flag_Write
+ 423:main.c        ****                 
+ 424:main.c        ****                 break;
+ 672              		.loc 1 424 0
+ 673 036c 63E0     		b	.L27
+ 674              	.L12:
+ 425:main.c        ****                 
+ 426:main.c        ****             case '#':
+ 427:main.c        ****                 UART_1_PutString("#");
+ 675              		.loc 1 427 0
+ 676 036e 1C48     		ldr	r0, .L33+68
+ 677 0370 FFF7FEFF 		bl	UART_1_PutString
+ 428:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 678              		.loc 1 428 0
+ 679 0374 FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 429:main.c        ****                 
+ 430:main.c        ****                 // Configure Muxes
+ 431:main.c        ****                 HF_SW2_Write(0);    // 1477 Hz (3,6,9,#)
+ 680              		.loc 1 431 0
+ 681 0378 0020     		movs	r0, #0
+ 682 037a FFF7FEFF 		bl	HF_SW2_Write
+ 432:main.c        ****                 LF_SW2_Write(1);    // 941  Hz (*,0,#)
+ 683              		.loc 1 432 0
+ 684 037e 0120     		movs	r0, #1
+ 685 0380 FFF7FEFF 		bl	LF_SW2_Write
+ 433:main.c        ****                 
+ 434:main.c        ****                 // Enable Components
+ 435:main.c        ****                 HF_DAC_2_Start();   // (3,6,9,#)
+ 686              		.loc 1 435 0
+ 687 0384 FFF7FEFF 		bl	HF_DAC_2_Start
+ 436:main.c        ****                 LF_DAC_2_Start();   // (7,8,9,*,0,#)
+ 688              		.loc 1 436 0
+ 689 0388 FFF7FEFF 		bl	LF_DAC_2_Start
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 21
+
+
+ 437:main.c        ****                 
+ 438:main.c        ****                 // Trigger "User Input" Interrupt
+ 439:main.c        ****                 Input_Flag_Write(1);
+ 690              		.loc 1 439 0
+ 691 038c 0120     		movs	r0, #1
+ 692 038e FFF7FEFF 		bl	Input_Flag_Write
+ 440:main.c        ****                 
+ 441:main.c        ****                 break;
+ 693              		.loc 1 441 0
+ 694 0392 50E0     		b	.L27
+ 695              	.L25:
+ 696              	.LBB2:
+ 442:main.c        **** 
+ 443:main.c        ****             case 'S':
+ 444:main.c        ****             case 's':
+ 445:main.c        ****                 //Get Samples
+ 446:main.c        ****                 for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
+ 697              		.loc 1 446 0
+ 698 0394 0023     		movs	r3, #0
+ 699 0396 FB80     		strh	r3, [r7, #6]	@ movhi
+ 700 0398 3EE0     		b	.L28
+ 701              	.L34:
+ 702 039a 00BF     		.align	2
+ 703              	.L33:
+ 704 039c 00000000 		.word	ContinuouslySendData
+ 705 03a0 00000000 		.word	SendSingleByte
+ 706 03a4 00000000 		.word	SendEmulatedData
+ 707 03a8 00000000 		.word	EmulatedData
+ 708 03ac 00000000 		.word	Transmit
+ 709 03b0 00000000 		.word	UserInput
+ 710 03b4 10000000 		.word	.LC4
+ 711 03b8 14000000 		.word	.LC5
+ 712 03bc 18000000 		.word	.LC6
+ 713 03c0 1C000000 		.word	.LC7
+ 714 03c4 20000000 		.word	.LC8
+ 715 03c8 24000000 		.word	.LC9
+ 716 03cc 28000000 		.word	.LC10
+ 717 03d0 2C000000 		.word	.LC11
+ 718 03d4 30000000 		.word	.LC12
+ 719 03d8 34000000 		.word	.LC13
+ 720 03dc 38000000 		.word	.LC14
+ 721 03e0 3C000000 		.word	.LC15
+ 722              	.L30:
+ 447:main.c        ****                 {                 
+ 448:main.c        ****                     /* Check to see if an ADC conversion has completed */
+ 449:main.c        ****                     if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
+ 723              		.loc 1 449 0
+ 724 03e4 0120     		movs	r0, #1
+ 725 03e6 FFF7FEFF 		bl	ADC_DelSig_1_IsEndConversion
+ 726 03ea 0346     		mov	r3, r0
+ 727 03ec 002B     		cmp	r3, #0
+ 728 03ee 13D0     		beq	.L28
+ 450:main.c        ****                     {
+ 451:main.c        ****                         Output = ADC_DelSig_1_GetResult16();
+ 729              		.loc 1 451 0
+ 730 03f0 FFF7FEFF 		bl	ADC_DelSig_1_GetResult16
+ 731 03f4 0346     		mov	r3, r0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 22
+
+
+ 732 03f6 9AB2     		uxth	r2, r3
+ 733 03f8 0F4B     		ldr	r3, .L35
+ 734 03fa 1A80     		strh	r2, [r3]	@ movhi
+ 452:main.c        ****                         array[sampleNumber] = Output;                       
+ 735              		.loc 1 452 0
+ 736 03fc B7F90630 		ldrsh	r3, [r7, #6]
+ 737 0400 0D4A     		ldr	r2, .L35
+ 738 0402 1288     		ldrh	r2, [r2]
+ 739 0404 11B2     		sxth	r1, r2
+ 740 0406 0D4A     		ldr	r2, .L35+4
+ 741 0408 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
+ 453:main.c        ****                         sampleNumber ++;
+ 742              		.loc 1 453 0
+ 743 040c B7F90630 		ldrsh	r3, [r7, #6]
+ 744 0410 9BB2     		uxth	r3, r3
+ 745 0412 0133     		adds	r3, r3, #1
+ 746 0414 9BB2     		uxth	r3, r3
+ 747 0416 FB80     		strh	r3, [r7, #6]	@ movhi
+ 748              	.L28:
+ 446:main.c        ****                 {                 
+ 749              		.loc 1 446 0 discriminator 1
+ 750 0418 B7F90630 		ldrsh	r3, [r7, #6]
+ 751 041c B3F5FA6F 		cmp	r3, #2000
+ 752 0420 E0DB     		blt	.L30
+ 753              	.LBE2:
+ 454:main.c        ****                     }
+ 455:main.c        ****                 }
+ 456:main.c        ****                 // Print samples 
+ 457:main.c        ****                 //for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber ++)
+ 458:main.c        ****                 //{
+ 459:main.c        ****                     //sprintf(TransmitBuffer, "%d\r\n", array[sampleNumber]);
+ 460:main.c        ****                     //UART_1_PutString(TransmitBuffer);
+ 461:main.c        ****                 //}
+ 462:main.c        ****                 // Decode data
+ 463:main.c        ****                 
+ 464:main.c        ****                 DTMF();              
+ 754              		.loc 1 464 0
+ 755 0422 FFF7FEFF 		bl	DTMF
+ 465:main.c        ****                 
+ 466:main.c        ****                 break;
+ 756              		.loc 1 466 0
+ 757 0426 06E0     		b	.L27
+ 758              	.L26:
+ 467:main.c        ****             
+ 468:main.c        ****             case 'X':    
+ 469:main.c        ****             case 'x':
+ 470:main.c        ****                 UART_1_PutString("Disabling DACs ...");
+ 759              		.loc 1 470 0
+ 760 0428 0548     		ldr	r0, .L35+8
+ 761 042a FFF7FEFF 		bl	UART_1_PutString
+ 471:main.c        ****                 DisableAllDigitalToAnalogConverters();
+ 762              		.loc 1 471 0
+ 763 042e FFF7FEFF 		bl	DisableAllDigitalToAnalogConverters
+ 472:main.c        ****                 
+ 473:main.c        ****                 break;
+ 764              		.loc 1 473 0
+ 765 0432 00E0     		b	.L27
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 23
+
+
+ 766              	.L32:
+ 474:main.c        ****                 
+ 475:main.c        ****             default:
+ 476:main.c        ****                 /* Place error handling code here */
+ 477:main.c        ****                 break;    
+ 767              		.loc 1 477 0
+ 768 0434 00BF     		nop
+ 769              	.L27:
+ 478:main.c        ****         }
+ 479:main.c        ****         
+ 480:main.c        ****     }
+ 770              		.loc 1 480 0 discriminator 1
+ 771 0436 11E6     		b	.L31
+ 772              	.L36:
+ 773              		.align	2
+ 774              	.L35:
+ 775 0438 00000000 		.word	Output
+ 776 043c 00000000 		.word	array
+ 777 0440 40000000 		.word	.LC16
+ 778              		.cfi_endproc
+ 779              	.LFE67:
+ 780              		.size	main, .-main
+ 781              		.global	__aeabi_i2d
+ 782              		.global	__aeabi_dmul
+ 783              		.global	__aeabi_ddiv
+ 784              		.section	.rodata
+ 785 0053 00       		.align	2
+ 786              	.LC17:
+ 787 0054 4C6F3D25 		.ascii	"Lo=%d\015\012\000"
+ 787      640D0A00 
+ 788              		.align	2
+ 789              	.LC18:
+ 790 005c 48693D25 		.ascii	"Hi=%d\015\012\000"
+ 790      640D0A00 
+ 791              		.align	2
+ 792              	.LC0:
+ 793 0064 B9020000 		.word	697
+ 794 0068 02030000 		.word	770
+ 795 006c 54030000 		.word	852
+ 796 0070 AD030000 		.word	941
+ 797              		.align	2
+ 798              	.LC1:
+ 799 0074 B9040000 		.word	1209
+ 800 0078 38050000 		.word	1336
+ 801 007c C5050000 		.word	1477
+ 802              		.section	.text.DTMF,"ax",%progbits
+ 803              		.align	2
+ 804              		.global	DTMF
+ 805              		.thumb
+ 806              		.thumb_func
+ 807              		.type	DTMF, %function
+ 808              	DTMF:
+ 809              	.LFB68:
+ 481:main.c        **** }
+ 482:main.c        **** 
+ 483:main.c        **** 
+ 484:main.c        **** 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 24
+
+
+ 485:main.c        **** void DTMF()
+ 486:main.c        **** {
+ 810              		.loc 1 486 0
+ 811              		.cfi_startproc
+ 812              		@ args = 0, pretend = 0, frame = 16112
+ 813              		@ frame_needed = 1, uses_anonymous_args = 0
+ 814 0000 90B5     		push	{r4, r7, lr}
+ 815              		.cfi_def_cfa_offset 12
+ 816              		.cfi_offset 4, -12
+ 817              		.cfi_offset 7, -8
+ 818              		.cfi_offset 14, -4
+ 819 0002 ADF57B5D 		sub	sp, sp, #16064
+ 820              		.cfi_def_cfa_offset 16076
+ 821 0006 8DB0     		sub	sp, sp, #52
+ 822              		.cfi_def_cfa_offset 16128
+ 823 0008 00AF     		add	r7, sp, #0
+ 824              		.cfi_def_cfa_register 7
+ 825              	.LBB3:
+ 487:main.c        ****     //UART_1_PutString("DTMF\n\r");
+ 488:main.c        ****     double signal[NUMBER_OF_SAMPLES];
+ 489:main.c        ****     for(int i = 0; i < NUMBER_OF_SAMPLES; i++)
+ 826              		.loc 1 489 0
+ 827 000a 0023     		movs	r3, #0
+ 828 000c 07F57B52 		add	r2, r7, #16064
+ 829 0010 02F12C02 		add	r2, r2, #44
+ 830 0014 1360     		str	r3, [r2]
+ 831 0016 54E0     		b	.L38
+ 832              	.L39:
+ 833              	.LBB4:
+ 490:main.c        ****     {
+ 491:main.c        ****         double pdata = (double)array[i];
+ 834              		.loc 1 491 0 discriminator 3
+ 835 0018 A44A     		ldr	r2, .L44
+ 836 001a 07F57B53 		add	r3, r7, #16064
+ 837 001e 03F12C03 		add	r3, r3, #44
+ 838 0022 1B68     		ldr	r3, [r3]
+ 839 0024 32F91330 		ldrsh	r3, [r2, r3, lsl #1]
+ 840 0028 1846     		mov	r0, r3
+ 841 002a FFF7FEFF 		bl	__aeabi_i2d
+ 842 002e 0346     		mov	r3, r0
+ 843 0030 0C46     		mov	r4, r1
+ 844 0032 07F57B52 		add	r2, r7, #16064
+ 845 0036 02F12002 		add	r2, r2, #32
+ 846 003a C2E90034 		strd	r3, [r2]
+ 492:main.c        ****         pdata = pdata*0.5;
+ 847              		.loc 1 492 0 discriminator 3
+ 848 003e 4FF00002 		mov	r2, #0
+ 849 0042 9B4B     		ldr	r3, .L44+4
+ 850 0044 07F57B51 		add	r1, r7, #16064
+ 851 0048 01F12001 		add	r1, r1, #32
+ 852 004c D1E90001 		ldrd	r0, [r1]
+ 853 0050 FFF7FEFF 		bl	__aeabi_dmul
+ 854 0054 0346     		mov	r3, r0
+ 855 0056 0C46     		mov	r4, r1
+ 856 0058 07F57B52 		add	r2, r7, #16064
+ 857 005c 02F12002 		add	r2, r2, #32
+ 858 0060 C2E90034 		strd	r3, [r2]
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 25
+
+
+ 493:main.c        ****         pdata = pdata/128;
+ 859              		.loc 1 493 0 discriminator 3
+ 860 0064 4FF00002 		mov	r2, #0
+ 861 0068 924B     		ldr	r3, .L44+8
+ 862 006a 07F57B51 		add	r1, r7, #16064
+ 863 006e 01F12001 		add	r1, r1, #32
+ 864 0072 D1E90001 		ldrd	r0, [r1]
+ 865 0076 FFF7FEFF 		bl	__aeabi_ddiv
+ 866 007a 0346     		mov	r3, r0
+ 867 007c 0C46     		mov	r4, r1
+ 868 007e 07F57B52 		add	r2, r7, #16064
+ 869 0082 02F12002 		add	r2, r2, #32
+ 870 0086 C2E90034 		strd	r3, [r2]
+ 494:main.c        ****         signal[i] = pdata;
+ 871              		.loc 1 494 0 discriminator 3
+ 872 008a 07F17003 		add	r3, r7, #112
+ 873 008e 183B     		subs	r3, r3, #24
+ 874 0090 07F57B52 		add	r2, r7, #16064
+ 875 0094 02F12C02 		add	r2, r2, #44
+ 876 0098 1268     		ldr	r2, [r2]
+ 877 009a D200     		lsls	r2, r2, #3
+ 878 009c 1A44     		add	r2, r2, r3
+ 879 009e 07F57B53 		add	r3, r7, #16064
+ 880 00a2 03F12003 		add	r3, r3, #32
+ 881 00a6 18CB     		ldmia	r3, {r3-r4}
+ 882 00a8 C2E90034 		strd	r3, [r2]
+ 883              	.LBE4:
+ 489:main.c        ****     {
+ 884              		.loc 1 489 0 discriminator 3
+ 885 00ac 07F57B53 		add	r3, r7, #16064
+ 886 00b0 03F12C03 		add	r3, r3, #44
+ 887 00b4 1B68     		ldr	r3, [r3]
+ 888 00b6 0133     		adds	r3, r3, #1
+ 889 00b8 07F57B52 		add	r2, r7, #16064
+ 890 00bc 02F12C02 		add	r2, r2, #44
+ 891 00c0 1360     		str	r3, [r2]
+ 892              	.L38:
+ 489:main.c        ****     {
+ 893              		.loc 1 489 0 is_stmt 0 discriminator 1
+ 894 00c2 07F57B53 		add	r3, r7, #16064
+ 895 00c6 03F12C03 		add	r3, r3, #44
+ 896 00ca 1B68     		ldr	r3, [r3]
+ 897 00cc B3F5FA6F 		cmp	r3, #2000
+ 898 00d0 A2DB     		blt	.L39
+ 899              	.LBE3:
+ 495:main.c        ****     }
+ 496:main.c        ****     
+ 497:main.c        ****     
+ 498:main.c        ****     double loAmplitudes[4] = {0, 0, 0, 0};
+ 900              		.loc 1 498 0 is_stmt 1
+ 901 00d2 07F17003 		add	r3, r7, #112
+ 902 00d6 383B     		subs	r3, r3, #56
+ 903 00d8 1846     		mov	r0, r3
+ 904 00da 2023     		movs	r3, #32
+ 905 00dc 1A46     		mov	r2, r3
+ 906 00de 0021     		movs	r1, #0
+ 907 00e0 FFF7FEFF 		bl	memset
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 26
+
+
+ 499:main.c        ****     double hiAmplitudes[3] = {0, 0, 0};
+ 908              		.loc 1 499 0
+ 909 00e4 07F13003 		add	r3, r7, #48
+ 910 00e8 103B     		subs	r3, r3, #16
+ 911 00ea 4FF00001 		mov	r1, #0
+ 912 00ee 4FF00002 		mov	r2, #0
+ 913 00f2 C3E90012 		strd	r1, [r3]
+ 914 00f6 07F13003 		add	r3, r7, #48
+ 915 00fa 103B     		subs	r3, r3, #16
+ 916 00fc 4FF00001 		mov	r1, #0
+ 917 0100 4FF00002 		mov	r2, #0
+ 918 0104 C3E90212 		strd	r1, [r3, #8]
+ 919 0108 07F13003 		add	r3, r7, #48
+ 920 010c 103B     		subs	r3, r3, #16
+ 921 010e 4FF00001 		mov	r1, #0
+ 922 0112 4FF00002 		mov	r2, #0
+ 923 0116 C3E90412 		strd	r1, [r3, #16]
+ 500:main.c        ****     int loFrequency[4] = {697, 770, 852, 941};
+ 924              		.loc 1 500 0
+ 925 011a 07F13003 		add	r3, r7, #48
+ 926 011e 203B     		subs	r3, r3, #32
+ 927 0120 654A     		ldr	r2, .L44+12
+ 928 0122 1C46     		mov	r4, r3
+ 929 0124 1346     		mov	r3, r2
+ 930 0126 0FCB     		ldmia	r3, {r0, r1, r2, r3}
+ 931 0128 84E80F00 		stmia	r4, {r0, r1, r2, r3}
+ 501:main.c        ****     int hiFrecuency[3] = {1209, 1336, 1477};
+ 932              		.loc 1 501 0
+ 933 012c 07F13003 		add	r3, r7, #48
+ 934 0130 2C3B     		subs	r3, r3, #44
+ 935 0132 624A     		ldr	r2, .L44+16
+ 936 0134 07CA     		ldmia	r2, {r0, r1, r2}
+ 937 0136 83E80700 		stmia	r3, {r0, r1, r2}
+ 938              	.LBB5:
+ 502:main.c        ****     
+ 503:main.c        ****     for(uint8 i = 0; i < 4; i++)
+ 939              		.loc 1 503 0
+ 940 013a 0023     		movs	r3, #0
+ 941 013c 07F57B52 		add	r2, r7, #16064
+ 942 0140 02F12B02 		add	r2, r2, #43
+ 943 0144 1370     		strb	r3, [r2]
+ 944 0146 2BE0     		b	.L40
+ 945              	.L41:
+ 504:main.c        ****     {
+ 505:main.c        ****         loAmplitudes[i] = Goertzel(NUMBER_OF_SAMPLES,loFrequency[i],SAMPLING_RATE, signal);
+ 946              		.loc 1 505 0 discriminator 3
+ 947 0148 07F57B53 		add	r3, r7, #16064
+ 948 014c 03F12B03 		add	r3, r3, #43
+ 949 0150 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
+ 950 0152 07F57B53 		add	r3, r7, #16064
+ 951 0156 03F12B03 		add	r3, r3, #43
+ 952 015a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 953 015c 07F13003 		add	r3, r7, #48
+ 954 0160 203B     		subs	r3, r3, #32
+ 955 0162 53F82210 		ldr	r1, [r3, r2, lsl #2]
+ 956 0166 07F17003 		add	r3, r7, #112
+ 957 016a 183B     		subs	r3, r3, #24
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 27
+
+
+ 958 016c 42F21072 		movw	r2, #10000
+ 959 0170 4FF4FA60 		mov	r0, #2000
+ 960 0174 FFF7FEFF 		bl	Goertzel
+ 961 0178 0A46     		mov	r2, r1
+ 962 017a 0146     		mov	r1, r0
+ 963 017c 07F17003 		add	r3, r7, #112
+ 964 0180 383B     		subs	r3, r3, #56
+ 965 0182 E000     		lsls	r0, r4, #3
+ 966 0184 0344     		add	r3, r3, r0
+ 967 0186 C3E90012 		strd	r1, [r3]
+ 503:main.c        ****     {
+ 968              		.loc 1 503 0 discriminator 3
+ 969 018a 07F57B53 		add	r3, r7, #16064
+ 970 018e 03F12B03 		add	r3, r3, #43
+ 971 0192 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 972 0194 0133     		adds	r3, r3, #1
+ 973 0196 07F57B52 		add	r2, r7, #16064
+ 974 019a 02F12B02 		add	r2, r2, #43
+ 975 019e 1370     		strb	r3, [r2]
+ 976              	.L40:
+ 503:main.c        ****     {
+ 977              		.loc 1 503 0 is_stmt 0 discriminator 1
+ 978 01a0 07F57B53 		add	r3, r7, #16064
+ 979 01a4 03F12B03 		add	r3, r3, #43
+ 980 01a8 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 981 01aa 032B     		cmp	r3, #3
+ 982 01ac CCD9     		bls	.L41
+ 983              	.LBE5:
+ 984              	.LBB6:
+ 506:main.c        ****     }
+ 507:main.c        ****     
+ 508:main.c        ****     for(uint8 i = 0; i < 3; i++)
+ 985              		.loc 1 508 0 is_stmt 1
+ 986 01ae 0023     		movs	r3, #0
+ 987 01b0 07F57B52 		add	r2, r7, #16064
+ 988 01b4 02F12A02 		add	r2, r2, #42
+ 989 01b8 1370     		strb	r3, [r2]
+ 990 01ba 2BE0     		b	.L42
+ 991              	.L43:
+ 509:main.c        ****     {
+ 510:main.c        ****         hiAmplitudes[i] = Goertzel(NUMBER_OF_SAMPLES,hiFrecuency[i],SAMPLING_RATE, signal);
+ 992              		.loc 1 510 0 discriminator 3
+ 993 01bc 07F57B53 		add	r3, r7, #16064
+ 994 01c0 03F12A03 		add	r3, r3, #42
+ 995 01c4 1C78     		ldrb	r4, [r3]	@ zero_extendqisi2
+ 996 01c6 07F57B53 		add	r3, r7, #16064
+ 997 01ca 03F12A03 		add	r3, r3, #42
+ 998 01ce 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 999 01d0 07F13003 		add	r3, r7, #48
+ 1000 01d4 2C3B     		subs	r3, r3, #44
+ 1001 01d6 53F82210 		ldr	r1, [r3, r2, lsl #2]
+ 1002 01da 07F17003 		add	r3, r7, #112
+ 1003 01de 183B     		subs	r3, r3, #24
+ 1004 01e0 42F21072 		movw	r2, #10000
+ 1005 01e4 4FF4FA60 		mov	r0, #2000
+ 1006 01e8 FFF7FEFF 		bl	Goertzel
+ 1007 01ec 0A46     		mov	r2, r1
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 28
+
+
+ 1008 01ee 0146     		mov	r1, r0
+ 1009 01f0 07F13003 		add	r3, r7, #48
+ 1010 01f4 103B     		subs	r3, r3, #16
+ 1011 01f6 E000     		lsls	r0, r4, #3
+ 1012 01f8 0344     		add	r3, r3, r0
+ 1013 01fa C3E90012 		strd	r1, [r3]
+ 508:main.c        ****     {
+ 1014              		.loc 1 508 0 discriminator 3
+ 1015 01fe 07F57B53 		add	r3, r7, #16064
+ 1016 0202 03F12A03 		add	r3, r3, #42
+ 1017 0206 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1018 0208 0133     		adds	r3, r3, #1
+ 1019 020a 07F57B52 		add	r2, r7, #16064
+ 1020 020e 02F12A02 		add	r2, r2, #42
+ 1021 0212 1370     		strb	r3, [r2]
+ 1022              	.L42:
+ 508:main.c        ****     {
+ 1023              		.loc 1 508 0 is_stmt 0 discriminator 1
+ 1024 0214 07F57B53 		add	r3, r7, #16064
+ 1025 0218 03F12A03 		add	r3, r3, #42
+ 1026 021c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1027 021e 022B     		cmp	r3, #2
+ 1028 0220 CCD9     		bls	.L43
+ 1029              	.LBE6:
+ 511:main.c        ****     }
+ 512:main.c        ****     
+ 513:main.c        ****     uint16 loAmp = getMaxValue(loAmplitudes, 4);
+ 1030              		.loc 1 513 0 is_stmt 1
+ 1031 0222 07F17003 		add	r3, r7, #112
+ 1032 0226 383B     		subs	r3, r3, #56
+ 1033 0228 0421     		movs	r1, #4
+ 1034 022a 1846     		mov	r0, r3
+ 1035 022c FFF7FEFF 		bl	getMaxValue
+ 1036 0230 0346     		mov	r3, r0
+ 1037 0232 07F57B52 		add	r2, r7, #16064
+ 1038 0236 02F11E02 		add	r2, r2, #30
+ 1039 023a 1380     		strh	r3, [r2]	@ movhi
+ 514:main.c        ****     uint16 hiAmp = getMaxValue(hiAmplitudes, 3);
+ 1040              		.loc 1 514 0
+ 1041 023c 07F13003 		add	r3, r7, #48
+ 1042 0240 103B     		subs	r3, r3, #16
+ 1043 0242 0321     		movs	r1, #3
+ 1044 0244 1846     		mov	r0, r3
+ 1045 0246 FFF7FEFF 		bl	getMaxValue
+ 1046 024a 0346     		mov	r3, r0
+ 1047 024c 07F57B52 		add	r2, r7, #16064
+ 1048 0250 02F11C02 		add	r2, r2, #28
+ 1049 0254 1380     		strh	r3, [r2]	@ movhi
+ 515:main.c        ****     
+ 516:main.c        ****     
+ 517:main.c        ****     sprintf(TransmitBuffer, "Lo=%d\r\n", loFrequency[loAmp]);
+ 1050              		.loc 1 517 0
+ 1051 0256 07F57B53 		add	r3, r7, #16064
+ 1052 025a 03F11E03 		add	r3, r3, #30
+ 1053 025e 1A88     		ldrh	r2, [r3]
+ 1054 0260 07F13003 		add	r3, r7, #48
+ 1055 0264 203B     		subs	r3, r3, #32
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 29
+
+
+ 1056 0266 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 1057 026a 1A46     		mov	r2, r3
+ 1058 026c 1449     		ldr	r1, .L44+20
+ 1059 026e 1548     		ldr	r0, .L44+24
+ 1060 0270 FFF7FEFF 		bl	sprintf
+ 518:main.c        ****     UART_1_PutString(TransmitBuffer);
+ 1061              		.loc 1 518 0
+ 1062 0274 1348     		ldr	r0, .L44+24
+ 1063 0276 FFF7FEFF 		bl	UART_1_PutString
+ 519:main.c        ****     sprintf(TransmitBuffer, "Hi=%d\r\n", hiFrecuency[hiAmp]);
+ 1064              		.loc 1 519 0
+ 1065 027a 07F57B53 		add	r3, r7, #16064
+ 1066 027e 03F11C03 		add	r3, r3, #28
+ 1067 0282 1A88     		ldrh	r2, [r3]
+ 1068 0284 07F13003 		add	r3, r7, #48
+ 1069 0288 2C3B     		subs	r3, r3, #44
+ 1070 028a 53F82230 		ldr	r3, [r3, r2, lsl #2]
+ 1071 028e 1A46     		mov	r2, r3
+ 1072 0290 0D49     		ldr	r1, .L44+28
+ 1073 0292 0C48     		ldr	r0, .L44+24
+ 1074 0294 FFF7FEFF 		bl	sprintf
+ 520:main.c        ****     UART_1_PutString(TransmitBuffer);
+ 1075              		.loc 1 520 0
+ 1076 0298 0A48     		ldr	r0, .L44+24
+ 1077 029a FFF7FEFF 		bl	UART_1_PutString
+ 521:main.c        **** }
+ 1078              		.loc 1 521 0
+ 1079 029e 00BF     		nop
+ 1080 02a0 07F57B57 		add	r7, r7, #16064
+ 1081 02a4 3437     		adds	r7, r7, #52
+ 1082              		.cfi_def_cfa_offset 12
+ 1083 02a6 BD46     		mov	sp, r7
+ 1084              		.cfi_def_cfa_register 13
+ 1085              		@ sp needed
+ 1086 02a8 90BD     		pop	{r4, r7, pc}
+ 1087              	.L45:
+ 1088 02aa 00BF     		.align	2
+ 1089              	.L44:
+ 1090 02ac 00000000 		.word	array
+ 1091 02b0 0000E03F 		.word	1071644672
+ 1092 02b4 00006040 		.word	1080033280
+ 1093 02b8 64000000 		.word	.LC0
+ 1094 02bc 74000000 		.word	.LC1
+ 1095 02c0 54000000 		.word	.LC17
+ 1096 02c4 00000000 		.word	TransmitBuffer
+ 1097 02c8 5C000000 		.word	.LC18
+ 1098              		.cfi_endproc
+ 1099              	.LFE68:
+ 1100              		.size	DTMF, .-DTMF
+ 1101              		.global	__aeabi_dadd
+ 1102              		.global	__aeabi_d2iz
+ 1103              		.global	__aeabi_dsub
+ 1104              		.section	.text.Goertzel,"ax",%progbits
+ 1105              		.align	2
+ 1106              		.global	Goertzel
+ 1107              		.thumb
+ 1108              		.thumb_func
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 30
+
+
+ 1109              		.type	Goertzel, %function
+ 1110              	Goertzel:
+ 1111              	.LFB69:
+ 522:main.c        **** 
+ 523:main.c        **** double Goertzel(int numSamples, int tFrequency,int tSamplingRate, double data[])
+ 524:main.c        **** {
+ 1112              		.loc 1 524 0
+ 1113              		.cfi_startproc
+ 1114              		@ args = 0, pretend = 0, frame = 136
+ 1115              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1116 0000 B0B5     		push	{r4, r5, r7, lr}
+ 1117              		.cfi_def_cfa_offset 16
+ 1118              		.cfi_offset 4, -16
+ 1119              		.cfi_offset 5, -12
+ 1120              		.cfi_offset 7, -8
+ 1121              		.cfi_offset 14, -4
+ 1122 0002 A2B0     		sub	sp, sp, #136
+ 1123              		.cfi_def_cfa_offset 152
+ 1124 0004 00AF     		add	r7, sp, #0
+ 1125              		.cfi_def_cfa_register 7
+ 1126 0006 F860     		str	r0, [r7, #12]
+ 1127 0008 B960     		str	r1, [r7, #8]
+ 1128 000a 7A60     		str	r2, [r7, #4]
+ 1129 000c 3B60     		str	r3, [r7]
+ 525:main.c        ****     int k;
+ 526:main.c        ****     int i;
+ 527:main.c        ****     double floatnumSamples;
+ 528:main.c        ****     double omega;
+ 529:main.c        ****     double sine;
+ 530:main.c        ****     double cosine;
+ 531:main.c        ****     double coeff;
+ 532:main.c        ****     double q0;
+ 533:main.c        ****     double q1;
+ 534:main.c        ****     double q2;
+ 535:main.c        ****     double magnitude;
+ 536:main.c        ****     double real;
+ 537:main.c        ****     double imag;
+ 538:main.c        ****     
+ 539:main.c        ****     double scalingFactor = numSamples / 2.0;
+ 1130              		.loc 1 539 0
+ 1131 000e F868     		ldr	r0, [r7, #12]
+ 1132 0010 FFF7FEFF 		bl	__aeabi_i2d
+ 1133 0014 4FF00002 		mov	r2, #0
+ 1134 0018 4FF08043 		mov	r3, #1073741824
+ 1135 001c FFF7FEFF 		bl	__aeabi_ddiv
+ 1136 0020 0346     		mov	r3, r0
+ 1137 0022 0C46     		mov	r4, r1
+ 1138 0024 C7E91A34 		strd	r3, [r7, #104]
+ 540:main.c        **** 
+ 541:main.c        ****     floatnumSamples = numSamples;
+ 1139              		.loc 1 541 0
+ 1140 0028 F868     		ldr	r0, [r7, #12]
+ 1141 002a FFF7FEFF 		bl	__aeabi_i2d
+ 1142 002e 0346     		mov	r3, r0
+ 1143 0030 0C46     		mov	r4, r1
+ 1144 0032 C7E91834 		strd	r3, [r7, #96]
+ 542:main.c        ****     k = (0.5 + ((floatnumSamples * tFrequency) / tSamplingRate));
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 31
+
+
+ 1145              		.loc 1 542 0
+ 1146 0036 B868     		ldr	r0, [r7, #8]
+ 1147 0038 FFF7FEFF 		bl	__aeabi_i2d
+ 1148 003c D7E91823 		ldrd	r2, [r7, #96]
+ 1149 0040 FFF7FEFF 		bl	__aeabi_dmul
+ 1150 0044 0346     		mov	r3, r0
+ 1151 0046 0C46     		mov	r4, r1
+ 1152 0048 2546     		mov	r5, r4
+ 1153 004a 1C46     		mov	r4, r3
+ 1154 004c 7868     		ldr	r0, [r7, #4]
+ 1155 004e FFF7FEFF 		bl	__aeabi_i2d
+ 1156 0052 0246     		mov	r2, r0
+ 1157 0054 0B46     		mov	r3, r1
+ 1158 0056 2046     		mov	r0, r4
+ 1159 0058 2946     		mov	r1, r5
+ 1160 005a FFF7FEFF 		bl	__aeabi_ddiv
+ 1161 005e 0346     		mov	r3, r0
+ 1162 0060 0C46     		mov	r4, r1
+ 1163 0062 1846     		mov	r0, r3
+ 1164 0064 2146     		mov	r1, r4
+ 1165 0066 4FF00002 		mov	r2, #0
+ 1166 006a 6B4B     		ldr	r3, .L50+8
+ 1167 006c FFF7FEFF 		bl	__aeabi_dadd
+ 1168 0070 0346     		mov	r3, r0
+ 1169 0072 0C46     		mov	r4, r1
+ 1170 0074 1846     		mov	r0, r3
+ 1171 0076 2146     		mov	r1, r4
+ 1172 0078 FFF7FEFF 		bl	__aeabi_d2iz
+ 1173 007c 0346     		mov	r3, r0
+ 1174 007e FB65     		str	r3, [r7, #92]
+ 543:main.c        ****     omega = (2.0 * M_PI * k) / floatnumSamples;
+ 1175              		.loc 1 543 0
+ 1176 0080 F86D     		ldr	r0, [r7, #92]
+ 1177 0082 FFF7FEFF 		bl	__aeabi_i2d
+ 1178 0086 62A3     		adr	r3, .L50
+ 1179 0088 D3E90023 		ldrd	r2, [r3]
+ 1180 008c FFF7FEFF 		bl	__aeabi_dmul
+ 1181 0090 0346     		mov	r3, r0
+ 1182 0092 0C46     		mov	r4, r1
+ 1183 0094 1846     		mov	r0, r3
+ 1184 0096 2146     		mov	r1, r4
+ 1185 0098 D7E91823 		ldrd	r2, [r7, #96]
+ 1186 009c FFF7FEFF 		bl	__aeabi_ddiv
+ 1187 00a0 0346     		mov	r3, r0
+ 1188 00a2 0C46     		mov	r4, r1
+ 1189 00a4 C7E91434 		strd	r3, [r7, #80]
+ 544:main.c        ****     sine = sin(omega);
+ 1190              		.loc 1 544 0
+ 1191 00a8 D7E91401 		ldrd	r0, [r7, #80]
+ 1192 00ac FFF7FEFF 		bl	sin
+ 1193 00b0 C7E91201 		strd	r0, [r7, #72]
+ 545:main.c        ****     cosine = cos(omega);
+ 1194              		.loc 1 545 0
+ 1195 00b4 D7E91401 		ldrd	r0, [r7, #80]
+ 1196 00b8 FFF7FEFF 		bl	cos
+ 1197 00bc C7E91001 		strd	r0, [r7, #64]
+ 546:main.c        ****     coeff = 2.0 * cosine;
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 32
+
+
+ 1198              		.loc 1 546 0
+ 1199 00c0 D7E91001 		ldrd	r0, [r7, #64]
+ 1200 00c4 0246     		mov	r2, r0
+ 1201 00c6 0B46     		mov	r3, r1
+ 1202 00c8 FFF7FEFF 		bl	__aeabi_dadd
+ 1203 00cc 0346     		mov	r3, r0
+ 1204 00ce 0C46     		mov	r4, r1
+ 1205 00d0 C7E90E34 		strd	r3, [r7, #56]
+ 547:main.c        ****     q0=0;
+ 1206              		.loc 1 547 0
+ 1207 00d4 4FF00003 		mov	r3, #0
+ 1208 00d8 4FF00004 		mov	r4, #0
+ 1209 00dc C7E90C34 		strd	r3, [r7, #48]
+ 548:main.c        ****     q1=0;
+ 1210              		.loc 1 548 0
+ 1211 00e0 4FF00003 		mov	r3, #0
+ 1212 00e4 4FF00004 		mov	r4, #0
+ 1213 00e8 C7E92034 		strd	r3, [r7, #128]
+ 549:main.c        ****     q2=0;
+ 1214              		.loc 1 549 0
+ 1215 00ec 4FF00003 		mov	r3, #0
+ 1216 00f0 4FF00004 		mov	r4, #0
+ 1217 00f4 C7E91E34 		strd	r3, [r7, #120]
+ 1218              	.LBB7:
+ 550:main.c        ****     
+ 551:main.c        ****     for(uint16 i = 0; i < numSamples; i++)
+ 1219              		.loc 1 551 0
+ 1220 00f8 0023     		movs	r3, #0
+ 1221 00fa A7F87630 		strh	r3, [r7, #118]	@ movhi
+ 1222 00fe 2EE0     		b	.L47
+ 1223              	.L48:
+ 1224              	.LBB8:
+ 552:main.c        ****     {
+ 553:main.c        ****         double mdata =  data[i];
+ 1225              		.loc 1 553 0 discriminator 3
+ 1226 0100 B7F87630 		ldrh	r3, [r7, #118]
+ 1227 0104 DB00     		lsls	r3, r3, #3
+ 1228 0106 3A68     		ldr	r2, [r7]
+ 1229 0108 1344     		add	r3, r3, r2
+ 1230 010a 18CB     		ldmia	r3, {r3-r4}
+ 1231 010c C7E90A34 		strd	r3, [r7, #40]
+ 554:main.c        ****         
+ 555:main.c        ****         q0 = coeff * q1 - q2 + mdata;
+ 1232              		.loc 1 555 0 discriminator 3
+ 1233 0110 D7E92023 		ldrd	r2, [r7, #128]
+ 1234 0114 D7E90E01 		ldrd	r0, [r7, #56]
+ 1235 0118 FFF7FEFF 		bl	__aeabi_dmul
+ 1236 011c 0346     		mov	r3, r0
+ 1237 011e 0C46     		mov	r4, r1
+ 1238 0120 1846     		mov	r0, r3
+ 1239 0122 2146     		mov	r1, r4
+ 1240 0124 D7E91E23 		ldrd	r2, [r7, #120]
+ 1241 0128 FFF7FEFF 		bl	__aeabi_dsub
+ 1242 012c 0346     		mov	r3, r0
+ 1243 012e 0C46     		mov	r4, r1
+ 1244 0130 1846     		mov	r0, r3
+ 1245 0132 2146     		mov	r1, r4
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 33
+
+
+ 1246 0134 D7E90A23 		ldrd	r2, [r7, #40]
+ 1247 0138 FFF7FEFF 		bl	__aeabi_dadd
+ 1248 013c 0346     		mov	r3, r0
+ 1249 013e 0C46     		mov	r4, r1
+ 1250 0140 C7E90C34 		strd	r3, [r7, #48]
+ 556:main.c        ****         q2 = q1;
+ 1251              		.loc 1 556 0 discriminator 3
+ 1252 0144 D7E92034 		ldrd	r3, [r7, #128]
+ 1253 0148 C7E91E34 		strd	r3, [r7, #120]
+ 557:main.c        ****         q1 = q0;
+ 1254              		.loc 1 557 0 discriminator 3
+ 1255 014c D7E90C34 		ldrd	r3, [r7, #48]
+ 1256 0150 C7E92034 		strd	r3, [r7, #128]
+ 1257              	.LBE8:
+ 551:main.c        ****     {
+ 1258              		.loc 1 551 0 discriminator 3
+ 1259 0154 B7F87630 		ldrh	r3, [r7, #118]
+ 1260 0158 0133     		adds	r3, r3, #1
+ 1261 015a A7F87630 		strh	r3, [r7, #118]	@ movhi
+ 1262              	.L47:
+ 551:main.c        ****     {
+ 1263              		.loc 1 551 0 is_stmt 0 discriminator 1
+ 1264 015e B7F87620 		ldrh	r2, [r7, #118]
+ 1265 0162 FB68     		ldr	r3, [r7, #12]
+ 1266 0164 9A42     		cmp	r2, r3
+ 1267 0166 CBDB     		blt	.L48
+ 1268              	.LBE7:
+ 558:main.c        ****     }
+ 559:main.c        **** 
+ 560:main.c        ****     // calculate the real and imaginary results
+ 561:main.c        ****     // scaling appropriately
+ 562:main.c        ****     real = (q1 - q2 * cosine) / scalingFactor;
+ 1269              		.loc 1 562 0 is_stmt 1
+ 1270 0168 D7E91023 		ldrd	r2, [r7, #64]
+ 1271 016c D7E91E01 		ldrd	r0, [r7, #120]
+ 1272 0170 FFF7FEFF 		bl	__aeabi_dmul
+ 1273 0174 0346     		mov	r3, r0
+ 1274 0176 0C46     		mov	r4, r1
+ 1275 0178 1A46     		mov	r2, r3
+ 1276 017a 2346     		mov	r3, r4
+ 1277 017c D7E92001 		ldrd	r0, [r7, #128]
+ 1278 0180 FFF7FEFF 		bl	__aeabi_dsub
+ 1279 0184 0346     		mov	r3, r0
+ 1280 0186 0C46     		mov	r4, r1
+ 1281 0188 1846     		mov	r0, r3
+ 1282 018a 2146     		mov	r1, r4
+ 1283 018c D7E91A23 		ldrd	r2, [r7, #104]
+ 1284 0190 FFF7FEFF 		bl	__aeabi_ddiv
+ 1285 0194 0346     		mov	r3, r0
+ 1286 0196 0C46     		mov	r4, r1
+ 1287 0198 C7E90834 		strd	r3, [r7, #32]
+ 563:main.c        ****     imag = (q2 * sine) / scalingFactor;
+ 1288              		.loc 1 563 0
+ 1289 019c D7E91223 		ldrd	r2, [r7, #72]
+ 1290 01a0 D7E91E01 		ldrd	r0, [r7, #120]
+ 1291 01a4 FFF7FEFF 		bl	__aeabi_dmul
+ 1292 01a8 0346     		mov	r3, r0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 34
+
+
+ 1293 01aa 0C46     		mov	r4, r1
+ 1294 01ac 1846     		mov	r0, r3
+ 1295 01ae 2146     		mov	r1, r4
+ 1296 01b0 D7E91A23 		ldrd	r2, [r7, #104]
+ 1297 01b4 FFF7FEFF 		bl	__aeabi_ddiv
+ 1298 01b8 0346     		mov	r3, r0
+ 1299 01ba 0C46     		mov	r4, r1
+ 1300 01bc C7E90634 		strd	r3, [r7, #24]
+ 564:main.c        **** 
+ 565:main.c        ****     magnitude = sqrt(real*real + imag*imag);
+ 1301              		.loc 1 565 0
+ 1302 01c0 D7E90823 		ldrd	r2, [r7, #32]
+ 1303 01c4 D7E90801 		ldrd	r0, [r7, #32]
+ 1304 01c8 FFF7FEFF 		bl	__aeabi_dmul
+ 1305 01cc 0346     		mov	r3, r0
+ 1306 01ce 0C46     		mov	r4, r1
+ 1307 01d0 2546     		mov	r5, r4
+ 1308 01d2 1C46     		mov	r4, r3
+ 1309 01d4 D7E90623 		ldrd	r2, [r7, #24]
+ 1310 01d8 D7E90601 		ldrd	r0, [r7, #24]
+ 1311 01dc FFF7FEFF 		bl	__aeabi_dmul
+ 1312 01e0 0246     		mov	r2, r0
+ 1313 01e2 0B46     		mov	r3, r1
+ 1314 01e4 2046     		mov	r0, r4
+ 1315 01e6 2946     		mov	r1, r5
+ 1316 01e8 FFF7FEFF 		bl	__aeabi_dadd
+ 1317 01ec 0346     		mov	r3, r0
+ 1318 01ee 0C46     		mov	r4, r1
+ 1319 01f0 1846     		mov	r0, r3
+ 1320 01f2 2146     		mov	r1, r4
+ 1321 01f4 FFF7FEFF 		bl	sqrt
+ 1322 01f8 C7E90401 		strd	r0, [r7, #16]
+ 566:main.c        ****     return magnitude;
+ 1323              		.loc 1 566 0
+ 1324 01fc D7E90434 		ldrd	r3, [r7, #16]
+ 567:main.c        **** }
+ 1325              		.loc 1 567 0
+ 1326 0200 1846     		mov	r0, r3
+ 1327 0202 2146     		mov	r1, r4
+ 1328 0204 8837     		adds	r7, r7, #136
+ 1329              		.cfi_def_cfa_offset 16
+ 1330 0206 BD46     		mov	sp, r7
+ 1331              		.cfi_def_cfa_register 13
+ 1332              		@ sp needed
+ 1333 0208 B0BD     		pop	{r4, r5, r7, pc}
+ 1334              	.L51:
+ 1335 020a 00BFAFF3 		.align	3
+ 1335      0080
+ 1336              	.L50:
+ 1337 0210 182D4454 		.word	1413754136
+ 1338 0214 FB211940 		.word	1075388923
+ 1339 0218 0000E03F 		.word	1071644672
+ 1340              		.cfi_endproc
+ 1341              	.LFE69:
+ 1342              		.size	Goertzel, .-Goertzel
+ 1343              		.global	__aeabi_dcmpgt
+ 1344              		.section	.text.getMaxValue,"ax",%progbits
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 35
+
+
+ 1345              		.align	2
+ 1346              		.global	getMaxValue
+ 1347              		.thumb
+ 1348              		.thumb_func
+ 1349              		.type	getMaxValue, %function
+ 1350              	getMaxValue:
+ 1351              	.LFB70:
+ 568:main.c        **** 
+ 569:main.c        **** uint16 getMaxValue(double *arrayData,uint8 size)
+ 570:main.c        **** {
+ 1352              		.loc 1 570 0
+ 1353              		.cfi_startproc
+ 1354              		@ args = 0, pretend = 0, frame = 24
+ 1355              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1356 0000 90B5     		push	{r4, r7, lr}
+ 1357              		.cfi_def_cfa_offset 12
+ 1358              		.cfi_offset 4, -12
+ 1359              		.cfi_offset 7, -8
+ 1360              		.cfi_offset 14, -4
+ 1361 0002 87B0     		sub	sp, sp, #28
+ 1362              		.cfi_def_cfa_offset 40
+ 1363 0004 00AF     		add	r7, sp, #0
+ 1364              		.cfi_def_cfa_register 7
+ 1365 0006 7860     		str	r0, [r7, #4]
+ 1366 0008 0B46     		mov	r3, r1
+ 1367 000a FB70     		strb	r3, [r7, #3]
+ 571:main.c        ****     double maxValue = arrayData[0];
+ 1368              		.loc 1 571 0
+ 1369 000c 7B68     		ldr	r3, [r7, #4]
+ 1370 000e 18CB     		ldmia	r3, {r3-r4}
+ 1371 0010 C7E90434 		strd	r3, [r7, #16]
+ 572:main.c        ****     uint16 index = 0;
+ 1372              		.loc 1 572 0
+ 1373 0014 0023     		movs	r3, #0
+ 1374 0016 FB81     		strh	r3, [r7, #14]	@ movhi
+ 1375              	.LBB9:
+ 573:main.c        ****     for (uint16 i = 1; i < size; ++i) 
+ 1376              		.loc 1 573 0
+ 1377 0018 0123     		movs	r3, #1
+ 1378 001a BB81     		strh	r3, [r7, #12]	@ movhi
+ 1379 001c 18E0     		b	.L53
+ 1380              	.L56:
+ 574:main.c        ****     {
+ 575:main.c        ****         if ( arrayData[i] > maxValue ) 
+ 1381              		.loc 1 575 0
+ 1382 001e BB89     		ldrh	r3, [r7, #12]
+ 1383 0020 DB00     		lsls	r3, r3, #3
+ 1384 0022 7A68     		ldr	r2, [r7, #4]
+ 1385 0024 1344     		add	r3, r3, r2
+ 1386 0026 D3E90001 		ldrd	r0, [r3]
+ 1387 002a D7E90423 		ldrd	r2, [r7, #16]
+ 1388 002e FFF7FEFF 		bl	__aeabi_dcmpgt
+ 1389 0032 0346     		mov	r3, r0
+ 1390 0034 002B     		cmp	r3, #0
+ 1391 0036 08D0     		beq	.L54
+ 576:main.c        ****         {
+ 577:main.c        ****             maxValue = arrayData[i];
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 36
+
+
+ 1392              		.loc 1 577 0
+ 1393 0038 BB89     		ldrh	r3, [r7, #12]
+ 1394 003a DB00     		lsls	r3, r3, #3
+ 1395 003c 7A68     		ldr	r2, [r7, #4]
+ 1396 003e 1344     		add	r3, r3, r2
+ 1397 0040 18CB     		ldmia	r3, {r3-r4}
+ 1398 0042 C7E90434 		strd	r3, [r7, #16]
+ 578:main.c        ****             index = i;
+ 1399              		.loc 1 578 0
+ 1400 0046 BB89     		ldrh	r3, [r7, #12]	@ movhi
+ 1401 0048 FB81     		strh	r3, [r7, #14]	@ movhi
+ 1402              	.L54:
+ 573:main.c        ****     {
+ 1403              		.loc 1 573 0 discriminator 2
+ 1404 004a BB89     		ldrh	r3, [r7, #12]	@ movhi
+ 1405 004c 0133     		adds	r3, r3, #1
+ 1406 004e BB81     		strh	r3, [r7, #12]	@ movhi
+ 1407              	.L53:
+ 573:main.c        ****     {
+ 1408              		.loc 1 573 0 is_stmt 0 discriminator 1
+ 1409 0050 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 1410 0052 9BB2     		uxth	r3, r3
+ 1411 0054 BA89     		ldrh	r2, [r7, #12]
+ 1412 0056 9A42     		cmp	r2, r3
+ 1413 0058 E1D3     		bcc	.L56
+ 1414              	.LBE9:
+ 579:main.c        ****         }
+ 580:main.c        ****     }
+ 581:main.c        ****     
+ 582:main.c        ****     return index;
+ 1415              		.loc 1 582 0 is_stmt 1
+ 1416 005a FB89     		ldrh	r3, [r7, #14]
+ 583:main.c        **** }
+ 1417              		.loc 1 583 0
+ 1418 005c 1846     		mov	r0, r3
+ 1419 005e 1C37     		adds	r7, r7, #28
+ 1420              		.cfi_def_cfa_offset 12
+ 1421 0060 BD46     		mov	sp, r7
+ 1422              		.cfi_def_cfa_register 13
+ 1423              		@ sp needed
+ 1424 0062 90BD     		pop	{r4, r7, pc}
+ 1425              		.cfi_endproc
+ 1426              	.LFE70:
+ 1427              		.size	getMaxValue, .-getMaxValue
+ 1428              		.section	.rodata
+ 1429              		.align	2
+ 1430              	.LC19:
+ 1431 0080 310A0D00 		.ascii	"1\012\015\000"
+ 1432              		.align	2
+ 1433              	.LC20:
+ 1434 0084 320A0D00 		.ascii	"2\012\015\000"
+ 1435              		.align	2
+ 1436              	.LC21:
+ 1437 0088 330A0D00 		.ascii	"3\012\015\000"
+ 1438              		.align	2
+ 1439              	.LC22:
+ 1440 008c 340A0D00 		.ascii	"4\012\015\000"
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 37
+
+
+ 1441              		.align	2
+ 1442              	.LC23:
+ 1443 0090 350A0D00 		.ascii	"5\012\015\000"
+ 1444              		.align	2
+ 1445              	.LC24:
+ 1446 0094 360A0D00 		.ascii	"6\012\015\000"
+ 1447              		.align	2
+ 1448              	.LC25:
+ 1449 0098 370A0D00 		.ascii	"7\012\015\000"
+ 1450              		.align	2
+ 1451              	.LC26:
+ 1452 009c 380A0D00 		.ascii	"8\012\015\000"
+ 1453              		.align	2
+ 1454              	.LC27:
+ 1455 00a0 390A0D00 		.ascii	"9\012\015\000"
+ 1456              		.align	2
+ 1457              	.LC28:
+ 1458 00a4 2A0A0D00 		.ascii	"*\012\015\000"
+ 1459              		.align	2
+ 1460              	.LC29:
+ 1461 00a8 300A0D00 		.ascii	"0\012\015\000"
+ 1462              		.align	2
+ 1463              	.LC30:
+ 1464 00ac 230A0D00 		.ascii	"#\012\015\000"
+ 1465              		.section	.text.Decoder,"ax",%progbits
+ 1466              		.align	2
+ 1467              		.global	Decoder
+ 1468              		.thumb
+ 1469              		.thumb_func
+ 1470              		.type	Decoder, %function
+ 1471              	Decoder:
+ 1472              	.LFB71:
+ 584:main.c        **** 
+ 585:main.c        **** void Decoder(uint16 loFrec, uint16 hiFrec)
+ 586:main.c        **** {
+ 1473              		.loc 1 586 0
+ 1474              		.cfi_startproc
+ 1475              		@ args = 0, pretend = 0, frame = 16
+ 1476              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1477 0000 80B5     		push	{r7, lr}
+ 1478              		.cfi_def_cfa_offset 8
+ 1479              		.cfi_offset 7, -8
+ 1480              		.cfi_offset 14, -4
+ 1481 0002 84B0     		sub	sp, sp, #16
+ 1482              		.cfi_def_cfa_offset 24
+ 1483 0004 00AF     		add	r7, sp, #0
+ 1484              		.cfi_def_cfa_register 7
+ 1485 0006 0346     		mov	r3, r0
+ 1486 0008 0A46     		mov	r2, r1
+ 1487 000a FB80     		strh	r3, [r7, #6]	@ movhi
+ 1488 000c 1346     		mov	r3, r2	@ movhi
+ 1489 000e BB80     		strh	r3, [r7, #4]	@ movhi
+ 587:main.c        ****     uint16 data = loFrec & hiFrec;
+ 1490              		.loc 1 587 0
+ 1491 0010 FA88     		ldrh	r2, [r7, #6]	@ movhi
+ 1492 0012 BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 1493 0014 1340     		ands	r3, r3, r2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 38
+
+
+ 1494 0016 FB81     		strh	r3, [r7, #14]	@ movhi
+ 588:main.c        ****     
+ 589:main.c        ****     switch(data)
+ 1495              		.loc 1 589 0
+ 1496 0018 FB89     		ldrh	r3, [r7, #14]
+ 1497 001a 40F66602 		movw	r2, #2150
+ 1498 001e 9342     		cmp	r3, r2
+ 1499 0020 5FD0     		beq	.L61
+ 1500 0022 40F66602 		movw	r2, #2150
+ 1501 0026 9342     		cmp	r3, r2
+ 1502 0028 19DC     		bgt	.L62
+ 1503 002a 40F2F172 		movw	r2, #2033
+ 1504 002e 9342     		cmp	r3, r2
+ 1505 0030 37D0     		beq	.L63
+ 1506 0032 40F2F172 		movw	r2, #2033
+ 1507 0036 9342     		cmp	r3, r2
+ 1508 0038 08DC     		bgt	.L64
+ 1509 003a 40F27272 		movw	r2, #1906
+ 1510 003e 9342     		cmp	r3, r2
+ 1511 0040 2BD0     		beq	.L65
+ 1512 0042 40F2BB72 		movw	r2, #1979
+ 1513 0046 9342     		cmp	r3, r2
+ 1514 0048 33D0     		beq	.L66
+ 590:main.c        ****     {
+ 591:main.c        ****         case 1906:
+ 592:main.c        ****             UART_1_PutString("1\n\r");
+ 593:main.c        ****             break;
+ 594:main.c        ****         case 2033:
+ 595:main.c        ****             UART_1_PutString("2\n\r");
+ 596:main.c        ****             break;
+ 597:main.c        ****         case 2174:
+ 598:main.c        ****             UART_1_PutString("3\n\r");
+ 599:main.c        ****             break;
+ 600:main.c        ****         case 1979:
+ 601:main.c        ****             UART_1_PutString("4\n\r");
+ 602:main.c        ****             break;
+ 603:main.c        ****         case 2106:
+ 604:main.c        ****             UART_1_PutString("5\n\r");
+ 605:main.c        ****             break;
+ 606:main.c        ****         case 2247:
+ 607:main.c        ****             UART_1_PutString("6\n\r");
+ 608:main.c        ****             break;
+ 609:main.c        ****         case 2061:
+ 610:main.c        ****             UART_1_PutString("7\n\r");
+ 611:main.c        ****             break;
+ 612:main.c        ****         case 2188:
+ 613:main.c        ****             UART_1_PutString("8\n\r");
+ 614:main.c        ****             break;
+ 615:main.c        ****         case 2329:
+ 616:main.c        ****             UART_1_PutString("9\n\r");
+ 617:main.c        ****             break;
+ 618:main.c        ****         case 2150:
+ 619:main.c        ****             UART_1_PutString("*\n\r");
+ 620:main.c        ****             break;
+ 621:main.c        ****         case 2277:
+ 622:main.c        ****             UART_1_PutString("0\n\r");
+ 623:main.c        ****             break;
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 39
+
+
+ 624:main.c        ****         case 2418:
+ 625:main.c        ****             UART_1_PutString("#\n\r");
+ 626:main.c        ****             break;
+ 627:main.c        ****          default:
+ 628:main.c        ****             break;
+ 1515              		.loc 1 628 0
+ 1516 004a 56E0     		b	.L76
+ 1517              	.L64:
+ 589:main.c        ****     {
+ 1518              		.loc 1 589 0
+ 1519 004c 40F60D02 		movw	r2, #2061
+ 1520 0050 9342     		cmp	r3, r2
+ 1521 0052 3AD0     		beq	.L67
+ 1522 0054 40F63A02 		movw	r2, #2106
+ 1523 0058 9342     		cmp	r3, r2
+ 1524 005a 2ED0     		beq	.L68
+ 1525              		.loc 1 628 0
+ 1526 005c 4DE0     		b	.L76
+ 1527              	.L62:
+ 589:main.c        ****     {
+ 1528              		.loc 1 589 0
+ 1529 005e 40F6C702 		movw	r2, #2247
+ 1530 0062 9342     		cmp	r3, r2
+ 1531 0064 2DD0     		beq	.L69
+ 1532 0066 40F6C702 		movw	r2, #2247
+ 1533 006a 9342     		cmp	r3, r2
+ 1534 006c 08DC     		bgt	.L70
+ 1535 006e 40F67E02 		movw	r2, #2174
+ 1536 0072 9342     		cmp	r3, r2
+ 1537 0074 19D0     		beq	.L71
+ 1538 0076 40F68C02 		movw	r2, #2188
+ 1539 007a 9342     		cmp	r3, r2
+ 1540 007c 29D0     		beq	.L72
+ 1541              		.loc 1 628 0
+ 1542 007e 3CE0     		b	.L76
+ 1543              	.L70:
+ 589:main.c        ****     {
+ 1544              		.loc 1 589 0
+ 1545 0080 40F61912 		movw	r2, #2329
+ 1546 0084 9342     		cmp	r3, r2
+ 1547 0086 28D0     		beq	.L73
+ 1548 0088 40F67212 		movw	r2, #2418
+ 1549 008c 9342     		cmp	r3, r2
+ 1550 008e 30D0     		beq	.L74
+ 1551 0090 40F6E502 		movw	r2, #2277
+ 1552 0094 9342     		cmp	r3, r2
+ 1553 0096 28D0     		beq	.L75
+ 1554              		.loc 1 628 0
+ 1555 0098 2FE0     		b	.L76
+ 1556              	.L65:
+ 592:main.c        ****             break;
+ 1557              		.loc 1 592 0
+ 1558 009a 1A48     		ldr	r0, .L77
+ 1559 009c FFF7FEFF 		bl	UART_1_PutString
+ 593:main.c        ****         case 2033:
+ 1560              		.loc 1 593 0
+ 1561 00a0 2BE0     		b	.L76
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 40
+
+
+ 1562              	.L63:
+ 595:main.c        ****             break;
+ 1563              		.loc 1 595 0
+ 1564 00a2 1948     		ldr	r0, .L77+4
+ 1565 00a4 FFF7FEFF 		bl	UART_1_PutString
+ 596:main.c        ****         case 2174:
+ 1566              		.loc 1 596 0
+ 1567 00a8 27E0     		b	.L76
+ 1568              	.L71:
+ 598:main.c        ****             break;
+ 1569              		.loc 1 598 0
+ 1570 00aa 1848     		ldr	r0, .L77+8
+ 1571 00ac FFF7FEFF 		bl	UART_1_PutString
+ 599:main.c        ****         case 1979:
+ 1572              		.loc 1 599 0
+ 1573 00b0 23E0     		b	.L76
+ 1574              	.L66:
+ 601:main.c        ****             break;
+ 1575              		.loc 1 601 0
+ 1576 00b2 1748     		ldr	r0, .L77+12
+ 1577 00b4 FFF7FEFF 		bl	UART_1_PutString
+ 602:main.c        ****         case 2106:
+ 1578              		.loc 1 602 0
+ 1579 00b8 1FE0     		b	.L76
+ 1580              	.L68:
+ 604:main.c        ****             break;
+ 1581              		.loc 1 604 0
+ 1582 00ba 1648     		ldr	r0, .L77+16
+ 1583 00bc FFF7FEFF 		bl	UART_1_PutString
+ 605:main.c        ****         case 2247:
+ 1584              		.loc 1 605 0
+ 1585 00c0 1BE0     		b	.L76
+ 1586              	.L69:
+ 607:main.c        ****             break;
+ 1587              		.loc 1 607 0
+ 1588 00c2 1548     		ldr	r0, .L77+20
+ 1589 00c4 FFF7FEFF 		bl	UART_1_PutString
+ 608:main.c        ****         case 2061:
+ 1590              		.loc 1 608 0
+ 1591 00c8 17E0     		b	.L76
+ 1592              	.L67:
+ 610:main.c        ****             break;
+ 1593              		.loc 1 610 0
+ 1594 00ca 1448     		ldr	r0, .L77+24
+ 1595 00cc FFF7FEFF 		bl	UART_1_PutString
+ 611:main.c        ****         case 2188:
+ 1596              		.loc 1 611 0
+ 1597 00d0 13E0     		b	.L76
+ 1598              	.L72:
+ 613:main.c        ****             break;
+ 1599              		.loc 1 613 0
+ 1600 00d2 1348     		ldr	r0, .L77+28
+ 1601 00d4 FFF7FEFF 		bl	UART_1_PutString
+ 614:main.c        ****         case 2329:
+ 1602              		.loc 1 614 0
+ 1603 00d8 0FE0     		b	.L76
+ 1604              	.L73:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 41
+
+
+ 616:main.c        ****             break;
+ 1605              		.loc 1 616 0
+ 1606 00da 1248     		ldr	r0, .L77+32
+ 1607 00dc FFF7FEFF 		bl	UART_1_PutString
+ 617:main.c        ****         case 2150:
+ 1608              		.loc 1 617 0
+ 1609 00e0 0BE0     		b	.L76
+ 1610              	.L61:
+ 619:main.c        ****             break;
+ 1611              		.loc 1 619 0
+ 1612 00e2 1148     		ldr	r0, .L77+36
+ 1613 00e4 FFF7FEFF 		bl	UART_1_PutString
+ 620:main.c        ****         case 2277:
+ 1614              		.loc 1 620 0
+ 1615 00e8 07E0     		b	.L76
+ 1616              	.L75:
+ 622:main.c        ****             break;
+ 1617              		.loc 1 622 0
+ 1618 00ea 1048     		ldr	r0, .L77+40
+ 1619 00ec FFF7FEFF 		bl	UART_1_PutString
+ 623:main.c        ****         case 2418:
+ 1620              		.loc 1 623 0
+ 1621 00f0 03E0     		b	.L76
+ 1622              	.L74:
+ 625:main.c        ****             break;
+ 1623              		.loc 1 625 0
+ 1624 00f2 0F48     		ldr	r0, .L77+44
+ 1625 00f4 FFF7FEFF 		bl	UART_1_PutString
+ 626:main.c        ****          default:
+ 1626              		.loc 1 626 0
+ 1627 00f8 00BF     		nop
+ 1628              	.L76:
+ 629:main.c        ****     }
+ 630:main.c        **** }
+ 1629              		.loc 1 630 0
+ 1630 00fa 00BF     		nop
+ 1631 00fc 1037     		adds	r7, r7, #16
+ 1632              		.cfi_def_cfa_offset 8
+ 1633 00fe BD46     		mov	sp, r7
+ 1634              		.cfi_def_cfa_register 13
+ 1635              		@ sp needed
+ 1636 0100 80BD     		pop	{r7, pc}
+ 1637              	.L78:
+ 1638 0102 00BF     		.align	2
+ 1639              	.L77:
+ 1640 0104 80000000 		.word	.LC19
+ 1641 0108 84000000 		.word	.LC20
+ 1642 010c 88000000 		.word	.LC21
+ 1643 0110 8C000000 		.word	.LC22
+ 1644 0114 90000000 		.word	.LC23
+ 1645 0118 94000000 		.word	.LC24
+ 1646 011c 98000000 		.word	.LC25
+ 1647 0120 9C000000 		.word	.LC26
+ 1648 0124 A0000000 		.word	.LC27
+ 1649 0128 A4000000 		.word	.LC28
+ 1650 012c A8000000 		.word	.LC29
+ 1651 0130 AC000000 		.word	.LC30
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 42
+
+
+ 1652              		.cfi_endproc
+ 1653              	.LFE71:
+ 1654              		.size	Decoder, .-Decoder
+ 1655              		.text
+ 1656              	.Letext0:
+ 1657              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1658              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\4.1\\psoc creator\\import\\gnu\\arm\\5.4.
+ 1659              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 1660              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 1661              		.section	.debug_info,"",%progbits
+ 1662              	.Ldebug_info0:
+ 1663 0000 36050000 		.4byte	0x536
+ 1664 0004 0400     		.2byte	0x4
+ 1665 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1666 000a 04       		.byte	0x4
+ 1667 000b 01       		.uleb128 0x1
+ 1668 000c 49000000 		.4byte	.LASF63
+ 1669 0010 0C       		.byte	0xc
+ 1670 0011 36030000 		.4byte	.LASF64
+ 1671 0015 1A010000 		.4byte	.LASF65
+ 1672 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1673 001d 00000000 		.4byte	0
+ 1674 0021 00000000 		.4byte	.Ldebug_line0
+ 1675 0025 02       		.uleb128 0x2
+ 1676 0026 01       		.byte	0x1
+ 1677 0027 06       		.byte	0x6
+ 1678 0028 51020000 		.4byte	.LASF0
+ 1679 002c 02       		.uleb128 0x2
+ 1680 002d 01       		.byte	0x1
+ 1681 002e 08       		.byte	0x8
+ 1682 002f 27020000 		.4byte	.LASF1
+ 1683 0033 02       		.uleb128 0x2
+ 1684 0034 02       		.byte	0x2
+ 1685 0035 05       		.byte	0x5
+ 1686 0036 32000000 		.4byte	.LASF2
+ 1687 003a 02       		.uleb128 0x2
+ 1688 003b 02       		.byte	0x2
+ 1689 003c 07       		.byte	0x7
+ 1690 003d 15030000 		.4byte	.LASF3
+ 1691 0041 03       		.uleb128 0x3
+ 1692 0042 61030000 		.4byte	.LASF9
+ 1693 0046 02       		.byte	0x2
+ 1694 0047 3F       		.byte	0x3f
+ 1695 0048 4C000000 		.4byte	0x4c
+ 1696 004c 02       		.uleb128 0x2
+ 1697 004d 04       		.byte	0x4
+ 1698 004e 05       		.byte	0x5
+ 1699 004f DB010000 		.4byte	.LASF4
+ 1700 0053 02       		.uleb128 0x2
+ 1701 0054 04       		.byte	0x4
+ 1702 0055 07       		.byte	0x7
+ 1703 0056 3D030000 		.4byte	.LASF5
+ 1704 005a 02       		.uleb128 0x2
+ 1705 005b 08       		.byte	0x8
+ 1706 005c 05       		.byte	0x5
+ 1707 005d C2010000 		.4byte	.LASF6
+ 1708 0061 02       		.uleb128 0x2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 43
+
+
+ 1709 0062 08       		.byte	0x8
+ 1710 0063 07       		.byte	0x7
+ 1711 0064 65020000 		.4byte	.LASF7
+ 1712 0068 04       		.uleb128 0x4
+ 1713 0069 04       		.byte	0x4
+ 1714 006a 05       		.byte	0x5
+ 1715 006b 696E7400 		.ascii	"int\000"
+ 1716 006f 02       		.uleb128 0x2
+ 1717 0070 04       		.byte	0x4
+ 1718 0071 07       		.byte	0x7
+ 1719 0072 7C020000 		.4byte	.LASF8
+ 1720 0076 03       		.uleb128 0x3
+ 1721 0077 5D020000 		.4byte	.LASF10
+ 1722 007b 03       		.byte	0x3
+ 1723 007c 2C       		.byte	0x2c
+ 1724 007d 41000000 		.4byte	0x41
+ 1725 0081 05       		.uleb128 0x5
+ 1726 0082 14010000 		.4byte	.LASF11
+ 1727 0086 04       		.byte	0x4
+ 1728 0087 9201     		.2byte	0x192
+ 1729 0089 2C000000 		.4byte	0x2c
+ 1730 008d 05       		.uleb128 0x5
+ 1731 008e 07010000 		.4byte	.LASF12
+ 1732 0092 04       		.byte	0x4
+ 1733 0093 9301     		.2byte	0x193
+ 1734 0095 3A000000 		.4byte	0x3a
+ 1735 0099 05       		.uleb128 0x5
+ 1736 009a 0E010000 		.4byte	.LASF13
+ 1737 009e 04       		.byte	0x4
+ 1738 009f 9601     		.2byte	0x196
+ 1739 00a1 33000000 		.4byte	0x33
+ 1740 00a5 02       		.uleb128 0x2
+ 1741 00a6 04       		.byte	0x4
+ 1742 00a7 04       		.byte	0x4
+ 1743 00a8 B5010000 		.4byte	.LASF14
+ 1744 00ac 02       		.uleb128 0x2
+ 1745 00ad 08       		.byte	0x8
+ 1746 00ae 04       		.byte	0x4
+ 1747 00af 4F030000 		.4byte	.LASF15
+ 1748 00b3 02       		.uleb128 0x2
+ 1749 00b4 01       		.byte	0x1
+ 1750 00b5 08       		.byte	0x8
+ 1751 00b6 BF020000 		.4byte	.LASF16
+ 1752 00ba 02       		.uleb128 0x2
+ 1753 00bb 08       		.byte	0x8
+ 1754 00bc 04       		.byte	0x4
+ 1755 00bd D7000000 		.4byte	.LASF17
+ 1756 00c1 02       		.uleb128 0x2
+ 1757 00c2 04       		.byte	0x4
+ 1758 00c3 07       		.byte	0x7
+ 1759 00c4 6B030000 		.4byte	.LASF18
+ 1760 00c8 06       		.uleb128 0x6
+ 1761 00c9 B7030000 		.4byte	.LASF19
+ 1762 00cd 01       		.byte	0x1
+ 1763 00ce 49       		.byte	0x49
+ 1764 00cf 00000000 		.4byte	.LFB64
+ 1765 00d3 B8000000 		.4byte	.LFE64-.LFB64
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 44
+
+
+ 1766 00d7 01       		.uleb128 0x1
+ 1767 00d8 9C       		.byte	0x9c
+ 1768 00d9 07       		.uleb128 0x7
+ 1769 00da 89020000 		.4byte	.LASF20
+ 1770 00de 01       		.byte	0x1
+ 1771 00df 7D       		.byte	0x7d
+ 1772 00e0 00000000 		.4byte	.LFB65
+ 1773 00e4 0C000000 		.4byte	.LFE65-.LFB65
+ 1774 00e8 01       		.uleb128 0x1
+ 1775 00e9 9C       		.byte	0x9c
+ 1776 00ea 08       		.uleb128 0x8
+ 1777 00eb 00000000 		.4byte	.LASF66
+ 1778 00ef 01       		.byte	0x1
+ 1779 00f0 85       		.byte	0x85
+ 1780 00f1 00000000 		.4byte	.LFB66
+ 1781 00f5 36000000 		.4byte	.LFE66-.LFB66
+ 1782 00f9 01       		.uleb128 0x1
+ 1783 00fa 9C       		.byte	0x9c
+ 1784 00fb 09       		.uleb128 0x9
+ 1785 00fc CB020000 		.4byte	.LASF22
+ 1786 0100 01       		.byte	0x1
+ 1787 0101 B0       		.byte	0xb0
+ 1788 0102 68000000 		.4byte	0x68
+ 1789 0106 00000000 		.4byte	.LFB67
+ 1790 010a 44040000 		.4byte	.LFE67-.LFB67
+ 1791 010e 01       		.uleb128 0x1
+ 1792 010f 9C       		.byte	0x9c
+ 1793 0110 3B010000 		.4byte	0x13b
+ 1794 0114 0A       		.uleb128 0xa
+ 1795 0115 436800   		.ascii	"Ch\000"
+ 1796 0118 01       		.byte	0x1
+ 1797 0119 B3       		.byte	0xb3
+ 1798 011a 81000000 		.4byte	0x81
+ 1799 011e 02       		.uleb128 0x2
+ 1800 011f 91       		.byte	0x91
+ 1801 0120 75       		.sleb128 -11
+ 1802 0121 0B       		.uleb128 0xb
+ 1803 0122 94030000 		.4byte	.LBB2
+ 1804 0126 8E000000 		.4byte	.LBE2-.LBB2
+ 1805 012a 0C       		.uleb128 0xc
+ 1806 012b E4010000 		.4byte	.LASF21
+ 1807 012f 01       		.byte	0x1
+ 1808 0130 BE01     		.2byte	0x1be
+ 1809 0132 99000000 		.4byte	0x99
+ 1810 0136 02       		.uleb128 0x2
+ 1811 0137 91       		.byte	0x91
+ 1812 0138 76       		.sleb128 -10
+ 1813 0139 00       		.byte	0
+ 1814 013a 00       		.byte	0
+ 1815 013b 0D       		.uleb128 0xd
+ 1816 013c AE020000 		.4byte	.LASF23
+ 1817 0140 01       		.byte	0x1
+ 1818 0141 E501     		.2byte	0x1e5
+ 1819 0143 00000000 		.4byte	.LFB68
+ 1820 0147 CC020000 		.4byte	.LFE68-.LFB68
+ 1821 014b 01       		.uleb128 0x1
+ 1822 014c 9C       		.byte	0x9c
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 45
+
+
+ 1823 014d 2B020000 		.4byte	0x22b
+ 1824 0151 0C       		.uleb128 0xc
+ 1825 0152 C4020000 		.4byte	.LASF24
+ 1826 0156 01       		.byte	0x1
+ 1827 0157 E801     		.2byte	0x1e8
+ 1828 0159 2B020000 		.4byte	0x22b
+ 1829 015d 04       		.uleb128 0x4
+ 1830 015e 91       		.byte	0x91
+ 1831 015f D8827F   		.sleb128 -16040
+ 1832 0162 0C       		.uleb128 0xc
+ 1833 0163 35020000 		.4byte	.LASF25
+ 1834 0167 01       		.byte	0x1
+ 1835 0168 F201     		.2byte	0x1f2
+ 1836 016a 3C020000 		.4byte	0x23c
+ 1837 016e 04       		.uleb128 0x4
+ 1838 016f 91       		.byte	0x91
+ 1839 0170 B8827F   		.sleb128 -16072
+ 1840 0173 0C       		.uleb128 0xc
+ 1841 0174 0D020000 		.4byte	.LASF26
+ 1842 0178 01       		.byte	0x1
+ 1843 0179 F301     		.2byte	0x1f3
+ 1844 017b 4C020000 		.4byte	0x24c
+ 1845 017f 04       		.uleb128 0x4
+ 1846 0180 91       		.byte	0x91
+ 1847 0181 A0827F   		.sleb128 -16096
+ 1848 0184 0C       		.uleb128 0xc
+ 1849 0185 7E030000 		.4byte	.LASF27
+ 1850 0189 01       		.byte	0x1
+ 1851 018a F401     		.2byte	0x1f4
+ 1852 018c 5C020000 		.4byte	0x25c
+ 1853 0190 04       		.uleb128 0x4
+ 1854 0191 91       		.byte	0x91
+ 1855 0192 90827F   		.sleb128 -16112
+ 1856 0195 0C       		.uleb128 0xc
+ 1857 0196 AB030000 		.4byte	.LASF28
+ 1858 019a 01       		.byte	0x1
+ 1859 019b F501     		.2byte	0x1f5
+ 1860 019d 6C020000 		.4byte	0x26c
+ 1861 01a1 04       		.uleb128 0x4
+ 1862 01a2 91       		.byte	0x91
+ 1863 01a3 84827F   		.sleb128 -16124
+ 1864 01a6 0C       		.uleb128 0xc
+ 1865 01a7 F5020000 		.4byte	.LASF29
+ 1866 01ab 01       		.byte	0x1
+ 1867 01ac 0102     		.2byte	0x201
+ 1868 01ae 8D000000 		.4byte	0x8d
+ 1869 01b2 02       		.uleb128 0x2
+ 1870 01b3 91       		.byte	0x91
+ 1871 01b4 5E       		.sleb128 -34
+ 1872 01b5 0C       		.uleb128 0xc
+ 1873 01b6 43000000 		.4byte	.LASF30
+ 1874 01ba 01       		.byte	0x1
+ 1875 01bb 0202     		.2byte	0x202
+ 1876 01bd 8D000000 		.4byte	0x8d
+ 1877 01c1 02       		.uleb128 0x2
+ 1878 01c2 91       		.byte	0x91
+ 1879 01c3 5C       		.sleb128 -36
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 46
+
+
+ 1880 01c4 0E       		.uleb128 0xe
+ 1881 01c5 0A000000 		.4byte	.LBB3
+ 1882 01c9 C8000000 		.4byte	.LBE3-.LBB3
+ 1883 01cd F8010000 		.4byte	0x1f8
+ 1884 01d1 0F       		.uleb128 0xf
+ 1885 01d2 6900     		.ascii	"i\000"
+ 1886 01d4 01       		.byte	0x1
+ 1887 01d5 E901     		.2byte	0x1e9
+ 1888 01d7 68000000 		.4byte	0x68
+ 1889 01db 02       		.uleb128 0x2
+ 1890 01dc 91       		.byte	0x91
+ 1891 01dd 6C       		.sleb128 -20
+ 1892 01de 0B       		.uleb128 0xb
+ 1893 01df 18000000 		.4byte	.LBB4
+ 1894 01e3 94000000 		.4byte	.LBE4-.LBB4
+ 1895 01e7 0C       		.uleb128 0xc
+ 1896 01e8 D5010000 		.4byte	.LASF31
+ 1897 01ec 01       		.byte	0x1
+ 1898 01ed EB01     		.2byte	0x1eb
+ 1899 01ef AC000000 		.4byte	0xac
+ 1900 01f3 02       		.uleb128 0x2
+ 1901 01f4 91       		.byte	0x91
+ 1902 01f5 60       		.sleb128 -32
+ 1903 01f6 00       		.byte	0
+ 1904 01f7 00       		.byte	0
+ 1905 01f8 0E       		.uleb128 0xe
+ 1906 01f9 3A010000 		.4byte	.LBB5
+ 1907 01fd 74000000 		.4byte	.LBE5-.LBB5
+ 1908 0201 13020000 		.4byte	0x213
+ 1909 0205 0F       		.uleb128 0xf
+ 1910 0206 6900     		.ascii	"i\000"
+ 1911 0208 01       		.byte	0x1
+ 1912 0209 F701     		.2byte	0x1f7
+ 1913 020b 81000000 		.4byte	0x81
+ 1914 020f 02       		.uleb128 0x2
+ 1915 0210 91       		.byte	0x91
+ 1916 0211 6B       		.sleb128 -21
+ 1917 0212 00       		.byte	0
+ 1918 0213 0B       		.uleb128 0xb
+ 1919 0214 AE010000 		.4byte	.LBB6
+ 1920 0218 74000000 		.4byte	.LBE6-.LBB6
+ 1921 021c 0F       		.uleb128 0xf
+ 1922 021d 6900     		.ascii	"i\000"
+ 1923 021f 01       		.byte	0x1
+ 1924 0220 FC01     		.2byte	0x1fc
+ 1925 0222 81000000 		.4byte	0x81
+ 1926 0226 02       		.uleb128 0x2
+ 1927 0227 91       		.byte	0x91
+ 1928 0228 6A       		.sleb128 -22
+ 1929 0229 00       		.byte	0
+ 1930 022a 00       		.byte	0
+ 1931 022b 10       		.uleb128 0x10
+ 1932 022c AC000000 		.4byte	0xac
+ 1933 0230 3C020000 		.4byte	0x23c
+ 1934 0234 11       		.uleb128 0x11
+ 1935 0235 C1000000 		.4byte	0xc1
+ 1936 0239 CF07     		.2byte	0x7cf
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 47
+
+
+ 1937 023b 00       		.byte	0
+ 1938 023c 10       		.uleb128 0x10
+ 1939 023d AC000000 		.4byte	0xac
+ 1940 0241 4C020000 		.4byte	0x24c
+ 1941 0245 12       		.uleb128 0x12
+ 1942 0246 C1000000 		.4byte	0xc1
+ 1943 024a 03       		.byte	0x3
+ 1944 024b 00       		.byte	0
+ 1945 024c 10       		.uleb128 0x10
+ 1946 024d AC000000 		.4byte	0xac
+ 1947 0251 5C020000 		.4byte	0x25c
+ 1948 0255 12       		.uleb128 0x12
+ 1949 0256 C1000000 		.4byte	0xc1
+ 1950 025a 02       		.byte	0x2
+ 1951 025b 00       		.byte	0
+ 1952 025c 10       		.uleb128 0x10
+ 1953 025d 68000000 		.4byte	0x68
+ 1954 0261 6C020000 		.4byte	0x26c
+ 1955 0265 12       		.uleb128 0x12
+ 1956 0266 C1000000 		.4byte	0xc1
+ 1957 026a 03       		.byte	0x3
+ 1958 026b 00       		.byte	0
+ 1959 026c 10       		.uleb128 0x10
+ 1960 026d 68000000 		.4byte	0x68
+ 1961 0271 7C020000 		.4byte	0x27c
+ 1962 0275 12       		.uleb128 0x12
+ 1963 0276 C1000000 		.4byte	0xc1
+ 1964 027a 02       		.byte	0x2
+ 1965 027b 00       		.byte	0
+ 1966 027c 13       		.uleb128 0x13
+ 1967 027d 8A030000 		.4byte	.LASF46
+ 1968 0281 01       		.byte	0x1
+ 1969 0282 0B02     		.2byte	0x20b
+ 1970 0284 AC000000 		.4byte	0xac
+ 1971 0288 00000000 		.4byte	.LFB69
+ 1972 028c 1C020000 		.4byte	.LFE69-.LFB69
+ 1973 0290 01       		.uleb128 0x1
+ 1974 0291 9C       		.byte	0x9c
+ 1975 0292 D8030000 		.4byte	0x3d8
+ 1976 0296 14       		.uleb128 0x14
+ 1977 0297 EA020000 		.4byte	.LASF32
+ 1978 029b 01       		.byte	0x1
+ 1979 029c 0B02     		.2byte	0x20b
+ 1980 029e 68000000 		.4byte	0x68
+ 1981 02a2 03       		.uleb128 0x3
+ 1982 02a3 91       		.byte	0x91
+ 1983 02a4 F47E     		.sleb128 -140
+ 1984 02a6 14       		.uleb128 0x14
+ 1985 02a7 A0030000 		.4byte	.LASF33
+ 1986 02ab 01       		.byte	0x1
+ 1987 02ac 0B02     		.2byte	0x20b
+ 1988 02ae 68000000 		.4byte	0x68
+ 1989 02b2 03       		.uleb128 0x3
+ 1990 02b3 91       		.byte	0x91
+ 1991 02b4 F07E     		.sleb128 -144
+ 1992 02b6 14       		.uleb128 0x14
+ 1993 02b7 F9000000 		.4byte	.LASF34
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 48
+
+
+ 1994 02bb 01       		.byte	0x1
+ 1995 02bc 0B02     		.2byte	0x20b
+ 1996 02be 68000000 		.4byte	0x68
+ 1997 02c2 03       		.uleb128 0x3
+ 1998 02c3 91       		.byte	0x91
+ 1999 02c4 EC7E     		.sleb128 -148
+ 2000 02c6 14       		.uleb128 0x14
+ 2001 02c7 10030000 		.4byte	.LASF35
+ 2002 02cb 01       		.byte	0x1
+ 2003 02cc 0B02     		.2byte	0x20b
+ 2004 02ce D8030000 		.4byte	0x3d8
+ 2005 02d2 03       		.uleb128 0x3
+ 2006 02d3 91       		.byte	0x91
+ 2007 02d4 E87E     		.sleb128 -152
+ 2008 02d6 0F       		.uleb128 0xf
+ 2009 02d7 6B00     		.ascii	"k\000"
+ 2010 02d9 01       		.byte	0x1
+ 2011 02da 0D02     		.2byte	0x20d
+ 2012 02dc 68000000 		.4byte	0x68
+ 2013 02e0 02       		.uleb128 0x2
+ 2014 02e1 91       		.byte	0x91
+ 2015 02e2 44       		.sleb128 -60
+ 2016 02e3 15       		.uleb128 0x15
+ 2017 02e4 6900     		.ascii	"i\000"
+ 2018 02e6 01       		.byte	0x1
+ 2019 02e7 0E02     		.2byte	0x20e
+ 2020 02e9 68000000 		.4byte	0x68
+ 2021 02ed 0C       		.uleb128 0xc
+ 2022 02ee DA020000 		.4byte	.LASF36
+ 2023 02f2 01       		.byte	0x1
+ 2024 02f3 0F02     		.2byte	0x20f
+ 2025 02f5 AC000000 		.4byte	0xac
+ 2026 02f9 02       		.uleb128 0x2
+ 2027 02fa 91       		.byte	0x91
+ 2028 02fb 48       		.sleb128 -56
+ 2029 02fc 0C       		.uleb128 0xc
+ 2030 02fd 07020000 		.4byte	.LASF37
+ 2031 0301 01       		.byte	0x1
+ 2032 0302 1002     		.2byte	0x210
+ 2033 0304 AC000000 		.4byte	0xac
+ 2034 0308 03       		.uleb128 0x3
+ 2035 0309 91       		.byte	0x91
+ 2036 030a B87F     		.sleb128 -72
+ 2037 030c 0C       		.uleb128 0xc
+ 2038 030d 98020000 		.4byte	.LASF38
+ 2039 0311 01       		.byte	0x1
+ 2040 0312 1102     		.2byte	0x211
+ 2041 0314 AC000000 		.4byte	0xac
+ 2042 0318 03       		.uleb128 0x3
+ 2043 0319 91       		.byte	0x91
+ 2044 031a B07F     		.sleb128 -80
+ 2045 031c 0C       		.uleb128 0xc
+ 2046 031d 20020000 		.4byte	.LASF39
+ 2047 0321 01       		.byte	0x1
+ 2048 0322 1202     		.2byte	0x212
+ 2049 0324 AC000000 		.4byte	0xac
+ 2050 0328 03       		.uleb128 0x3
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 49
+
+
+ 2051 0329 91       		.byte	0x91
+ 2052 032a A87F     		.sleb128 -88
+ 2053 032c 0C       		.uleb128 0xc
+ 2054 032d 1A020000 		.4byte	.LASF40
+ 2055 0331 01       		.byte	0x1
+ 2056 0332 1302     		.2byte	0x213
+ 2057 0334 AC000000 		.4byte	0xac
+ 2058 0338 03       		.uleb128 0x3
+ 2059 0339 91       		.byte	0x91
+ 2060 033a A07F     		.sleb128 -96
+ 2061 033c 0F       		.uleb128 0xf
+ 2062 033d 713000   		.ascii	"q0\000"
+ 2063 0340 01       		.byte	0x1
+ 2064 0341 1402     		.2byte	0x214
+ 2065 0343 AC000000 		.4byte	0xac
+ 2066 0347 03       		.uleb128 0x3
+ 2067 0348 91       		.byte	0x91
+ 2068 0349 987F     		.sleb128 -104
+ 2069 034b 0F       		.uleb128 0xf
+ 2070 034c 713100   		.ascii	"q1\000"
+ 2071 034f 01       		.byte	0x1
+ 2072 0350 1502     		.2byte	0x215
+ 2073 0352 AC000000 		.4byte	0xac
+ 2074 0356 02       		.uleb128 0x2
+ 2075 0357 91       		.byte	0x91
+ 2076 0358 68       		.sleb128 -24
+ 2077 0359 0F       		.uleb128 0xf
+ 2078 035a 713200   		.ascii	"q2\000"
+ 2079 035d 01       		.byte	0x1
+ 2080 035e 1602     		.2byte	0x216
+ 2081 0360 AC000000 		.4byte	0xac
+ 2082 0364 02       		.uleb128 0x2
+ 2083 0365 91       		.byte	0x91
+ 2084 0366 60       		.sleb128 -32
+ 2085 0367 0C       		.uleb128 0xc
+ 2086 0368 74030000 		.4byte	.LASF41
+ 2087 036c 01       		.byte	0x1
+ 2088 036d 1702     		.2byte	0x217
+ 2089 036f AC000000 		.4byte	0xac
+ 2090 0373 03       		.uleb128 0x3
+ 2091 0374 91       		.byte	0x91
+ 2092 0375 F87E     		.sleb128 -136
+ 2093 0377 0C       		.uleb128 0xc
+ 2094 0378 D0010000 		.4byte	.LASF42
+ 2095 037c 01       		.byte	0x1
+ 2096 037d 1802     		.2byte	0x218
+ 2097 037f AC000000 		.4byte	0xac
+ 2098 0383 03       		.uleb128 0x3
+ 2099 0384 91       		.byte	0x91
+ 2100 0385 887F     		.sleb128 -120
+ 2101 0387 0C       		.uleb128 0xc
+ 2102 0388 93020000 		.4byte	.LASF43
+ 2103 038c 01       		.byte	0x1
+ 2104 038d 1902     		.2byte	0x219
+ 2105 038f AC000000 		.4byte	0xac
+ 2106 0393 03       		.uleb128 0x3
+ 2107 0394 91       		.byte	0x91
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 50
+
+
+ 2108 0395 807F     		.sleb128 -128
+ 2109 0397 0C       		.uleb128 0xc
+ 2110 0398 28030000 		.4byte	.LASF44
+ 2111 039c 01       		.byte	0x1
+ 2112 039d 1B02     		.2byte	0x21b
+ 2113 039f AC000000 		.4byte	0xac
+ 2114 03a3 02       		.uleb128 0x2
+ 2115 03a4 91       		.byte	0x91
+ 2116 03a5 50       		.sleb128 -48
+ 2117 03a6 0B       		.uleb128 0xb
+ 2118 03a7 F8000000 		.4byte	.LBB7
+ 2119 03ab 70000000 		.4byte	.LBE7-.LBB7
+ 2120 03af 0F       		.uleb128 0xf
+ 2121 03b0 6900     		.ascii	"i\000"
+ 2122 03b2 01       		.byte	0x1
+ 2123 03b3 2702     		.2byte	0x227
+ 2124 03b5 8D000000 		.4byte	0x8d
+ 2125 03b9 02       		.uleb128 0x2
+ 2126 03ba 91       		.byte	0x91
+ 2127 03bb 5E       		.sleb128 -34
+ 2128 03bc 0B       		.uleb128 0xb
+ 2129 03bd 00010000 		.4byte	.LBB8
+ 2130 03c1 54000000 		.4byte	.LBE8-.LBB8
+ 2131 03c5 0C       		.uleb128 0xc
+ 2132 03c6 AF010000 		.4byte	.LASF45
+ 2133 03ca 01       		.byte	0x1
+ 2134 03cb 2902     		.2byte	0x229
+ 2135 03cd AC000000 		.4byte	0xac
+ 2136 03d1 03       		.uleb128 0x3
+ 2137 03d2 91       		.byte	0x91
+ 2138 03d3 907F     		.sleb128 -112
+ 2139 03d5 00       		.byte	0
+ 2140 03d6 00       		.byte	0
+ 2141 03d7 00       		.byte	0
+ 2142 03d8 16       		.uleb128 0x16
+ 2143 03d9 04       		.byte	0x4
+ 2144 03da AC000000 		.4byte	0xac
+ 2145 03de 13       		.uleb128 0x13
+ 2146 03df B3020000 		.4byte	.LASF47
+ 2147 03e3 01       		.byte	0x1
+ 2148 03e4 3902     		.2byte	0x239
+ 2149 03e6 8D000000 		.4byte	0x8d
+ 2150 03ea 00000000 		.4byte	.LFB70
+ 2151 03ee 64000000 		.4byte	.LFE70-.LFB70
+ 2152 03f2 01       		.uleb128 0x1
+ 2153 03f3 9C       		.byte	0x9c
+ 2154 03f4 4C040000 		.4byte	0x44c
+ 2155 03f8 14       		.uleb128 0x14
+ 2156 03f9 D0020000 		.4byte	.LASF48
+ 2157 03fd 01       		.byte	0x1
+ 2158 03fe 3902     		.2byte	0x239
+ 2159 0400 D8030000 		.4byte	0x3d8
+ 2160 0404 02       		.uleb128 0x2
+ 2161 0405 91       		.byte	0x91
+ 2162 0406 5C       		.sleb128 -36
+ 2163 0407 14       		.uleb128 0x14
+ 2164 0408 5C030000 		.4byte	.LASF49
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 51
+
+
+ 2165 040c 01       		.byte	0x1
+ 2166 040d 3902     		.2byte	0x239
+ 2167 040f 81000000 		.4byte	0x81
+ 2168 0413 02       		.uleb128 0x2
+ 2169 0414 91       		.byte	0x91
+ 2170 0415 5B       		.sleb128 -37
+ 2171 0416 0C       		.uleb128 0xc
+ 2172 0417 F1010000 		.4byte	.LASF50
+ 2173 041b 01       		.byte	0x1
+ 2174 041c 3B02     		.2byte	0x23b
+ 2175 041e AC000000 		.4byte	0xac
+ 2176 0422 02       		.uleb128 0x2
+ 2177 0423 91       		.byte	0x91
+ 2178 0424 68       		.sleb128 -24
+ 2179 0425 0C       		.uleb128 0xc
+ 2180 0426 2C000000 		.4byte	.LASF51
+ 2181 042a 01       		.byte	0x1
+ 2182 042b 3C02     		.2byte	0x23c
+ 2183 042d 8D000000 		.4byte	0x8d
+ 2184 0431 02       		.uleb128 0x2
+ 2185 0432 91       		.byte	0x91
+ 2186 0433 66       		.sleb128 -26
+ 2187 0434 0B       		.uleb128 0xb
+ 2188 0435 18000000 		.4byte	.LBB9
+ 2189 0439 42000000 		.4byte	.LBE9-.LBB9
+ 2190 043d 0F       		.uleb128 0xf
+ 2191 043e 6900     		.ascii	"i\000"
+ 2192 0440 01       		.byte	0x1
+ 2193 0441 3D02     		.2byte	0x23d
+ 2194 0443 8D000000 		.4byte	0x8d
+ 2195 0447 02       		.uleb128 0x2
+ 2196 0448 91       		.byte	0x91
+ 2197 0449 64       		.sleb128 -28
+ 2198 044a 00       		.byte	0
+ 2199 044b 00       		.byte	0
+ 2200 044c 0D       		.uleb128 0xd
+ 2201 044d 24000000 		.4byte	.LASF52
+ 2202 0451 01       		.byte	0x1
+ 2203 0452 4902     		.2byte	0x249
+ 2204 0454 00000000 		.4byte	.LFB71
+ 2205 0458 34010000 		.4byte	.LFE71-.LFB71
+ 2206 045c 01       		.uleb128 0x1
+ 2207 045d 9C       		.byte	0x9c
+ 2208 045e 90040000 		.4byte	0x490
+ 2209 0462 14       		.uleb128 0x14
+ 2210 0463 BB010000 		.4byte	.LASF53
+ 2211 0467 01       		.byte	0x1
+ 2212 0468 4902     		.2byte	0x249
+ 2213 046a 8D000000 		.4byte	0x8d
+ 2214 046e 02       		.uleb128 0x2
+ 2215 046f 91       		.byte	0x91
+ 2216 0470 6E       		.sleb128 -18
+ 2217 0471 14       		.uleb128 0x14
+ 2218 0472 E3000000 		.4byte	.LASF54
+ 2219 0476 01       		.byte	0x1
+ 2220 0477 4902     		.2byte	0x249
+ 2221 0479 8D000000 		.4byte	0x8d
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 52
+
+
+ 2222 047d 02       		.uleb128 0x2
+ 2223 047e 91       		.byte	0x91
+ 2224 047f 6C       		.sleb128 -20
+ 2225 0480 0C       		.uleb128 0xc
+ 2226 0481 10030000 		.4byte	.LASF35
+ 2227 0485 01       		.byte	0x1
+ 2228 0486 4B02     		.2byte	0x24b
+ 2229 0488 8D000000 		.4byte	0x8d
+ 2230 048c 02       		.uleb128 0x2
+ 2231 048d 91       		.byte	0x91
+ 2232 048e 76       		.sleb128 -10
+ 2233 048f 00       		.byte	0
+ 2234 0490 17       		.uleb128 0x17
+ 2235 0491 93030000 		.4byte	.LASF55
+ 2236 0495 05       		.byte	0x5
+ 2237 0496 1207     		.2byte	0x712
+ 2238 0498 9C040000 		.4byte	0x49c
+ 2239 049c 18       		.uleb128 0x18
+ 2240 049d 76000000 		.4byte	0x76
+ 2241 04a1 19       		.uleb128 0x19
+ 2242 04a2 3C000000 		.4byte	.LASF56
+ 2243 04a6 01       		.byte	0x1
+ 2244 04a7 36       		.byte	0x36
+ 2245 04a8 8D000000 		.4byte	0x8d
+ 2246 04ac 05       		.uleb128 0x5
+ 2247 04ad 03       		.byte	0x3
+ 2248 04ae 00000000 		.4byte	Output
+ 2249 04b2 19       		.uleb128 0x19
+ 2250 04b3 FB020000 		.4byte	.LASF57
+ 2251 04b7 01       		.byte	0x1
+ 2252 04b8 38       		.byte	0x38
+ 2253 04b9 81000000 		.4byte	0x81
+ 2254 04bd 05       		.uleb128 0x5
+ 2255 04be 03       		.byte	0x3
+ 2256 04bf 00000000 		.4byte	ContinuouslySendData
+ 2257 04c3 19       		.uleb128 0x19
+ 2258 04c4 42020000 		.4byte	.LASF58
+ 2259 04c8 01       		.byte	0x1
+ 2260 04c9 39       		.byte	0x39
+ 2261 04ca 81000000 		.4byte	0x81
+ 2262 04ce 05       		.uleb128 0x5
+ 2263 04cf 03       		.byte	0x3
+ 2264 04d0 00000000 		.4byte	SendSingleByte
+ 2265 04d4 19       		.uleb128 0x19
+ 2266 04d5 9D020000 		.4byte	.LASF59
+ 2267 04d9 01       		.byte	0x1
+ 2268 04da 3A       		.byte	0x3a
+ 2269 04db 81000000 		.4byte	0x81
+ 2270 04df 05       		.uleb128 0x5
+ 2271 04e0 03       		.byte	0x3
+ 2272 04e1 00000000 		.4byte	SendEmulatedData
+ 2273 04e5 10       		.uleb128 0x10
+ 2274 04e6 B3000000 		.4byte	0xb3
+ 2275 04ea F5040000 		.4byte	0x4f5
+ 2276 04ee 12       		.uleb128 0x12
+ 2277 04ef C1000000 		.4byte	0xc1
+ 2278 04f3 0F       		.byte	0xf
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 53
+
+
+ 2279 04f4 00       		.byte	0
+ 2280 04f5 19       		.uleb128 0x19
+ 2281 04f6 EA000000 		.4byte	.LASF60
+ 2282 04fa 01       		.byte	0x1
+ 2283 04fb 3C       		.byte	0x3c
+ 2284 04fc E5040000 		.4byte	0x4e5
+ 2285 0500 05       		.uleb128 0x5
+ 2286 0501 03       		.byte	0x3
+ 2287 0502 00000000 		.4byte	TransmitBuffer
+ 2288 0506 19       		.uleb128 0x19
+ 2289 0507 FA010000 		.4byte	.LASF61
+ 2290 050b 01       		.byte	0x1
+ 2291 050c 3E       		.byte	0x3e
+ 2292 050d 81000000 		.4byte	0x81
+ 2293 0511 05       		.uleb128 0x5
+ 2294 0512 03       		.byte	0x3
+ 2295 0513 00000000 		.4byte	EmulatedData
+ 2296 0517 10       		.uleb128 0x10
+ 2297 0518 99000000 		.4byte	0x99
+ 2298 051c 28050000 		.4byte	0x528
+ 2299 0520 11       		.uleb128 0x11
+ 2300 0521 C1000000 		.4byte	0xc1
+ 2301 0525 CF07     		.2byte	0x7cf
+ 2302 0527 00       		.byte	0
+ 2303 0528 19       		.uleb128 0x19
+ 2304 0529 56030000 		.4byte	.LASF62
+ 2305 052d 01       		.byte	0x1
+ 2306 052e 3F       		.byte	0x3f
+ 2307 052f 17050000 		.4byte	0x517
+ 2308 0533 05       		.uleb128 0x5
+ 2309 0534 03       		.byte	0x3
+ 2310 0535 00000000 		.4byte	array
+ 2311 0539 00       		.byte	0
+ 2312              		.section	.debug_abbrev,"",%progbits
+ 2313              	.Ldebug_abbrev0:
+ 2314 0000 01       		.uleb128 0x1
+ 2315 0001 11       		.uleb128 0x11
+ 2316 0002 01       		.byte	0x1
+ 2317 0003 25       		.uleb128 0x25
+ 2318 0004 0E       		.uleb128 0xe
+ 2319 0005 13       		.uleb128 0x13
+ 2320 0006 0B       		.uleb128 0xb
+ 2321 0007 03       		.uleb128 0x3
+ 2322 0008 0E       		.uleb128 0xe
+ 2323 0009 1B       		.uleb128 0x1b
+ 2324 000a 0E       		.uleb128 0xe
+ 2325 000b 55       		.uleb128 0x55
+ 2326 000c 17       		.uleb128 0x17
+ 2327 000d 11       		.uleb128 0x11
+ 2328 000e 01       		.uleb128 0x1
+ 2329 000f 10       		.uleb128 0x10
+ 2330 0010 17       		.uleb128 0x17
+ 2331 0011 00       		.byte	0
+ 2332 0012 00       		.byte	0
+ 2333 0013 02       		.uleb128 0x2
+ 2334 0014 24       		.uleb128 0x24
+ 2335 0015 00       		.byte	0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 54
+
+
+ 2336 0016 0B       		.uleb128 0xb
+ 2337 0017 0B       		.uleb128 0xb
+ 2338 0018 3E       		.uleb128 0x3e
+ 2339 0019 0B       		.uleb128 0xb
+ 2340 001a 03       		.uleb128 0x3
+ 2341 001b 0E       		.uleb128 0xe
+ 2342 001c 00       		.byte	0
+ 2343 001d 00       		.byte	0
+ 2344 001e 03       		.uleb128 0x3
+ 2345 001f 16       		.uleb128 0x16
+ 2346 0020 00       		.byte	0
+ 2347 0021 03       		.uleb128 0x3
+ 2348 0022 0E       		.uleb128 0xe
+ 2349 0023 3A       		.uleb128 0x3a
+ 2350 0024 0B       		.uleb128 0xb
+ 2351 0025 3B       		.uleb128 0x3b
+ 2352 0026 0B       		.uleb128 0xb
+ 2353 0027 49       		.uleb128 0x49
+ 2354 0028 13       		.uleb128 0x13
+ 2355 0029 00       		.byte	0
+ 2356 002a 00       		.byte	0
+ 2357 002b 04       		.uleb128 0x4
+ 2358 002c 24       		.uleb128 0x24
+ 2359 002d 00       		.byte	0
+ 2360 002e 0B       		.uleb128 0xb
+ 2361 002f 0B       		.uleb128 0xb
+ 2362 0030 3E       		.uleb128 0x3e
+ 2363 0031 0B       		.uleb128 0xb
+ 2364 0032 03       		.uleb128 0x3
+ 2365 0033 08       		.uleb128 0x8
+ 2366 0034 00       		.byte	0
+ 2367 0035 00       		.byte	0
+ 2368 0036 05       		.uleb128 0x5
+ 2369 0037 16       		.uleb128 0x16
+ 2370 0038 00       		.byte	0
+ 2371 0039 03       		.uleb128 0x3
+ 2372 003a 0E       		.uleb128 0xe
+ 2373 003b 3A       		.uleb128 0x3a
+ 2374 003c 0B       		.uleb128 0xb
+ 2375 003d 3B       		.uleb128 0x3b
+ 2376 003e 05       		.uleb128 0x5
+ 2377 003f 49       		.uleb128 0x49
+ 2378 0040 13       		.uleb128 0x13
+ 2379 0041 00       		.byte	0
+ 2380 0042 00       		.byte	0
+ 2381 0043 06       		.uleb128 0x6
+ 2382 0044 2E       		.uleb128 0x2e
+ 2383 0045 00       		.byte	0
+ 2384 0046 3F       		.uleb128 0x3f
+ 2385 0047 19       		.uleb128 0x19
+ 2386 0048 03       		.uleb128 0x3
+ 2387 0049 0E       		.uleb128 0xe
+ 2388 004a 3A       		.uleb128 0x3a
+ 2389 004b 0B       		.uleb128 0xb
+ 2390 004c 3B       		.uleb128 0x3b
+ 2391 004d 0B       		.uleb128 0xb
+ 2392 004e 27       		.uleb128 0x27
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 55
+
+
+ 2393 004f 19       		.uleb128 0x19
+ 2394 0050 11       		.uleb128 0x11
+ 2395 0051 01       		.uleb128 0x1
+ 2396 0052 12       		.uleb128 0x12
+ 2397 0053 06       		.uleb128 0x6
+ 2398 0054 40       		.uleb128 0x40
+ 2399 0055 18       		.uleb128 0x18
+ 2400 0056 9642     		.uleb128 0x2116
+ 2401 0058 19       		.uleb128 0x19
+ 2402 0059 00       		.byte	0
+ 2403 005a 00       		.byte	0
+ 2404 005b 07       		.uleb128 0x7
+ 2405 005c 2E       		.uleb128 0x2e
+ 2406 005d 00       		.byte	0
+ 2407 005e 3F       		.uleb128 0x3f
+ 2408 005f 19       		.uleb128 0x19
+ 2409 0060 03       		.uleb128 0x3
+ 2410 0061 0E       		.uleb128 0xe
+ 2411 0062 3A       		.uleb128 0x3a
+ 2412 0063 0B       		.uleb128 0xb
+ 2413 0064 3B       		.uleb128 0x3b
+ 2414 0065 0B       		.uleb128 0xb
+ 2415 0066 27       		.uleb128 0x27
+ 2416 0067 19       		.uleb128 0x19
+ 2417 0068 11       		.uleb128 0x11
+ 2418 0069 01       		.uleb128 0x1
+ 2419 006a 12       		.uleb128 0x12
+ 2420 006b 06       		.uleb128 0x6
+ 2421 006c 40       		.uleb128 0x40
+ 2422 006d 18       		.uleb128 0x18
+ 2423 006e 9742     		.uleb128 0x2117
+ 2424 0070 19       		.uleb128 0x19
+ 2425 0071 00       		.byte	0
+ 2426 0072 00       		.byte	0
+ 2427 0073 08       		.uleb128 0x8
+ 2428 0074 2E       		.uleb128 0x2e
+ 2429 0075 00       		.byte	0
+ 2430 0076 3F       		.uleb128 0x3f
+ 2431 0077 19       		.uleb128 0x19
+ 2432 0078 03       		.uleb128 0x3
+ 2433 0079 0E       		.uleb128 0xe
+ 2434 007a 3A       		.uleb128 0x3a
+ 2435 007b 0B       		.uleb128 0xb
+ 2436 007c 3B       		.uleb128 0x3b
+ 2437 007d 0B       		.uleb128 0xb
+ 2438 007e 11       		.uleb128 0x11
+ 2439 007f 01       		.uleb128 0x1
+ 2440 0080 12       		.uleb128 0x12
+ 2441 0081 06       		.uleb128 0x6
+ 2442 0082 40       		.uleb128 0x40
+ 2443 0083 18       		.uleb128 0x18
+ 2444 0084 9642     		.uleb128 0x2116
+ 2445 0086 19       		.uleb128 0x19
+ 2446 0087 00       		.byte	0
+ 2447 0088 00       		.byte	0
+ 2448 0089 09       		.uleb128 0x9
+ 2449 008a 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 56
+
+
+ 2450 008b 01       		.byte	0x1
+ 2451 008c 3F       		.uleb128 0x3f
+ 2452 008d 19       		.uleb128 0x19
+ 2453 008e 03       		.uleb128 0x3
+ 2454 008f 0E       		.uleb128 0xe
+ 2455 0090 3A       		.uleb128 0x3a
+ 2456 0091 0B       		.uleb128 0xb
+ 2457 0092 3B       		.uleb128 0x3b
+ 2458 0093 0B       		.uleb128 0xb
+ 2459 0094 49       		.uleb128 0x49
+ 2460 0095 13       		.uleb128 0x13
+ 2461 0096 11       		.uleb128 0x11
+ 2462 0097 01       		.uleb128 0x1
+ 2463 0098 12       		.uleb128 0x12
+ 2464 0099 06       		.uleb128 0x6
+ 2465 009a 40       		.uleb128 0x40
+ 2466 009b 18       		.uleb128 0x18
+ 2467 009c 9642     		.uleb128 0x2116
+ 2468 009e 19       		.uleb128 0x19
+ 2469 009f 01       		.uleb128 0x1
+ 2470 00a0 13       		.uleb128 0x13
+ 2471 00a1 00       		.byte	0
+ 2472 00a2 00       		.byte	0
+ 2473 00a3 0A       		.uleb128 0xa
+ 2474 00a4 34       		.uleb128 0x34
+ 2475 00a5 00       		.byte	0
+ 2476 00a6 03       		.uleb128 0x3
+ 2477 00a7 08       		.uleb128 0x8
+ 2478 00a8 3A       		.uleb128 0x3a
+ 2479 00a9 0B       		.uleb128 0xb
+ 2480 00aa 3B       		.uleb128 0x3b
+ 2481 00ab 0B       		.uleb128 0xb
+ 2482 00ac 49       		.uleb128 0x49
+ 2483 00ad 13       		.uleb128 0x13
+ 2484 00ae 02       		.uleb128 0x2
+ 2485 00af 18       		.uleb128 0x18
+ 2486 00b0 00       		.byte	0
+ 2487 00b1 00       		.byte	0
+ 2488 00b2 0B       		.uleb128 0xb
+ 2489 00b3 0B       		.uleb128 0xb
+ 2490 00b4 01       		.byte	0x1
+ 2491 00b5 11       		.uleb128 0x11
+ 2492 00b6 01       		.uleb128 0x1
+ 2493 00b7 12       		.uleb128 0x12
+ 2494 00b8 06       		.uleb128 0x6
+ 2495 00b9 00       		.byte	0
+ 2496 00ba 00       		.byte	0
+ 2497 00bb 0C       		.uleb128 0xc
+ 2498 00bc 34       		.uleb128 0x34
+ 2499 00bd 00       		.byte	0
+ 2500 00be 03       		.uleb128 0x3
+ 2501 00bf 0E       		.uleb128 0xe
+ 2502 00c0 3A       		.uleb128 0x3a
+ 2503 00c1 0B       		.uleb128 0xb
+ 2504 00c2 3B       		.uleb128 0x3b
+ 2505 00c3 05       		.uleb128 0x5
+ 2506 00c4 49       		.uleb128 0x49
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 57
+
+
+ 2507 00c5 13       		.uleb128 0x13
+ 2508 00c6 02       		.uleb128 0x2
+ 2509 00c7 18       		.uleb128 0x18
+ 2510 00c8 00       		.byte	0
+ 2511 00c9 00       		.byte	0
+ 2512 00ca 0D       		.uleb128 0xd
+ 2513 00cb 2E       		.uleb128 0x2e
+ 2514 00cc 01       		.byte	0x1
+ 2515 00cd 3F       		.uleb128 0x3f
+ 2516 00ce 19       		.uleb128 0x19
+ 2517 00cf 03       		.uleb128 0x3
+ 2518 00d0 0E       		.uleb128 0xe
+ 2519 00d1 3A       		.uleb128 0x3a
+ 2520 00d2 0B       		.uleb128 0xb
+ 2521 00d3 3B       		.uleb128 0x3b
+ 2522 00d4 05       		.uleb128 0x5
+ 2523 00d5 27       		.uleb128 0x27
+ 2524 00d6 19       		.uleb128 0x19
+ 2525 00d7 11       		.uleb128 0x11
+ 2526 00d8 01       		.uleb128 0x1
+ 2527 00d9 12       		.uleb128 0x12
+ 2528 00da 06       		.uleb128 0x6
+ 2529 00db 40       		.uleb128 0x40
+ 2530 00dc 18       		.uleb128 0x18
+ 2531 00dd 9642     		.uleb128 0x2116
+ 2532 00df 19       		.uleb128 0x19
+ 2533 00e0 01       		.uleb128 0x1
+ 2534 00e1 13       		.uleb128 0x13
+ 2535 00e2 00       		.byte	0
+ 2536 00e3 00       		.byte	0
+ 2537 00e4 0E       		.uleb128 0xe
+ 2538 00e5 0B       		.uleb128 0xb
+ 2539 00e6 01       		.byte	0x1
+ 2540 00e7 11       		.uleb128 0x11
+ 2541 00e8 01       		.uleb128 0x1
+ 2542 00e9 12       		.uleb128 0x12
+ 2543 00ea 06       		.uleb128 0x6
+ 2544 00eb 01       		.uleb128 0x1
+ 2545 00ec 13       		.uleb128 0x13
+ 2546 00ed 00       		.byte	0
+ 2547 00ee 00       		.byte	0
+ 2548 00ef 0F       		.uleb128 0xf
+ 2549 00f0 34       		.uleb128 0x34
+ 2550 00f1 00       		.byte	0
+ 2551 00f2 03       		.uleb128 0x3
+ 2552 00f3 08       		.uleb128 0x8
+ 2553 00f4 3A       		.uleb128 0x3a
+ 2554 00f5 0B       		.uleb128 0xb
+ 2555 00f6 3B       		.uleb128 0x3b
+ 2556 00f7 05       		.uleb128 0x5
+ 2557 00f8 49       		.uleb128 0x49
+ 2558 00f9 13       		.uleb128 0x13
+ 2559 00fa 02       		.uleb128 0x2
+ 2560 00fb 18       		.uleb128 0x18
+ 2561 00fc 00       		.byte	0
+ 2562 00fd 00       		.byte	0
+ 2563 00fe 10       		.uleb128 0x10
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 58
+
+
+ 2564 00ff 01       		.uleb128 0x1
+ 2565 0100 01       		.byte	0x1
+ 2566 0101 49       		.uleb128 0x49
+ 2567 0102 13       		.uleb128 0x13
+ 2568 0103 01       		.uleb128 0x1
+ 2569 0104 13       		.uleb128 0x13
+ 2570 0105 00       		.byte	0
+ 2571 0106 00       		.byte	0
+ 2572 0107 11       		.uleb128 0x11
+ 2573 0108 21       		.uleb128 0x21
+ 2574 0109 00       		.byte	0
+ 2575 010a 49       		.uleb128 0x49
+ 2576 010b 13       		.uleb128 0x13
+ 2577 010c 2F       		.uleb128 0x2f
+ 2578 010d 05       		.uleb128 0x5
+ 2579 010e 00       		.byte	0
+ 2580 010f 00       		.byte	0
+ 2581 0110 12       		.uleb128 0x12
+ 2582 0111 21       		.uleb128 0x21
+ 2583 0112 00       		.byte	0
+ 2584 0113 49       		.uleb128 0x49
+ 2585 0114 13       		.uleb128 0x13
+ 2586 0115 2F       		.uleb128 0x2f
+ 2587 0116 0B       		.uleb128 0xb
+ 2588 0117 00       		.byte	0
+ 2589 0118 00       		.byte	0
+ 2590 0119 13       		.uleb128 0x13
+ 2591 011a 2E       		.uleb128 0x2e
+ 2592 011b 01       		.byte	0x1
+ 2593 011c 3F       		.uleb128 0x3f
+ 2594 011d 19       		.uleb128 0x19
+ 2595 011e 03       		.uleb128 0x3
+ 2596 011f 0E       		.uleb128 0xe
+ 2597 0120 3A       		.uleb128 0x3a
+ 2598 0121 0B       		.uleb128 0xb
+ 2599 0122 3B       		.uleb128 0x3b
+ 2600 0123 05       		.uleb128 0x5
+ 2601 0124 27       		.uleb128 0x27
+ 2602 0125 19       		.uleb128 0x19
+ 2603 0126 49       		.uleb128 0x49
+ 2604 0127 13       		.uleb128 0x13
+ 2605 0128 11       		.uleb128 0x11
+ 2606 0129 01       		.uleb128 0x1
+ 2607 012a 12       		.uleb128 0x12
+ 2608 012b 06       		.uleb128 0x6
+ 2609 012c 40       		.uleb128 0x40
+ 2610 012d 18       		.uleb128 0x18
+ 2611 012e 9642     		.uleb128 0x2116
+ 2612 0130 19       		.uleb128 0x19
+ 2613 0131 01       		.uleb128 0x1
+ 2614 0132 13       		.uleb128 0x13
+ 2615 0133 00       		.byte	0
+ 2616 0134 00       		.byte	0
+ 2617 0135 14       		.uleb128 0x14
+ 2618 0136 05       		.uleb128 0x5
+ 2619 0137 00       		.byte	0
+ 2620 0138 03       		.uleb128 0x3
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 59
+
+
+ 2621 0139 0E       		.uleb128 0xe
+ 2622 013a 3A       		.uleb128 0x3a
+ 2623 013b 0B       		.uleb128 0xb
+ 2624 013c 3B       		.uleb128 0x3b
+ 2625 013d 05       		.uleb128 0x5
+ 2626 013e 49       		.uleb128 0x49
+ 2627 013f 13       		.uleb128 0x13
+ 2628 0140 02       		.uleb128 0x2
+ 2629 0141 18       		.uleb128 0x18
+ 2630 0142 00       		.byte	0
+ 2631 0143 00       		.byte	0
+ 2632 0144 15       		.uleb128 0x15
+ 2633 0145 34       		.uleb128 0x34
+ 2634 0146 00       		.byte	0
+ 2635 0147 03       		.uleb128 0x3
+ 2636 0148 08       		.uleb128 0x8
+ 2637 0149 3A       		.uleb128 0x3a
+ 2638 014a 0B       		.uleb128 0xb
+ 2639 014b 3B       		.uleb128 0x3b
+ 2640 014c 05       		.uleb128 0x5
+ 2641 014d 49       		.uleb128 0x49
+ 2642 014e 13       		.uleb128 0x13
+ 2643 014f 00       		.byte	0
+ 2644 0150 00       		.byte	0
+ 2645 0151 16       		.uleb128 0x16
+ 2646 0152 0F       		.uleb128 0xf
+ 2647 0153 00       		.byte	0
+ 2648 0154 0B       		.uleb128 0xb
+ 2649 0155 0B       		.uleb128 0xb
+ 2650 0156 49       		.uleb128 0x49
+ 2651 0157 13       		.uleb128 0x13
+ 2652 0158 00       		.byte	0
+ 2653 0159 00       		.byte	0
+ 2654 015a 17       		.uleb128 0x17
+ 2655 015b 34       		.uleb128 0x34
+ 2656 015c 00       		.byte	0
+ 2657 015d 03       		.uleb128 0x3
+ 2658 015e 0E       		.uleb128 0xe
+ 2659 015f 3A       		.uleb128 0x3a
+ 2660 0160 0B       		.uleb128 0xb
+ 2661 0161 3B       		.uleb128 0x3b
+ 2662 0162 05       		.uleb128 0x5
+ 2663 0163 49       		.uleb128 0x49
+ 2664 0164 13       		.uleb128 0x13
+ 2665 0165 3F       		.uleb128 0x3f
+ 2666 0166 19       		.uleb128 0x19
+ 2667 0167 3C       		.uleb128 0x3c
+ 2668 0168 19       		.uleb128 0x19
+ 2669 0169 00       		.byte	0
+ 2670 016a 00       		.byte	0
+ 2671 016b 18       		.uleb128 0x18
+ 2672 016c 35       		.uleb128 0x35
+ 2673 016d 00       		.byte	0
+ 2674 016e 49       		.uleb128 0x49
+ 2675 016f 13       		.uleb128 0x13
+ 2676 0170 00       		.byte	0
+ 2677 0171 00       		.byte	0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 60
+
+
+ 2678 0172 19       		.uleb128 0x19
+ 2679 0173 34       		.uleb128 0x34
+ 2680 0174 00       		.byte	0
+ 2681 0175 03       		.uleb128 0x3
+ 2682 0176 0E       		.uleb128 0xe
+ 2683 0177 3A       		.uleb128 0x3a
+ 2684 0178 0B       		.uleb128 0xb
+ 2685 0179 3B       		.uleb128 0x3b
+ 2686 017a 0B       		.uleb128 0xb
+ 2687 017b 49       		.uleb128 0x49
+ 2688 017c 13       		.uleb128 0x13
+ 2689 017d 3F       		.uleb128 0x3f
+ 2690 017e 19       		.uleb128 0x19
+ 2691 017f 02       		.uleb128 0x2
+ 2692 0180 18       		.uleb128 0x18
+ 2693 0181 00       		.byte	0
+ 2694 0182 00       		.byte	0
+ 2695 0183 00       		.byte	0
+ 2696              		.section	.debug_aranges,"",%progbits
+ 2697 0000 54000000 		.4byte	0x54
+ 2698 0004 0200     		.2byte	0x2
+ 2699 0006 00000000 		.4byte	.Ldebug_info0
+ 2700 000a 04       		.byte	0x4
+ 2701 000b 00       		.byte	0
+ 2702 000c 0000     		.2byte	0
+ 2703 000e 0000     		.2byte	0
+ 2704 0010 00000000 		.4byte	.LFB64
+ 2705 0014 B8000000 		.4byte	.LFE64-.LFB64
+ 2706 0018 00000000 		.4byte	.LFB65
+ 2707 001c 0C000000 		.4byte	.LFE65-.LFB65
+ 2708 0020 00000000 		.4byte	.LFB66
+ 2709 0024 36000000 		.4byte	.LFE66-.LFB66
+ 2710 0028 00000000 		.4byte	.LFB67
+ 2711 002c 44040000 		.4byte	.LFE67-.LFB67
+ 2712 0030 00000000 		.4byte	.LFB68
+ 2713 0034 CC020000 		.4byte	.LFE68-.LFB68
+ 2714 0038 00000000 		.4byte	.LFB69
+ 2715 003c 1C020000 		.4byte	.LFE69-.LFB69
+ 2716 0040 00000000 		.4byte	.LFB70
+ 2717 0044 64000000 		.4byte	.LFE70-.LFB70
+ 2718 0048 00000000 		.4byte	.LFB71
+ 2719 004c 34010000 		.4byte	.LFE71-.LFB71
+ 2720 0050 00000000 		.4byte	0
+ 2721 0054 00000000 		.4byte	0
+ 2722              		.section	.debug_ranges,"",%progbits
+ 2723              	.Ldebug_ranges0:
+ 2724 0000 00000000 		.4byte	.LFB64
+ 2725 0004 B8000000 		.4byte	.LFE64
+ 2726 0008 00000000 		.4byte	.LFB65
+ 2727 000c 0C000000 		.4byte	.LFE65
+ 2728 0010 00000000 		.4byte	.LFB66
+ 2729 0014 36000000 		.4byte	.LFE66
+ 2730 0018 00000000 		.4byte	.LFB67
+ 2731 001c 44040000 		.4byte	.LFE67
+ 2732 0020 00000000 		.4byte	.LFB68
+ 2733 0024 CC020000 		.4byte	.LFE68
+ 2734 0028 00000000 		.4byte	.LFB69
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 61
+
+
+ 2735 002c 1C020000 		.4byte	.LFE69
+ 2736 0030 00000000 		.4byte	.LFB70
+ 2737 0034 64000000 		.4byte	.LFE70
+ 2738 0038 00000000 		.4byte	.LFB71
+ 2739 003c 34010000 		.4byte	.LFE71
+ 2740 0040 00000000 		.4byte	0
+ 2741 0044 00000000 		.4byte	0
+ 2742              		.section	.debug_line,"",%progbits
+ 2743              	.Ldebug_line0:
+ 2744 0000 6A030000 		.section	.debug_str,"MS",%progbits,1
+ 2744      02004C01 
+ 2744      00000201 
+ 2744      FB0E0D00 
+ 2744      01010101 
+ 2745              	.LASF66:
+ 2746 0000 44697361 		.ascii	"DisableAllDigitalToAnalogConverters\000"
+ 2746      626C6541 
+ 2746      6C6C4469 
+ 2746      67697461 
+ 2746      6C546F41 
+ 2747              	.LASF52:
+ 2748 0024 4465636F 		.ascii	"Decoder\000"
+ 2748      64657200 
+ 2749              	.LASF51:
+ 2750 002c 696E6465 		.ascii	"index\000"
+ 2750      7800
+ 2751              	.LASF2:
+ 2752 0032 73686F72 		.ascii	"short int\000"
+ 2752      7420696E 
+ 2752      7400
+ 2753              	.LASF56:
+ 2754 003c 4F757470 		.ascii	"Output\000"
+ 2754      757400
+ 2755              	.LASF30:
+ 2756 0043 6869416D 		.ascii	"hiAmp\000"
+ 2756      7000
+ 2757              	.LASF63:
+ 2758 0049 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2758      43313120 
+ 2758      352E342E 
+ 2758      31203230 
+ 2758      31363036 
+ 2759 007c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2759      20726576 
+ 2759      6973696F 
+ 2759      6E203233 
+ 2759      37373135 
+ 2760 00af 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2760      66756E63 
+ 2760      74696F6E 
+ 2760      2D736563 
+ 2760      74696F6E 
+ 2761              	.LASF17:
+ 2762 00d7 6C6F6E67 		.ascii	"long double\000"
+ 2762      20646F75 
+ 2762      626C6500 
+ 2763              	.LASF54:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 62
+
+
+ 2764 00e3 68694672 		.ascii	"hiFrec\000"
+ 2764      656300
+ 2765              	.LASF60:
+ 2766 00ea 5472616E 		.ascii	"TransmitBuffer\000"
+ 2766      736D6974 
+ 2766      42756666 
+ 2766      657200
+ 2767              	.LASF34:
+ 2768 00f9 7453616D 		.ascii	"tSamplingRate\000"
+ 2768      706C696E 
+ 2768      67526174 
+ 2768      6500
+ 2769              	.LASF12:
+ 2770 0107 75696E74 		.ascii	"uint16\000"
+ 2770      313600
+ 2771              	.LASF13:
+ 2772 010e 696E7431 		.ascii	"int16\000"
+ 2772      3600
+ 2773              	.LASF11:
+ 2774 0114 75696E74 		.ascii	"uint8\000"
+ 2774      3800
+ 2775              	.LASF65:
+ 2776 011a 433A5C55 		.ascii	"C:\\Users\\herreral\\Documents\\Masters\\Tecnicas d"
+ 2776      73657273 
+ 2776      5C686572 
+ 2776      72657261 
+ 2776      6C5C446F 
+ 2777 0148 65204164 		.ascii	"e Adquisicion y Procesamiento de Datos\\DualToneMul"
+ 2777      71756973 
+ 2777      6963696F 
+ 2777      6E207920 
+ 2777      50726F63 
+ 2778 017a 74694672 		.ascii	"tiFrequencyCoder\\DualTone MultiFrequency Coder.cyd"
+ 2778      65717565 
+ 2778      6E637943 
+ 2778      6F646572 
+ 2778      5C447561 
+ 2779 01ac 736E00   		.ascii	"sn\000"
+ 2780              	.LASF45:
+ 2781 01af 6D646174 		.ascii	"mdata\000"
+ 2781      6100
+ 2782              	.LASF14:
+ 2783 01b5 666C6F61 		.ascii	"float\000"
+ 2783      7400
+ 2784              	.LASF53:
+ 2785 01bb 6C6F4672 		.ascii	"loFrec\000"
+ 2785      656300
+ 2786              	.LASF6:
+ 2787 01c2 6C6F6E67 		.ascii	"long long int\000"
+ 2787      206C6F6E 
+ 2787      6720696E 
+ 2787      7400
+ 2788              	.LASF42:
+ 2789 01d0 7265616C 		.ascii	"real\000"
+ 2789      00
+ 2790              	.LASF31:
+ 2791 01d5 70646174 		.ascii	"pdata\000"
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 63
+
+
+ 2791      6100
+ 2792              	.LASF4:
+ 2793 01db 6C6F6E67 		.ascii	"long int\000"
+ 2793      20696E74 
+ 2793      00
+ 2794              	.LASF21:
+ 2795 01e4 73616D70 		.ascii	"sampleNumber\000"
+ 2795      6C654E75 
+ 2795      6D626572 
+ 2795      00
+ 2796              	.LASF50:
+ 2797 01f1 6D617856 		.ascii	"maxValue\000"
+ 2797      616C7565 
+ 2797      00
+ 2798              	.LASF61:
+ 2799 01fa 456D756C 		.ascii	"EmulatedData\000"
+ 2799      61746564 
+ 2799      44617461 
+ 2799      00
+ 2800              	.LASF37:
+ 2801 0207 6F6D6567 		.ascii	"omega\000"
+ 2801      6100
+ 2802              	.LASF26:
+ 2803 020d 6869416D 		.ascii	"hiAmplitudes\000"
+ 2803      706C6974 
+ 2803      75646573 
+ 2803      00
+ 2804              	.LASF40:
+ 2805 021a 636F6566 		.ascii	"coeff\000"
+ 2805      6600
+ 2806              	.LASF39:
+ 2807 0220 636F7369 		.ascii	"cosine\000"
+ 2807      6E6500
+ 2808              	.LASF1:
+ 2809 0227 756E7369 		.ascii	"unsigned char\000"
+ 2809      676E6564 
+ 2809      20636861 
+ 2809      7200
+ 2810              	.LASF25:
+ 2811 0235 6C6F416D 		.ascii	"loAmplitudes\000"
+ 2811      706C6974 
+ 2811      75646573 
+ 2811      00
+ 2812              	.LASF58:
+ 2813 0242 53656E64 		.ascii	"SendSingleByte\000"
+ 2813      53696E67 
+ 2813      6C654279 
+ 2813      746500
+ 2814              	.LASF0:
+ 2815 0251 7369676E 		.ascii	"signed char\000"
+ 2815      65642063 
+ 2815      68617200 
+ 2816              	.LASF10:
+ 2817 025d 696E7433 		.ascii	"int32_t\000"
+ 2817      325F7400 
+ 2818              	.LASF7:
+ 2819 0265 6C6F6E67 		.ascii	"long long unsigned int\000"
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 64
+
+
+ 2819      206C6F6E 
+ 2819      6720756E 
+ 2819      7369676E 
+ 2819      65642069 
+ 2820              	.LASF8:
+ 2821 027c 756E7369 		.ascii	"unsigned int\000"
+ 2821      676E6564 
+ 2821      20696E74 
+ 2821      00
+ 2822              	.LASF20:
+ 2823 0289 55736572 		.ascii	"UserInput\000"
+ 2823      496E7075 
+ 2823      7400
+ 2824              	.LASF43:
+ 2825 0293 696D6167 		.ascii	"imag\000"
+ 2825      00
+ 2826              	.LASF38:
+ 2827 0298 73696E65 		.ascii	"sine\000"
+ 2827      00
+ 2828              	.LASF59:
+ 2829 029d 53656E64 		.ascii	"SendEmulatedData\000"
+ 2829      456D756C 
+ 2829      61746564 
+ 2829      44617461 
+ 2829      00
+ 2830              	.LASF23:
+ 2831 02ae 44544D46 		.ascii	"DTMF\000"
+ 2831      00
+ 2832              	.LASF47:
+ 2833 02b3 6765744D 		.ascii	"getMaxValue\000"
+ 2833      61785661 
+ 2833      6C756500 
+ 2834              	.LASF16:
+ 2835 02bf 63686172 		.ascii	"char\000"
+ 2835      00
+ 2836              	.LASF24:
+ 2837 02c4 7369676E 		.ascii	"signal\000"
+ 2837      616C00
+ 2838              	.LASF22:
+ 2839 02cb 6D61696E 		.ascii	"main\000"
+ 2839      00
+ 2840              	.LASF48:
+ 2841 02d0 61727261 		.ascii	"arrayData\000"
+ 2841      79446174 
+ 2841      6100
+ 2842              	.LASF36:
+ 2843 02da 666C6F61 		.ascii	"floatnumSamples\000"
+ 2843      746E756D 
+ 2843      53616D70 
+ 2843      6C657300 
+ 2844              	.LASF32:
+ 2845 02ea 6E756D53 		.ascii	"numSamples\000"
+ 2845      616D706C 
+ 2845      657300
+ 2846              	.LASF29:
+ 2847 02f5 6C6F416D 		.ascii	"loAmp\000"
+ 2847      7000
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 65
+
+
+ 2848              	.LASF57:
+ 2849 02fb 436F6E74 		.ascii	"ContinuouslySendData\000"
+ 2849      696E756F 
+ 2849      75736C79 
+ 2849      53656E64 
+ 2849      44617461 
+ 2850              	.LASF35:
+ 2851 0310 64617461 		.ascii	"data\000"
+ 2851      00
+ 2852              	.LASF3:
+ 2853 0315 73686F72 		.ascii	"short unsigned int\000"
+ 2853      7420756E 
+ 2853      7369676E 
+ 2853      65642069 
+ 2853      6E7400
+ 2854              	.LASF44:
+ 2855 0328 7363616C 		.ascii	"scalingFactor\000"
+ 2855      696E6746 
+ 2855      6163746F 
+ 2855      7200
+ 2856              	.LASF64:
+ 2857 0336 6D61696E 		.ascii	"main.c\000"
+ 2857      2E6300
+ 2858              	.LASF5:
+ 2859 033d 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2859      20756E73 
+ 2859      69676E65 
+ 2859      6420696E 
+ 2859      7400
+ 2860              	.LASF15:
+ 2861 034f 646F7562 		.ascii	"double\000"
+ 2861      6C6500
+ 2862              	.LASF62:
+ 2863 0356 61727261 		.ascii	"array\000"
+ 2863      7900
+ 2864              	.LASF49:
+ 2865 035c 73697A65 		.ascii	"size\000"
+ 2865      00
+ 2866              	.LASF9:
+ 2867 0361 5F5F696E 		.ascii	"__int32_t\000"
+ 2867      7433325F 
+ 2867      7400
+ 2868              	.LASF18:
+ 2869 036b 73697A65 		.ascii	"sizetype\000"
+ 2869      74797065 
+ 2869      00
+ 2870              	.LASF41:
+ 2871 0374 6D61676E 		.ascii	"magnitude\000"
+ 2871      69747564 
+ 2871      6500
+ 2872              	.LASF27:
+ 2873 037e 6C6F4672 		.ascii	"loFrequency\000"
+ 2873      65717565 
+ 2873      6E637900 
+ 2874              	.LASF46:
+ 2875 038a 476F6572 		.ascii	"Goertzel\000"
+ 2875      747A656C 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\cc258W7h.s 			page 66
+
+
+ 2875      00
+ 2876              	.LASF55:
+ 2877 0393 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 2877      52784275 
+ 2877      66666572 
+ 2877      00
+ 2878              	.LASF33:
+ 2879 03a0 74467265 		.ascii	"tFrequency\000"
+ 2879      7175656E 
+ 2879      637900
+ 2880              	.LASF28:
+ 2881 03ab 68694672 		.ascii	"hiFrecuency\000"
+ 2881      65637565 
+ 2881      6E637900 
+ 2882              	.LASF19:
+ 2883 03b7 5472616E 		.ascii	"Transmit\000"
+ 2883      736D6974 
+ 2883      00
+ 2884              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

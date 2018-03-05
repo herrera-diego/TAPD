@@ -1,0 +1,2928 @@
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"HF_DAC_1.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	HF_DAC_1_initVar
+  20              		.bss
+  21              		.type	HF_DAC_1_initVar, %object
+  22              		.size	HF_DAC_1_initVar, 1
+  23              	HF_DAC_1_initVar:
+  24 0000 00       		.space	1
+  25              		.global	HF_DAC_1_wave1
+  26              		.section	.rodata
+  27              		.align	2
+  28              		.type	HF_DAC_1_wave1, %object
+  29              		.size	HF_DAC_1_wave1, 661
+  30              	HF_DAC_1_wave1:
+  31 0000 80       		.byte	-128
+  32 0001 80       		.byte	-128
+  33 0002 81       		.byte	-127
+  34 0003 81       		.byte	-127
+  35 0004 82       		.byte	-126
+  36 0005 82       		.byte	-126
+  37 0006 83       		.byte	-125
+  38 0007 84       		.byte	-124
+  39 0008 84       		.byte	-124
+  40 0009 85       		.byte	-123
+  41 000a 85       		.byte	-123
+  42 000b 86       		.byte	-122
+  43 000c 87       		.byte	-121
+  44 000d 87       		.byte	-121
+  45 000e 88       		.byte	-120
+  46 000f 88       		.byte	-120
+  47 0010 89       		.byte	-119
+  48 0011 8A       		.byte	-118
+  49 0012 8A       		.byte	-118
+  50 0013 8B       		.byte	-117
+  51 0014 8B       		.byte	-117
+  52 0015 8C       		.byte	-116
+  53 0016 8C       		.byte	-116
+  54 0017 8D       		.byte	-115
+  55 0018 8E       		.byte	-114
+  56 0019 8E       		.byte	-114
+  57 001a 8F       		.byte	-113
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 2
+
+
+  58 001b 8F       		.byte	-113
+  59 001c 90       		.byte	-112
+  60 001d 91       		.byte	-111
+  61 001e 91       		.byte	-111
+  62 001f 92       		.byte	-110
+  63 0020 92       		.byte	-110
+  64 0021 93       		.byte	-109
+  65 0022 93       		.byte	-109
+  66 0023 94       		.byte	-108
+  67 0024 94       		.byte	-108
+  68 0025 95       		.byte	-107
+  69 0026 96       		.byte	-106
+  70 0027 96       		.byte	-106
+  71 0028 97       		.byte	-105
+  72 0029 97       		.byte	-105
+  73 002a 98       		.byte	-104
+  74 002b 98       		.byte	-104
+  75 002c 99       		.byte	-103
+  76 002d 99       		.byte	-103
+  77 002e 9A       		.byte	-102
+  78 002f 9B       		.byte	-101
+  79 0030 9B       		.byte	-101
+  80 0031 9C       		.byte	-100
+  81 0032 9C       		.byte	-100
+  82 0033 9D       		.byte	-99
+  83 0034 9D       		.byte	-99
+  84 0035 9E       		.byte	-98
+  85 0036 9E       		.byte	-98
+  86 0037 9F       		.byte	-97
+  87 0038 9F       		.byte	-97
+  88 0039 A0       		.byte	-96
+  89 003a A0       		.byte	-96
+  90 003b A1       		.byte	-95
+  91 003c A1       		.byte	-95
+  92 003d A2       		.byte	-94
+  93 003e A2       		.byte	-94
+  94 003f A3       		.byte	-93
+  95 0040 A3       		.byte	-93
+  96 0041 A4       		.byte	-92
+  97 0042 A4       		.byte	-92
+  98 0043 A5       		.byte	-91
+  99 0044 A5       		.byte	-91
+ 100 0045 A6       		.byte	-90
+ 101 0046 A6       		.byte	-90
+ 102 0047 A7       		.byte	-89
+ 103 0048 A7       		.byte	-89
+ 104 0049 A7       		.byte	-89
+ 105 004a A8       		.byte	-88
+ 106 004b A8       		.byte	-88
+ 107 004c A9       		.byte	-87
+ 108 004d A9       		.byte	-87
+ 109 004e AA       		.byte	-86
+ 110 004f AA       		.byte	-86
+ 111 0050 AB       		.byte	-85
+ 112 0051 AB       		.byte	-85
+ 113 0052 AB       		.byte	-85
+ 114 0053 AC       		.byte	-84
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 3
+
+
+ 115 0054 AC       		.byte	-84
+ 116 0055 AD       		.byte	-83
+ 117 0056 AD       		.byte	-83
+ 118 0057 AD       		.byte	-83
+ 119 0058 AE       		.byte	-82
+ 120 0059 AE       		.byte	-82
+ 121 005a AF       		.byte	-81
+ 122 005b AF       		.byte	-81
+ 123 005c AF       		.byte	-81
+ 124 005d B0       		.byte	-80
+ 125 005e B0       		.byte	-80
+ 126 005f B1       		.byte	-79
+ 127 0060 B1       		.byte	-79
+ 128 0061 B1       		.byte	-79
+ 129 0062 B2       		.byte	-78
+ 130 0063 B2       		.byte	-78
+ 131 0064 B2       		.byte	-78
+ 132 0065 B3       		.byte	-77
+ 133 0066 B3       		.byte	-77
+ 134 0067 B3       		.byte	-77
+ 135 0068 B4       		.byte	-76
+ 136 0069 B4       		.byte	-76
+ 137 006a B4       		.byte	-76
+ 138 006b B5       		.byte	-75
+ 139 006c B5       		.byte	-75
+ 140 006d B5       		.byte	-75
+ 141 006e B6       		.byte	-74
+ 142 006f B6       		.byte	-74
+ 143 0070 B6       		.byte	-74
+ 144 0071 B6       		.byte	-74
+ 145 0072 B7       		.byte	-73
+ 146 0073 B7       		.byte	-73
+ 147 0074 B7       		.byte	-73
+ 148 0075 B8       		.byte	-72
+ 149 0076 B8       		.byte	-72
+ 150 0077 B8       		.byte	-72
+ 151 0078 B8       		.byte	-72
+ 152 0079 B9       		.byte	-71
+ 153 007a B9       		.byte	-71
+ 154 007b B9       		.byte	-71
+ 155 007c B9       		.byte	-71
+ 156 007d B9       		.byte	-71
+ 157 007e BA       		.byte	-70
+ 158 007f BA       		.byte	-70
+ 159 0080 BA       		.byte	-70
+ 160 0081 BA       		.byte	-70
+ 161 0082 BB       		.byte	-69
+ 162 0083 BB       		.byte	-69
+ 163 0084 BB       		.byte	-69
+ 164 0085 BB       		.byte	-69
+ 165 0086 BB       		.byte	-69
+ 166 0087 BB       		.byte	-69
+ 167 0088 BC       		.byte	-68
+ 168 0089 BC       		.byte	-68
+ 169 008a BC       		.byte	-68
+ 170 008b BC       		.byte	-68
+ 171 008c BC       		.byte	-68
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 4
+
+
+ 172 008d BC       		.byte	-68
+ 173 008e BC       		.byte	-68
+ 174 008f BD       		.byte	-67
+ 175 0090 BD       		.byte	-67
+ 176 0091 BD       		.byte	-67
+ 177 0092 BD       		.byte	-67
+ 178 0093 BD       		.byte	-67
+ 179 0094 BD       		.byte	-67
+ 180 0095 BD       		.byte	-67
+ 181 0096 BD       		.byte	-67
+ 182 0097 BD       		.byte	-67
+ 183 0098 BE       		.byte	-66
+ 184 0099 BE       		.byte	-66
+ 185 009a BE       		.byte	-66
+ 186 009b BE       		.byte	-66
+ 187 009c BE       		.byte	-66
+ 188 009d BE       		.byte	-66
+ 189 009e BE       		.byte	-66
+ 190 009f BE       		.byte	-66
+ 191 00a0 BE       		.byte	-66
+ 192 00a1 BE       		.byte	-66
+ 193 00a2 BE       		.byte	-66
+ 194 00a3 BE       		.byte	-66
+ 195 00a4 BE       		.byte	-66
+ 196 00a5 BE       		.byte	-66
+ 197 00a6 BE       		.byte	-66
+ 198 00a7 BE       		.byte	-66
+ 199 00a8 BE       		.byte	-66
+ 200 00a9 BE       		.byte	-66
+ 201 00aa BE       		.byte	-66
+ 202 00ab BE       		.byte	-66
+ 203 00ac BE       		.byte	-66
+ 204 00ad BE       		.byte	-66
+ 205 00ae BE       		.byte	-66
+ 206 00af BE       		.byte	-66
+ 207 00b0 BE       		.byte	-66
+ 208 00b1 BE       		.byte	-66
+ 209 00b2 BE       		.byte	-66
+ 210 00b3 BD       		.byte	-67
+ 211 00b4 BD       		.byte	-67
+ 212 00b5 BD       		.byte	-67
+ 213 00b6 BD       		.byte	-67
+ 214 00b7 BD       		.byte	-67
+ 215 00b8 BD       		.byte	-67
+ 216 00b9 BD       		.byte	-67
+ 217 00ba BD       		.byte	-67
+ 218 00bb BD       		.byte	-67
+ 219 00bc BD       		.byte	-67
+ 220 00bd BC       		.byte	-68
+ 221 00be BC       		.byte	-68
+ 222 00bf BC       		.byte	-68
+ 223 00c0 BC       		.byte	-68
+ 224 00c1 BC       		.byte	-68
+ 225 00c2 BC       		.byte	-68
+ 226 00c3 BC       		.byte	-68
+ 227 00c4 BB       		.byte	-69
+ 228 00c5 BB       		.byte	-69
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 5
+
+
+ 229 00c6 BB       		.byte	-69
+ 230 00c7 BB       		.byte	-69
+ 231 00c8 BB       		.byte	-69
+ 232 00c9 BA       		.byte	-70
+ 233 00ca BA       		.byte	-70
+ 234 00cb BA       		.byte	-70
+ 235 00cc BA       		.byte	-70
+ 236 00cd BA       		.byte	-70
+ 237 00ce B9       		.byte	-71
+ 238 00cf B9       		.byte	-71
+ 239 00d0 B9       		.byte	-71
+ 240 00d1 B9       		.byte	-71
+ 241 00d2 B8       		.byte	-72
+ 242 00d3 B8       		.byte	-72
+ 243 00d4 B8       		.byte	-72
+ 244 00d5 B8       		.byte	-72
+ 245 00d6 B7       		.byte	-73
+ 246 00d7 B7       		.byte	-73
+ 247 00d8 B7       		.byte	-73
+ 248 00d9 B7       		.byte	-73
+ 249 00da B6       		.byte	-74
+ 250 00db B6       		.byte	-74
+ 251 00dc B6       		.byte	-74
+ 252 00dd B5       		.byte	-75
+ 253 00de B5       		.byte	-75
+ 254 00df B5       		.byte	-75
+ 255 00e0 B5       		.byte	-75
+ 256 00e1 B4       		.byte	-76
+ 257 00e2 B4       		.byte	-76
+ 258 00e3 B4       		.byte	-76
+ 259 00e4 B3       		.byte	-77
+ 260 00e5 B3       		.byte	-77
+ 261 00e6 B3       		.byte	-77
+ 262 00e7 B2       		.byte	-78
+ 263 00e8 B2       		.byte	-78
+ 264 00e9 B1       		.byte	-79
+ 265 00ea B1       		.byte	-79
+ 266 00eb B1       		.byte	-79
+ 267 00ec B0       		.byte	-80
+ 268 00ed B0       		.byte	-80
+ 269 00ee B0       		.byte	-80
+ 270 00ef AF       		.byte	-81
+ 271 00f0 AF       		.byte	-81
+ 272 00f1 AE       		.byte	-82
+ 273 00f2 AE       		.byte	-82
+ 274 00f3 AE       		.byte	-82
+ 275 00f4 AD       		.byte	-83
+ 276 00f5 AD       		.byte	-83
+ 277 00f6 AC       		.byte	-84
+ 278 00f7 AC       		.byte	-84
+ 279 00f8 AC       		.byte	-84
+ 280 00f9 AB       		.byte	-85
+ 281 00fa AB       		.byte	-85
+ 282 00fb AA       		.byte	-86
+ 283 00fc AA       		.byte	-86
+ 284 00fd A9       		.byte	-87
+ 285 00fe A9       		.byte	-87
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 6
+
+
+ 286 00ff A9       		.byte	-87
+ 287 0100 A8       		.byte	-88
+ 288 0101 A8       		.byte	-88
+ 289 0102 A7       		.byte	-89
+ 290 0103 A7       		.byte	-89
+ 291 0104 A6       		.byte	-90
+ 292 0105 A6       		.byte	-90
+ 293 0106 A5       		.byte	-91
+ 294 0107 A5       		.byte	-91
+ 295 0108 A4       		.byte	-92
+ 296 0109 A4       		.byte	-92
+ 297 010a A3       		.byte	-93
+ 298 010b A3       		.byte	-93
+ 299 010c A2       		.byte	-94
+ 300 010d A2       		.byte	-94
+ 301 010e A1       		.byte	-95
+ 302 010f A1       		.byte	-95
+ 303 0110 A0       		.byte	-96
+ 304 0111 A0       		.byte	-96
+ 305 0112 9F       		.byte	-97
+ 306 0113 9F       		.byte	-97
+ 307 0114 9E       		.byte	-98
+ 308 0115 9E       		.byte	-98
+ 309 0116 9D       		.byte	-99
+ 310 0117 9D       		.byte	-99
+ 311 0118 9C       		.byte	-100
+ 312 0119 9C       		.byte	-100
+ 313 011a 9B       		.byte	-101
+ 314 011b 9B       		.byte	-101
+ 315 011c 9A       		.byte	-102
+ 316 011d 9A       		.byte	-102
+ 317 011e 99       		.byte	-103
+ 318 011f 99       		.byte	-103
+ 319 0120 98       		.byte	-104
+ 320 0121 98       		.byte	-104
+ 321 0122 97       		.byte	-105
+ 322 0123 96       		.byte	-106
+ 323 0124 96       		.byte	-106
+ 324 0125 95       		.byte	-107
+ 325 0126 95       		.byte	-107
+ 326 0127 94       		.byte	-108
+ 327 0128 94       		.byte	-108
+ 328 0129 93       		.byte	-109
+ 329 012a 93       		.byte	-109
+ 330 012b 92       		.byte	-110
+ 331 012c 91       		.byte	-111
+ 332 012d 91       		.byte	-111
+ 333 012e 90       		.byte	-112
+ 334 012f 90       		.byte	-112
+ 335 0130 8F       		.byte	-113
+ 336 0131 8F       		.byte	-113
+ 337 0132 8E       		.byte	-114
+ 338 0133 8D       		.byte	-115
+ 339 0134 8D       		.byte	-115
+ 340 0135 8C       		.byte	-116
+ 341 0136 8C       		.byte	-116
+ 342 0137 8B       		.byte	-117
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 7
+
+
+ 343 0138 8A       		.byte	-118
+ 344 0139 8A       		.byte	-118
+ 345 013a 89       		.byte	-119
+ 346 013b 89       		.byte	-119
+ 347 013c 88       		.byte	-120
+ 348 013d 87       		.byte	-121
+ 349 013e 87       		.byte	-121
+ 350 013f 86       		.byte	-122
+ 351 0140 86       		.byte	-122
+ 352 0141 85       		.byte	-123
+ 353 0142 85       		.byte	-123
+ 354 0143 84       		.byte	-124
+ 355 0144 83       		.byte	-125
+ 356 0145 83       		.byte	-125
+ 357 0146 82       		.byte	-126
+ 358 0147 82       		.byte	-126
+ 359 0148 81       		.byte	-127
+ 360 0149 80       		.byte	-128
+ 361 014a 80       		.byte	-128
+ 362 014b 7F       		.byte	127
+ 363 014c 7F       		.byte	127
+ 364 014d 7E       		.byte	126
+ 365 014e 7D       		.byte	125
+ 366 014f 7D       		.byte	125
+ 367 0150 7C       		.byte	124
+ 368 0151 7C       		.byte	124
+ 369 0152 7B       		.byte	123
+ 370 0153 7A       		.byte	122
+ 371 0154 7A       		.byte	122
+ 372 0155 79       		.byte	121
+ 373 0156 79       		.byte	121
+ 374 0157 78       		.byte	120
+ 375 0158 78       		.byte	120
+ 376 0159 77       		.byte	119
+ 377 015a 76       		.byte	118
+ 378 015b 76       		.byte	118
+ 379 015c 75       		.byte	117
+ 380 015d 75       		.byte	117
+ 381 015e 74       		.byte	116
+ 382 015f 73       		.byte	115
+ 383 0160 73       		.byte	115
+ 384 0161 72       		.byte	114
+ 385 0162 72       		.byte	114
+ 386 0163 71       		.byte	113
+ 387 0164 70       		.byte	112
+ 388 0165 70       		.byte	112
+ 389 0166 6F       		.byte	111
+ 390 0167 6F       		.byte	111
+ 391 0168 6E       		.byte	110
+ 392 0169 6E       		.byte	110
+ 393 016a 6D       		.byte	109
+ 394 016b 6C       		.byte	108
+ 395 016c 6C       		.byte	108
+ 396 016d 6B       		.byte	107
+ 397 016e 6B       		.byte	107
+ 398 016f 6A       		.byte	106
+ 399 0170 6A       		.byte	106
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 8
+
+
+ 400 0171 69       		.byte	105
+ 401 0172 69       		.byte	105
+ 402 0173 68       		.byte	104
+ 403 0174 67       		.byte	103
+ 404 0175 67       		.byte	103
+ 405 0176 66       		.byte	102
+ 406 0177 66       		.byte	102
+ 407 0178 65       		.byte	101
+ 408 0179 65       		.byte	101
+ 409 017a 64       		.byte	100
+ 410 017b 64       		.byte	100
+ 411 017c 63       		.byte	99
+ 412 017d 63       		.byte	99
+ 413 017e 62       		.byte	98
+ 414 017f 62       		.byte	98
+ 415 0180 61       		.byte	97
+ 416 0181 61       		.byte	97
+ 417 0182 60       		.byte	96
+ 418 0183 60       		.byte	96
+ 419 0184 5F       		.byte	95
+ 420 0185 5F       		.byte	95
+ 421 0186 5E       		.byte	94
+ 422 0187 5E       		.byte	94
+ 423 0188 5D       		.byte	93
+ 424 0189 5D       		.byte	93
+ 425 018a 5C       		.byte	92
+ 426 018b 5C       		.byte	92
+ 427 018c 5B       		.byte	91
+ 428 018d 5B       		.byte	91
+ 429 018e 5A       		.byte	90
+ 430 018f 5A       		.byte	90
+ 431 0190 59       		.byte	89
+ 432 0191 59       		.byte	89
+ 433 0192 58       		.byte	88
+ 434 0193 58       		.byte	88
+ 435 0194 57       		.byte	87
+ 436 0195 57       		.byte	87
+ 437 0196 56       		.byte	86
+ 438 0197 56       		.byte	86
+ 439 0198 56       		.byte	86
+ 440 0199 55       		.byte	85
+ 441 019a 55       		.byte	85
+ 442 019b 54       		.byte	84
+ 443 019c 54       		.byte	84
+ 444 019d 53       		.byte	83
+ 445 019e 53       		.byte	83
+ 446 019f 53       		.byte	83
+ 447 01a0 52       		.byte	82
+ 448 01a1 52       		.byte	82
+ 449 01a2 51       		.byte	81
+ 450 01a3 51       		.byte	81
+ 451 01a4 51       		.byte	81
+ 452 01a5 50       		.byte	80
+ 453 01a6 50       		.byte	80
+ 454 01a7 4F       		.byte	79
+ 455 01a8 4F       		.byte	79
+ 456 01a9 4F       		.byte	79
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 9
+
+
+ 457 01aa 4E       		.byte	78
+ 458 01ab 4E       		.byte	78
+ 459 01ac 4E       		.byte	78
+ 460 01ad 4D       		.byte	77
+ 461 01ae 4D       		.byte	77
+ 462 01af 4C       		.byte	76
+ 463 01b0 4C       		.byte	76
+ 464 01b1 4C       		.byte	76
+ 465 01b2 4B       		.byte	75
+ 466 01b3 4B       		.byte	75
+ 467 01b4 4B       		.byte	75
+ 468 01b5 4A       		.byte	74
+ 469 01b6 4A       		.byte	74
+ 470 01b7 4A       		.byte	74
+ 471 01b8 4A       		.byte	74
+ 472 01b9 49       		.byte	73
+ 473 01ba 49       		.byte	73
+ 474 01bb 49       		.byte	73
+ 475 01bc 48       		.byte	72
+ 476 01bd 48       		.byte	72
+ 477 01be 48       		.byte	72
+ 478 01bf 48       		.byte	72
+ 479 01c0 47       		.byte	71
+ 480 01c1 47       		.byte	71
+ 481 01c2 47       		.byte	71
+ 482 01c3 47       		.byte	71
+ 483 01c4 46       		.byte	70
+ 484 01c5 46       		.byte	70
+ 485 01c6 46       		.byte	70
+ 486 01c7 46       		.byte	70
+ 487 01c8 45       		.byte	69
+ 488 01c9 45       		.byte	69
+ 489 01ca 45       		.byte	69
+ 490 01cb 45       		.byte	69
+ 491 01cc 45       		.byte	69
+ 492 01cd 44       		.byte	68
+ 493 01ce 44       		.byte	68
+ 494 01cf 44       		.byte	68
+ 495 01d0 44       		.byte	68
+ 496 01d1 44       		.byte	68
+ 497 01d2 43       		.byte	67
+ 498 01d3 43       		.byte	67
+ 499 01d4 43       		.byte	67
+ 500 01d5 43       		.byte	67
+ 501 01d6 43       		.byte	67
+ 502 01d7 43       		.byte	67
+ 503 01d8 43       		.byte	67
+ 504 01d9 42       		.byte	66
+ 505 01da 42       		.byte	66
+ 506 01db 42       		.byte	66
+ 507 01dc 42       		.byte	66
+ 508 01dd 42       		.byte	66
+ 509 01de 42       		.byte	66
+ 510 01df 42       		.byte	66
+ 511 01e0 42       		.byte	66
+ 512 01e1 42       		.byte	66
+ 513 01e2 42       		.byte	66
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 10
+
+
+ 514 01e3 41       		.byte	65
+ 515 01e4 41       		.byte	65
+ 516 01e5 41       		.byte	65
+ 517 01e6 41       		.byte	65
+ 518 01e7 41       		.byte	65
+ 519 01e8 41       		.byte	65
+ 520 01e9 41       		.byte	65
+ 521 01ea 41       		.byte	65
+ 522 01eb 41       		.byte	65
+ 523 01ec 41       		.byte	65
+ 524 01ed 41       		.byte	65
+ 525 01ee 41       		.byte	65
+ 526 01ef 41       		.byte	65
+ 527 01f0 41       		.byte	65
+ 528 01f1 41       		.byte	65
+ 529 01f2 41       		.byte	65
+ 530 01f3 41       		.byte	65
+ 531 01f4 41       		.byte	65
+ 532 01f5 41       		.byte	65
+ 533 01f6 41       		.byte	65
+ 534 01f7 41       		.byte	65
+ 535 01f8 41       		.byte	65
+ 536 01f9 41       		.byte	65
+ 537 01fa 41       		.byte	65
+ 538 01fb 41       		.byte	65
+ 539 01fc 41       		.byte	65
+ 540 01fd 41       		.byte	65
+ 541 01fe 42       		.byte	66
+ 542 01ff 42       		.byte	66
+ 543 0200 42       		.byte	66
+ 544 0201 42       		.byte	66
+ 545 0202 42       		.byte	66
+ 546 0203 42       		.byte	66
+ 547 0204 42       		.byte	66
+ 548 0205 42       		.byte	66
+ 549 0206 42       		.byte	66
+ 550 0207 43       		.byte	67
+ 551 0208 43       		.byte	67
+ 552 0209 43       		.byte	67
+ 553 020a 43       		.byte	67
+ 554 020b 43       		.byte	67
+ 555 020c 43       		.byte	67
+ 556 020d 43       		.byte	67
+ 557 020e 44       		.byte	68
+ 558 020f 44       		.byte	68
+ 559 0210 44       		.byte	68
+ 560 0211 44       		.byte	68
+ 561 0212 44       		.byte	68
+ 562 0213 44       		.byte	68
+ 563 0214 45       		.byte	69
+ 564 0215 45       		.byte	69
+ 565 0216 45       		.byte	69
+ 566 0217 45       		.byte	69
+ 567 0218 46       		.byte	70
+ 568 0219 46       		.byte	70
+ 569 021a 46       		.byte	70
+ 570 021b 46       		.byte	70
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 11
+
+
+ 571 021c 46       		.byte	70
+ 572 021d 47       		.byte	71
+ 573 021e 47       		.byte	71
+ 574 021f 47       		.byte	71
+ 575 0220 47       		.byte	71
+ 576 0221 48       		.byte	72
+ 577 0222 48       		.byte	72
+ 578 0223 48       		.byte	72
+ 579 0224 49       		.byte	73
+ 580 0225 49       		.byte	73
+ 581 0226 49       		.byte	73
+ 582 0227 49       		.byte	73
+ 583 0228 4A       		.byte	74
+ 584 0229 4A       		.byte	74
+ 585 022a 4A       		.byte	74
+ 586 022b 4B       		.byte	75
+ 587 022c 4B       		.byte	75
+ 588 022d 4B       		.byte	75
+ 589 022e 4C       		.byte	76
+ 590 022f 4C       		.byte	76
+ 591 0230 4C       		.byte	76
+ 592 0231 4D       		.byte	77
+ 593 0232 4D       		.byte	77
+ 594 0233 4D       		.byte	77
+ 595 0234 4E       		.byte	78
+ 596 0235 4E       		.byte	78
+ 597 0236 4E       		.byte	78
+ 598 0237 4F       		.byte	79
+ 599 0238 4F       		.byte	79
+ 600 0239 50       		.byte	80
+ 601 023a 50       		.byte	80
+ 602 023b 50       		.byte	80
+ 603 023c 51       		.byte	81
+ 604 023d 51       		.byte	81
+ 605 023e 52       		.byte	82
+ 606 023f 52       		.byte	82
+ 607 0240 52       		.byte	82
+ 608 0241 53       		.byte	83
+ 609 0242 53       		.byte	83
+ 610 0243 54       		.byte	84
+ 611 0244 54       		.byte	84
+ 612 0245 54       		.byte	84
+ 613 0246 55       		.byte	85
+ 614 0247 55       		.byte	85
+ 615 0248 56       		.byte	86
+ 616 0249 56       		.byte	86
+ 617 024a 57       		.byte	87
+ 618 024b 57       		.byte	87
+ 619 024c 58       		.byte	88
+ 620 024d 58       		.byte	88
+ 621 024e 58       		.byte	88
+ 622 024f 59       		.byte	89
+ 623 0250 59       		.byte	89
+ 624 0251 5A       		.byte	90
+ 625 0252 5A       		.byte	90
+ 626 0253 5B       		.byte	91
+ 627 0254 5B       		.byte	91
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 12
+
+
+ 628 0255 5C       		.byte	92
+ 629 0256 5C       		.byte	92
+ 630 0257 5D       		.byte	93
+ 631 0258 5D       		.byte	93
+ 632 0259 5E       		.byte	94
+ 633 025a 5E       		.byte	94
+ 634 025b 5F       		.byte	95
+ 635 025c 5F       		.byte	95
+ 636 025d 60       		.byte	96
+ 637 025e 60       		.byte	96
+ 638 025f 61       		.byte	97
+ 639 0260 61       		.byte	97
+ 640 0261 62       		.byte	98
+ 641 0262 62       		.byte	98
+ 642 0263 63       		.byte	99
+ 643 0264 63       		.byte	99
+ 644 0265 64       		.byte	100
+ 645 0266 64       		.byte	100
+ 646 0267 65       		.byte	101
+ 647 0268 66       		.byte	102
+ 648 0269 66       		.byte	102
+ 649 026a 67       		.byte	103
+ 650 026b 67       		.byte	103
+ 651 026c 68       		.byte	104
+ 652 026d 68       		.byte	104
+ 653 026e 69       		.byte	105
+ 654 026f 69       		.byte	105
+ 655 0270 6A       		.byte	106
+ 656 0271 6B       		.byte	107
+ 657 0272 6B       		.byte	107
+ 658 0273 6C       		.byte	108
+ 659 0274 6C       		.byte	108
+ 660 0275 6D       		.byte	109
+ 661 0276 6D       		.byte	109
+ 662 0277 6E       		.byte	110
+ 663 0278 6E       		.byte	110
+ 664 0279 6F       		.byte	111
+ 665 027a 70       		.byte	112
+ 666 027b 70       		.byte	112
+ 667 027c 71       		.byte	113
+ 668 027d 71       		.byte	113
+ 669 027e 72       		.byte	114
+ 670 027f 73       		.byte	115
+ 671 0280 73       		.byte	115
+ 672 0281 74       		.byte	116
+ 673 0282 74       		.byte	116
+ 674 0283 75       		.byte	117
+ 675 0284 75       		.byte	117
+ 676 0285 76       		.byte	118
+ 677 0286 77       		.byte	119
+ 678 0287 77       		.byte	119
+ 679 0288 78       		.byte	120
+ 680 0289 78       		.byte	120
+ 681 028a 79       		.byte	121
+ 682 028b 7A       		.byte	122
+ 683 028c 7A       		.byte	122
+ 684 028d 7B       		.byte	123
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 13
+
+
+ 685 028e 7B       		.byte	123
+ 686 028f 7C       		.byte	124
+ 687 0290 7D       		.byte	125
+ 688 0291 7D       		.byte	125
+ 689 0292 7E       		.byte	126
+ 690 0293 7E       		.byte	126
+ 691 0294 7F       		.byte	127
+ 692              		.global	HF_DAC_1_wave2
+ 693 0295 000000   		.align	2
+ 694              		.type	HF_DAC_1_wave2, %object
+ 695              		.size	HF_DAC_1_wave2, 598
+ 696              	HF_DAC_1_wave2:
+ 697 0298 80       		.byte	-128
+ 698 0299 80       		.byte	-128
+ 699 029a 81       		.byte	-127
+ 700 029b 81       		.byte	-127
+ 701 029c 82       		.byte	-126
+ 702 029d 83       		.byte	-125
+ 703 029e 83       		.byte	-125
+ 704 029f 84       		.byte	-124
+ 705 02a0 85       		.byte	-123
+ 706 02a1 85       		.byte	-123
+ 707 02a2 86       		.byte	-122
+ 708 02a3 87       		.byte	-121
+ 709 02a4 87       		.byte	-121
+ 710 02a5 88       		.byte	-120
+ 711 02a6 89       		.byte	-119
+ 712 02a7 89       		.byte	-119
+ 713 02a8 8A       		.byte	-118
+ 714 02a9 8B       		.byte	-117
+ 715 02aa 8B       		.byte	-117
+ 716 02ab 8C       		.byte	-116
+ 717 02ac 8D       		.byte	-115
+ 718 02ad 8D       		.byte	-115
+ 719 02ae 8E       		.byte	-114
+ 720 02af 8E       		.byte	-114
+ 721 02b0 8F       		.byte	-113
+ 722 02b1 90       		.byte	-112
+ 723 02b2 90       		.byte	-112
+ 724 02b3 91       		.byte	-111
+ 725 02b4 92       		.byte	-110
+ 726 02b5 92       		.byte	-110
+ 727 02b6 93       		.byte	-109
+ 728 02b7 93       		.byte	-109
+ 729 02b8 94       		.byte	-108
+ 730 02b9 95       		.byte	-107
+ 731 02ba 95       		.byte	-107
+ 732 02bb 96       		.byte	-106
+ 733 02bc 97       		.byte	-105
+ 734 02bd 97       		.byte	-105
+ 735 02be 98       		.byte	-104
+ 736 02bf 98       		.byte	-104
+ 737 02c0 99       		.byte	-103
+ 738 02c1 9A       		.byte	-102
+ 739 02c2 9A       		.byte	-102
+ 740 02c3 9B       		.byte	-101
+ 741 02c4 9B       		.byte	-101
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 14
+
+
+ 742 02c5 9C       		.byte	-100
+ 743 02c6 9D       		.byte	-99
+ 744 02c7 9D       		.byte	-99
+ 745 02c8 9E       		.byte	-98
+ 746 02c9 9E       		.byte	-98
+ 747 02ca 9F       		.byte	-97
+ 748 02cb 9F       		.byte	-97
+ 749 02cc A0       		.byte	-96
+ 750 02cd A1       		.byte	-95
+ 751 02ce A1       		.byte	-95
+ 752 02cf A2       		.byte	-94
+ 753 02d0 A2       		.byte	-94
+ 754 02d1 A3       		.byte	-93
+ 755 02d2 A3       		.byte	-93
+ 756 02d3 A4       		.byte	-92
+ 757 02d4 A4       		.byte	-92
+ 758 02d5 A5       		.byte	-91
+ 759 02d6 A5       		.byte	-91
+ 760 02d7 A6       		.byte	-90
+ 761 02d8 A6       		.byte	-90
+ 762 02d9 A7       		.byte	-89
+ 763 02da A7       		.byte	-89
+ 764 02db A8       		.byte	-88
+ 765 02dc A8       		.byte	-88
+ 766 02dd A9       		.byte	-87
+ 767 02de A9       		.byte	-87
+ 768 02df AA       		.byte	-86
+ 769 02e0 AA       		.byte	-86
+ 770 02e1 AB       		.byte	-85
+ 771 02e2 AB       		.byte	-85
+ 772 02e3 AC       		.byte	-84
+ 773 02e4 AC       		.byte	-84
+ 774 02e5 AD       		.byte	-83
+ 775 02e6 AD       		.byte	-83
+ 776 02e7 AE       		.byte	-82
+ 777 02e8 AE       		.byte	-82
+ 778 02e9 AE       		.byte	-82
+ 779 02ea AF       		.byte	-81
+ 780 02eb AF       		.byte	-81
+ 781 02ec B0       		.byte	-80
+ 782 02ed B0       		.byte	-80
+ 783 02ee B1       		.byte	-79
+ 784 02ef B1       		.byte	-79
+ 785 02f0 B1       		.byte	-79
+ 786 02f1 B2       		.byte	-78
+ 787 02f2 B2       		.byte	-78
+ 788 02f3 B3       		.byte	-77
+ 789 02f4 B3       		.byte	-77
+ 790 02f5 B3       		.byte	-77
+ 791 02f6 B4       		.byte	-76
+ 792 02f7 B4       		.byte	-76
+ 793 02f8 B4       		.byte	-76
+ 794 02f9 B5       		.byte	-75
+ 795 02fa B5       		.byte	-75
+ 796 02fb B5       		.byte	-75
+ 797 02fc B6       		.byte	-74
+ 798 02fd B6       		.byte	-74
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 15
+
+
+ 799 02fe B6       		.byte	-74
+ 800 02ff B7       		.byte	-73
+ 801 0300 B7       		.byte	-73
+ 802 0301 B7       		.byte	-73
+ 803 0302 B8       		.byte	-72
+ 804 0303 B8       		.byte	-72
+ 805 0304 B8       		.byte	-72
+ 806 0305 B8       		.byte	-72
+ 807 0306 B9       		.byte	-71
+ 808 0307 B9       		.byte	-71
+ 809 0308 B9       		.byte	-71
+ 810 0309 B9       		.byte	-71
+ 811 030a BA       		.byte	-70
+ 812 030b BA       		.byte	-70
+ 813 030c BA       		.byte	-70
+ 814 030d BA       		.byte	-70
+ 815 030e BB       		.byte	-69
+ 816 030f BB       		.byte	-69
+ 817 0310 BB       		.byte	-69
+ 818 0311 BB       		.byte	-69
+ 819 0312 BB       		.byte	-69
+ 820 0313 BC       		.byte	-68
+ 821 0314 BC       		.byte	-68
+ 822 0315 BC       		.byte	-68
+ 823 0316 BC       		.byte	-68
+ 824 0317 BC       		.byte	-68
+ 825 0318 BC       		.byte	-68
+ 826 0319 BD       		.byte	-67
+ 827 031a BD       		.byte	-67
+ 828 031b BD       		.byte	-67
+ 829 031c BD       		.byte	-67
+ 830 031d BD       		.byte	-67
+ 831 031e BD       		.byte	-67
+ 832 031f BD       		.byte	-67
+ 833 0320 BD       		.byte	-67
+ 834 0321 BD       		.byte	-67
+ 835 0322 BE       		.byte	-66
+ 836 0323 BE       		.byte	-66
+ 837 0324 BE       		.byte	-66
+ 838 0325 BE       		.byte	-66
+ 839 0326 BE       		.byte	-66
+ 840 0327 BE       		.byte	-66
+ 841 0328 BE       		.byte	-66
+ 842 0329 BE       		.byte	-66
+ 843 032a BE       		.byte	-66
+ 844 032b BE       		.byte	-66
+ 845 032c BE       		.byte	-66
+ 846 032d BE       		.byte	-66
+ 847 032e BE       		.byte	-66
+ 848 032f BE       		.byte	-66
+ 849 0330 BE       		.byte	-66
+ 850 0331 BE       		.byte	-66
+ 851 0332 BE       		.byte	-66
+ 852 0333 BE       		.byte	-66
+ 853 0334 BE       		.byte	-66
+ 854 0335 BE       		.byte	-66
+ 855 0336 BE       		.byte	-66
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 16
+
+
+ 856 0337 BE       		.byte	-66
+ 857 0338 BE       		.byte	-66
+ 858 0339 BE       		.byte	-66
+ 859 033a BD       		.byte	-67
+ 860 033b BD       		.byte	-67
+ 861 033c BD       		.byte	-67
+ 862 033d BD       		.byte	-67
+ 863 033e BD       		.byte	-67
+ 864 033f BD       		.byte	-67
+ 865 0340 BD       		.byte	-67
+ 866 0341 BD       		.byte	-67
+ 867 0342 BD       		.byte	-67
+ 868 0343 BC       		.byte	-68
+ 869 0344 BC       		.byte	-68
+ 870 0345 BC       		.byte	-68
+ 871 0346 BC       		.byte	-68
+ 872 0347 BC       		.byte	-68
+ 873 0348 BC       		.byte	-68
+ 874 0349 BB       		.byte	-69
+ 875 034a BB       		.byte	-69
+ 876 034b BB       		.byte	-69
+ 877 034c BB       		.byte	-69
+ 878 034d BB       		.byte	-69
+ 879 034e BA       		.byte	-70
+ 880 034f BA       		.byte	-70
+ 881 0350 BA       		.byte	-70
+ 882 0351 BA       		.byte	-70
+ 883 0352 B9       		.byte	-71
+ 884 0353 B9       		.byte	-71
+ 885 0354 B9       		.byte	-71
+ 886 0355 B9       		.byte	-71
+ 887 0356 B8       		.byte	-72
+ 888 0357 B8       		.byte	-72
+ 889 0358 B8       		.byte	-72
+ 890 0359 B8       		.byte	-72
+ 891 035a B7       		.byte	-73
+ 892 035b B7       		.byte	-73
+ 893 035c B7       		.byte	-73
+ 894 035d B6       		.byte	-74
+ 895 035e B6       		.byte	-74
+ 896 035f B6       		.byte	-74
+ 897 0360 B5       		.byte	-75
+ 898 0361 B5       		.byte	-75
+ 899 0362 B5       		.byte	-75
+ 900 0363 B4       		.byte	-76
+ 901 0364 B4       		.byte	-76
+ 902 0365 B4       		.byte	-76
+ 903 0366 B3       		.byte	-77
+ 904 0367 B3       		.byte	-77
+ 905 0368 B3       		.byte	-77
+ 906 0369 B2       		.byte	-78
+ 907 036a B2       		.byte	-78
+ 908 036b B1       		.byte	-79
+ 909 036c B1       		.byte	-79
+ 910 036d B1       		.byte	-79
+ 911 036e B0       		.byte	-80
+ 912 036f B0       		.byte	-80
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 17
+
+
+ 913 0370 AF       		.byte	-81
+ 914 0371 AF       		.byte	-81
+ 915 0372 AE       		.byte	-82
+ 916 0373 AE       		.byte	-82
+ 917 0374 AE       		.byte	-82
+ 918 0375 AD       		.byte	-83
+ 919 0376 AD       		.byte	-83
+ 920 0377 AC       		.byte	-84
+ 921 0378 AC       		.byte	-84
+ 922 0379 AB       		.byte	-85
+ 923 037a AB       		.byte	-85
+ 924 037b AA       		.byte	-86
+ 925 037c AA       		.byte	-86
+ 926 037d A9       		.byte	-87
+ 927 037e A9       		.byte	-87
+ 928 037f A8       		.byte	-88
+ 929 0380 A8       		.byte	-88
+ 930 0381 A7       		.byte	-89
+ 931 0382 A7       		.byte	-89
+ 932 0383 A6       		.byte	-90
+ 933 0384 A6       		.byte	-90
+ 934 0385 A5       		.byte	-91
+ 935 0386 A5       		.byte	-91
+ 936 0387 A4       		.byte	-92
+ 937 0388 A4       		.byte	-92
+ 938 0389 A3       		.byte	-93
+ 939 038a A3       		.byte	-93
+ 940 038b A2       		.byte	-94
+ 941 038c A2       		.byte	-94
+ 942 038d A1       		.byte	-95
+ 943 038e A1       		.byte	-95
+ 944 038f A0       		.byte	-96
+ 945 0390 9F       		.byte	-97
+ 946 0391 9F       		.byte	-97
+ 947 0392 9E       		.byte	-98
+ 948 0393 9E       		.byte	-98
+ 949 0394 9D       		.byte	-99
+ 950 0395 9D       		.byte	-99
+ 951 0396 9C       		.byte	-100
+ 952 0397 9B       		.byte	-101
+ 953 0398 9B       		.byte	-101
+ 954 0399 9A       		.byte	-102
+ 955 039a 9A       		.byte	-102
+ 956 039b 99       		.byte	-103
+ 957 039c 98       		.byte	-104
+ 958 039d 98       		.byte	-104
+ 959 039e 97       		.byte	-105
+ 960 039f 97       		.byte	-105
+ 961 03a0 96       		.byte	-106
+ 962 03a1 95       		.byte	-107
+ 963 03a2 95       		.byte	-107
+ 964 03a3 94       		.byte	-108
+ 965 03a4 93       		.byte	-109
+ 966 03a5 93       		.byte	-109
+ 967 03a6 92       		.byte	-110
+ 968 03a7 92       		.byte	-110
+ 969 03a8 91       		.byte	-111
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 18
+
+
+ 970 03a9 90       		.byte	-112
+ 971 03aa 90       		.byte	-112
+ 972 03ab 8F       		.byte	-113
+ 973 03ac 8E       		.byte	-114
+ 974 03ad 8E       		.byte	-114
+ 975 03ae 8D       		.byte	-115
+ 976 03af 8D       		.byte	-115
+ 977 03b0 8C       		.byte	-116
+ 978 03b1 8B       		.byte	-117
+ 979 03b2 8B       		.byte	-117
+ 980 03b3 8A       		.byte	-118
+ 981 03b4 89       		.byte	-119
+ 982 03b5 89       		.byte	-119
+ 983 03b6 88       		.byte	-120
+ 984 03b7 87       		.byte	-121
+ 985 03b8 87       		.byte	-121
+ 986 03b9 86       		.byte	-122
+ 987 03ba 85       		.byte	-123
+ 988 03bb 85       		.byte	-123
+ 989 03bc 84       		.byte	-124
+ 990 03bd 83       		.byte	-125
+ 991 03be 83       		.byte	-125
+ 992 03bf 82       		.byte	-126
+ 993 03c0 81       		.byte	-127
+ 994 03c1 81       		.byte	-127
+ 995 03c2 80       		.byte	-128
+ 996 03c3 80       		.byte	-128
+ 997 03c4 7F       		.byte	127
+ 998 03c5 7E       		.byte	126
+ 999 03c6 7E       		.byte	126
+ 1000 03c7 7D       		.byte	125
+ 1001 03c8 7C       		.byte	124
+ 1002 03c9 7C       		.byte	124
+ 1003 03ca 7B       		.byte	123
+ 1004 03cb 7A       		.byte	122
+ 1005 03cc 7A       		.byte	122
+ 1006 03cd 79       		.byte	121
+ 1007 03ce 78       		.byte	120
+ 1008 03cf 78       		.byte	120
+ 1009 03d0 77       		.byte	119
+ 1010 03d1 76       		.byte	118
+ 1011 03d2 76       		.byte	118
+ 1012 03d3 75       		.byte	117
+ 1013 03d4 74       		.byte	116
+ 1014 03d5 74       		.byte	116
+ 1015 03d6 73       		.byte	115
+ 1016 03d7 72       		.byte	114
+ 1017 03d8 72       		.byte	114
+ 1018 03d9 71       		.byte	113
+ 1019 03da 71       		.byte	113
+ 1020 03db 70       		.byte	112
+ 1021 03dc 6F       		.byte	111
+ 1022 03dd 6F       		.byte	111
+ 1023 03de 6E       		.byte	110
+ 1024 03df 6D       		.byte	109
+ 1025 03e0 6D       		.byte	109
+ 1026 03e1 6C       		.byte	108
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 19
+
+
+ 1027 03e2 6C       		.byte	108
+ 1028 03e3 6B       		.byte	107
+ 1029 03e4 6A       		.byte	106
+ 1030 03e5 6A       		.byte	106
+ 1031 03e6 69       		.byte	105
+ 1032 03e7 68       		.byte	104
+ 1033 03e8 68       		.byte	104
+ 1034 03e9 67       		.byte	103
+ 1035 03ea 67       		.byte	103
+ 1036 03eb 66       		.byte	102
+ 1037 03ec 65       		.byte	101
+ 1038 03ed 65       		.byte	101
+ 1039 03ee 64       		.byte	100
+ 1040 03ef 64       		.byte	100
+ 1041 03f0 63       		.byte	99
+ 1042 03f1 62       		.byte	98
+ 1043 03f2 62       		.byte	98
+ 1044 03f3 61       		.byte	97
+ 1045 03f4 61       		.byte	97
+ 1046 03f5 60       		.byte	96
+ 1047 03f6 60       		.byte	96
+ 1048 03f7 5F       		.byte	95
+ 1049 03f8 5E       		.byte	94
+ 1050 03f9 5E       		.byte	94
+ 1051 03fa 5D       		.byte	93
+ 1052 03fb 5D       		.byte	93
+ 1053 03fc 5C       		.byte	92
+ 1054 03fd 5C       		.byte	92
+ 1055 03fe 5B       		.byte	91
+ 1056 03ff 5B       		.byte	91
+ 1057 0400 5A       		.byte	90
+ 1058 0401 5A       		.byte	90
+ 1059 0402 59       		.byte	89
+ 1060 0403 59       		.byte	89
+ 1061 0404 58       		.byte	88
+ 1062 0405 58       		.byte	88
+ 1063 0406 57       		.byte	87
+ 1064 0407 57       		.byte	87
+ 1065 0408 56       		.byte	86
+ 1066 0409 56       		.byte	86
+ 1067 040a 55       		.byte	85
+ 1068 040b 55       		.byte	85
+ 1069 040c 54       		.byte	84
+ 1070 040d 54       		.byte	84
+ 1071 040e 53       		.byte	83
+ 1072 040f 53       		.byte	83
+ 1073 0410 52       		.byte	82
+ 1074 0411 52       		.byte	82
+ 1075 0412 51       		.byte	81
+ 1076 0413 51       		.byte	81
+ 1077 0414 51       		.byte	81
+ 1078 0415 50       		.byte	80
+ 1079 0416 50       		.byte	80
+ 1080 0417 4F       		.byte	79
+ 1081 0418 4F       		.byte	79
+ 1082 0419 4E       		.byte	78
+ 1083 041a 4E       		.byte	78
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 20
+
+
+ 1084 041b 4E       		.byte	78
+ 1085 041c 4D       		.byte	77
+ 1086 041d 4D       		.byte	77
+ 1087 041e 4C       		.byte	76
+ 1088 041f 4C       		.byte	76
+ 1089 0420 4C       		.byte	76
+ 1090 0421 4B       		.byte	75
+ 1091 0422 4B       		.byte	75
+ 1092 0423 4B       		.byte	75
+ 1093 0424 4A       		.byte	74
+ 1094 0425 4A       		.byte	74
+ 1095 0426 4A       		.byte	74
+ 1096 0427 49       		.byte	73
+ 1097 0428 49       		.byte	73
+ 1098 0429 49       		.byte	73
+ 1099 042a 48       		.byte	72
+ 1100 042b 48       		.byte	72
+ 1101 042c 48       		.byte	72
+ 1102 042d 47       		.byte	71
+ 1103 042e 47       		.byte	71
+ 1104 042f 47       		.byte	71
+ 1105 0430 47       		.byte	71
+ 1106 0431 46       		.byte	70
+ 1107 0432 46       		.byte	70
+ 1108 0433 46       		.byte	70
+ 1109 0434 46       		.byte	70
+ 1110 0435 45       		.byte	69
+ 1111 0436 45       		.byte	69
+ 1112 0437 45       		.byte	69
+ 1113 0438 45       		.byte	69
+ 1114 0439 44       		.byte	68
+ 1115 043a 44       		.byte	68
+ 1116 043b 44       		.byte	68
+ 1117 043c 44       		.byte	68
+ 1118 043d 44       		.byte	68
+ 1119 043e 43       		.byte	67
+ 1120 043f 43       		.byte	67
+ 1121 0440 43       		.byte	67
+ 1122 0441 43       		.byte	67
+ 1123 0442 43       		.byte	67
+ 1124 0443 43       		.byte	67
+ 1125 0444 42       		.byte	66
+ 1126 0445 42       		.byte	66
+ 1127 0446 42       		.byte	66
+ 1128 0447 42       		.byte	66
+ 1129 0448 42       		.byte	66
+ 1130 0449 42       		.byte	66
+ 1131 044a 42       		.byte	66
+ 1132 044b 42       		.byte	66
+ 1133 044c 42       		.byte	66
+ 1134 044d 41       		.byte	65
+ 1135 044e 41       		.byte	65
+ 1136 044f 41       		.byte	65
+ 1137 0450 41       		.byte	65
+ 1138 0451 41       		.byte	65
+ 1139 0452 41       		.byte	65
+ 1140 0453 41       		.byte	65
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 21
+
+
+ 1141 0454 41       		.byte	65
+ 1142 0455 41       		.byte	65
+ 1143 0456 41       		.byte	65
+ 1144 0457 41       		.byte	65
+ 1145 0458 41       		.byte	65
+ 1146 0459 41       		.byte	65
+ 1147 045a 41       		.byte	65
+ 1148 045b 41       		.byte	65
+ 1149 045c 41       		.byte	65
+ 1150 045d 41       		.byte	65
+ 1151 045e 41       		.byte	65
+ 1152 045f 41       		.byte	65
+ 1153 0460 41       		.byte	65
+ 1154 0461 41       		.byte	65
+ 1155 0462 41       		.byte	65
+ 1156 0463 41       		.byte	65
+ 1157 0464 41       		.byte	65
+ 1158 0465 42       		.byte	66
+ 1159 0466 42       		.byte	66
+ 1160 0467 42       		.byte	66
+ 1161 0468 42       		.byte	66
+ 1162 0469 42       		.byte	66
+ 1163 046a 42       		.byte	66
+ 1164 046b 42       		.byte	66
+ 1165 046c 42       		.byte	66
+ 1166 046d 42       		.byte	66
+ 1167 046e 43       		.byte	67
+ 1168 046f 43       		.byte	67
+ 1169 0470 43       		.byte	67
+ 1170 0471 43       		.byte	67
+ 1171 0472 43       		.byte	67
+ 1172 0473 43       		.byte	67
+ 1173 0474 44       		.byte	68
+ 1174 0475 44       		.byte	68
+ 1175 0476 44       		.byte	68
+ 1176 0477 44       		.byte	68
+ 1177 0478 44       		.byte	68
+ 1178 0479 45       		.byte	69
+ 1179 047a 45       		.byte	69
+ 1180 047b 45       		.byte	69
+ 1181 047c 45       		.byte	69
+ 1182 047d 46       		.byte	70
+ 1183 047e 46       		.byte	70
+ 1184 047f 46       		.byte	70
+ 1185 0480 46       		.byte	70
+ 1186 0481 47       		.byte	71
+ 1187 0482 47       		.byte	71
+ 1188 0483 47       		.byte	71
+ 1189 0484 47       		.byte	71
+ 1190 0485 48       		.byte	72
+ 1191 0486 48       		.byte	72
+ 1192 0487 48       		.byte	72
+ 1193 0488 49       		.byte	73
+ 1194 0489 49       		.byte	73
+ 1195 048a 49       		.byte	73
+ 1196 048b 4A       		.byte	74
+ 1197 048c 4A       		.byte	74
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 22
+
+
+ 1198 048d 4A       		.byte	74
+ 1199 048e 4B       		.byte	75
+ 1200 048f 4B       		.byte	75
+ 1201 0490 4B       		.byte	75
+ 1202 0491 4C       		.byte	76
+ 1203 0492 4C       		.byte	76
+ 1204 0493 4C       		.byte	76
+ 1205 0494 4D       		.byte	77
+ 1206 0495 4D       		.byte	77
+ 1207 0496 4E       		.byte	78
+ 1208 0497 4E       		.byte	78
+ 1209 0498 4E       		.byte	78
+ 1210 0499 4F       		.byte	79
+ 1211 049a 4F       		.byte	79
+ 1212 049b 50       		.byte	80
+ 1213 049c 50       		.byte	80
+ 1214 049d 51       		.byte	81
+ 1215 049e 51       		.byte	81
+ 1216 049f 51       		.byte	81
+ 1217 04a0 52       		.byte	82
+ 1218 04a1 52       		.byte	82
+ 1219 04a2 53       		.byte	83
+ 1220 04a3 53       		.byte	83
+ 1221 04a4 54       		.byte	84
+ 1222 04a5 54       		.byte	84
+ 1223 04a6 55       		.byte	85
+ 1224 04a7 55       		.byte	85
+ 1225 04a8 56       		.byte	86
+ 1226 04a9 56       		.byte	86
+ 1227 04aa 57       		.byte	87
+ 1228 04ab 57       		.byte	87
+ 1229 04ac 58       		.byte	88
+ 1230 04ad 58       		.byte	88
+ 1231 04ae 59       		.byte	89
+ 1232 04af 59       		.byte	89
+ 1233 04b0 5A       		.byte	90
+ 1234 04b1 5A       		.byte	90
+ 1235 04b2 5B       		.byte	91
+ 1236 04b3 5B       		.byte	91
+ 1237 04b4 5C       		.byte	92
+ 1238 04b5 5C       		.byte	92
+ 1239 04b6 5D       		.byte	93
+ 1240 04b7 5D       		.byte	93
+ 1241 04b8 5E       		.byte	94
+ 1242 04b9 5E       		.byte	94
+ 1243 04ba 5F       		.byte	95
+ 1244 04bb 60       		.byte	96
+ 1245 04bc 60       		.byte	96
+ 1246 04bd 61       		.byte	97
+ 1247 04be 61       		.byte	97
+ 1248 04bf 62       		.byte	98
+ 1249 04c0 62       		.byte	98
+ 1250 04c1 63       		.byte	99
+ 1251 04c2 64       		.byte	100
+ 1252 04c3 64       		.byte	100
+ 1253 04c4 65       		.byte	101
+ 1254 04c5 65       		.byte	101
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 23
+
+
+ 1255 04c6 66       		.byte	102
+ 1256 04c7 67       		.byte	103
+ 1257 04c8 67       		.byte	103
+ 1258 04c9 68       		.byte	104
+ 1259 04ca 68       		.byte	104
+ 1260 04cb 69       		.byte	105
+ 1261 04cc 6A       		.byte	106
+ 1262 04cd 6A       		.byte	106
+ 1263 04ce 6B       		.byte	107
+ 1264 04cf 6C       		.byte	108
+ 1265 04d0 6C       		.byte	108
+ 1266 04d1 6D       		.byte	109
+ 1267 04d2 6D       		.byte	109
+ 1268 04d3 6E       		.byte	110
+ 1269 04d4 6F       		.byte	111
+ 1270 04d5 6F       		.byte	111
+ 1271 04d6 70       		.byte	112
+ 1272 04d7 71       		.byte	113
+ 1273 04d8 71       		.byte	113
+ 1274 04d9 72       		.byte	114
+ 1275 04da 72       		.byte	114
+ 1276 04db 73       		.byte	115
+ 1277 04dc 74       		.byte	116
+ 1278 04dd 74       		.byte	116
+ 1279 04de 75       		.byte	117
+ 1280 04df 76       		.byte	118
+ 1281 04e0 76       		.byte	118
+ 1282 04e1 77       		.byte	119
+ 1283 04e2 78       		.byte	120
+ 1284 04e3 78       		.byte	120
+ 1285 04e4 79       		.byte	121
+ 1286 04e5 7A       		.byte	122
+ 1287 04e6 7A       		.byte	122
+ 1288 04e7 7B       		.byte	123
+ 1289 04e8 7C       		.byte	124
+ 1290 04e9 7C       		.byte	124
+ 1291 04ea 7D       		.byte	125
+ 1292 04eb 7E       		.byte	126
+ 1293 04ec 7E       		.byte	126
+ 1294 04ed 7F       		.byte	127
+ 1295              		.bss
+ 1296              	HF_DAC_1_Wave1Chan:
+ 1297 0001 00       		.space	1
+ 1298              	HF_DAC_1_Wave2Chan:
+ 1299 0002 00       		.space	1
+ 1300              	HF_DAC_1_Wave1TD:
+ 1301 0003 00       		.space	1
+ 1302              	HF_DAC_1_Wave2TD:
+ 1303 0004 00       		.space	1
+ 1304              		.section	.text.HF_DAC_1_Init,"ax",%progbits
+ 1305              		.align	2
+ 1306              		.global	HF_DAC_1_Init
+ 1307              		.thumb
+ 1308              		.thumb_func
+ 1309              		.type	HF_DAC_1_Init, %function
+ 1310              	HF_DAC_1_Init:
+ 1311              	.LFB0:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 24
+
+
+ 1312              		.file 1 "Generated_Source\\PSoC5\\HF_DAC_1.c"
+   1:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/HF_DAC_1.c **** * File Name: HF_DAC_1.c
+   3:Generated_Source\PSoC5/HF_DAC_1.c **** * Version 2.10
+   4:Generated_Source\PSoC5/HF_DAC_1.c **** *
+   5:Generated_Source\PSoC5/HF_DAC_1.c **** * Description:
+   6:Generated_Source\PSoC5/HF_DAC_1.c **** *  This file provides the source code for the 8-bit Waveform DAC 
+   7:Generated_Source\PSoC5/HF_DAC_1.c **** *  (WaveDAC8) Component.
+   8:Generated_Source\PSoC5/HF_DAC_1.c **** *
+   9:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+  10:Generated_Source\PSoC5/HF_DAC_1.c **** * Copyright 2013, Cypress Semiconductor Corporation.  All rights reserved.
+  11:Generated_Source\PSoC5/HF_DAC_1.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC5/HF_DAC_1.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC5/HF_DAC_1.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+  15:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  16:Generated_Source\PSoC5/HF_DAC_1.c **** #include "HF_DAC_1.h"
+  17:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  18:Generated_Source\PSoC5/HF_DAC_1.c **** uint8  HF_DAC_1_initVar = 0u;
+  19:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  20:Generated_Source\PSoC5/HF_DAC_1.c **** const uint8 CYCODE HF_DAC_1_wave1[HF_DAC_1_WAVE1_LENGTH] = { 128u,128u,129u,129u,130u,130u,131u,132
+  21:Generated_Source\PSoC5/HF_DAC_1.c **** const uint8 CYCODE HF_DAC_1_wave2[HF_DAC_1_WAVE2_LENGTH] = { 128u,128u,129u,129u,130u,131u,131u,132
+  22:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  23:Generated_Source\PSoC5/HF_DAC_1.c **** static uint8  HF_DAC_1_Wave1Chan;
+  24:Generated_Source\PSoC5/HF_DAC_1.c **** static uint8  HF_DAC_1_Wave2Chan;
+  25:Generated_Source\PSoC5/HF_DAC_1.c **** static uint8  HF_DAC_1_Wave1TD;
+  26:Generated_Source\PSoC5/HF_DAC_1.c **** static uint8  HF_DAC_1_Wave2TD;
+  27:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  28:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  29:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+  30:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_Init
+  31:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+  32:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  33:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary:
+  34:Generated_Source\PSoC5/HF_DAC_1.c **** *  Initializes component with parameters set in the customizer.
+  35:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  36:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+  37:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+  38:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  39:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+  40:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+  41:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  42:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+  43:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_Init(void) 
+  44:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1313              		.loc 1 44 0
+ 1314              		.cfi_startproc
+ 1315              		@ args = 0, pretend = 0, frame = 0
+ 1316              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1317 0000 80B5     		push	{r7, lr}
+ 1318              		.cfi_def_cfa_offset 8
+ 1319              		.cfi_offset 7, -8
+ 1320              		.cfi_offset 14, -4
+ 1321 0002 00AF     		add	r7, sp, #0
+ 1322              		.cfi_def_cfa_register 7
+  45:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_VDAC8_Init();
+ 1323              		.loc 1 45 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 25
+
+
+ 1324 0004 FFF7FEFF 		bl	HF_DAC_1_VDAC8_Init
+  46:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_VDAC8_SetSpeed(HF_DAC_1_HIGHSPEED);
+ 1325              		.loc 1 46 0
+ 1326 0008 0220     		movs	r0, #2
+ 1327 000a FFF7FEFF 		bl	HF_DAC_1_VDAC8_SetSpeed
+  47:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_VDAC8_SetRange(HF_DAC_1_DAC_RANGE);
+ 1328              		.loc 1 47 0
+ 1329 000e 0020     		movs	r0, #0
+ 1330 0010 FFF7FEFF 		bl	HF_DAC_1_VDAC8_SetRange
+  48:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  49:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if(HF_DAC_1_DAC_MODE == HF_DAC_1_CURRENT_MODE)
+  50:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_IDAC8_SetPolarity(HF_DAC_1_DAC_POL);
+  51:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* HF_DAC_1_DAC_MODE == HF_DAC_1_CURRENT_MODE */
+  52:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  53:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if(HF_DAC_1_OUT_MODE == HF_DAC_1_BUFFER_MODE)
+  54:Generated_Source\PSoC5/HF_DAC_1.c **** 	   HF_DAC_1_BuffAmp_Init();
+  55:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* HF_DAC_1_OUT_MODE == HF_DAC_1_BUFFER_MODE */
+  56:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  57:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Get the TD Number for the DMA channel 1 and 2   */
+  58:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Wave1TD = CyDmaTdAllocate();
+ 1331              		.loc 1 58 0
+ 1332 0014 FFF7FEFF 		bl	CyDmaTdAllocate
+ 1333 0018 0346     		mov	r3, r0
+ 1334 001a 1A46     		mov	r2, r3
+ 1335 001c 094B     		ldr	r3, .L2
+ 1336 001e 1A70     		strb	r2, [r3]
+  59:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Wave2TD = CyDmaTdAllocate();
+ 1337              		.loc 1 59 0
+ 1338 0020 FFF7FEFF 		bl	CyDmaTdAllocate
+ 1339 0024 0346     		mov	r3, r0
+ 1340 0026 1A46     		mov	r2, r3
+ 1341 0028 074B     		ldr	r3, .L2+4
+ 1342 002a 1A70     		strb	r2, [r3]
+  60:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+  61:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Initialize waveform pointers  */
+  62:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Wave1Setup(HF_DAC_1_wave1, HF_DAC_1_WAVE1_LENGTH) ;
+ 1343              		.loc 1 62 0
+ 1344 002c 40F29521 		movw	r1, #661
+ 1345 0030 0648     		ldr	r0, .L2+8
+ 1346 0032 FFF7FEFF 		bl	HF_DAC_1_Wave1Setup
+  63:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Wave2Setup(HF_DAC_1_wave2, HF_DAC_1_WAVE2_LENGTH) ;
+ 1347              		.loc 1 63 0
+ 1348 0036 40F25621 		movw	r1, #598
+ 1349 003a 0548     		ldr	r0, .L2+12
+ 1350 003c FFF7FEFF 		bl	HF_DAC_1_Wave2Setup
+  64:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+  65:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Initialize the internal clock if one present  */
+  66:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if defined(HF_DAC_1_DacClk_PHASE)
+  67:Generated_Source\PSoC5/HF_DAC_1.c **** 	   HF_DAC_1_DacClk_SetPhase(HF_DAC_1_CLK_PHASE_0nS);
+  68:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* defined(HF_DAC_1_DacClk_PHASE) */
+  69:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1351              		.loc 1 69 0
+ 1352 0040 00BF     		nop
+ 1353 0042 80BD     		pop	{r7, pc}
+ 1354              	.L3:
+ 1355              		.align	2
+ 1356              	.L2:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 26
+
+
+ 1357 0044 03000000 		.word	HF_DAC_1_Wave1TD
+ 1358 0048 04000000 		.word	HF_DAC_1_Wave2TD
+ 1359 004c 00000000 		.word	HF_DAC_1_wave1
+ 1360 0050 00000000 		.word	HF_DAC_1_wave2
+ 1361              		.cfi_endproc
+ 1362              	.LFE0:
+ 1363              		.size	HF_DAC_1_Init, .-HF_DAC_1_Init
+ 1364              		.section	.text.HF_DAC_1_Enable,"ax",%progbits
+ 1365              		.align	2
+ 1366              		.global	HF_DAC_1_Enable
+ 1367              		.thumb
+ 1368              		.thumb_func
+ 1369              		.type	HF_DAC_1_Enable, %function
+ 1370              	HF_DAC_1_Enable:
+ 1371              	.LFB1:
+  70:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  71:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  72:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+  73:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_Enable
+  74:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+  75:Generated_Source\PSoC5/HF_DAC_1.c **** *  
+  76:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary: 
+  77:Generated_Source\PSoC5/HF_DAC_1.c **** *  Enables the DAC block and DMA operation.
+  78:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  79:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+  80:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+  81:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  82:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+  83:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+  84:Generated_Source\PSoC5/HF_DAC_1.c **** *
+  85:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+  86:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_Enable(void) 
+  87:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1372              		.loc 1 87 0
+ 1373              		.cfi_startproc
+ 1374              		@ args = 0, pretend = 0, frame = 0
+ 1375              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1376 0000 80B5     		push	{r7, lr}
+ 1377              		.cfi_def_cfa_offset 8
+ 1378              		.cfi_offset 7, -8
+ 1379              		.cfi_offset 14, -4
+ 1380 0002 00AF     		add	r7, sp, #0
+ 1381              		.cfi_def_cfa_register 7
+  88:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_VDAC8_Enable();
+ 1382              		.loc 1 88 0
+ 1383 0004 FFF7FEFF 		bl	HF_DAC_1_VDAC8_Enable
+  89:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  90:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if(HF_DAC_1_OUT_MODE == HF_DAC_1_BUFFER_MODE)
+  91:Generated_Source\PSoC5/HF_DAC_1.c **** 	   HF_DAC_1_BuffAmp_Enable();
+  92:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* HF_DAC_1_OUT_MODE == HF_DAC_1_BUFFER_MODE */
+  93:Generated_Source\PSoC5/HF_DAC_1.c **** 
+  94:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* 
+  95:Generated_Source\PSoC5/HF_DAC_1.c **** 	* Enable the channel. It is configured to remember the TD value so that
+  96:Generated_Source\PSoC5/HF_DAC_1.c **** 	* it can be restored from the place where it has been stopped.
+  97:Generated_Source\PSoC5/HF_DAC_1.c **** 	*/
+  98:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaChEnable(HF_DAC_1_Wave1Chan, 1u);
+ 1384              		.loc 1 98 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 27
+
+
+ 1385 0008 094B     		ldr	r3, .L5
+ 1386 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1387 000c 0121     		movs	r1, #1
+ 1388 000e 1846     		mov	r0, r3
+ 1389 0010 FFF7FEFF 		bl	CyDmaChEnable
+  99:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaChEnable(HF_DAC_1_Wave2Chan, 1u);
+ 1390              		.loc 1 99 0
+ 1391 0014 074B     		ldr	r3, .L5+4
+ 1392 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1393 0018 0121     		movs	r1, #1
+ 1394 001a 1846     		mov	r0, r3
+ 1395 001c FFF7FEFF 		bl	CyDmaChEnable
+ 100:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 101:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* set the initial value */
+ 102:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_SetValue(0u);
+ 1396              		.loc 1 102 0
+ 1397 0020 0020     		movs	r0, #0
+ 1398 0022 FFF7FEFF 		bl	HF_DAC_1_VDAC8_SetValue
+ 103:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 104:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if(HF_DAC_1_CLOCK_SRC == HF_DAC_1_CLOCK_INT)  	
+ 105:Generated_Source\PSoC5/HF_DAC_1.c **** 	   HF_DAC_1_DacClk_Start();
+ 1399              		.loc 1 105 0
+ 1400 0026 FFF7FEFF 		bl	HF_DAC_1_DacClk_Start
+ 106:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* HF_DAC_1_CLOCK_SRC == HF_DAC_1_CLOCK_INT */
+ 107:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1401              		.loc 1 107 0
+ 1402 002a 00BF     		nop
+ 1403 002c 80BD     		pop	{r7, pc}
+ 1404              	.L6:
+ 1405 002e 00BF     		.align	2
+ 1406              	.L5:
+ 1407 0030 01000000 		.word	HF_DAC_1_Wave1Chan
+ 1408 0034 02000000 		.word	HF_DAC_1_Wave2Chan
+ 1409              		.cfi_endproc
+ 1410              	.LFE1:
+ 1411              		.size	HF_DAC_1_Enable, .-HF_DAC_1_Enable
+ 1412              		.section	.text.HF_DAC_1_Start,"ax",%progbits
+ 1413              		.align	2
+ 1414              		.global	HF_DAC_1_Start
+ 1415              		.thumb
+ 1416              		.thumb_func
+ 1417              		.type	HF_DAC_1_Start, %function
+ 1418              	HF_DAC_1_Start:
+ 1419              	.LFB2:
+ 108:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 109:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 110:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+ 111:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_Start
+ 112:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+ 113:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 114:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary:
+ 115:Generated_Source\PSoC5/HF_DAC_1.c **** *  The start function initializes the voltage DAC with the default values, 
+ 116:Generated_Source\PSoC5/HF_DAC_1.c **** *  and sets the power to the given level.  A power level of 0, is the same as 
+ 117:Generated_Source\PSoC5/HF_DAC_1.c **** *  executing the stop function.
+ 118:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 119:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+ 120:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 28
+
+
+ 121:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 122:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+ 123:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+ 124:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 125:Generated_Source\PSoC5/HF_DAC_1.c **** * Reentrant:
+ 126:Generated_Source\PSoC5/HF_DAC_1.c **** *  No
+ 127:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 128:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+ 129:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_Start(void) 
+ 130:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1420              		.loc 1 130 0
+ 1421              		.cfi_startproc
+ 1422              		@ args = 0, pretend = 0, frame = 0
+ 1423              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1424 0000 80B5     		push	{r7, lr}
+ 1425              		.cfi_def_cfa_offset 8
+ 1426              		.cfi_offset 7, -8
+ 1427              		.cfi_offset 14, -4
+ 1428 0002 00AF     		add	r7, sp, #0
+ 1429              		.cfi_def_cfa_register 7
+ 131:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* If not Initialized then initialize all required hardware and software */
+ 132:Generated_Source\PSoC5/HF_DAC_1.c **** 	if(HF_DAC_1_initVar == 0u)
+ 1430              		.loc 1 132 0
+ 1431 0004 064B     		ldr	r3, .L9
+ 1432 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1433 0008 002B     		cmp	r3, #0
+ 1434 000a 04D1     		bne	.L8
+ 133:Generated_Source\PSoC5/HF_DAC_1.c **** 	{
+ 134:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Init();
+ 1435              		.loc 1 134 0
+ 1436 000c FFF7FEFF 		bl	HF_DAC_1_Init
+ 135:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_initVar = 1u;
+ 1437              		.loc 1 135 0
+ 1438 0010 034B     		ldr	r3, .L9
+ 1439 0012 0122     		movs	r2, #1
+ 1440 0014 1A70     		strb	r2, [r3]
+ 1441              	.L8:
+ 136:Generated_Source\PSoC5/HF_DAC_1.c **** 	}
+ 137:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 138:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Enable();
+ 1442              		.loc 1 138 0
+ 1443 0016 FFF7FEFF 		bl	HF_DAC_1_Enable
+ 139:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1444              		.loc 1 139 0
+ 1445 001a 00BF     		nop
+ 1446 001c 80BD     		pop	{r7, pc}
+ 1447              	.L10:
+ 1448 001e 00BF     		.align	2
+ 1449              	.L9:
+ 1450 0020 00000000 		.word	HF_DAC_1_initVar
+ 1451              		.cfi_endproc
+ 1452              	.LFE2:
+ 1453              		.size	HF_DAC_1_Start, .-HF_DAC_1_Start
+ 1454              		.section	.text.HF_DAC_1_StartEx,"ax",%progbits
+ 1455              		.align	2
+ 1456              		.global	HF_DAC_1_StartEx
+ 1457              		.thumb
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 29
+
+
+ 1458              		.thumb_func
+ 1459              		.type	HF_DAC_1_StartEx, %function
+ 1460              	HF_DAC_1_StartEx:
+ 1461              	.LFB3:
+ 140:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 141:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 142:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+ 143:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_StartEx
+ 144:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+ 145:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 146:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary:
+ 147:Generated_Source\PSoC5/HF_DAC_1.c **** *  The StartEx function sets pointers and sizes for both waveforms
+ 148:Generated_Source\PSoC5/HF_DAC_1.c **** *  and then starts the component.
+ 149:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 150:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+ 151:Generated_Source\PSoC5/HF_DAC_1.c **** *   uint8 * wavePtr1:     Pointer to the waveform 1 array.
+ 152:Generated_Source\PSoC5/HF_DAC_1.c **** *   uint16  sampleSize1:  The amount of samples in the waveform 1.
+ 153:Generated_Source\PSoC5/HF_DAC_1.c **** *   uint8 * wavePtr2:     Pointer to the waveform 2 array.
+ 154:Generated_Source\PSoC5/HF_DAC_1.c **** *   uint16  sampleSize2:  The amount of samples in the waveform 2.
+ 155:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 156:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+ 157:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+ 158:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 159:Generated_Source\PSoC5/HF_DAC_1.c **** * Reentrant:
+ 160:Generated_Source\PSoC5/HF_DAC_1.c **** *  No
+ 161:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 162:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+ 163:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_StartEx(const uint8 * wavePtr1, uint16 sampleSize1, const uint8 * wavePtr2, uint16 sa
+ 164:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 165:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1462              		.loc 1 165 0
+ 1463              		.cfi_startproc
+ 1464              		@ args = 0, pretend = 0, frame = 16
+ 1465              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1466 0000 80B5     		push	{r7, lr}
+ 1467              		.cfi_def_cfa_offset 8
+ 1468              		.cfi_offset 7, -8
+ 1469              		.cfi_offset 14, -4
+ 1470 0002 84B0     		sub	sp, sp, #16
+ 1471              		.cfi_def_cfa_offset 24
+ 1472 0004 00AF     		add	r7, sp, #0
+ 1473              		.cfi_def_cfa_register 7
+ 1474 0006 F860     		str	r0, [r7, #12]
+ 1475 0008 7A60     		str	r2, [r7, #4]
+ 1476 000a 1A46     		mov	r2, r3
+ 1477 000c 0B46     		mov	r3, r1	@ movhi
+ 1478 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 1479 0010 1346     		mov	r3, r2	@ movhi
+ 1480 0012 3B81     		strh	r3, [r7, #8]	@ movhi
+ 166:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Wave1Setup(wavePtr1, sampleSize1);
+ 1481              		.loc 1 166 0
+ 1482 0014 7B89     		ldrh	r3, [r7, #10]
+ 1483 0016 1946     		mov	r1, r3
+ 1484 0018 F868     		ldr	r0, [r7, #12]
+ 1485 001a FFF7FEFF 		bl	HF_DAC_1_Wave1Setup
+ 167:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Wave2Setup(wavePtr2, sampleSize2);
+ 1486              		.loc 1 167 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 30
+
+
+ 1487 001e 3B89     		ldrh	r3, [r7, #8]
+ 1488 0020 1946     		mov	r1, r3
+ 1489 0022 7868     		ldr	r0, [r7, #4]
+ 1490 0024 FFF7FEFF 		bl	HF_DAC_1_Wave2Setup
+ 168:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_Start();
+ 1491              		.loc 1 168 0
+ 1492 0028 FFF7FEFF 		bl	HF_DAC_1_Start
+ 169:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1493              		.loc 1 169 0
+ 1494 002c 00BF     		nop
+ 1495 002e 1037     		adds	r7, r7, #16
+ 1496              		.cfi_def_cfa_offset 8
+ 1497 0030 BD46     		mov	sp, r7
+ 1498              		.cfi_def_cfa_register 13
+ 1499              		@ sp needed
+ 1500 0032 80BD     		pop	{r7, pc}
+ 1501              		.cfi_endproc
+ 1502              	.LFE3:
+ 1503              		.size	HF_DAC_1_StartEx, .-HF_DAC_1_StartEx
+ 1504              		.section	.text.HF_DAC_1_Stop,"ax",%progbits
+ 1505              		.align	2
+ 1506              		.global	HF_DAC_1_Stop
+ 1507              		.thumb
+ 1508              		.thumb_func
+ 1509              		.type	HF_DAC_1_Stop, %function
+ 1510              	HF_DAC_1_Stop:
+ 1511              	.LFB4:
+ 170:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 171:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 172:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+ 173:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_Stop
+ 174:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+ 175:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 176:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary:
+ 177:Generated_Source\PSoC5/HF_DAC_1.c **** *  Stops the clock (if internal), disables the DMA channels
+ 178:Generated_Source\PSoC5/HF_DAC_1.c **** *  and powers down the DAC.
+ 179:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 180:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+ 181:Generated_Source\PSoC5/HF_DAC_1.c **** *  None  
+ 182:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 183:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+ 184:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+ 185:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 186:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+ 187:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_Stop(void) 
+ 188:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1512              		.loc 1 188 0
+ 1513              		.cfi_startproc
+ 1514              		@ args = 0, pretend = 0, frame = 0
+ 1515              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1516 0000 80B5     		push	{r7, lr}
+ 1517              		.cfi_def_cfa_offset 8
+ 1518              		.cfi_offset 7, -8
+ 1519              		.cfi_offset 14, -4
+ 1520 0002 00AF     		add	r7, sp, #0
+ 1521              		.cfi_def_cfa_register 7
+ 189:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Turn off internal clock, if one present */
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 31
+
+
+ 190:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if(HF_DAC_1_CLOCK_SRC == HF_DAC_1_CLOCK_INT)  	
+ 191:Generated_Source\PSoC5/HF_DAC_1.c **** 	   HF_DAC_1_DacClk_Stop();
+ 1522              		.loc 1 191 0
+ 1523 0004 FFF7FEFF 		bl	HF_DAC_1_DacClk_Stop
+ 192:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* HF_DAC_1_CLOCK_SRC == HF_DAC_1_CLOCK_INT */
+ 193:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 194:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Disble DMA channels */
+ 195:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaChDisable(HF_DAC_1_Wave1Chan);
+ 1524              		.loc 1 195 0
+ 1525 0008 064B     		ldr	r3, .L13
+ 1526 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1527 000c 1846     		mov	r0, r3
+ 1528 000e FFF7FEFF 		bl	CyDmaChDisable
+ 196:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaChDisable(HF_DAC_1_Wave2Chan);
+ 1529              		.loc 1 196 0
+ 1530 0012 054B     		ldr	r3, .L13+4
+ 1531 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1532 0016 1846     		mov	r0, r3
+ 1533 0018 FFF7FEFF 		bl	CyDmaChDisable
+ 197:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 198:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Disable power to DAC */
+ 199:Generated_Source\PSoC5/HF_DAC_1.c **** 	HF_DAC_1_VDAC8_Stop();
+ 1534              		.loc 1 199 0
+ 1535 001c FFF7FEFF 		bl	HF_DAC_1_VDAC8_Stop
+ 200:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1536              		.loc 1 200 0
+ 1537 0020 00BF     		nop
+ 1538 0022 80BD     		pop	{r7, pc}
+ 1539              	.L14:
+ 1540              		.align	2
+ 1541              	.L13:
+ 1542 0024 01000000 		.word	HF_DAC_1_Wave1Chan
+ 1543 0028 02000000 		.word	HF_DAC_1_Wave2Chan
+ 1544              		.cfi_endproc
+ 1545              	.LFE4:
+ 1546              		.size	HF_DAC_1_Stop, .-HF_DAC_1_Stop
+ 1547              		.section	.text.HF_DAC_1_Wave1Setup,"ax",%progbits
+ 1548              		.align	2
+ 1549              		.global	HF_DAC_1_Wave1Setup
+ 1550              		.thumb
+ 1551              		.thumb_func
+ 1552              		.type	HF_DAC_1_Wave1Setup, %function
+ 1553              	HF_DAC_1_Wave1Setup:
+ 1554              	.LFB5:
+ 201:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 202:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 203:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+ 204:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_Wave1Setup
+ 205:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+ 206:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 207:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary:
+ 208:Generated_Source\PSoC5/HF_DAC_1.c **** *  Sets pointer and size for waveform 1.                                    
+ 209:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 210:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+ 211:Generated_Source\PSoC5/HF_DAC_1.c **** *  uint8 * WavePtr:     Pointer to the waveform array.
+ 212:Generated_Source\PSoC5/HF_DAC_1.c **** *  uint16  SampleSize:  The amount of samples in the waveform.
+ 213:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 32
+
+
+ 214:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+ 215:Generated_Source\PSoC5/HF_DAC_1.c **** *  None 
+ 216:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 217:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+ 218:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_Wave1Setup(const uint8 * wavePtr, uint16 sampleSize)
+ 219:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 220:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1555              		.loc 1 220 0
+ 1556              		.cfi_startproc
+ 1557              		@ args = 0, pretend = 0, frame = 8
+ 1558              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1559 0000 80B5     		push	{r7, lr}
+ 1560              		.cfi_def_cfa_offset 8
+ 1561              		.cfi_offset 7, -8
+ 1562              		.cfi_offset 14, -4
+ 1563 0002 82B0     		sub	sp, sp, #8
+ 1564              		.cfi_def_cfa_offset 16
+ 1565 0004 00AF     		add	r7, sp, #0
+ 1566              		.cfi_def_cfa_register 7
+ 1567 0006 7860     		str	r0, [r7, #4]
+ 1568 0008 0B46     		mov	r3, r1
+ 1569 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 221:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if (CY_PSOC3)
+ 222:Generated_Source\PSoC5/HF_DAC_1.c **** 		uint16 memoryType; /* determining the source memory type */
+ 223:Generated_Source\PSoC5/HF_DAC_1.c **** 		memoryType = (HF_DAC_1_HI16FLASHPTR == HI16(wavePtr)) ? HI16(CYDEV_FLS_BASE) : HI16(CYDEV_SRAM_BA
+ 224:Generated_Source\PSoC5/HF_DAC_1.c **** 		
+ 225:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave1Chan = HF_DAC_1_Wave1_DMA_DmaInitialize(
+ 226:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave1_DMA_BYTES_PER_BURST, HF_DAC_1_Wave1_DMA_REQUEST_PER_BURST,
+ 227:Generated_Source\PSoC5/HF_DAC_1.c **** 		memoryType, HI16(CYDEV_PERIPH_BASE));
+ 228:Generated_Source\PSoC5/HF_DAC_1.c **** 	#else /* PSoC 5 */
+ 229:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave1Chan = HF_DAC_1_Wave1_DMA_DmaInitialize(
+ 230:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave1_DMA_BYTES_PER_BURST, HF_DAC_1_Wave1_DMA_REQUEST_PER_BURST,
+ 231:Generated_Source\PSoC5/HF_DAC_1.c **** 		HI16(wavePtr), HI16(HF_DAC_1_DAC8__D));
+ 1570              		.loc 1 231 0
+ 1571 000c 7B68     		ldr	r3, [r7, #4]
+ 1572 000e 1B0C     		lsrs	r3, r3, #16
+ 229:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave1_DMA_BYTES_PER_BURST, HF_DAC_1_Wave1_DMA_REQUEST_PER_BURST,
+ 1573              		.loc 1 229 0
+ 1574 0010 9AB2     		uxth	r2, r3
+ 1575 0012 4FF48043 		mov	r3, #16384
+ 1576 0016 0121     		movs	r1, #1
+ 1577 0018 0120     		movs	r0, #1
+ 1578 001a FFF7FEFF 		bl	HF_DAC_1_Wave1_DMA_DmaInitialize
+ 1579 001e 0346     		mov	r3, r0
+ 1580 0020 1A46     		mov	r2, r3
+ 1581 0022 0F4B     		ldr	r3, .L16
+ 1582 0024 1A70     		strb	r2, [r3]
+ 232:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* CY_PSOC3 */
+ 233:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 234:Generated_Source\PSoC5/HF_DAC_1.c **** 	/*
+ 235:Generated_Source\PSoC5/HF_DAC_1.c **** 	* TD is looping on itself. 
+ 236:Generated_Source\PSoC5/HF_DAC_1.c ****     * Increment the source address, but not the destination address. 
+ 237:Generated_Source\PSoC5/HF_DAC_1.c **** 	*/
+ 238:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaTdSetConfiguration(HF_DAC_1_Wave1TD, sampleSize, HF_DAC_1_Wave1TD, 
+ 1583              		.loc 1 238 0
+ 1584 0026 0F4B     		ldr	r3, .L16+4
+ 1585 0028 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 33
+
+
+ 1586 002a 0E4B     		ldr	r3, .L16+4
+ 1587 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1588 002e 7988     		ldrh	r1, [r7, #2]
+ 1589 0030 0123     		movs	r3, #1
+ 1590 0032 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 239:Generated_Source\PSoC5/HF_DAC_1.c ****                                     (uint8)CY_DMA_TD_INC_SRC_ADR | (uint8)HF_DAC_1_Wave1_DMA__TD_TE
+ 240:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 241:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Set the TD source and destination address */
+ 242:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaTdSetAddress(HF_DAC_1_Wave1TD, LO16((uint32)wavePtr), LO16(HF_DAC_1_DAC8__D));
+ 1591              		.loc 1 242 0
+ 1592 0036 0B4B     		ldr	r3, .L16+4
+ 1593 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1594 003a 7A68     		ldr	r2, [r7, #4]
+ 1595 003c 91B2     		uxth	r1, r2
+ 1596 003e 45F68132 		movw	r2, #23425
+ 1597 0042 1846     		mov	r0, r3
+ 1598 0044 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 243:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 244:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Associate the TD with the channel */
+ 245:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaChSetInitialTd(HF_DAC_1_Wave1Chan, HF_DAC_1_Wave1TD);
+ 1599              		.loc 1 245 0
+ 1600 0048 054B     		ldr	r3, .L16
+ 1601 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1602 004c 054B     		ldr	r3, .L16+4
+ 1603 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1604 0050 1946     		mov	r1, r3
+ 1605 0052 1046     		mov	r0, r2
+ 1606 0054 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 246:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1607              		.loc 1 246 0
+ 1608 0058 00BF     		nop
+ 1609 005a 0837     		adds	r7, r7, #8
+ 1610              		.cfi_def_cfa_offset 8
+ 1611 005c BD46     		mov	sp, r7
+ 1612              		.cfi_def_cfa_register 13
+ 1613              		@ sp needed
+ 1614 005e 80BD     		pop	{r7, pc}
+ 1615              	.L17:
+ 1616              		.align	2
+ 1617              	.L16:
+ 1618 0060 01000000 		.word	HF_DAC_1_Wave1Chan
+ 1619 0064 03000000 		.word	HF_DAC_1_Wave1TD
+ 1620              		.cfi_endproc
+ 1621              	.LFE5:
+ 1622              		.size	HF_DAC_1_Wave1Setup, .-HF_DAC_1_Wave1Setup
+ 1623              		.section	.text.HF_DAC_1_Wave2Setup,"ax",%progbits
+ 1624              		.align	2
+ 1625              		.global	HF_DAC_1_Wave2Setup
+ 1626              		.thumb
+ 1627              		.thumb_func
+ 1628              		.type	HF_DAC_1_Wave2Setup, %function
+ 1629              	HF_DAC_1_Wave2Setup:
+ 1630              	.LFB6:
+ 247:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 248:Generated_Source\PSoC5/HF_DAC_1.c **** 
+ 249:Generated_Source\PSoC5/HF_DAC_1.c **** /*******************************************************************************
+ 250:Generated_Source\PSoC5/HF_DAC_1.c **** * Function Name: HF_DAC_1_Wave2Setup
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 34
+
+
+ 251:Generated_Source\PSoC5/HF_DAC_1.c **** ********************************************************************************
+ 252:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 253:Generated_Source\PSoC5/HF_DAC_1.c **** * Summary:
+ 254:Generated_Source\PSoC5/HF_DAC_1.c **** *  Sets pointer and size for waveform 2.                                    
+ 255:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 256:Generated_Source\PSoC5/HF_DAC_1.c **** * Parameters:  
+ 257:Generated_Source\PSoC5/HF_DAC_1.c **** *  uint8 * WavePtr:     Pointer to the waveform array.
+ 258:Generated_Source\PSoC5/HF_DAC_1.c **** *  uint16  SampleSize:  The amount of samples in the waveform.
+ 259:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 260:Generated_Source\PSoC5/HF_DAC_1.c **** * Return: 
+ 261:Generated_Source\PSoC5/HF_DAC_1.c **** *  None
+ 262:Generated_Source\PSoC5/HF_DAC_1.c **** *
+ 263:Generated_Source\PSoC5/HF_DAC_1.c **** *******************************************************************************/
+ 264:Generated_Source\PSoC5/HF_DAC_1.c **** void HF_DAC_1_Wave2Setup(const uint8 * wavePtr, uint16 sampleSize)
+ 265:Generated_Source\PSoC5/HF_DAC_1.c ****  
+ 266:Generated_Source\PSoC5/HF_DAC_1.c **** {
+ 1631              		.loc 1 266 0
+ 1632              		.cfi_startproc
+ 1633              		@ args = 0, pretend = 0, frame = 8
+ 1634              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1635 0000 80B5     		push	{r7, lr}
+ 1636              		.cfi_def_cfa_offset 8
+ 1637              		.cfi_offset 7, -8
+ 1638              		.cfi_offset 14, -4
+ 1639 0002 82B0     		sub	sp, sp, #8
+ 1640              		.cfi_def_cfa_offset 16
+ 1641 0004 00AF     		add	r7, sp, #0
+ 1642              		.cfi_def_cfa_register 7
+ 1643 0006 7860     		str	r0, [r7, #4]
+ 1644 0008 0B46     		mov	r3, r1
+ 1645 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 267:Generated_Source\PSoC5/HF_DAC_1.c **** 	#if (CY_PSOC3)
+ 268:Generated_Source\PSoC5/HF_DAC_1.c **** 		uint16 memoryType; /* determining the source memory type */
+ 269:Generated_Source\PSoC5/HF_DAC_1.c **** 		memoryType = (HF_DAC_1_HI16FLASHPTR == HI16(wavePtr)) ? HI16(CYDEV_FLS_BASE) : HI16(CYDEV_SRAM_BA
+ 270:Generated_Source\PSoC5/HF_DAC_1.c **** 			
+ 271:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave2Chan = HF_DAC_1_Wave2_DMA_DmaInitialize(
+ 272:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave2_DMA_BYTES_PER_BURST, HF_DAC_1_Wave2_DMA_REQUEST_PER_BURST,
+ 273:Generated_Source\PSoC5/HF_DAC_1.c **** 		memoryType, HI16(CYDEV_PERIPH_BASE));
+ 274:Generated_Source\PSoC5/HF_DAC_1.c **** 	#else /* PSoC 5 */
+ 275:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave2Chan = HF_DAC_1_Wave2_DMA_DmaInitialize(
+ 276:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave2_DMA_BYTES_PER_BURST, HF_DAC_1_Wave2_DMA_REQUEST_PER_BURST,
+ 277:Generated_Source\PSoC5/HF_DAC_1.c **** 		HI16(wavePtr), HI16(HF_DAC_1_DAC8__D));
+ 1646              		.loc 1 277 0
+ 1647 000c 7B68     		ldr	r3, [r7, #4]
+ 1648 000e 1B0C     		lsrs	r3, r3, #16
+ 275:Generated_Source\PSoC5/HF_DAC_1.c **** 		HF_DAC_1_Wave2_DMA_BYTES_PER_BURST, HF_DAC_1_Wave2_DMA_REQUEST_PER_BURST,
+ 1649              		.loc 1 275 0
+ 1650 0010 9AB2     		uxth	r2, r3
+ 1651 0012 4FF48043 		mov	r3, #16384
+ 1652 0016 0121     		movs	r1, #1
+ 1653 0018 0120     		movs	r0, #1
+ 1654 001a FFF7FEFF 		bl	HF_DAC_1_Wave2_DMA_DmaInitialize
+ 1655 001e 0346     		mov	r3, r0
+ 1656 0020 1A46     		mov	r2, r3
+ 1657 0022 0F4B     		ldr	r3, .L19
+ 1658 0024 1A70     		strb	r2, [r3]
+ 278:Generated_Source\PSoC5/HF_DAC_1.c **** 	#endif /* CY_PSOC3 */
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 35
+
+
+ 279:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 280:Generated_Source\PSoC5/HF_DAC_1.c **** 	/*
+ 281:Generated_Source\PSoC5/HF_DAC_1.c **** 	* TD is looping on itself. 
+ 282:Generated_Source\PSoC5/HF_DAC_1.c **** 	* Increment the source address, but not the destination address. 
+ 283:Generated_Source\PSoC5/HF_DAC_1.c **** 	*/
+ 284:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaTdSetConfiguration(HF_DAC_1_Wave2TD, sampleSize, HF_DAC_1_Wave2TD, 
+ 1659              		.loc 1 284 0
+ 1660 0026 0F4B     		ldr	r3, .L19+4
+ 1661 0028 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 1662 002a 0E4B     		ldr	r3, .L19+4
+ 1663 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1664 002e 7988     		ldrh	r1, [r7, #2]
+ 1665 0030 0123     		movs	r3, #1
+ 1666 0032 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 285:Generated_Source\PSoC5/HF_DAC_1.c ****                                     (uint8)CY_DMA_TD_INC_SRC_ADR | (uint8)HF_DAC_1_Wave2_DMA__TD_TE
+ 286:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 287:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Set the TD source and destination address */
+ 288:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaTdSetAddress(HF_DAC_1_Wave2TD, LO16((uint32)wavePtr), LO16(HF_DAC_1_DAC8__D));
+ 1667              		.loc 1 288 0
+ 1668 0036 0B4B     		ldr	r3, .L19+4
+ 1669 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1670 003a 7A68     		ldr	r2, [r7, #4]
+ 1671 003c 91B2     		uxth	r1, r2
+ 1672 003e 45F68132 		movw	r2, #23425
+ 1673 0042 1846     		mov	r0, r3
+ 1674 0044 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 289:Generated_Source\PSoC5/HF_DAC_1.c **** 	
+ 290:Generated_Source\PSoC5/HF_DAC_1.c **** 	/* Associate the TD with the channel */
+ 291:Generated_Source\PSoC5/HF_DAC_1.c **** 	(void)CyDmaChSetInitialTd(HF_DAC_1_Wave2Chan, HF_DAC_1_Wave2TD);
+ 1675              		.loc 1 291 0
+ 1676 0048 054B     		ldr	r3, .L19
+ 1677 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 1678 004c 054B     		ldr	r3, .L19+4
+ 1679 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1680 0050 1946     		mov	r1, r3
+ 1681 0052 1046     		mov	r0, r2
+ 1682 0054 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 292:Generated_Source\PSoC5/HF_DAC_1.c **** }
+ 1683              		.loc 1 292 0
+ 1684 0058 00BF     		nop
+ 1685 005a 0837     		adds	r7, r7, #8
+ 1686              		.cfi_def_cfa_offset 8
+ 1687 005c BD46     		mov	sp, r7
+ 1688              		.cfi_def_cfa_register 13
+ 1689              		@ sp needed
+ 1690 005e 80BD     		pop	{r7, pc}
+ 1691              	.L20:
+ 1692              		.align	2
+ 1693              	.L19:
+ 1694 0060 02000000 		.word	HF_DAC_1_Wave2Chan
+ 1695 0064 04000000 		.word	HF_DAC_1_Wave2TD
+ 1696              		.cfi_endproc
+ 1697              	.LFE6:
+ 1698              		.size	HF_DAC_1_Wave2Setup, .-HF_DAC_1_Wave2Setup
+ 1699              		.text
+ 1700              	.Letext0:
+ 1701              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 36
+
+
+ 1702              		.section	.debug_info,"",%progbits
+ 1703              	.Ldebug_info0:
+ 1704 0000 56020000 		.4byte	0x256
+ 1705 0004 0400     		.2byte	0x4
+ 1706 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 1707 000a 04       		.byte	0x4
+ 1708 000b 01       		.uleb128 0x1
+ 1709 000c 11000000 		.4byte	.LASF37
+ 1710 0010 0C       		.byte	0xc
+ 1711 0011 40020000 		.4byte	.LASF38
+ 1712 0015 2A010000 		.4byte	.LASF39
+ 1713 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 1714 001d 00000000 		.4byte	0
+ 1715 0021 00000000 		.4byte	.Ldebug_line0
+ 1716 0025 02       		.uleb128 0x2
+ 1717 0026 01       		.byte	0x1
+ 1718 0027 06       		.byte	0x6
+ 1719 0028 38030000 		.4byte	.LASF0
+ 1720 002c 02       		.uleb128 0x2
+ 1721 002d 01       		.byte	0x1
+ 1722 002e 08       		.byte	0x8
+ 1723 002f 32020000 		.4byte	.LASF1
+ 1724 0033 02       		.uleb128 0x2
+ 1725 0034 02       		.byte	0x2
+ 1726 0035 05       		.byte	0x5
+ 1727 0036 19030000 		.4byte	.LASF2
+ 1728 003a 02       		.uleb128 0x2
+ 1729 003b 02       		.byte	0x2
+ 1730 003c 07       		.byte	0x7
+ 1731 003d C5000000 		.4byte	.LASF3
+ 1732 0041 02       		.uleb128 0x2
+ 1733 0042 04       		.byte	0x4
+ 1734 0043 05       		.byte	0x5
+ 1735 0044 23030000 		.4byte	.LASF4
+ 1736 0048 02       		.uleb128 0x2
+ 1737 0049 04       		.byte	0x4
+ 1738 004a 07       		.byte	0x7
+ 1739 004b E7010000 		.4byte	.LASF5
+ 1740 004f 02       		.uleb128 0x2
+ 1741 0050 08       		.byte	0x8
+ 1742 0051 05       		.byte	0x5
+ 1743 0052 06030000 		.4byte	.LASF6
+ 1744 0056 02       		.uleb128 0x2
+ 1745 0057 08       		.byte	0x8
+ 1746 0058 07       		.byte	0x7
+ 1747 0059 A6020000 		.4byte	.LASF7
+ 1748 005d 03       		.uleb128 0x3
+ 1749 005e 04       		.byte	0x4
+ 1750 005f 05       		.byte	0x5
+ 1751 0060 696E7400 		.ascii	"int\000"
+ 1752 0064 02       		.uleb128 0x2
+ 1753 0065 04       		.byte	0x4
+ 1754 0066 07       		.byte	0x7
+ 1755 0067 8B020000 		.4byte	.LASF8
+ 1756 006b 04       		.uleb128 0x4
+ 1757 006c 01020000 		.4byte	.LASF9
+ 1758 0070 02       		.byte	0x2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 37
+
+
+ 1759 0071 9201     		.2byte	0x192
+ 1760 0073 2C000000 		.4byte	0x2c
+ 1761 0077 04       		.uleb128 0x4
+ 1762 0078 69020000 		.4byte	.LASF10
+ 1763 007c 02       		.byte	0x2
+ 1764 007d 9301     		.2byte	0x193
+ 1765 007f 3A000000 		.4byte	0x3a
+ 1766 0083 04       		.uleb128 0x4
+ 1767 0084 70020000 		.4byte	.LASF11
+ 1768 0088 02       		.byte	0x2
+ 1769 0089 9401     		.2byte	0x194
+ 1770 008b 48000000 		.4byte	0x48
+ 1771 008f 02       		.uleb128 0x2
+ 1772 0090 04       		.byte	0x4
+ 1773 0091 04       		.byte	0x4
+ 1774 0092 9F000000 		.4byte	.LASF12
+ 1775 0096 02       		.uleb128 0x2
+ 1776 0097 08       		.byte	0x8
+ 1777 0098 04       		.byte	0x4
+ 1778 0099 62020000 		.4byte	.LASF13
+ 1779 009d 02       		.uleb128 0x2
+ 1780 009e 01       		.byte	0x1
+ 1781 009f 08       		.byte	0x8
+ 1782 00a0 14030000 		.4byte	.LASF14
+ 1783 00a4 02       		.uleb128 0x2
+ 1784 00a5 08       		.byte	0x8
+ 1785 00a6 04       		.byte	0x4
+ 1786 00a7 2C030000 		.4byte	.LASF15
+ 1787 00ab 02       		.uleb128 0x2
+ 1788 00ac 04       		.byte	0x4
+ 1789 00ad 07       		.byte	0x7
+ 1790 00ae FD020000 		.4byte	.LASF16
+ 1791 00b2 05       		.uleb128 0x5
+ 1792 00b3 FE000000 		.4byte	.LASF17
+ 1793 00b7 01       		.byte	0x1
+ 1794 00b8 2B       		.byte	0x2b
+ 1795 00b9 00000000 		.4byte	.LFB0
+ 1796 00bd 54000000 		.4byte	.LFE0-.LFB0
+ 1797 00c1 01       		.uleb128 0x1
+ 1798 00c2 9C       		.byte	0x9c
+ 1799 00c3 05       		.uleb128 0x5
+ 1800 00c4 D7010000 		.4byte	.LASF18
+ 1801 00c8 01       		.byte	0x1
+ 1802 00c9 56       		.byte	0x56
+ 1803 00ca 00000000 		.4byte	.LFB1
+ 1804 00ce 38000000 		.4byte	.LFE1-.LFB1
+ 1805 00d2 01       		.uleb128 0x1
+ 1806 00d3 9C       		.byte	0x9c
+ 1807 00d4 05       		.uleb128 0x5
+ 1808 00d5 B6000000 		.4byte	.LASF19
+ 1809 00d9 01       		.byte	0x1
+ 1810 00da 81       		.byte	0x81
+ 1811 00db 00000000 		.4byte	.LFB2
+ 1812 00df 24000000 		.4byte	.LFE2-.LFB2
+ 1813 00e3 01       		.uleb128 0x1
+ 1814 00e4 9C       		.byte	0x9c
+ 1815 00e5 06       		.uleb128 0x6
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 38
+
+
+ 1816 00e6 BD020000 		.4byte	.LASF25
+ 1817 00ea 01       		.byte	0x1
+ 1818 00eb A3       		.byte	0xa3
+ 1819 00ec 00000000 		.4byte	.LFB3
+ 1820 00f0 34000000 		.4byte	.LFE3-.LFB3
+ 1821 00f4 01       		.uleb128 0x1
+ 1822 00f5 9C       		.byte	0x9c
+ 1823 00f6 33010000 		.4byte	0x133
+ 1824 00fa 07       		.uleb128 0x7
+ 1825 00fb EC000000 		.4byte	.LASF20
+ 1826 00ff 01       		.byte	0x1
+ 1827 0100 A3       		.byte	0xa3
+ 1828 0101 33010000 		.4byte	0x133
+ 1829 0105 02       		.uleb128 0x2
+ 1830 0106 91       		.byte	0x91
+ 1831 0107 74       		.sleb128 -12
+ 1832 0108 07       		.uleb128 0x7
+ 1833 0109 1A020000 		.4byte	.LASF21
+ 1834 010d 01       		.byte	0x1
+ 1835 010e A3       		.byte	0xa3
+ 1836 010f 77000000 		.4byte	0x77
+ 1837 0113 02       		.uleb128 0x2
+ 1838 0114 91       		.byte	0x91
+ 1839 0115 72       		.sleb128 -14
+ 1840 0116 07       		.uleb128 0x7
+ 1841 0117 F5000000 		.4byte	.LASF22
+ 1842 011b 01       		.byte	0x1
+ 1843 011c A3       		.byte	0xa3
+ 1844 011d 33010000 		.4byte	0x133
+ 1845 0121 02       		.uleb128 0x2
+ 1846 0122 91       		.byte	0x91
+ 1847 0123 6C       		.sleb128 -20
+ 1848 0124 07       		.uleb128 0x7
+ 1849 0125 26020000 		.4byte	.LASF23
+ 1850 0129 01       		.byte	0x1
+ 1851 012a A3       		.byte	0xa3
+ 1852 012b 77000000 		.4byte	0x77
+ 1853 012f 02       		.uleb128 0x2
+ 1854 0130 91       		.byte	0x91
+ 1855 0131 70       		.sleb128 -16
+ 1856 0132 00       		.byte	0
+ 1857 0133 08       		.uleb128 0x8
+ 1858 0134 04       		.byte	0x4
+ 1859 0135 39010000 		.4byte	0x139
+ 1860 0139 09       		.uleb128 0x9
+ 1861 013a 6B000000 		.4byte	0x6b
+ 1862 013e 05       		.uleb128 0x5
+ 1863 013f 98020000 		.4byte	.LASF24
+ 1864 0143 01       		.byte	0x1
+ 1865 0144 BB       		.byte	0xbb
+ 1866 0145 00000000 		.4byte	.LFB4
+ 1867 0149 2C000000 		.4byte	.LFE4-.LFB4
+ 1868 014d 01       		.uleb128 0x1
+ 1869 014e 9C       		.byte	0x9c
+ 1870 014f 06       		.uleb128 0x6
+ 1871 0150 D8000000 		.4byte	.LASF26
+ 1872 0154 01       		.byte	0x1
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 39
+
+
+ 1873 0155 DA       		.byte	0xda
+ 1874 0156 00000000 		.4byte	.LFB5
+ 1875 015a 68000000 		.4byte	.LFE5-.LFB5
+ 1876 015e 01       		.uleb128 0x1
+ 1877 015f 9C       		.byte	0x9c
+ 1878 0160 81010000 		.4byte	0x181
+ 1879 0164 07       		.uleb128 0x7
+ 1880 0165 F9010000 		.4byte	.LASF27
+ 1881 0169 01       		.byte	0x1
+ 1882 016a DA       		.byte	0xda
+ 1883 016b 33010000 		.4byte	0x133
+ 1884 016f 02       		.uleb128 0x2
+ 1885 0170 91       		.byte	0x91
+ 1886 0171 74       		.sleb128 -12
+ 1887 0172 07       		.uleb128 0x7
+ 1888 0173 1F010000 		.4byte	.LASF28
+ 1889 0177 01       		.byte	0x1
+ 1890 0178 DA       		.byte	0xda
+ 1891 0179 77000000 		.4byte	0x77
+ 1892 017d 02       		.uleb128 0x2
+ 1893 017e 91       		.byte	0x91
+ 1894 017f 72       		.sleb128 -14
+ 1895 0180 00       		.byte	0
+ 1896 0181 0A       		.uleb128 0xa
+ 1897 0182 77020000 		.4byte	.LASF29
+ 1898 0186 01       		.byte	0x1
+ 1899 0187 0801     		.2byte	0x108
+ 1900 0189 00000000 		.4byte	.LFB6
+ 1901 018d 68000000 		.4byte	.LFE6-.LFB6
+ 1902 0191 01       		.uleb128 0x1
+ 1903 0192 9C       		.byte	0x9c
+ 1904 0193 B6010000 		.4byte	0x1b6
+ 1905 0197 0B       		.uleb128 0xb
+ 1906 0198 F9010000 		.4byte	.LASF27
+ 1907 019c 01       		.byte	0x1
+ 1908 019d 0801     		.2byte	0x108
+ 1909 019f 33010000 		.4byte	0x133
+ 1910 01a3 02       		.uleb128 0x2
+ 1911 01a4 91       		.byte	0x91
+ 1912 01a5 74       		.sleb128 -12
+ 1913 01a6 0B       		.uleb128 0xb
+ 1914 01a7 1F010000 		.4byte	.LASF28
+ 1915 01ab 01       		.byte	0x1
+ 1916 01ac 0801     		.2byte	0x108
+ 1917 01ae 77000000 		.4byte	0x77
+ 1918 01b2 02       		.uleb128 0x2
+ 1919 01b3 91       		.byte	0x91
+ 1920 01b4 72       		.sleb128 -14
+ 1921 01b5 00       		.byte	0
+ 1922 01b6 0C       		.uleb128 0xc
+ 1923 01b7 0C010000 		.4byte	.LASF30
+ 1924 01bb 01       		.byte	0x1
+ 1925 01bc 17       		.byte	0x17
+ 1926 01bd 6B000000 		.4byte	0x6b
+ 1927 01c1 05       		.uleb128 0x5
+ 1928 01c2 03       		.byte	0x3
+ 1929 01c3 01000000 		.4byte	HF_DAC_1_Wave1Chan
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 40
+
+
+ 1930 01c7 0C       		.uleb128 0xc
+ 1931 01c8 07020000 		.4byte	.LASF31
+ 1932 01cc 01       		.byte	0x1
+ 1933 01cd 18       		.byte	0x18
+ 1934 01ce 6B000000 		.4byte	0x6b
+ 1935 01d2 05       		.uleb128 0x5
+ 1936 01d3 03       		.byte	0x3
+ 1937 01d4 02000000 		.4byte	HF_DAC_1_Wave2Chan
+ 1938 01d8 0C       		.uleb128 0xc
+ 1939 01d9 EC020000 		.4byte	.LASF32
+ 1940 01dd 01       		.byte	0x1
+ 1941 01de 19       		.byte	0x19
+ 1942 01df 6B000000 		.4byte	0x6b
+ 1943 01e3 05       		.uleb128 0x5
+ 1944 01e4 03       		.byte	0x3
+ 1945 01e5 03000000 		.4byte	HF_DAC_1_Wave1TD
+ 1946 01e9 0C       		.uleb128 0xc
+ 1947 01ea 00000000 		.4byte	.LASF33
+ 1948 01ee 01       		.byte	0x1
+ 1949 01ef 1A       		.byte	0x1a
+ 1950 01f0 6B000000 		.4byte	0x6b
+ 1951 01f4 05       		.uleb128 0x5
+ 1952 01f5 03       		.byte	0x3
+ 1953 01f6 04000000 		.4byte	HF_DAC_1_Wave2TD
+ 1954 01fa 0D       		.uleb128 0xd
+ 1955 01fb A5000000 		.4byte	.LASF34
+ 1956 01ff 01       		.byte	0x1
+ 1957 0200 12       		.byte	0x12
+ 1958 0201 6B000000 		.4byte	0x6b
+ 1959 0205 05       		.uleb128 0x5
+ 1960 0206 03       		.byte	0x3
+ 1961 0207 00000000 		.4byte	HF_DAC_1_initVar
+ 1962 020b 0E       		.uleb128 0xe
+ 1963 020c 39010000 		.4byte	0x139
+ 1964 0210 1C020000 		.4byte	0x21c
+ 1965 0214 0F       		.uleb128 0xf
+ 1966 0215 AB000000 		.4byte	0xab
+ 1967 0219 9402     		.2byte	0x294
+ 1968 021b 00       		.byte	0
+ 1969 021c 0D       		.uleb128 0xd
+ 1970 021d CE020000 		.4byte	.LASF35
+ 1971 0221 01       		.byte	0x1
+ 1972 0222 14       		.byte	0x14
+ 1973 0223 2D020000 		.4byte	0x22d
+ 1974 0227 05       		.uleb128 0x5
+ 1975 0228 03       		.byte	0x3
+ 1976 0229 00000000 		.4byte	HF_DAC_1_wave1
+ 1977 022d 09       		.uleb128 0x9
+ 1978 022e 0B020000 		.4byte	0x20b
+ 1979 0232 0E       		.uleb128 0xe
+ 1980 0233 39010000 		.4byte	0x139
+ 1981 0237 43020000 		.4byte	0x243
+ 1982 023b 0F       		.uleb128 0xf
+ 1983 023c AB000000 		.4byte	0xab
+ 1984 0240 5502     		.2byte	0x255
+ 1985 0242 00       		.byte	0
+ 1986 0243 0D       		.uleb128 0xd
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 41
+
+
+ 1987 0244 DD020000 		.4byte	.LASF36
+ 1988 0248 01       		.byte	0x1
+ 1989 0249 15       		.byte	0x15
+ 1990 024a 54020000 		.4byte	0x254
+ 1991 024e 05       		.uleb128 0x5
+ 1992 024f 03       		.byte	0x3
+ 1993 0250 00000000 		.4byte	HF_DAC_1_wave2
+ 1994 0254 09       		.uleb128 0x9
+ 1995 0255 32020000 		.4byte	0x232
+ 1996 0259 00       		.byte	0
+ 1997              		.section	.debug_abbrev,"",%progbits
+ 1998              	.Ldebug_abbrev0:
+ 1999 0000 01       		.uleb128 0x1
+ 2000 0001 11       		.uleb128 0x11
+ 2001 0002 01       		.byte	0x1
+ 2002 0003 25       		.uleb128 0x25
+ 2003 0004 0E       		.uleb128 0xe
+ 2004 0005 13       		.uleb128 0x13
+ 2005 0006 0B       		.uleb128 0xb
+ 2006 0007 03       		.uleb128 0x3
+ 2007 0008 0E       		.uleb128 0xe
+ 2008 0009 1B       		.uleb128 0x1b
+ 2009 000a 0E       		.uleb128 0xe
+ 2010 000b 55       		.uleb128 0x55
+ 2011 000c 17       		.uleb128 0x17
+ 2012 000d 11       		.uleb128 0x11
+ 2013 000e 01       		.uleb128 0x1
+ 2014 000f 10       		.uleb128 0x10
+ 2015 0010 17       		.uleb128 0x17
+ 2016 0011 00       		.byte	0
+ 2017 0012 00       		.byte	0
+ 2018 0013 02       		.uleb128 0x2
+ 2019 0014 24       		.uleb128 0x24
+ 2020 0015 00       		.byte	0
+ 2021 0016 0B       		.uleb128 0xb
+ 2022 0017 0B       		.uleb128 0xb
+ 2023 0018 3E       		.uleb128 0x3e
+ 2024 0019 0B       		.uleb128 0xb
+ 2025 001a 03       		.uleb128 0x3
+ 2026 001b 0E       		.uleb128 0xe
+ 2027 001c 00       		.byte	0
+ 2028 001d 00       		.byte	0
+ 2029 001e 03       		.uleb128 0x3
+ 2030 001f 24       		.uleb128 0x24
+ 2031 0020 00       		.byte	0
+ 2032 0021 0B       		.uleb128 0xb
+ 2033 0022 0B       		.uleb128 0xb
+ 2034 0023 3E       		.uleb128 0x3e
+ 2035 0024 0B       		.uleb128 0xb
+ 2036 0025 03       		.uleb128 0x3
+ 2037 0026 08       		.uleb128 0x8
+ 2038 0027 00       		.byte	0
+ 2039 0028 00       		.byte	0
+ 2040 0029 04       		.uleb128 0x4
+ 2041 002a 16       		.uleb128 0x16
+ 2042 002b 00       		.byte	0
+ 2043 002c 03       		.uleb128 0x3
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 42
+
+
+ 2044 002d 0E       		.uleb128 0xe
+ 2045 002e 3A       		.uleb128 0x3a
+ 2046 002f 0B       		.uleb128 0xb
+ 2047 0030 3B       		.uleb128 0x3b
+ 2048 0031 05       		.uleb128 0x5
+ 2049 0032 49       		.uleb128 0x49
+ 2050 0033 13       		.uleb128 0x13
+ 2051 0034 00       		.byte	0
+ 2052 0035 00       		.byte	0
+ 2053 0036 05       		.uleb128 0x5
+ 2054 0037 2E       		.uleb128 0x2e
+ 2055 0038 00       		.byte	0
+ 2056 0039 3F       		.uleb128 0x3f
+ 2057 003a 19       		.uleb128 0x19
+ 2058 003b 03       		.uleb128 0x3
+ 2059 003c 0E       		.uleb128 0xe
+ 2060 003d 3A       		.uleb128 0x3a
+ 2061 003e 0B       		.uleb128 0xb
+ 2062 003f 3B       		.uleb128 0x3b
+ 2063 0040 0B       		.uleb128 0xb
+ 2064 0041 27       		.uleb128 0x27
+ 2065 0042 19       		.uleb128 0x19
+ 2066 0043 11       		.uleb128 0x11
+ 2067 0044 01       		.uleb128 0x1
+ 2068 0045 12       		.uleb128 0x12
+ 2069 0046 06       		.uleb128 0x6
+ 2070 0047 40       		.uleb128 0x40
+ 2071 0048 18       		.uleb128 0x18
+ 2072 0049 9642     		.uleb128 0x2116
+ 2073 004b 19       		.uleb128 0x19
+ 2074 004c 00       		.byte	0
+ 2075 004d 00       		.byte	0
+ 2076 004e 06       		.uleb128 0x6
+ 2077 004f 2E       		.uleb128 0x2e
+ 2078 0050 01       		.byte	0x1
+ 2079 0051 3F       		.uleb128 0x3f
+ 2080 0052 19       		.uleb128 0x19
+ 2081 0053 03       		.uleb128 0x3
+ 2082 0054 0E       		.uleb128 0xe
+ 2083 0055 3A       		.uleb128 0x3a
+ 2084 0056 0B       		.uleb128 0xb
+ 2085 0057 3B       		.uleb128 0x3b
+ 2086 0058 0B       		.uleb128 0xb
+ 2087 0059 27       		.uleb128 0x27
+ 2088 005a 19       		.uleb128 0x19
+ 2089 005b 11       		.uleb128 0x11
+ 2090 005c 01       		.uleb128 0x1
+ 2091 005d 12       		.uleb128 0x12
+ 2092 005e 06       		.uleb128 0x6
+ 2093 005f 40       		.uleb128 0x40
+ 2094 0060 18       		.uleb128 0x18
+ 2095 0061 9642     		.uleb128 0x2116
+ 2096 0063 19       		.uleb128 0x19
+ 2097 0064 01       		.uleb128 0x1
+ 2098 0065 13       		.uleb128 0x13
+ 2099 0066 00       		.byte	0
+ 2100 0067 00       		.byte	0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 43
+
+
+ 2101 0068 07       		.uleb128 0x7
+ 2102 0069 05       		.uleb128 0x5
+ 2103 006a 00       		.byte	0
+ 2104 006b 03       		.uleb128 0x3
+ 2105 006c 0E       		.uleb128 0xe
+ 2106 006d 3A       		.uleb128 0x3a
+ 2107 006e 0B       		.uleb128 0xb
+ 2108 006f 3B       		.uleb128 0x3b
+ 2109 0070 0B       		.uleb128 0xb
+ 2110 0071 49       		.uleb128 0x49
+ 2111 0072 13       		.uleb128 0x13
+ 2112 0073 02       		.uleb128 0x2
+ 2113 0074 18       		.uleb128 0x18
+ 2114 0075 00       		.byte	0
+ 2115 0076 00       		.byte	0
+ 2116 0077 08       		.uleb128 0x8
+ 2117 0078 0F       		.uleb128 0xf
+ 2118 0079 00       		.byte	0
+ 2119 007a 0B       		.uleb128 0xb
+ 2120 007b 0B       		.uleb128 0xb
+ 2121 007c 49       		.uleb128 0x49
+ 2122 007d 13       		.uleb128 0x13
+ 2123 007e 00       		.byte	0
+ 2124 007f 00       		.byte	0
+ 2125 0080 09       		.uleb128 0x9
+ 2126 0081 26       		.uleb128 0x26
+ 2127 0082 00       		.byte	0
+ 2128 0083 49       		.uleb128 0x49
+ 2129 0084 13       		.uleb128 0x13
+ 2130 0085 00       		.byte	0
+ 2131 0086 00       		.byte	0
+ 2132 0087 0A       		.uleb128 0xa
+ 2133 0088 2E       		.uleb128 0x2e
+ 2134 0089 01       		.byte	0x1
+ 2135 008a 3F       		.uleb128 0x3f
+ 2136 008b 19       		.uleb128 0x19
+ 2137 008c 03       		.uleb128 0x3
+ 2138 008d 0E       		.uleb128 0xe
+ 2139 008e 3A       		.uleb128 0x3a
+ 2140 008f 0B       		.uleb128 0xb
+ 2141 0090 3B       		.uleb128 0x3b
+ 2142 0091 05       		.uleb128 0x5
+ 2143 0092 27       		.uleb128 0x27
+ 2144 0093 19       		.uleb128 0x19
+ 2145 0094 11       		.uleb128 0x11
+ 2146 0095 01       		.uleb128 0x1
+ 2147 0096 12       		.uleb128 0x12
+ 2148 0097 06       		.uleb128 0x6
+ 2149 0098 40       		.uleb128 0x40
+ 2150 0099 18       		.uleb128 0x18
+ 2151 009a 9642     		.uleb128 0x2116
+ 2152 009c 19       		.uleb128 0x19
+ 2153 009d 01       		.uleb128 0x1
+ 2154 009e 13       		.uleb128 0x13
+ 2155 009f 00       		.byte	0
+ 2156 00a0 00       		.byte	0
+ 2157 00a1 0B       		.uleb128 0xb
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 44
+
+
+ 2158 00a2 05       		.uleb128 0x5
+ 2159 00a3 00       		.byte	0
+ 2160 00a4 03       		.uleb128 0x3
+ 2161 00a5 0E       		.uleb128 0xe
+ 2162 00a6 3A       		.uleb128 0x3a
+ 2163 00a7 0B       		.uleb128 0xb
+ 2164 00a8 3B       		.uleb128 0x3b
+ 2165 00a9 05       		.uleb128 0x5
+ 2166 00aa 49       		.uleb128 0x49
+ 2167 00ab 13       		.uleb128 0x13
+ 2168 00ac 02       		.uleb128 0x2
+ 2169 00ad 18       		.uleb128 0x18
+ 2170 00ae 00       		.byte	0
+ 2171 00af 00       		.byte	0
+ 2172 00b0 0C       		.uleb128 0xc
+ 2173 00b1 34       		.uleb128 0x34
+ 2174 00b2 00       		.byte	0
+ 2175 00b3 03       		.uleb128 0x3
+ 2176 00b4 0E       		.uleb128 0xe
+ 2177 00b5 3A       		.uleb128 0x3a
+ 2178 00b6 0B       		.uleb128 0xb
+ 2179 00b7 3B       		.uleb128 0x3b
+ 2180 00b8 0B       		.uleb128 0xb
+ 2181 00b9 49       		.uleb128 0x49
+ 2182 00ba 13       		.uleb128 0x13
+ 2183 00bb 02       		.uleb128 0x2
+ 2184 00bc 18       		.uleb128 0x18
+ 2185 00bd 00       		.byte	0
+ 2186 00be 00       		.byte	0
+ 2187 00bf 0D       		.uleb128 0xd
+ 2188 00c0 34       		.uleb128 0x34
+ 2189 00c1 00       		.byte	0
+ 2190 00c2 03       		.uleb128 0x3
+ 2191 00c3 0E       		.uleb128 0xe
+ 2192 00c4 3A       		.uleb128 0x3a
+ 2193 00c5 0B       		.uleb128 0xb
+ 2194 00c6 3B       		.uleb128 0x3b
+ 2195 00c7 0B       		.uleb128 0xb
+ 2196 00c8 49       		.uleb128 0x49
+ 2197 00c9 13       		.uleb128 0x13
+ 2198 00ca 3F       		.uleb128 0x3f
+ 2199 00cb 19       		.uleb128 0x19
+ 2200 00cc 02       		.uleb128 0x2
+ 2201 00cd 18       		.uleb128 0x18
+ 2202 00ce 00       		.byte	0
+ 2203 00cf 00       		.byte	0
+ 2204 00d0 0E       		.uleb128 0xe
+ 2205 00d1 01       		.uleb128 0x1
+ 2206 00d2 01       		.byte	0x1
+ 2207 00d3 49       		.uleb128 0x49
+ 2208 00d4 13       		.uleb128 0x13
+ 2209 00d5 01       		.uleb128 0x1
+ 2210 00d6 13       		.uleb128 0x13
+ 2211 00d7 00       		.byte	0
+ 2212 00d8 00       		.byte	0
+ 2213 00d9 0F       		.uleb128 0xf
+ 2214 00da 21       		.uleb128 0x21
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 45
+
+
+ 2215 00db 00       		.byte	0
+ 2216 00dc 49       		.uleb128 0x49
+ 2217 00dd 13       		.uleb128 0x13
+ 2218 00de 2F       		.uleb128 0x2f
+ 2219 00df 05       		.uleb128 0x5
+ 2220 00e0 00       		.byte	0
+ 2221 00e1 00       		.byte	0
+ 2222 00e2 00       		.byte	0
+ 2223              		.section	.debug_aranges,"",%progbits
+ 2224 0000 4C000000 		.4byte	0x4c
+ 2225 0004 0200     		.2byte	0x2
+ 2226 0006 00000000 		.4byte	.Ldebug_info0
+ 2227 000a 04       		.byte	0x4
+ 2228 000b 00       		.byte	0
+ 2229 000c 0000     		.2byte	0
+ 2230 000e 0000     		.2byte	0
+ 2231 0010 00000000 		.4byte	.LFB0
+ 2232 0014 54000000 		.4byte	.LFE0-.LFB0
+ 2233 0018 00000000 		.4byte	.LFB1
+ 2234 001c 38000000 		.4byte	.LFE1-.LFB1
+ 2235 0020 00000000 		.4byte	.LFB2
+ 2236 0024 24000000 		.4byte	.LFE2-.LFB2
+ 2237 0028 00000000 		.4byte	.LFB3
+ 2238 002c 34000000 		.4byte	.LFE3-.LFB3
+ 2239 0030 00000000 		.4byte	.LFB4
+ 2240 0034 2C000000 		.4byte	.LFE4-.LFB4
+ 2241 0038 00000000 		.4byte	.LFB5
+ 2242 003c 68000000 		.4byte	.LFE5-.LFB5
+ 2243 0040 00000000 		.4byte	.LFB6
+ 2244 0044 68000000 		.4byte	.LFE6-.LFB6
+ 2245 0048 00000000 		.4byte	0
+ 2246 004c 00000000 		.4byte	0
+ 2247              		.section	.debug_ranges,"",%progbits
+ 2248              	.Ldebug_ranges0:
+ 2249 0000 00000000 		.4byte	.LFB0
+ 2250 0004 54000000 		.4byte	.LFE0
+ 2251 0008 00000000 		.4byte	.LFB1
+ 2252 000c 38000000 		.4byte	.LFE1
+ 2253 0010 00000000 		.4byte	.LFB2
+ 2254 0014 24000000 		.4byte	.LFE2
+ 2255 0018 00000000 		.4byte	.LFB3
+ 2256 001c 34000000 		.4byte	.LFE3
+ 2257 0020 00000000 		.4byte	.LFB4
+ 2258 0024 2C000000 		.4byte	.LFE4
+ 2259 0028 00000000 		.4byte	.LFB5
+ 2260 002c 68000000 		.4byte	.LFE5
+ 2261 0030 00000000 		.4byte	.LFB6
+ 2262 0034 68000000 		.4byte	.LFE6
+ 2263 0038 00000000 		.4byte	0
+ 2264 003c 00000000 		.4byte	0
+ 2265              		.section	.debug_line,"",%progbits
+ 2266              	.Ldebug_line0:
+ 2267 0000 EE000000 		.section	.debug_str,"MS",%progbits,1
+ 2267      02004500 
+ 2267      00000201 
+ 2267      FB0E0D00 
+ 2267      01010101 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 46
+
+
+ 2268              	.LASF33:
+ 2269 0000 48465F44 		.ascii	"HF_DAC_1_Wave2TD\000"
+ 2269      41435F31 
+ 2269      5F576176 
+ 2269      65325444 
+ 2269      00
+ 2270              	.LASF37:
+ 2271 0011 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2271      43313120 
+ 2271      352E342E 
+ 2271      31203230 
+ 2271      31363036 
+ 2272 0044 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2272      20726576 
+ 2272      6973696F 
+ 2272      6E203233 
+ 2272      37373135 
+ 2273 0077 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2273      66756E63 
+ 2273      74696F6E 
+ 2273      2D736563 
+ 2273      74696F6E 
+ 2274              	.LASF12:
+ 2275 009f 666C6F61 		.ascii	"float\000"
+ 2275      7400
+ 2276              	.LASF34:
+ 2277 00a5 48465F44 		.ascii	"HF_DAC_1_initVar\000"
+ 2277      41435F31 
+ 2277      5F696E69 
+ 2277      74566172 
+ 2277      00
+ 2278              	.LASF19:
+ 2279 00b6 48465F44 		.ascii	"HF_DAC_1_Start\000"
+ 2279      41435F31 
+ 2279      5F537461 
+ 2279      727400
+ 2280              	.LASF3:
+ 2281 00c5 73686F72 		.ascii	"short unsigned int\000"
+ 2281      7420756E 
+ 2281      7369676E 
+ 2281      65642069 
+ 2281      6E7400
+ 2282              	.LASF26:
+ 2283 00d8 48465F44 		.ascii	"HF_DAC_1_Wave1Setup\000"
+ 2283      41435F31 
+ 2283      5F576176 
+ 2283      65315365 
+ 2283      74757000 
+ 2284              	.LASF20:
+ 2285 00ec 77617665 		.ascii	"wavePtr1\000"
+ 2285      50747231 
+ 2285      00
+ 2286              	.LASF22:
+ 2287 00f5 77617665 		.ascii	"wavePtr2\000"
+ 2287      50747232 
+ 2287      00
+ 2288              	.LASF17:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 47
+
+
+ 2289 00fe 48465F44 		.ascii	"HF_DAC_1_Init\000"
+ 2289      41435F31 
+ 2289      5F496E69 
+ 2289      7400
+ 2290              	.LASF30:
+ 2291 010c 48465F44 		.ascii	"HF_DAC_1_Wave1Chan\000"
+ 2291      41435F31 
+ 2291      5F576176 
+ 2291      65314368 
+ 2291      616E00
+ 2292              	.LASF28:
+ 2293 011f 73616D70 		.ascii	"sampleSize\000"
+ 2293      6C655369 
+ 2293      7A6500
+ 2294              	.LASF39:
+ 2295 012a 433A5C55 		.ascii	"C:\\Users\\herreral\\Documents\\Masters\\Tecnicas d"
+ 2295      73657273 
+ 2295      5C686572 
+ 2295      72657261 
+ 2295      6C5C446F 
+ 2296 0158 65204164 		.ascii	"e Adquisicion y Procesamiento de Datos\\Proyecto1_D"
+ 2296      71756973 
+ 2296      6963696F 
+ 2296      6E207920 
+ 2296      50726F63 
+ 2297 018a 75616C54 		.ascii	"ualToneCoder\\DualToneMultiFrequencyCoder\\DualTone"
+ 2297      6F6E6543 
+ 2297      6F646572 
+ 2297      5C447561 
+ 2297      6C546F6E 
+ 2298 01bb 204D756C 		.ascii	" MultiFrequency Coder.cydsn\000"
+ 2298      74694672 
+ 2298      65717565 
+ 2298      6E637920 
+ 2298      436F6465 
+ 2299              	.LASF18:
+ 2300 01d7 48465F44 		.ascii	"HF_DAC_1_Enable\000"
+ 2300      41435F31 
+ 2300      5F456E61 
+ 2300      626C6500 
+ 2301              	.LASF5:
+ 2302 01e7 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2302      20756E73 
+ 2302      69676E65 
+ 2302      6420696E 
+ 2302      7400
+ 2303              	.LASF27:
+ 2304 01f9 77617665 		.ascii	"wavePtr\000"
+ 2304      50747200 
+ 2305              	.LASF9:
+ 2306 0201 75696E74 		.ascii	"uint8\000"
+ 2306      3800
+ 2307              	.LASF31:
+ 2308 0207 48465F44 		.ascii	"HF_DAC_1_Wave2Chan\000"
+ 2308      41435F31 
+ 2308      5F576176 
+ 2308      65324368 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 48
+
+
+ 2308      616E00
+ 2309              	.LASF21:
+ 2310 021a 73616D70 		.ascii	"sampleSize1\000"
+ 2310      6C655369 
+ 2310      7A653100 
+ 2311              	.LASF23:
+ 2312 0226 73616D70 		.ascii	"sampleSize2\000"
+ 2312      6C655369 
+ 2312      7A653200 
+ 2313              	.LASF1:
+ 2314 0232 756E7369 		.ascii	"unsigned char\000"
+ 2314      676E6564 
+ 2314      20636861 
+ 2314      7200
+ 2315              	.LASF38:
+ 2316 0240 47656E65 		.ascii	"Generated_Source\\PSoC5\\HF_DAC_1.c\000"
+ 2316      72617465 
+ 2316      645F536F 
+ 2316      75726365 
+ 2316      5C50536F 
+ 2317              	.LASF13:
+ 2318 0262 646F7562 		.ascii	"double\000"
+ 2318      6C6500
+ 2319              	.LASF10:
+ 2320 0269 75696E74 		.ascii	"uint16\000"
+ 2320      313600
+ 2321              	.LASF11:
+ 2322 0270 75696E74 		.ascii	"uint32\000"
+ 2322      333200
+ 2323              	.LASF29:
+ 2324 0277 48465F44 		.ascii	"HF_DAC_1_Wave2Setup\000"
+ 2324      41435F31 
+ 2324      5F576176 
+ 2324      65325365 
+ 2324      74757000 
+ 2325              	.LASF8:
+ 2326 028b 756E7369 		.ascii	"unsigned int\000"
+ 2326      676E6564 
+ 2326      20696E74 
+ 2326      00
+ 2327              	.LASF24:
+ 2328 0298 48465F44 		.ascii	"HF_DAC_1_Stop\000"
+ 2328      41435F31 
+ 2328      5F53746F 
+ 2328      7000
+ 2329              	.LASF7:
+ 2330 02a6 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2330      206C6F6E 
+ 2330      6720756E 
+ 2330      7369676E 
+ 2330      65642069 
+ 2331              	.LASF25:
+ 2332 02bd 48465F44 		.ascii	"HF_DAC_1_StartEx\000"
+ 2332      41435F31 
+ 2332      5F537461 
+ 2332      72744578 
+ 2332      00
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccyQ9WGL.s 			page 49
+
+
+ 2333              	.LASF35:
+ 2334 02ce 48465F44 		.ascii	"HF_DAC_1_wave1\000"
+ 2334      41435F31 
+ 2334      5F776176 
+ 2334      653100
+ 2335              	.LASF36:
+ 2336 02dd 48465F44 		.ascii	"HF_DAC_1_wave2\000"
+ 2336      41435F31 
+ 2336      5F776176 
+ 2336      653200
+ 2337              	.LASF32:
+ 2338 02ec 48465F44 		.ascii	"HF_DAC_1_Wave1TD\000"
+ 2338      41435F31 
+ 2338      5F576176 
+ 2338      65315444 
+ 2338      00
+ 2339              	.LASF16:
+ 2340 02fd 73697A65 		.ascii	"sizetype\000"
+ 2340      74797065 
+ 2340      00
+ 2341              	.LASF6:
+ 2342 0306 6C6F6E67 		.ascii	"long long int\000"
+ 2342      206C6F6E 
+ 2342      6720696E 
+ 2342      7400
+ 2343              	.LASF14:
+ 2344 0314 63686172 		.ascii	"char\000"
+ 2344      00
+ 2345              	.LASF2:
+ 2346 0319 73686F72 		.ascii	"short int\000"
+ 2346      7420696E 
+ 2346      7400
+ 2347              	.LASF4:
+ 2348 0323 6C6F6E67 		.ascii	"long int\000"
+ 2348      20696E74 
+ 2348      00
+ 2349              	.LASF15:
+ 2350 032c 6C6F6E67 		.ascii	"long double\000"
+ 2350      20646F75 
+ 2350      626C6500 
+ 2351              	.LASF0:
+ 2352 0338 7369676E 		.ascii	"signed char\000"
+ 2352      65642063 
+ 2352      68617200 
+ 2353              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

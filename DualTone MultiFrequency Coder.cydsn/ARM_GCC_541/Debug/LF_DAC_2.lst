@@ -1,0 +1,3485 @@
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"LF_DAC_2.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.global	LF_DAC_2_initVar
+  20              		.bss
+  21              		.type	LF_DAC_2_initVar, %object
+  22              		.size	LF_DAC_2_initVar, 1
+  23              	LF_DAC_2_initVar:
+  24 0000 00       		.space	1
+  25              		.global	LF_DAC_2_wave1
+  26              		.section	.rodata
+  27              		.align	2
+  28              		.type	LF_DAC_2_wave1, %object
+  29              		.size	LF_DAC_2_wave1, 937
+  30              	LF_DAC_2_wave1:
+  31 0000 80       		.byte	-128
+  32 0001 80       		.byte	-128
+  33 0002 80       		.byte	-128
+  34 0003 81       		.byte	-127
+  35 0004 81       		.byte	-127
+  36 0005 82       		.byte	-126
+  37 0006 82       		.byte	-126
+  38 0007 82       		.byte	-126
+  39 0008 83       		.byte	-125
+  40 0009 83       		.byte	-125
+  41 000a 84       		.byte	-124
+  42 000b 84       		.byte	-124
+  43 000c 85       		.byte	-123
+  44 000d 85       		.byte	-123
+  45 000e 85       		.byte	-123
+  46 000f 86       		.byte	-122
+  47 0010 86       		.byte	-122
+  48 0011 87       		.byte	-121
+  49 0012 87       		.byte	-121
+  50 0013 87       		.byte	-121
+  51 0014 88       		.byte	-120
+  52 0015 88       		.byte	-120
+  53 0016 89       		.byte	-119
+  54 0017 89       		.byte	-119
+  55 0018 8A       		.byte	-118
+  56 0019 8A       		.byte	-118
+  57 001a 8A       		.byte	-118
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 2
+
+
+  58 001b 8B       		.byte	-117
+  59 001c 8B       		.byte	-117
+  60 001d 8C       		.byte	-116
+  61 001e 8C       		.byte	-116
+  62 001f 8C       		.byte	-116
+  63 0020 8D       		.byte	-115
+  64 0021 8D       		.byte	-115
+  65 0022 8E       		.byte	-114
+  66 0023 8E       		.byte	-114
+  67 0024 8E       		.byte	-114
+  68 0025 8F       		.byte	-113
+  69 0026 8F       		.byte	-113
+  70 0027 90       		.byte	-112
+  71 0028 90       		.byte	-112
+  72 0029 90       		.byte	-112
+  73 002a 91       		.byte	-111
+  74 002b 91       		.byte	-111
+  75 002c 92       		.byte	-110
+  76 002d 92       		.byte	-110
+  77 002e 92       		.byte	-110
+  78 002f 93       		.byte	-109
+  79 0030 93       		.byte	-109
+  80 0031 94       		.byte	-108
+  81 0032 94       		.byte	-108
+  82 0033 94       		.byte	-108
+  83 0034 95       		.byte	-107
+  84 0035 95       		.byte	-107
+  85 0036 96       		.byte	-106
+  86 0037 96       		.byte	-106
+  87 0038 96       		.byte	-106
+  88 0039 97       		.byte	-105
+  89 003a 97       		.byte	-105
+  90 003b 98       		.byte	-104
+  91 003c 98       		.byte	-104
+  92 003d 98       		.byte	-104
+  93 003e 99       		.byte	-103
+  94 003f 99       		.byte	-103
+  95 0040 9A       		.byte	-102
+  96 0041 9A       		.byte	-102
+  97 0042 9A       		.byte	-102
+  98 0043 9B       		.byte	-101
+  99 0044 9B       		.byte	-101
+ 100 0045 9B       		.byte	-101
+ 101 0046 9C       		.byte	-100
+ 102 0047 9C       		.byte	-100
+ 103 0048 9D       		.byte	-99
+ 104 0049 9D       		.byte	-99
+ 105 004a 9D       		.byte	-99
+ 106 004b 9E       		.byte	-98
+ 107 004c 9E       		.byte	-98
+ 108 004d 9E       		.byte	-98
+ 109 004e 9F       		.byte	-97
+ 110 004f 9F       		.byte	-97
+ 111 0050 9F       		.byte	-97
+ 112 0051 A0       		.byte	-96
+ 113 0052 A0       		.byte	-96
+ 114 0053 A1       		.byte	-95
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 3
+
+
+ 115 0054 A1       		.byte	-95
+ 116 0055 A1       		.byte	-95
+ 117 0056 A2       		.byte	-94
+ 118 0057 A2       		.byte	-94
+ 119 0058 A2       		.byte	-94
+ 120 0059 A3       		.byte	-93
+ 121 005a A3       		.byte	-93
+ 122 005b A3       		.byte	-93
+ 123 005c A4       		.byte	-92
+ 124 005d A4       		.byte	-92
+ 125 005e A4       		.byte	-92
+ 126 005f A5       		.byte	-91
+ 127 0060 A5       		.byte	-91
+ 128 0061 A5       		.byte	-91
+ 129 0062 A6       		.byte	-90
+ 130 0063 A6       		.byte	-90
+ 131 0064 A6       		.byte	-90
+ 132 0065 A7       		.byte	-89
+ 133 0066 A7       		.byte	-89
+ 134 0067 A7       		.byte	-89
+ 135 0068 A8       		.byte	-88
+ 136 0069 A8       		.byte	-88
+ 137 006a A8       		.byte	-88
+ 138 006b A9       		.byte	-87
+ 139 006c A9       		.byte	-87
+ 140 006d A9       		.byte	-87
+ 141 006e AA       		.byte	-86
+ 142 006f AA       		.byte	-86
+ 143 0070 AA       		.byte	-86
+ 144 0071 AA       		.byte	-86
+ 145 0072 AB       		.byte	-85
+ 146 0073 AB       		.byte	-85
+ 147 0074 AB       		.byte	-85
+ 148 0075 AC       		.byte	-84
+ 149 0076 AC       		.byte	-84
+ 150 0077 AC       		.byte	-84
+ 151 0078 AD       		.byte	-83
+ 152 0079 AD       		.byte	-83
+ 153 007a AD       		.byte	-83
+ 154 007b AD       		.byte	-83
+ 155 007c AE       		.byte	-82
+ 156 007d AE       		.byte	-82
+ 157 007e AE       		.byte	-82
+ 158 007f AF       		.byte	-81
+ 159 0080 AF       		.byte	-81
+ 160 0081 AF       		.byte	-81
+ 161 0082 AF       		.byte	-81
+ 162 0083 B0       		.byte	-80
+ 163 0084 B0       		.byte	-80
+ 164 0085 B0       		.byte	-80
+ 165 0086 B0       		.byte	-80
+ 166 0087 B1       		.byte	-79
+ 167 0088 B1       		.byte	-79
+ 168 0089 B1       		.byte	-79
+ 169 008a B1       		.byte	-79
+ 170 008b B2       		.byte	-78
+ 171 008c B2       		.byte	-78
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 4
+
+
+ 172 008d B2       		.byte	-78
+ 173 008e B2       		.byte	-78
+ 174 008f B3       		.byte	-77
+ 175 0090 B3       		.byte	-77
+ 176 0091 B3       		.byte	-77
+ 177 0092 B3       		.byte	-77
+ 178 0093 B4       		.byte	-76
+ 179 0094 B4       		.byte	-76
+ 180 0095 B4       		.byte	-76
+ 181 0096 B4       		.byte	-76
+ 182 0097 B5       		.byte	-75
+ 183 0098 B5       		.byte	-75
+ 184 0099 B5       		.byte	-75
+ 185 009a B5       		.byte	-75
+ 186 009b B5       		.byte	-75
+ 187 009c B6       		.byte	-74
+ 188 009d B6       		.byte	-74
+ 189 009e B6       		.byte	-74
+ 190 009f B6       		.byte	-74
+ 191 00a0 B6       		.byte	-74
+ 192 00a1 B7       		.byte	-73
+ 193 00a2 B7       		.byte	-73
+ 194 00a3 B7       		.byte	-73
+ 195 00a4 B7       		.byte	-73
+ 196 00a5 B7       		.byte	-73
+ 197 00a6 B8       		.byte	-72
+ 198 00a7 B8       		.byte	-72
+ 199 00a8 B8       		.byte	-72
+ 200 00a9 B8       		.byte	-72
+ 201 00aa B8       		.byte	-72
+ 202 00ab B8       		.byte	-72
+ 203 00ac B9       		.byte	-71
+ 204 00ad B9       		.byte	-71
+ 205 00ae B9       		.byte	-71
+ 206 00af B9       		.byte	-71
+ 207 00b0 B9       		.byte	-71
+ 208 00b1 B9       		.byte	-71
+ 209 00b2 BA       		.byte	-70
+ 210 00b3 BA       		.byte	-70
+ 211 00b4 BA       		.byte	-70
+ 212 00b5 BA       		.byte	-70
+ 213 00b6 BA       		.byte	-70
+ 214 00b7 BA       		.byte	-70
+ 215 00b8 BA       		.byte	-70
+ 216 00b9 BB       		.byte	-69
+ 217 00ba BB       		.byte	-69
+ 218 00bb BB       		.byte	-69
+ 219 00bc BB       		.byte	-69
+ 220 00bd BB       		.byte	-69
+ 221 00be BB       		.byte	-69
+ 222 00bf BB       		.byte	-69
+ 223 00c0 BC       		.byte	-68
+ 224 00c1 BC       		.byte	-68
+ 225 00c2 BC       		.byte	-68
+ 226 00c3 BC       		.byte	-68
+ 227 00c4 BC       		.byte	-68
+ 228 00c5 BC       		.byte	-68
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 5
+
+
+ 229 00c6 BC       		.byte	-68
+ 230 00c7 BC       		.byte	-68
+ 231 00c8 BC       		.byte	-68
+ 232 00c9 BC       		.byte	-68
+ 233 00ca BD       		.byte	-67
+ 234 00cb BD       		.byte	-67
+ 235 00cc BD       		.byte	-67
+ 236 00cd BD       		.byte	-67
+ 237 00ce BD       		.byte	-67
+ 238 00cf BD       		.byte	-67
+ 239 00d0 BD       		.byte	-67
+ 240 00d1 BD       		.byte	-67
+ 241 00d2 BD       		.byte	-67
+ 242 00d3 BD       		.byte	-67
+ 243 00d4 BD       		.byte	-67
+ 244 00d5 BD       		.byte	-67
+ 245 00d6 BD       		.byte	-67
+ 246 00d7 BD       		.byte	-67
+ 247 00d8 BE       		.byte	-66
+ 248 00d9 BE       		.byte	-66
+ 249 00da BE       		.byte	-66
+ 250 00db BE       		.byte	-66
+ 251 00dc BE       		.byte	-66
+ 252 00dd BE       		.byte	-66
+ 253 00de BE       		.byte	-66
+ 254 00df BE       		.byte	-66
+ 255 00e0 BE       		.byte	-66
+ 256 00e1 BE       		.byte	-66
+ 257 00e2 BE       		.byte	-66
+ 258 00e3 BE       		.byte	-66
+ 259 00e4 BE       		.byte	-66
+ 260 00e5 BE       		.byte	-66
+ 261 00e6 BE       		.byte	-66
+ 262 00e7 BE       		.byte	-66
+ 263 00e8 BE       		.byte	-66
+ 264 00e9 BE       		.byte	-66
+ 265 00ea BE       		.byte	-66
+ 266 00eb BE       		.byte	-66
+ 267 00ec BE       		.byte	-66
+ 268 00ed BE       		.byte	-66
+ 269 00ee BE       		.byte	-66
+ 270 00ef BE       		.byte	-66
+ 271 00f0 BE       		.byte	-66
+ 272 00f1 BE       		.byte	-66
+ 273 00f2 BE       		.byte	-66
+ 274 00f3 BE       		.byte	-66
+ 275 00f4 BE       		.byte	-66
+ 276 00f5 BE       		.byte	-66
+ 277 00f6 BE       		.byte	-66
+ 278 00f7 BE       		.byte	-66
+ 279 00f8 BE       		.byte	-66
+ 280 00f9 BE       		.byte	-66
+ 281 00fa BE       		.byte	-66
+ 282 00fb BE       		.byte	-66
+ 283 00fc BE       		.byte	-66
+ 284 00fd BE       		.byte	-66
+ 285 00fe BD       		.byte	-67
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 6
+
+
+ 286 00ff BD       		.byte	-67
+ 287 0100 BD       		.byte	-67
+ 288 0101 BD       		.byte	-67
+ 289 0102 BD       		.byte	-67
+ 290 0103 BD       		.byte	-67
+ 291 0104 BD       		.byte	-67
+ 292 0105 BD       		.byte	-67
+ 293 0106 BD       		.byte	-67
+ 294 0107 BD       		.byte	-67
+ 295 0108 BD       		.byte	-67
+ 296 0109 BD       		.byte	-67
+ 297 010a BD       		.byte	-67
+ 298 010b BC       		.byte	-68
+ 299 010c BC       		.byte	-68
+ 300 010d BC       		.byte	-68
+ 301 010e BC       		.byte	-68
+ 302 010f BC       		.byte	-68
+ 303 0110 BC       		.byte	-68
+ 304 0111 BC       		.byte	-68
+ 305 0112 BC       		.byte	-68
+ 306 0113 BC       		.byte	-68
+ 307 0114 BC       		.byte	-68
+ 308 0115 BB       		.byte	-69
+ 309 0116 BB       		.byte	-69
+ 310 0117 BB       		.byte	-69
+ 311 0118 BB       		.byte	-69
+ 312 0119 BB       		.byte	-69
+ 313 011a BB       		.byte	-69
+ 314 011b BB       		.byte	-69
+ 315 011c BB       		.byte	-69
+ 316 011d BA       		.byte	-70
+ 317 011e BA       		.byte	-70
+ 318 011f BA       		.byte	-70
+ 319 0120 BA       		.byte	-70
+ 320 0121 BA       		.byte	-70
+ 321 0122 BA       		.byte	-70
+ 322 0123 BA       		.byte	-70
+ 323 0124 B9       		.byte	-71
+ 324 0125 B9       		.byte	-71
+ 325 0126 B9       		.byte	-71
+ 326 0127 B9       		.byte	-71
+ 327 0128 B9       		.byte	-71
+ 328 0129 B9       		.byte	-71
+ 329 012a B8       		.byte	-72
+ 330 012b B8       		.byte	-72
+ 331 012c B8       		.byte	-72
+ 332 012d B8       		.byte	-72
+ 333 012e B8       		.byte	-72
+ 334 012f B7       		.byte	-73
+ 335 0130 B7       		.byte	-73
+ 336 0131 B7       		.byte	-73
+ 337 0132 B7       		.byte	-73
+ 338 0133 B7       		.byte	-73
+ 339 0134 B7       		.byte	-73
+ 340 0135 B6       		.byte	-74
+ 341 0136 B6       		.byte	-74
+ 342 0137 B6       		.byte	-74
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 7
+
+
+ 343 0138 B6       		.byte	-74
+ 344 0139 B5       		.byte	-75
+ 345 013a B5       		.byte	-75
+ 346 013b B5       		.byte	-75
+ 347 013c B5       		.byte	-75
+ 348 013d B5       		.byte	-75
+ 349 013e B4       		.byte	-76
+ 350 013f B4       		.byte	-76
+ 351 0140 B4       		.byte	-76
+ 352 0141 B4       		.byte	-76
+ 353 0142 B3       		.byte	-77
+ 354 0143 B3       		.byte	-77
+ 355 0144 B3       		.byte	-77
+ 356 0145 B3       		.byte	-77
+ 357 0146 B3       		.byte	-77
+ 358 0147 B2       		.byte	-78
+ 359 0148 B2       		.byte	-78
+ 360 0149 B2       		.byte	-78
+ 361 014a B2       		.byte	-78
+ 362 014b B1       		.byte	-79
+ 363 014c B1       		.byte	-79
+ 364 014d B1       		.byte	-79
+ 365 014e B1       		.byte	-79
+ 366 014f B0       		.byte	-80
+ 367 0150 B0       		.byte	-80
+ 368 0151 B0       		.byte	-80
+ 369 0152 AF       		.byte	-81
+ 370 0153 AF       		.byte	-81
+ 371 0154 AF       		.byte	-81
+ 372 0155 AF       		.byte	-81
+ 373 0156 AE       		.byte	-82
+ 374 0157 AE       		.byte	-82
+ 375 0158 AE       		.byte	-82
+ 376 0159 AE       		.byte	-82
+ 377 015a AD       		.byte	-83
+ 378 015b AD       		.byte	-83
+ 379 015c AD       		.byte	-83
+ 380 015d AC       		.byte	-84
+ 381 015e AC       		.byte	-84
+ 382 015f AC       		.byte	-84
+ 383 0160 AC       		.byte	-84
+ 384 0161 AB       		.byte	-85
+ 385 0162 AB       		.byte	-85
+ 386 0163 AB       		.byte	-85
+ 387 0164 AA       		.byte	-86
+ 388 0165 AA       		.byte	-86
+ 389 0166 AA       		.byte	-86
+ 390 0167 A9       		.byte	-87
+ 391 0168 A9       		.byte	-87
+ 392 0169 A9       		.byte	-87
+ 393 016a A8       		.byte	-88
+ 394 016b A8       		.byte	-88
+ 395 016c A8       		.byte	-88
+ 396 016d A7       		.byte	-89
+ 397 016e A7       		.byte	-89
+ 398 016f A7       		.byte	-89
+ 399 0170 A7       		.byte	-89
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 8
+
+
+ 400 0171 A6       		.byte	-90
+ 401 0172 A6       		.byte	-90
+ 402 0173 A6       		.byte	-90
+ 403 0174 A5       		.byte	-91
+ 404 0175 A5       		.byte	-91
+ 405 0176 A5       		.byte	-91
+ 406 0177 A4       		.byte	-92
+ 407 0178 A4       		.byte	-92
+ 408 0179 A3       		.byte	-93
+ 409 017a A3       		.byte	-93
+ 410 017b A3       		.byte	-93
+ 411 017c A2       		.byte	-94
+ 412 017d A2       		.byte	-94
+ 413 017e A2       		.byte	-94
+ 414 017f A1       		.byte	-95
+ 415 0180 A1       		.byte	-95
+ 416 0181 A1       		.byte	-95
+ 417 0182 A0       		.byte	-96
+ 418 0183 A0       		.byte	-96
+ 419 0184 A0       		.byte	-96
+ 420 0185 9F       		.byte	-97
+ 421 0186 9F       		.byte	-97
+ 422 0187 9F       		.byte	-97
+ 423 0188 9E       		.byte	-98
+ 424 0189 9E       		.byte	-98
+ 425 018a 9D       		.byte	-99
+ 426 018b 9D       		.byte	-99
+ 427 018c 9D       		.byte	-99
+ 428 018d 9C       		.byte	-100
+ 429 018e 9C       		.byte	-100
+ 430 018f 9C       		.byte	-100
+ 431 0190 9B       		.byte	-101
+ 432 0191 9B       		.byte	-101
+ 433 0192 9A       		.byte	-102
+ 434 0193 9A       		.byte	-102
+ 435 0194 9A       		.byte	-102
+ 436 0195 99       		.byte	-103
+ 437 0196 99       		.byte	-103
+ 438 0197 99       		.byte	-103
+ 439 0198 98       		.byte	-104
+ 440 0199 98       		.byte	-104
+ 441 019a 97       		.byte	-105
+ 442 019b 97       		.byte	-105
+ 443 019c 97       		.byte	-105
+ 444 019d 96       		.byte	-106
+ 445 019e 96       		.byte	-106
+ 446 019f 95       		.byte	-107
+ 447 01a0 95       		.byte	-107
+ 448 01a1 95       		.byte	-107
+ 449 01a2 94       		.byte	-108
+ 450 01a3 94       		.byte	-108
+ 451 01a4 93       		.byte	-109
+ 452 01a5 93       		.byte	-109
+ 453 01a6 93       		.byte	-109
+ 454 01a7 92       		.byte	-110
+ 455 01a8 92       		.byte	-110
+ 456 01a9 91       		.byte	-111
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 9
+
+
+ 457 01aa 91       		.byte	-111
+ 458 01ab 91       		.byte	-111
+ 459 01ac 90       		.byte	-112
+ 460 01ad 90       		.byte	-112
+ 461 01ae 8F       		.byte	-113
+ 462 01af 8F       		.byte	-113
+ 463 01b0 8F       		.byte	-113
+ 464 01b1 8E       		.byte	-114
+ 465 01b2 8E       		.byte	-114
+ 466 01b3 8D       		.byte	-115
+ 467 01b4 8D       		.byte	-115
+ 468 01b5 8D       		.byte	-115
+ 469 01b6 8C       		.byte	-116
+ 470 01b7 8C       		.byte	-116
+ 471 01b8 8B       		.byte	-117
+ 472 01b9 8B       		.byte	-117
+ 473 01ba 8B       		.byte	-117
+ 474 01bb 8A       		.byte	-118
+ 475 01bc 8A       		.byte	-118
+ 476 01bd 89       		.byte	-119
+ 477 01be 89       		.byte	-119
+ 478 01bf 88       		.byte	-120
+ 479 01c0 88       		.byte	-120
+ 480 01c1 88       		.byte	-120
+ 481 01c2 87       		.byte	-121
+ 482 01c3 87       		.byte	-121
+ 483 01c4 86       		.byte	-122
+ 484 01c5 86       		.byte	-122
+ 485 01c6 86       		.byte	-122
+ 486 01c7 85       		.byte	-123
+ 487 01c8 85       		.byte	-123
+ 488 01c9 84       		.byte	-124
+ 489 01ca 84       		.byte	-124
+ 490 01cb 83       		.byte	-125
+ 491 01cc 83       		.byte	-125
+ 492 01cd 83       		.byte	-125
+ 493 01ce 82       		.byte	-126
+ 494 01cf 82       		.byte	-126
+ 495 01d0 81       		.byte	-127
+ 496 01d1 81       		.byte	-127
+ 497 01d2 81       		.byte	-127
+ 498 01d3 80       		.byte	-128
+ 499 01d4 80       		.byte	-128
+ 500 01d5 7F       		.byte	127
+ 501 01d6 7F       		.byte	127
+ 502 01d7 7E       		.byte	126
+ 503 01d8 7E       		.byte	126
+ 504 01d9 7E       		.byte	126
+ 505 01da 7D       		.byte	125
+ 506 01db 7D       		.byte	125
+ 507 01dc 7C       		.byte	124
+ 508 01dd 7C       		.byte	124
+ 509 01de 7C       		.byte	124
+ 510 01df 7B       		.byte	123
+ 511 01e0 7B       		.byte	123
+ 512 01e1 7A       		.byte	122
+ 513 01e2 7A       		.byte	122
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 10
+
+
+ 514 01e3 79       		.byte	121
+ 515 01e4 79       		.byte	121
+ 516 01e5 79       		.byte	121
+ 517 01e6 78       		.byte	120
+ 518 01e7 78       		.byte	120
+ 519 01e8 77       		.byte	119
+ 520 01e9 77       		.byte	119
+ 521 01ea 77       		.byte	119
+ 522 01eb 76       		.byte	118
+ 523 01ec 76       		.byte	118
+ 524 01ed 75       		.byte	117
+ 525 01ee 75       		.byte	117
+ 526 01ef 74       		.byte	116
+ 527 01f0 74       		.byte	116
+ 528 01f1 74       		.byte	116
+ 529 01f2 73       		.byte	115
+ 530 01f3 73       		.byte	115
+ 531 01f4 72       		.byte	114
+ 532 01f5 72       		.byte	114
+ 533 01f6 72       		.byte	114
+ 534 01f7 71       		.byte	113
+ 535 01f8 71       		.byte	113
+ 536 01f9 70       		.byte	112
+ 537 01fa 70       		.byte	112
+ 538 01fb 70       		.byte	112
+ 539 01fc 6F       		.byte	111
+ 540 01fd 6F       		.byte	111
+ 541 01fe 6E       		.byte	110
+ 542 01ff 6E       		.byte	110
+ 543 0200 6E       		.byte	110
+ 544 0201 6D       		.byte	109
+ 545 0202 6D       		.byte	109
+ 546 0203 6C       		.byte	108
+ 547 0204 6C       		.byte	108
+ 548 0205 6C       		.byte	108
+ 549 0206 6B       		.byte	107
+ 550 0207 6B       		.byte	107
+ 551 0208 6A       		.byte	106
+ 552 0209 6A       		.byte	106
+ 553 020a 6A       		.byte	106
+ 554 020b 69       		.byte	105
+ 555 020c 69       		.byte	105
+ 556 020d 68       		.byte	104
+ 557 020e 68       		.byte	104
+ 558 020f 68       		.byte	104
+ 559 0210 67       		.byte	103
+ 560 0211 67       		.byte	103
+ 561 0212 66       		.byte	102
+ 562 0213 66       		.byte	102
+ 563 0214 66       		.byte	102
+ 564 0215 65       		.byte	101
+ 565 0216 65       		.byte	101
+ 566 0217 65       		.byte	101
+ 567 0218 64       		.byte	100
+ 568 0219 64       		.byte	100
+ 569 021a 63       		.byte	99
+ 570 021b 63       		.byte	99
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 11
+
+
+ 571 021c 63       		.byte	99
+ 572 021d 62       		.byte	98
+ 573 021e 62       		.byte	98
+ 574 021f 62       		.byte	98
+ 575 0220 61       		.byte	97
+ 576 0221 61       		.byte	97
+ 577 0222 60       		.byte	96
+ 578 0223 60       		.byte	96
+ 579 0224 60       		.byte	96
+ 580 0225 5F       		.byte	95
+ 581 0226 5F       		.byte	95
+ 582 0227 5F       		.byte	95
+ 583 0228 5E       		.byte	94
+ 584 0229 5E       		.byte	94
+ 585 022a 5E       		.byte	94
+ 586 022b 5D       		.byte	93
+ 587 022c 5D       		.byte	93
+ 588 022d 5D       		.byte	93
+ 589 022e 5C       		.byte	92
+ 590 022f 5C       		.byte	92
+ 591 0230 5C       		.byte	92
+ 592 0231 5B       		.byte	91
+ 593 0232 5B       		.byte	91
+ 594 0233 5A       		.byte	90
+ 595 0234 5A       		.byte	90
+ 596 0235 5A       		.byte	90
+ 597 0236 59       		.byte	89
+ 598 0237 59       		.byte	89
+ 599 0238 59       		.byte	89
+ 600 0239 58       		.byte	88
+ 601 023a 58       		.byte	88
+ 602 023b 58       		.byte	88
+ 603 023c 58       		.byte	88
+ 604 023d 57       		.byte	87
+ 605 023e 57       		.byte	87
+ 606 023f 57       		.byte	87
+ 607 0240 56       		.byte	86
+ 608 0241 56       		.byte	86
+ 609 0242 56       		.byte	86
+ 610 0243 55       		.byte	85
+ 611 0244 55       		.byte	85
+ 612 0245 55       		.byte	85
+ 613 0246 54       		.byte	84
+ 614 0247 54       		.byte	84
+ 615 0248 54       		.byte	84
+ 616 0249 53       		.byte	83
+ 617 024a 53       		.byte	83
+ 618 024b 53       		.byte	83
+ 619 024c 53       		.byte	83
+ 620 024d 52       		.byte	82
+ 621 024e 52       		.byte	82
+ 622 024f 52       		.byte	82
+ 623 0250 51       		.byte	81
+ 624 0251 51       		.byte	81
+ 625 0252 51       		.byte	81
+ 626 0253 51       		.byte	81
+ 627 0254 50       		.byte	80
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 12
+
+
+ 628 0255 50       		.byte	80
+ 629 0256 50       		.byte	80
+ 630 0257 50       		.byte	80
+ 631 0258 4F       		.byte	79
+ 632 0259 4F       		.byte	79
+ 633 025a 4F       		.byte	79
+ 634 025b 4E       		.byte	78
+ 635 025c 4E       		.byte	78
+ 636 025d 4E       		.byte	78
+ 637 025e 4E       		.byte	78
+ 638 025f 4D       		.byte	77
+ 639 0260 4D       		.byte	77
+ 640 0261 4D       		.byte	77
+ 641 0262 4D       		.byte	77
+ 642 0263 4C       		.byte	76
+ 643 0264 4C       		.byte	76
+ 644 0265 4C       		.byte	76
+ 645 0266 4C       		.byte	76
+ 646 0267 4C       		.byte	76
+ 647 0268 4B       		.byte	75
+ 648 0269 4B       		.byte	75
+ 649 026a 4B       		.byte	75
+ 650 026b 4B       		.byte	75
+ 651 026c 4A       		.byte	74
+ 652 026d 4A       		.byte	74
+ 653 026e 4A       		.byte	74
+ 654 026f 4A       		.byte	74
+ 655 0270 4A       		.byte	74
+ 656 0271 49       		.byte	73
+ 657 0272 49       		.byte	73
+ 658 0273 49       		.byte	73
+ 659 0274 49       		.byte	73
+ 660 0275 48       		.byte	72
+ 661 0276 48       		.byte	72
+ 662 0277 48       		.byte	72
+ 663 0278 48       		.byte	72
+ 664 0279 48       		.byte	72
+ 665 027a 48       		.byte	72
+ 666 027b 47       		.byte	71
+ 667 027c 47       		.byte	71
+ 668 027d 47       		.byte	71
+ 669 027e 47       		.byte	71
+ 670 027f 47       		.byte	71
+ 671 0280 46       		.byte	70
+ 672 0281 46       		.byte	70
+ 673 0282 46       		.byte	70
+ 674 0283 46       		.byte	70
+ 675 0284 46       		.byte	70
+ 676 0285 46       		.byte	70
+ 677 0286 45       		.byte	69
+ 678 0287 45       		.byte	69
+ 679 0288 45       		.byte	69
+ 680 0289 45       		.byte	69
+ 681 028a 45       		.byte	69
+ 682 028b 45       		.byte	69
+ 683 028c 45       		.byte	69
+ 684 028d 44       		.byte	68
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 13
+
+
+ 685 028e 44       		.byte	68
+ 686 028f 44       		.byte	68
+ 687 0290 44       		.byte	68
+ 688 0291 44       		.byte	68
+ 689 0292 44       		.byte	68
+ 690 0293 44       		.byte	68
+ 691 0294 44       		.byte	68
+ 692 0295 43       		.byte	67
+ 693 0296 43       		.byte	67
+ 694 0297 43       		.byte	67
+ 695 0298 43       		.byte	67
+ 696 0299 43       		.byte	67
+ 697 029a 43       		.byte	67
+ 698 029b 43       		.byte	67
+ 699 029c 43       		.byte	67
+ 700 029d 43       		.byte	67
+ 701 029e 43       		.byte	67
+ 702 029f 42       		.byte	66
+ 703 02a0 42       		.byte	66
+ 704 02a1 42       		.byte	66
+ 705 02a2 42       		.byte	66
+ 706 02a3 42       		.byte	66
+ 707 02a4 42       		.byte	66
+ 708 02a5 42       		.byte	66
+ 709 02a6 42       		.byte	66
+ 710 02a7 42       		.byte	66
+ 711 02a8 42       		.byte	66
+ 712 02a9 42       		.byte	66
+ 713 02aa 42       		.byte	66
+ 714 02ab 42       		.byte	66
+ 715 02ac 41       		.byte	65
+ 716 02ad 41       		.byte	65
+ 717 02ae 41       		.byte	65
+ 718 02af 41       		.byte	65
+ 719 02b0 41       		.byte	65
+ 720 02b1 41       		.byte	65
+ 721 02b2 41       		.byte	65
+ 722 02b3 41       		.byte	65
+ 723 02b4 41       		.byte	65
+ 724 02b5 41       		.byte	65
+ 725 02b6 41       		.byte	65
+ 726 02b7 41       		.byte	65
+ 727 02b8 41       		.byte	65
+ 728 02b9 41       		.byte	65
+ 729 02ba 41       		.byte	65
+ 730 02bb 41       		.byte	65
+ 731 02bc 41       		.byte	65
+ 732 02bd 41       		.byte	65
+ 733 02be 41       		.byte	65
+ 734 02bf 41       		.byte	65
+ 735 02c0 41       		.byte	65
+ 736 02c1 41       		.byte	65
+ 737 02c2 41       		.byte	65
+ 738 02c3 41       		.byte	65
+ 739 02c4 41       		.byte	65
+ 740 02c5 41       		.byte	65
+ 741 02c6 41       		.byte	65
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 14
+
+
+ 742 02c7 41       		.byte	65
+ 743 02c8 41       		.byte	65
+ 744 02c9 41       		.byte	65
+ 745 02ca 41       		.byte	65
+ 746 02cb 41       		.byte	65
+ 747 02cc 41       		.byte	65
+ 748 02cd 41       		.byte	65
+ 749 02ce 41       		.byte	65
+ 750 02cf 41       		.byte	65
+ 751 02d0 41       		.byte	65
+ 752 02d1 41       		.byte	65
+ 753 02d2 42       		.byte	66
+ 754 02d3 42       		.byte	66
+ 755 02d4 42       		.byte	66
+ 756 02d5 42       		.byte	66
+ 757 02d6 42       		.byte	66
+ 758 02d7 42       		.byte	66
+ 759 02d8 42       		.byte	66
+ 760 02d9 42       		.byte	66
+ 761 02da 42       		.byte	66
+ 762 02db 42       		.byte	66
+ 763 02dc 42       		.byte	66
+ 764 02dd 42       		.byte	66
+ 765 02de 42       		.byte	66
+ 766 02df 42       		.byte	66
+ 767 02e0 43       		.byte	67
+ 768 02e1 43       		.byte	67
+ 769 02e2 43       		.byte	67
+ 770 02e3 43       		.byte	67
+ 771 02e4 43       		.byte	67
+ 772 02e5 43       		.byte	67
+ 773 02e6 43       		.byte	67
+ 774 02e7 43       		.byte	67
+ 775 02e8 43       		.byte	67
+ 776 02e9 43       		.byte	67
+ 777 02ea 44       		.byte	68
+ 778 02eb 44       		.byte	68
+ 779 02ec 44       		.byte	68
+ 780 02ed 44       		.byte	68
+ 781 02ee 44       		.byte	68
+ 782 02ef 44       		.byte	68
+ 783 02f0 44       		.byte	68
+ 784 02f1 45       		.byte	69
+ 785 02f2 45       		.byte	69
+ 786 02f3 45       		.byte	69
+ 787 02f4 45       		.byte	69
+ 788 02f5 45       		.byte	69
+ 789 02f6 45       		.byte	69
+ 790 02f7 45       		.byte	69
+ 791 02f8 46       		.byte	70
+ 792 02f9 46       		.byte	70
+ 793 02fa 46       		.byte	70
+ 794 02fb 46       		.byte	70
+ 795 02fc 46       		.byte	70
+ 796 02fd 46       		.byte	70
+ 797 02fe 47       		.byte	71
+ 798 02ff 47       		.byte	71
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 15
+
+
+ 799 0300 47       		.byte	71
+ 800 0301 47       		.byte	71
+ 801 0302 47       		.byte	71
+ 802 0303 47       		.byte	71
+ 803 0304 48       		.byte	72
+ 804 0305 48       		.byte	72
+ 805 0306 48       		.byte	72
+ 806 0307 48       		.byte	72
+ 807 0308 48       		.byte	72
+ 808 0309 49       		.byte	73
+ 809 030a 49       		.byte	73
+ 810 030b 49       		.byte	73
+ 811 030c 49       		.byte	73
+ 812 030d 49       		.byte	73
+ 813 030e 4A       		.byte	74
+ 814 030f 4A       		.byte	74
+ 815 0310 4A       		.byte	74
+ 816 0311 4A       		.byte	74
+ 817 0312 4A       		.byte	74
+ 818 0313 4B       		.byte	75
+ 819 0314 4B       		.byte	75
+ 820 0315 4B       		.byte	75
+ 821 0316 4B       		.byte	75
+ 822 0317 4C       		.byte	76
+ 823 0318 4C       		.byte	76
+ 824 0319 4C       		.byte	76
+ 825 031a 4C       		.byte	76
+ 826 031b 4D       		.byte	77
+ 827 031c 4D       		.byte	77
+ 828 031d 4D       		.byte	77
+ 829 031e 4D       		.byte	77
+ 830 031f 4E       		.byte	78
+ 831 0320 4E       		.byte	78
+ 832 0321 4E       		.byte	78
+ 833 0322 4E       		.byte	78
+ 834 0323 4F       		.byte	79
+ 835 0324 4F       		.byte	79
+ 836 0325 4F       		.byte	79
+ 837 0326 4F       		.byte	79
+ 838 0327 50       		.byte	80
+ 839 0328 50       		.byte	80
+ 840 0329 50       		.byte	80
+ 841 032a 50       		.byte	80
+ 842 032b 51       		.byte	81
+ 843 032c 51       		.byte	81
+ 844 032d 51       		.byte	81
+ 845 032e 52       		.byte	82
+ 846 032f 52       		.byte	82
+ 847 0330 52       		.byte	82
+ 848 0331 52       		.byte	82
+ 849 0332 53       		.byte	83
+ 850 0333 53       		.byte	83
+ 851 0334 53       		.byte	83
+ 852 0335 54       		.byte	84
+ 853 0336 54       		.byte	84
+ 854 0337 54       		.byte	84
+ 855 0338 55       		.byte	85
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 16
+
+
+ 856 0339 55       		.byte	85
+ 857 033a 55       		.byte	85
+ 858 033b 55       		.byte	85
+ 859 033c 56       		.byte	86
+ 860 033d 56       		.byte	86
+ 861 033e 56       		.byte	86
+ 862 033f 57       		.byte	87
+ 863 0340 57       		.byte	87
+ 864 0341 57       		.byte	87
+ 865 0342 58       		.byte	88
+ 866 0343 58       		.byte	88
+ 867 0344 58       		.byte	88
+ 868 0345 59       		.byte	89
+ 869 0346 59       		.byte	89
+ 870 0347 59       		.byte	89
+ 871 0348 5A       		.byte	90
+ 872 0349 5A       		.byte	90
+ 873 034a 5A       		.byte	90
+ 874 034b 5B       		.byte	91
+ 875 034c 5B       		.byte	91
+ 876 034d 5B       		.byte	91
+ 877 034e 5C       		.byte	92
+ 878 034f 5C       		.byte	92
+ 879 0350 5C       		.byte	92
+ 880 0351 5D       		.byte	93
+ 881 0352 5D       		.byte	93
+ 882 0353 5D       		.byte	93
+ 883 0354 5E       		.byte	94
+ 884 0355 5E       		.byte	94
+ 885 0356 5E       		.byte	94
+ 886 0357 5F       		.byte	95
+ 887 0358 5F       		.byte	95
+ 888 0359 60       		.byte	96
+ 889 035a 60       		.byte	96
+ 890 035b 60       		.byte	96
+ 891 035c 61       		.byte	97
+ 892 035d 61       		.byte	97
+ 893 035e 61       		.byte	97
+ 894 035f 62       		.byte	98
+ 895 0360 62       		.byte	98
+ 896 0361 62       		.byte	98
+ 897 0362 63       		.byte	99
+ 898 0363 63       		.byte	99
+ 899 0364 64       		.byte	100
+ 900 0365 64       		.byte	100
+ 901 0366 64       		.byte	100
+ 902 0367 65       		.byte	101
+ 903 0368 65       		.byte	101
+ 904 0369 65       		.byte	101
+ 905 036a 66       		.byte	102
+ 906 036b 66       		.byte	102
+ 907 036c 67       		.byte	103
+ 908 036d 67       		.byte	103
+ 909 036e 67       		.byte	103
+ 910 036f 68       		.byte	104
+ 911 0370 68       		.byte	104
+ 912 0371 69       		.byte	105
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 17
+
+
+ 913 0372 69       		.byte	105
+ 914 0373 69       		.byte	105
+ 915 0374 6A       		.byte	106
+ 916 0375 6A       		.byte	106
+ 917 0376 6B       		.byte	107
+ 918 0377 6B       		.byte	107
+ 919 0378 6B       		.byte	107
+ 920 0379 6C       		.byte	108
+ 921 037a 6C       		.byte	108
+ 922 037b 6D       		.byte	109
+ 923 037c 6D       		.byte	109
+ 924 037d 6D       		.byte	109
+ 925 037e 6E       		.byte	110
+ 926 037f 6E       		.byte	110
+ 927 0380 6F       		.byte	111
+ 928 0381 6F       		.byte	111
+ 929 0382 6F       		.byte	111
+ 930 0383 70       		.byte	112
+ 931 0384 70       		.byte	112
+ 932 0385 71       		.byte	113
+ 933 0386 71       		.byte	113
+ 934 0387 71       		.byte	113
+ 935 0388 72       		.byte	114
+ 936 0389 72       		.byte	114
+ 937 038a 73       		.byte	115
+ 938 038b 73       		.byte	115
+ 939 038c 73       		.byte	115
+ 940 038d 74       		.byte	116
+ 941 038e 74       		.byte	116
+ 942 038f 75       		.byte	117
+ 943 0390 75       		.byte	117
+ 944 0391 75       		.byte	117
+ 945 0392 76       		.byte	118
+ 946 0393 76       		.byte	118
+ 947 0394 77       		.byte	119
+ 948 0395 77       		.byte	119
+ 949 0396 78       		.byte	120
+ 950 0397 78       		.byte	120
+ 951 0398 78       		.byte	120
+ 952 0399 79       		.byte	121
+ 953 039a 79       		.byte	121
+ 954 039b 7A       		.byte	122
+ 955 039c 7A       		.byte	122
+ 956 039d 7A       		.byte	122
+ 957 039e 7B       		.byte	123
+ 958 039f 7B       		.byte	123
+ 959 03a0 7C       		.byte	124
+ 960 03a1 7C       		.byte	124
+ 961 03a2 7D       		.byte	125
+ 962 03a3 7D       		.byte	125
+ 963 03a4 7D       		.byte	125
+ 964 03a5 7E       		.byte	126
+ 965 03a6 7E       		.byte	126
+ 966 03a7 7F       		.byte	127
+ 967 03a8 7F       		.byte	127
+ 968              		.global	LF_DAC_2_wave2
+ 969 03a9 000000   		.align	2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 18
+
+
+ 970              		.type	LF_DAC_2_wave2, %object
+ 971              		.size	LF_DAC_2_wave2, 849
+ 972              	LF_DAC_2_wave2:
+ 973 03ac 80       		.byte	-128
+ 974 03ad 80       		.byte	-128
+ 975 03ae 80       		.byte	-128
+ 976 03af 81       		.byte	-127
+ 977 03b0 81       		.byte	-127
+ 978 03b1 82       		.byte	-126
+ 979 03b2 82       		.byte	-126
+ 980 03b3 83       		.byte	-125
+ 981 03b4 83       		.byte	-125
+ 982 03b5 84       		.byte	-124
+ 983 03b6 84       		.byte	-124
+ 984 03b7 85       		.byte	-123
+ 985 03b8 85       		.byte	-123
+ 986 03b9 86       		.byte	-122
+ 987 03ba 86       		.byte	-122
+ 988 03bb 86       		.byte	-122
+ 989 03bc 87       		.byte	-121
+ 990 03bd 87       		.byte	-121
+ 991 03be 88       		.byte	-120
+ 992 03bf 88       		.byte	-120
+ 993 03c0 89       		.byte	-119
+ 994 03c1 89       		.byte	-119
+ 995 03c2 8A       		.byte	-118
+ 996 03c3 8A       		.byte	-118
+ 997 03c4 8B       		.byte	-117
+ 998 03c5 8B       		.byte	-117
+ 999 03c6 8B       		.byte	-117
+ 1000 03c7 8C       		.byte	-116
+ 1001 03c8 8C       		.byte	-116
+ 1002 03c9 8D       		.byte	-115
+ 1003 03ca 8D       		.byte	-115
+ 1004 03cb 8E       		.byte	-114
+ 1005 03cc 8E       		.byte	-114
+ 1006 03cd 8F       		.byte	-113
+ 1007 03ce 8F       		.byte	-113
+ 1008 03cf 90       		.byte	-112
+ 1009 03d0 90       		.byte	-112
+ 1010 03d1 90       		.byte	-112
+ 1011 03d2 91       		.byte	-111
+ 1012 03d3 91       		.byte	-111
+ 1013 03d4 92       		.byte	-110
+ 1014 03d5 92       		.byte	-110
+ 1015 03d6 93       		.byte	-109
+ 1016 03d7 93       		.byte	-109
+ 1017 03d8 93       		.byte	-109
+ 1018 03d9 94       		.byte	-108
+ 1019 03da 94       		.byte	-108
+ 1020 03db 95       		.byte	-107
+ 1021 03dc 95       		.byte	-107
+ 1022 03dd 96       		.byte	-106
+ 1023 03de 96       		.byte	-106
+ 1024 03df 97       		.byte	-105
+ 1025 03e0 97       		.byte	-105
+ 1026 03e1 97       		.byte	-105
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 19
+
+
+ 1027 03e2 98       		.byte	-104
+ 1028 03e3 98       		.byte	-104
+ 1029 03e4 99       		.byte	-103
+ 1030 03e5 99       		.byte	-103
+ 1031 03e6 9A       		.byte	-102
+ 1032 03e7 9A       		.byte	-102
+ 1033 03e8 9A       		.byte	-102
+ 1034 03e9 9B       		.byte	-101
+ 1035 03ea 9B       		.byte	-101
+ 1036 03eb 9C       		.byte	-100
+ 1037 03ec 9C       		.byte	-100
+ 1038 03ed 9C       		.byte	-100
+ 1039 03ee 9D       		.byte	-99
+ 1040 03ef 9D       		.byte	-99
+ 1041 03f0 9E       		.byte	-98
+ 1042 03f1 9E       		.byte	-98
+ 1043 03f2 9E       		.byte	-98
+ 1044 03f3 9F       		.byte	-97
+ 1045 03f4 9F       		.byte	-97
+ 1046 03f5 A0       		.byte	-96
+ 1047 03f6 A0       		.byte	-96
+ 1048 03f7 A0       		.byte	-96
+ 1049 03f8 A1       		.byte	-95
+ 1050 03f9 A1       		.byte	-95
+ 1051 03fa A2       		.byte	-94
+ 1052 03fb A2       		.byte	-94
+ 1053 03fc A2       		.byte	-94
+ 1054 03fd A3       		.byte	-93
+ 1055 03fe A3       		.byte	-93
+ 1056 03ff A4       		.byte	-92
+ 1057 0400 A4       		.byte	-92
+ 1058 0401 A4       		.byte	-92
+ 1059 0402 A5       		.byte	-91
+ 1060 0403 A5       		.byte	-91
+ 1061 0404 A5       		.byte	-91
+ 1062 0405 A6       		.byte	-90
+ 1063 0406 A6       		.byte	-90
+ 1064 0407 A6       		.byte	-90
+ 1065 0408 A7       		.byte	-89
+ 1066 0409 A7       		.byte	-89
+ 1067 040a A8       		.byte	-88
+ 1068 040b A8       		.byte	-88
+ 1069 040c A8       		.byte	-88
+ 1070 040d A9       		.byte	-87
+ 1071 040e A9       		.byte	-87
+ 1072 040f A9       		.byte	-87
+ 1073 0410 AA       		.byte	-86
+ 1074 0411 AA       		.byte	-86
+ 1075 0412 AA       		.byte	-86
+ 1076 0413 AB       		.byte	-85
+ 1077 0414 AB       		.byte	-85
+ 1078 0415 AB       		.byte	-85
+ 1079 0416 AC       		.byte	-84
+ 1080 0417 AC       		.byte	-84
+ 1081 0418 AC       		.byte	-84
+ 1082 0419 AD       		.byte	-83
+ 1083 041a AD       		.byte	-83
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 20
+
+
+ 1084 041b AD       		.byte	-83
+ 1085 041c AE       		.byte	-82
+ 1086 041d AE       		.byte	-82
+ 1087 041e AE       		.byte	-82
+ 1088 041f AE       		.byte	-82
+ 1089 0420 AF       		.byte	-81
+ 1090 0421 AF       		.byte	-81
+ 1091 0422 AF       		.byte	-81
+ 1092 0423 B0       		.byte	-80
+ 1093 0424 B0       		.byte	-80
+ 1094 0425 B0       		.byte	-80
+ 1095 0426 B1       		.byte	-79
+ 1096 0427 B1       		.byte	-79
+ 1097 0428 B1       		.byte	-79
+ 1098 0429 B1       		.byte	-79
+ 1099 042a B2       		.byte	-78
+ 1100 042b B2       		.byte	-78
+ 1101 042c B2       		.byte	-78
+ 1102 042d B3       		.byte	-77
+ 1103 042e B3       		.byte	-77
+ 1104 042f B3       		.byte	-77
+ 1105 0430 B3       		.byte	-77
+ 1106 0431 B4       		.byte	-76
+ 1107 0432 B4       		.byte	-76
+ 1108 0433 B4       		.byte	-76
+ 1109 0434 B4       		.byte	-76
+ 1110 0435 B5       		.byte	-75
+ 1111 0436 B5       		.byte	-75
+ 1112 0437 B5       		.byte	-75
+ 1113 0438 B5       		.byte	-75
+ 1114 0439 B6       		.byte	-74
+ 1115 043a B6       		.byte	-74
+ 1116 043b B6       		.byte	-74
+ 1117 043c B6       		.byte	-74
+ 1118 043d B6       		.byte	-74
+ 1119 043e B7       		.byte	-73
+ 1120 043f B7       		.byte	-73
+ 1121 0440 B7       		.byte	-73
+ 1122 0441 B7       		.byte	-73
+ 1123 0442 B7       		.byte	-73
+ 1124 0443 B8       		.byte	-72
+ 1125 0444 B8       		.byte	-72
+ 1126 0445 B8       		.byte	-72
+ 1127 0446 B8       		.byte	-72
+ 1128 0447 B8       		.byte	-72
+ 1129 0448 B9       		.byte	-71
+ 1130 0449 B9       		.byte	-71
+ 1131 044a B9       		.byte	-71
+ 1132 044b B9       		.byte	-71
+ 1133 044c B9       		.byte	-71
+ 1134 044d BA       		.byte	-70
+ 1135 044e BA       		.byte	-70
+ 1136 044f BA       		.byte	-70
+ 1137 0450 BA       		.byte	-70
+ 1138 0451 BA       		.byte	-70
+ 1139 0452 BA       		.byte	-70
+ 1140 0453 BB       		.byte	-69
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 21
+
+
+ 1141 0454 BB       		.byte	-69
+ 1142 0455 BB       		.byte	-69
+ 1143 0456 BB       		.byte	-69
+ 1144 0457 BB       		.byte	-69
+ 1145 0458 BB       		.byte	-69
+ 1146 0459 BB       		.byte	-69
+ 1147 045a BC       		.byte	-68
+ 1148 045b BC       		.byte	-68
+ 1149 045c BC       		.byte	-68
+ 1150 045d BC       		.byte	-68
+ 1151 045e BC       		.byte	-68
+ 1152 045f BC       		.byte	-68
+ 1153 0460 BC       		.byte	-68
+ 1154 0461 BC       		.byte	-68
+ 1155 0462 BC       		.byte	-68
+ 1156 0463 BD       		.byte	-67
+ 1157 0464 BD       		.byte	-67
+ 1158 0465 BD       		.byte	-67
+ 1159 0466 BD       		.byte	-67
+ 1160 0467 BD       		.byte	-67
+ 1161 0468 BD       		.byte	-67
+ 1162 0469 BD       		.byte	-67
+ 1163 046a BD       		.byte	-67
+ 1164 046b BD       		.byte	-67
+ 1165 046c BD       		.byte	-67
+ 1166 046d BD       		.byte	-67
+ 1167 046e BD       		.byte	-67
+ 1168 046f BD       		.byte	-67
+ 1169 0470 BE       		.byte	-66
+ 1170 0471 BE       		.byte	-66
+ 1171 0472 BE       		.byte	-66
+ 1172 0473 BE       		.byte	-66
+ 1173 0474 BE       		.byte	-66
+ 1174 0475 BE       		.byte	-66
+ 1175 0476 BE       		.byte	-66
+ 1176 0477 BE       		.byte	-66
+ 1177 0478 BE       		.byte	-66
+ 1178 0479 BE       		.byte	-66
+ 1179 047a BE       		.byte	-66
+ 1180 047b BE       		.byte	-66
+ 1181 047c BE       		.byte	-66
+ 1182 047d BE       		.byte	-66
+ 1183 047e BE       		.byte	-66
+ 1184 047f BE       		.byte	-66
+ 1185 0480 BE       		.byte	-66
+ 1186 0481 BE       		.byte	-66
+ 1187 0482 BE       		.byte	-66
+ 1188 0483 BE       		.byte	-66
+ 1189 0484 BE       		.byte	-66
+ 1190 0485 BE       		.byte	-66
+ 1191 0486 BE       		.byte	-66
+ 1192 0487 BE       		.byte	-66
+ 1193 0488 BE       		.byte	-66
+ 1194 0489 BE       		.byte	-66
+ 1195 048a BE       		.byte	-66
+ 1196 048b BE       		.byte	-66
+ 1197 048c BE       		.byte	-66
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 22
+
+
+ 1198 048d BE       		.byte	-66
+ 1199 048e BE       		.byte	-66
+ 1200 048f BE       		.byte	-66
+ 1201 0490 BE       		.byte	-66
+ 1202 0491 BE       		.byte	-66
+ 1203 0492 BD       		.byte	-67
+ 1204 0493 BD       		.byte	-67
+ 1205 0494 BD       		.byte	-67
+ 1206 0495 BD       		.byte	-67
+ 1207 0496 BD       		.byte	-67
+ 1208 0497 BD       		.byte	-67
+ 1209 0498 BD       		.byte	-67
+ 1210 0499 BD       		.byte	-67
+ 1211 049a BD       		.byte	-67
+ 1212 049b BD       		.byte	-67
+ 1213 049c BD       		.byte	-67
+ 1214 049d BD       		.byte	-67
+ 1215 049e BC       		.byte	-68
+ 1216 049f BC       		.byte	-68
+ 1217 04a0 BC       		.byte	-68
+ 1218 04a1 BC       		.byte	-68
+ 1219 04a2 BC       		.byte	-68
+ 1220 04a3 BC       		.byte	-68
+ 1221 04a4 BC       		.byte	-68
+ 1222 04a5 BC       		.byte	-68
+ 1223 04a6 BC       		.byte	-68
+ 1224 04a7 BB       		.byte	-69
+ 1225 04a8 BB       		.byte	-69
+ 1226 04a9 BB       		.byte	-69
+ 1227 04aa BB       		.byte	-69
+ 1228 04ab BB       		.byte	-69
+ 1229 04ac BB       		.byte	-69
+ 1230 04ad BB       		.byte	-69
+ 1231 04ae BA       		.byte	-70
+ 1232 04af BA       		.byte	-70
+ 1233 04b0 BA       		.byte	-70
+ 1234 04b1 BA       		.byte	-70
+ 1235 04b2 BA       		.byte	-70
+ 1236 04b3 BA       		.byte	-70
+ 1237 04b4 B9       		.byte	-71
+ 1238 04b5 B9       		.byte	-71
+ 1239 04b6 B9       		.byte	-71
+ 1240 04b7 B9       		.byte	-71
+ 1241 04b8 B9       		.byte	-71
+ 1242 04b9 B9       		.byte	-71
+ 1243 04ba B8       		.byte	-72
+ 1244 04bb B8       		.byte	-72
+ 1245 04bc B8       		.byte	-72
+ 1246 04bd B8       		.byte	-72
+ 1247 04be B8       		.byte	-72
+ 1248 04bf B7       		.byte	-73
+ 1249 04c0 B7       		.byte	-73
+ 1250 04c1 B7       		.byte	-73
+ 1251 04c2 B7       		.byte	-73
+ 1252 04c3 B7       		.byte	-73
+ 1253 04c4 B6       		.byte	-74
+ 1254 04c5 B6       		.byte	-74
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 23
+
+
+ 1255 04c6 B6       		.byte	-74
+ 1256 04c7 B6       		.byte	-74
+ 1257 04c8 B5       		.byte	-75
+ 1258 04c9 B5       		.byte	-75
+ 1259 04ca B5       		.byte	-75
+ 1260 04cb B5       		.byte	-75
+ 1261 04cc B4       		.byte	-76
+ 1262 04cd B4       		.byte	-76
+ 1263 04ce B4       		.byte	-76
+ 1264 04cf B4       		.byte	-76
+ 1265 04d0 B3       		.byte	-77
+ 1266 04d1 B3       		.byte	-77
+ 1267 04d2 B3       		.byte	-77
+ 1268 04d3 B3       		.byte	-77
+ 1269 04d4 B2       		.byte	-78
+ 1270 04d5 B2       		.byte	-78
+ 1271 04d6 B2       		.byte	-78
+ 1272 04d7 B2       		.byte	-78
+ 1273 04d8 B1       		.byte	-79
+ 1274 04d9 B1       		.byte	-79
+ 1275 04da B1       		.byte	-79
+ 1276 04db B0       		.byte	-80
+ 1277 04dc B0       		.byte	-80
+ 1278 04dd B0       		.byte	-80
+ 1279 04de B0       		.byte	-80
+ 1280 04df AF       		.byte	-81
+ 1281 04e0 AF       		.byte	-81
+ 1282 04e1 AF       		.byte	-81
+ 1283 04e2 AE       		.byte	-82
+ 1284 04e3 AE       		.byte	-82
+ 1285 04e4 AE       		.byte	-82
+ 1286 04e5 AD       		.byte	-83
+ 1287 04e6 AD       		.byte	-83
+ 1288 04e7 AD       		.byte	-83
+ 1289 04e8 AC       		.byte	-84
+ 1290 04e9 AC       		.byte	-84
+ 1291 04ea AC       		.byte	-84
+ 1292 04eb AB       		.byte	-85
+ 1293 04ec AB       		.byte	-85
+ 1294 04ed AB       		.byte	-85
+ 1295 04ee AA       		.byte	-86
+ 1296 04ef AA       		.byte	-86
+ 1297 04f0 AA       		.byte	-86
+ 1298 04f1 A9       		.byte	-87
+ 1299 04f2 A9       		.byte	-87
+ 1300 04f3 A9       		.byte	-87
+ 1301 04f4 A8       		.byte	-88
+ 1302 04f5 A8       		.byte	-88
+ 1303 04f6 A8       		.byte	-88
+ 1304 04f7 A7       		.byte	-89
+ 1305 04f8 A7       		.byte	-89
+ 1306 04f9 A7       		.byte	-89
+ 1307 04fa A6       		.byte	-90
+ 1308 04fb A6       		.byte	-90
+ 1309 04fc A6       		.byte	-90
+ 1310 04fd A5       		.byte	-91
+ 1311 04fe A5       		.byte	-91
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 24
+
+
+ 1312 04ff A4       		.byte	-92
+ 1313 0500 A4       		.byte	-92
+ 1314 0501 A4       		.byte	-92
+ 1315 0502 A3       		.byte	-93
+ 1316 0503 A3       		.byte	-93
+ 1317 0504 A3       		.byte	-93
+ 1318 0505 A2       		.byte	-94
+ 1319 0506 A2       		.byte	-94
+ 1320 0507 A1       		.byte	-95
+ 1321 0508 A1       		.byte	-95
+ 1322 0509 A1       		.byte	-95
+ 1323 050a A0       		.byte	-96
+ 1324 050b A0       		.byte	-96
+ 1325 050c 9F       		.byte	-97
+ 1326 050d 9F       		.byte	-97
+ 1327 050e 9F       		.byte	-97
+ 1328 050f 9E       		.byte	-98
+ 1329 0510 9E       		.byte	-98
+ 1330 0511 9D       		.byte	-99
+ 1331 0512 9D       		.byte	-99
+ 1332 0513 9D       		.byte	-99
+ 1333 0514 9C       		.byte	-100
+ 1334 0515 9C       		.byte	-100
+ 1335 0516 9B       		.byte	-101
+ 1336 0517 9B       		.byte	-101
+ 1337 0518 9B       		.byte	-101
+ 1338 0519 9A       		.byte	-102
+ 1339 051a 9A       		.byte	-102
+ 1340 051b 99       		.byte	-103
+ 1341 051c 99       		.byte	-103
+ 1342 051d 98       		.byte	-104
+ 1343 051e 98       		.byte	-104
+ 1344 051f 98       		.byte	-104
+ 1345 0520 97       		.byte	-105
+ 1346 0521 97       		.byte	-105
+ 1347 0522 96       		.byte	-106
+ 1348 0523 96       		.byte	-106
+ 1349 0524 95       		.byte	-107
+ 1350 0525 95       		.byte	-107
+ 1351 0526 95       		.byte	-107
+ 1352 0527 94       		.byte	-108
+ 1353 0528 94       		.byte	-108
+ 1354 0529 93       		.byte	-109
+ 1355 052a 93       		.byte	-109
+ 1356 052b 92       		.byte	-110
+ 1357 052c 92       		.byte	-110
+ 1358 052d 92       		.byte	-110
+ 1359 052e 91       		.byte	-111
+ 1360 052f 91       		.byte	-111
+ 1361 0530 90       		.byte	-112
+ 1362 0531 90       		.byte	-112
+ 1363 0532 8F       		.byte	-113
+ 1364 0533 8F       		.byte	-113
+ 1365 0534 8E       		.byte	-114
+ 1366 0535 8E       		.byte	-114
+ 1367 0536 8D       		.byte	-115
+ 1368 0537 8D       		.byte	-115
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 25
+
+
+ 1369 0538 8D       		.byte	-115
+ 1370 0539 8C       		.byte	-116
+ 1371 053a 8C       		.byte	-116
+ 1372 053b 8B       		.byte	-117
+ 1373 053c 8B       		.byte	-117
+ 1374 053d 8A       		.byte	-118
+ 1375 053e 8A       		.byte	-118
+ 1376 053f 89       		.byte	-119
+ 1377 0540 89       		.byte	-119
+ 1378 0541 88       		.byte	-120
+ 1379 0542 88       		.byte	-120
+ 1380 0543 88       		.byte	-120
+ 1381 0544 87       		.byte	-121
+ 1382 0545 87       		.byte	-121
+ 1383 0546 86       		.byte	-122
+ 1384 0547 86       		.byte	-122
+ 1385 0548 85       		.byte	-123
+ 1386 0549 85       		.byte	-123
+ 1387 054a 84       		.byte	-124
+ 1388 054b 84       		.byte	-124
+ 1389 054c 83       		.byte	-125
+ 1390 054d 83       		.byte	-125
+ 1391 054e 83       		.byte	-125
+ 1392 054f 82       		.byte	-126
+ 1393 0550 82       		.byte	-126
+ 1394 0551 81       		.byte	-127
+ 1395 0552 81       		.byte	-127
+ 1396 0553 80       		.byte	-128
+ 1397 0554 80       		.byte	-128
+ 1398 0555 7F       		.byte	127
+ 1399 0556 7F       		.byte	127
+ 1400 0557 7E       		.byte	126
+ 1401 0558 7E       		.byte	126
+ 1402 0559 7D       		.byte	125
+ 1403 055a 7D       		.byte	125
+ 1404 055b 7C       		.byte	124
+ 1405 055c 7C       		.byte	124
+ 1406 055d 7C       		.byte	124
+ 1407 055e 7B       		.byte	123
+ 1408 055f 7B       		.byte	123
+ 1409 0560 7A       		.byte	122
+ 1410 0561 7A       		.byte	122
+ 1411 0562 79       		.byte	121
+ 1412 0563 79       		.byte	121
+ 1413 0564 78       		.byte	120
+ 1414 0565 78       		.byte	120
+ 1415 0566 77       		.byte	119
+ 1416 0567 77       		.byte	119
+ 1417 0568 77       		.byte	119
+ 1418 0569 76       		.byte	118
+ 1419 056a 76       		.byte	118
+ 1420 056b 75       		.byte	117
+ 1421 056c 75       		.byte	117
+ 1422 056d 74       		.byte	116
+ 1423 056e 74       		.byte	116
+ 1424 056f 73       		.byte	115
+ 1425 0570 73       		.byte	115
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 26
+
+
+ 1426 0571 72       		.byte	114
+ 1427 0572 72       		.byte	114
+ 1428 0573 72       		.byte	114
+ 1429 0574 71       		.byte	113
+ 1430 0575 71       		.byte	113
+ 1431 0576 70       		.byte	112
+ 1432 0577 70       		.byte	112
+ 1433 0578 6F       		.byte	111
+ 1434 0579 6F       		.byte	111
+ 1435 057a 6E       		.byte	110
+ 1436 057b 6E       		.byte	110
+ 1437 057c 6D       		.byte	109
+ 1438 057d 6D       		.byte	109
+ 1439 057e 6D       		.byte	109
+ 1440 057f 6C       		.byte	108
+ 1441 0580 6C       		.byte	108
+ 1442 0581 6B       		.byte	107
+ 1443 0582 6B       		.byte	107
+ 1444 0583 6A       		.byte	106
+ 1445 0584 6A       		.byte	106
+ 1446 0585 6A       		.byte	106
+ 1447 0586 69       		.byte	105
+ 1448 0587 69       		.byte	105
+ 1449 0588 68       		.byte	104
+ 1450 0589 68       		.byte	104
+ 1451 058a 67       		.byte	103
+ 1452 058b 67       		.byte	103
+ 1453 058c 67       		.byte	103
+ 1454 058d 66       		.byte	102
+ 1455 058e 66       		.byte	102
+ 1456 058f 65       		.byte	101
+ 1457 0590 65       		.byte	101
+ 1458 0591 64       		.byte	100
+ 1459 0592 64       		.byte	100
+ 1460 0593 64       		.byte	100
+ 1461 0594 63       		.byte	99
+ 1462 0595 63       		.byte	99
+ 1463 0596 62       		.byte	98
+ 1464 0597 62       		.byte	98
+ 1465 0598 62       		.byte	98
+ 1466 0599 61       		.byte	97
+ 1467 059a 61       		.byte	97
+ 1468 059b 60       		.byte	96
+ 1469 059c 60       		.byte	96
+ 1470 059d 60       		.byte	96
+ 1471 059e 5F       		.byte	95
+ 1472 059f 5F       		.byte	95
+ 1473 05a0 5E       		.byte	94
+ 1474 05a1 5E       		.byte	94
+ 1475 05a2 5E       		.byte	94
+ 1476 05a3 5D       		.byte	93
+ 1477 05a4 5D       		.byte	93
+ 1478 05a5 5C       		.byte	92
+ 1479 05a6 5C       		.byte	92
+ 1480 05a7 5C       		.byte	92
+ 1481 05a8 5B       		.byte	91
+ 1482 05a9 5B       		.byte	91
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 27
+
+
+ 1483 05aa 5B       		.byte	91
+ 1484 05ab 5A       		.byte	90
+ 1485 05ac 5A       		.byte	90
+ 1486 05ad 59       		.byte	89
+ 1487 05ae 59       		.byte	89
+ 1488 05af 59       		.byte	89
+ 1489 05b0 58       		.byte	88
+ 1490 05b1 58       		.byte	88
+ 1491 05b2 58       		.byte	88
+ 1492 05b3 57       		.byte	87
+ 1493 05b4 57       		.byte	87
+ 1494 05b5 57       		.byte	87
+ 1495 05b6 56       		.byte	86
+ 1496 05b7 56       		.byte	86
+ 1497 05b8 56       		.byte	86
+ 1498 05b9 55       		.byte	85
+ 1499 05ba 55       		.byte	85
+ 1500 05bb 55       		.byte	85
+ 1501 05bc 54       		.byte	84
+ 1502 05bd 54       		.byte	84
+ 1503 05be 54       		.byte	84
+ 1504 05bf 53       		.byte	83
+ 1505 05c0 53       		.byte	83
+ 1506 05c1 53       		.byte	83
+ 1507 05c2 52       		.byte	82
+ 1508 05c3 52       		.byte	82
+ 1509 05c4 52       		.byte	82
+ 1510 05c5 51       		.byte	81
+ 1511 05c6 51       		.byte	81
+ 1512 05c7 51       		.byte	81
+ 1513 05c8 50       		.byte	80
+ 1514 05c9 50       		.byte	80
+ 1515 05ca 50       		.byte	80
+ 1516 05cb 4F       		.byte	79
+ 1517 05cc 4F       		.byte	79
+ 1518 05cd 4F       		.byte	79
+ 1519 05ce 4F       		.byte	79
+ 1520 05cf 4E       		.byte	78
+ 1521 05d0 4E       		.byte	78
+ 1522 05d1 4E       		.byte	78
+ 1523 05d2 4D       		.byte	77
+ 1524 05d3 4D       		.byte	77
+ 1525 05d4 4D       		.byte	77
+ 1526 05d5 4D       		.byte	77
+ 1527 05d6 4C       		.byte	76
+ 1528 05d7 4C       		.byte	76
+ 1529 05d8 4C       		.byte	76
+ 1530 05d9 4C       		.byte	76
+ 1531 05da 4B       		.byte	75
+ 1532 05db 4B       		.byte	75
+ 1533 05dc 4B       		.byte	75
+ 1534 05dd 4B       		.byte	75
+ 1535 05de 4A       		.byte	74
+ 1536 05df 4A       		.byte	74
+ 1537 05e0 4A       		.byte	74
+ 1538 05e1 4A       		.byte	74
+ 1539 05e2 49       		.byte	73
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 28
+
+
+ 1540 05e3 49       		.byte	73
+ 1541 05e4 49       		.byte	73
+ 1542 05e5 49       		.byte	73
+ 1543 05e6 48       		.byte	72
+ 1544 05e7 48       		.byte	72
+ 1545 05e8 48       		.byte	72
+ 1546 05e9 48       		.byte	72
+ 1547 05ea 48       		.byte	72
+ 1548 05eb 47       		.byte	71
+ 1549 05ec 47       		.byte	71
+ 1550 05ed 47       		.byte	71
+ 1551 05ee 47       		.byte	71
+ 1552 05ef 47       		.byte	71
+ 1553 05f0 46       		.byte	70
+ 1554 05f1 46       		.byte	70
+ 1555 05f2 46       		.byte	70
+ 1556 05f3 46       		.byte	70
+ 1557 05f4 46       		.byte	70
+ 1558 05f5 46       		.byte	70
+ 1559 05f6 45       		.byte	69
+ 1560 05f7 45       		.byte	69
+ 1561 05f8 45       		.byte	69
+ 1562 05f9 45       		.byte	69
+ 1563 05fa 45       		.byte	69
+ 1564 05fb 45       		.byte	69
+ 1565 05fc 44       		.byte	68
+ 1566 05fd 44       		.byte	68
+ 1567 05fe 44       		.byte	68
+ 1568 05ff 44       		.byte	68
+ 1569 0600 44       		.byte	68
+ 1570 0601 44       		.byte	68
+ 1571 0602 44       		.byte	68
+ 1572 0603 43       		.byte	67
+ 1573 0604 43       		.byte	67
+ 1574 0605 43       		.byte	67
+ 1575 0606 43       		.byte	67
+ 1576 0607 43       		.byte	67
+ 1577 0608 43       		.byte	67
+ 1578 0609 43       		.byte	67
+ 1579 060a 43       		.byte	67
+ 1580 060b 43       		.byte	67
+ 1581 060c 42       		.byte	66
+ 1582 060d 42       		.byte	66
+ 1583 060e 42       		.byte	66
+ 1584 060f 42       		.byte	66
+ 1585 0610 42       		.byte	66
+ 1586 0611 42       		.byte	66
+ 1587 0612 42       		.byte	66
+ 1588 0613 42       		.byte	66
+ 1589 0614 42       		.byte	66
+ 1590 0615 42       		.byte	66
+ 1591 0616 42       		.byte	66
+ 1592 0617 42       		.byte	66
+ 1593 0618 41       		.byte	65
+ 1594 0619 41       		.byte	65
+ 1595 061a 41       		.byte	65
+ 1596 061b 41       		.byte	65
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 29
+
+
+ 1597 061c 41       		.byte	65
+ 1598 061d 41       		.byte	65
+ 1599 061e 41       		.byte	65
+ 1600 061f 41       		.byte	65
+ 1601 0620 41       		.byte	65
+ 1602 0621 41       		.byte	65
+ 1603 0622 41       		.byte	65
+ 1604 0623 41       		.byte	65
+ 1605 0624 41       		.byte	65
+ 1606 0625 41       		.byte	65
+ 1607 0626 41       		.byte	65
+ 1608 0627 41       		.byte	65
+ 1609 0628 41       		.byte	65
+ 1610 0629 41       		.byte	65
+ 1611 062a 41       		.byte	65
+ 1612 062b 41       		.byte	65
+ 1613 062c 41       		.byte	65
+ 1614 062d 41       		.byte	65
+ 1615 062e 41       		.byte	65
+ 1616 062f 41       		.byte	65
+ 1617 0630 41       		.byte	65
+ 1618 0631 41       		.byte	65
+ 1619 0632 41       		.byte	65
+ 1620 0633 41       		.byte	65
+ 1621 0634 41       		.byte	65
+ 1622 0635 41       		.byte	65
+ 1623 0636 41       		.byte	65
+ 1624 0637 41       		.byte	65
+ 1625 0638 41       		.byte	65
+ 1626 0639 41       		.byte	65
+ 1627 063a 42       		.byte	66
+ 1628 063b 42       		.byte	66
+ 1629 063c 42       		.byte	66
+ 1630 063d 42       		.byte	66
+ 1631 063e 42       		.byte	66
+ 1632 063f 42       		.byte	66
+ 1633 0640 42       		.byte	66
+ 1634 0641 42       		.byte	66
+ 1635 0642 42       		.byte	66
+ 1636 0643 42       		.byte	66
+ 1637 0644 42       		.byte	66
+ 1638 0645 42       		.byte	66
+ 1639 0646 42       		.byte	66
+ 1640 0647 43       		.byte	67
+ 1641 0648 43       		.byte	67
+ 1642 0649 43       		.byte	67
+ 1643 064a 43       		.byte	67
+ 1644 064b 43       		.byte	67
+ 1645 064c 43       		.byte	67
+ 1646 064d 43       		.byte	67
+ 1647 064e 43       		.byte	67
+ 1648 064f 43       		.byte	67
+ 1649 0650 44       		.byte	68
+ 1650 0651 44       		.byte	68
+ 1651 0652 44       		.byte	68
+ 1652 0653 44       		.byte	68
+ 1653 0654 44       		.byte	68
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 30
+
+
+ 1654 0655 44       		.byte	68
+ 1655 0656 44       		.byte	68
+ 1656 0657 45       		.byte	69
+ 1657 0658 45       		.byte	69
+ 1658 0659 45       		.byte	69
+ 1659 065a 45       		.byte	69
+ 1660 065b 45       		.byte	69
+ 1661 065c 45       		.byte	69
+ 1662 065d 46       		.byte	70
+ 1663 065e 46       		.byte	70
+ 1664 065f 46       		.byte	70
+ 1665 0660 46       		.byte	70
+ 1666 0661 46       		.byte	70
+ 1667 0662 47       		.byte	71
+ 1668 0663 47       		.byte	71
+ 1669 0664 47       		.byte	71
+ 1670 0665 47       		.byte	71
+ 1671 0666 47       		.byte	71
+ 1672 0667 48       		.byte	72
+ 1673 0668 48       		.byte	72
+ 1674 0669 48       		.byte	72
+ 1675 066a 48       		.byte	72
+ 1676 066b 48       		.byte	72
+ 1677 066c 49       		.byte	73
+ 1678 066d 49       		.byte	73
+ 1679 066e 49       		.byte	73
+ 1680 066f 49       		.byte	73
+ 1681 0670 49       		.byte	73
+ 1682 0671 4A       		.byte	74
+ 1683 0672 4A       		.byte	74
+ 1684 0673 4A       		.byte	74
+ 1685 0674 4A       		.byte	74
+ 1686 0675 4B       		.byte	75
+ 1687 0676 4B       		.byte	75
+ 1688 0677 4B       		.byte	75
+ 1689 0678 4B       		.byte	75
+ 1690 0679 4C       		.byte	76
+ 1691 067a 4C       		.byte	76
+ 1692 067b 4C       		.byte	76
+ 1693 067c 4C       		.byte	76
+ 1694 067d 4D       		.byte	77
+ 1695 067e 4D       		.byte	77
+ 1696 067f 4D       		.byte	77
+ 1697 0680 4E       		.byte	78
+ 1698 0681 4E       		.byte	78
+ 1699 0682 4E       		.byte	78
+ 1700 0683 4E       		.byte	78
+ 1701 0684 4F       		.byte	79
+ 1702 0685 4F       		.byte	79
+ 1703 0686 4F       		.byte	79
+ 1704 0687 50       		.byte	80
+ 1705 0688 50       		.byte	80
+ 1706 0689 50       		.byte	80
+ 1707 068a 51       		.byte	81
+ 1708 068b 51       		.byte	81
+ 1709 068c 51       		.byte	81
+ 1710 068d 51       		.byte	81
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 31
+
+
+ 1711 068e 52       		.byte	82
+ 1712 068f 52       		.byte	82
+ 1713 0690 52       		.byte	82
+ 1714 0691 53       		.byte	83
+ 1715 0692 53       		.byte	83
+ 1716 0693 53       		.byte	83
+ 1717 0694 54       		.byte	84
+ 1718 0695 54       		.byte	84
+ 1719 0696 54       		.byte	84
+ 1720 0697 55       		.byte	85
+ 1721 0698 55       		.byte	85
+ 1722 0699 55       		.byte	85
+ 1723 069a 56       		.byte	86
+ 1724 069b 56       		.byte	86
+ 1725 069c 56       		.byte	86
+ 1726 069d 57       		.byte	87
+ 1727 069e 57       		.byte	87
+ 1728 069f 57       		.byte	87
+ 1729 06a0 58       		.byte	88
+ 1730 06a1 58       		.byte	88
+ 1731 06a2 59       		.byte	89
+ 1732 06a3 59       		.byte	89
+ 1733 06a4 59       		.byte	89
+ 1734 06a5 5A       		.byte	90
+ 1735 06a6 5A       		.byte	90
+ 1736 06a7 5A       		.byte	90
+ 1737 06a8 5B       		.byte	91
+ 1738 06a9 5B       		.byte	91
+ 1739 06aa 5B       		.byte	91
+ 1740 06ab 5C       		.byte	92
+ 1741 06ac 5C       		.byte	92
+ 1742 06ad 5D       		.byte	93
+ 1743 06ae 5D       		.byte	93
+ 1744 06af 5D       		.byte	93
+ 1745 06b0 5E       		.byte	94
+ 1746 06b1 5E       		.byte	94
+ 1747 06b2 5F       		.byte	95
+ 1748 06b3 5F       		.byte	95
+ 1749 06b4 5F       		.byte	95
+ 1750 06b5 60       		.byte	96
+ 1751 06b6 60       		.byte	96
+ 1752 06b7 61       		.byte	97
+ 1753 06b8 61       		.byte	97
+ 1754 06b9 61       		.byte	97
+ 1755 06ba 62       		.byte	98
+ 1756 06bb 62       		.byte	98
+ 1757 06bc 63       		.byte	99
+ 1758 06bd 63       		.byte	99
+ 1759 06be 63       		.byte	99
+ 1760 06bf 64       		.byte	100
+ 1761 06c0 64       		.byte	100
+ 1762 06c1 65       		.byte	101
+ 1763 06c2 65       		.byte	101
+ 1764 06c3 65       		.byte	101
+ 1765 06c4 66       		.byte	102
+ 1766 06c5 66       		.byte	102
+ 1767 06c6 67       		.byte	103
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 32
+
+
+ 1768 06c7 67       		.byte	103
+ 1769 06c8 68       		.byte	104
+ 1770 06c9 68       		.byte	104
+ 1771 06ca 68       		.byte	104
+ 1772 06cb 69       		.byte	105
+ 1773 06cc 69       		.byte	105
+ 1774 06cd 6A       		.byte	106
+ 1775 06ce 6A       		.byte	106
+ 1776 06cf 6B       		.byte	107
+ 1777 06d0 6B       		.byte	107
+ 1778 06d1 6C       		.byte	108
+ 1779 06d2 6C       		.byte	108
+ 1780 06d3 6C       		.byte	108
+ 1781 06d4 6D       		.byte	109
+ 1782 06d5 6D       		.byte	109
+ 1783 06d6 6E       		.byte	110
+ 1784 06d7 6E       		.byte	110
+ 1785 06d8 6F       		.byte	111
+ 1786 06d9 6F       		.byte	111
+ 1787 06da 6F       		.byte	111
+ 1788 06db 70       		.byte	112
+ 1789 06dc 70       		.byte	112
+ 1790 06dd 71       		.byte	113
+ 1791 06de 71       		.byte	113
+ 1792 06df 72       		.byte	114
+ 1793 06e0 72       		.byte	114
+ 1794 06e1 73       		.byte	115
+ 1795 06e2 73       		.byte	115
+ 1796 06e3 74       		.byte	116
+ 1797 06e4 74       		.byte	116
+ 1798 06e5 74       		.byte	116
+ 1799 06e6 75       		.byte	117
+ 1800 06e7 75       		.byte	117
+ 1801 06e8 76       		.byte	118
+ 1802 06e9 76       		.byte	118
+ 1803 06ea 77       		.byte	119
+ 1804 06eb 77       		.byte	119
+ 1805 06ec 78       		.byte	120
+ 1806 06ed 78       		.byte	120
+ 1807 06ee 79       		.byte	121
+ 1808 06ef 79       		.byte	121
+ 1809 06f0 79       		.byte	121
+ 1810 06f1 7A       		.byte	122
+ 1811 06f2 7A       		.byte	122
+ 1812 06f3 7B       		.byte	123
+ 1813 06f4 7B       		.byte	123
+ 1814 06f5 7C       		.byte	124
+ 1815 06f6 7C       		.byte	124
+ 1816 06f7 7D       		.byte	125
+ 1817 06f8 7D       		.byte	125
+ 1818 06f9 7E       		.byte	126
+ 1819 06fa 7E       		.byte	126
+ 1820 06fb 7F       		.byte	127
+ 1821 06fc 7F       		.byte	127
+ 1822              		.bss
+ 1823              	LF_DAC_2_Wave1Chan:
+ 1824 0001 00       		.space	1
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 33
+
+
+ 1825              	LF_DAC_2_Wave2Chan:
+ 1826 0002 00       		.space	1
+ 1827              	LF_DAC_2_Wave1TD:
+ 1828 0003 00       		.space	1
+ 1829              	LF_DAC_2_Wave2TD:
+ 1830 0004 00       		.space	1
+ 1831              		.section	.text.LF_DAC_2_Init,"ax",%progbits
+ 1832              		.align	2
+ 1833              		.global	LF_DAC_2_Init
+ 1834              		.thumb
+ 1835              		.thumb_func
+ 1836              		.type	LF_DAC_2_Init, %function
+ 1837              	LF_DAC_2_Init:
+ 1838              	.LFB0:
+ 1839              		.file 1 "Generated_Source\\PSoC5\\LF_DAC_2.c"
+   1:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/LF_DAC_2.c **** * File Name: LF_DAC_2.c
+   3:Generated_Source\PSoC5/LF_DAC_2.c **** * Version 2.10
+   4:Generated_Source\PSoC5/LF_DAC_2.c **** *
+   5:Generated_Source\PSoC5/LF_DAC_2.c **** * Description:
+   6:Generated_Source\PSoC5/LF_DAC_2.c **** *  This file provides the source code for the 8-bit Waveform DAC 
+   7:Generated_Source\PSoC5/LF_DAC_2.c **** *  (WaveDAC8) Component.
+   8:Generated_Source\PSoC5/LF_DAC_2.c **** *
+   9:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+  10:Generated_Source\PSoC5/LF_DAC_2.c **** * Copyright 2013, Cypress Semiconductor Corporation.  All rights reserved.
+  11:Generated_Source\PSoC5/LF_DAC_2.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:Generated_Source\PSoC5/LF_DAC_2.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:Generated_Source\PSoC5/LF_DAC_2.c **** * the software package with which this file was provided.
+  14:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+  15:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  16:Generated_Source\PSoC5/LF_DAC_2.c **** #include "LF_DAC_2.h"
+  17:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  18:Generated_Source\PSoC5/LF_DAC_2.c **** uint8  LF_DAC_2_initVar = 0u;
+  19:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  20:Generated_Source\PSoC5/LF_DAC_2.c **** const uint8 CYCODE LF_DAC_2_wave1[LF_DAC_2_WAVE1_LENGTH] = { 128u,128u,128u,129u,129u,130u,130u,130
+  21:Generated_Source\PSoC5/LF_DAC_2.c **** const uint8 CYCODE LF_DAC_2_wave2[LF_DAC_2_WAVE2_LENGTH] = { 128u,128u,128u,129u,129u,130u,130u,131
+  22:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  23:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave1Chan;
+  24:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave2Chan;
+  25:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave1TD;
+  26:Generated_Source\PSoC5/LF_DAC_2.c **** static uint8  LF_DAC_2_Wave2TD;
+  27:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  28:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  29:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+  30:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Init
+  31:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+  32:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  33:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+  34:Generated_Source\PSoC5/LF_DAC_2.c **** *  Initializes component with parameters set in the customizer.
+  35:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  36:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+  37:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  38:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  39:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+  40:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  41:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  42:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 34
+
+
+  43:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Init(void) 
+  44:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1840              		.loc 1 44 0
+ 1841              		.cfi_startproc
+ 1842              		@ args = 0, pretend = 0, frame = 0
+ 1843              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1844 0000 80B5     		push	{r7, lr}
+ 1845              		.cfi_def_cfa_offset 8
+ 1846              		.cfi_offset 7, -8
+ 1847              		.cfi_offset 14, -4
+ 1848 0002 00AF     		add	r7, sp, #0
+ 1849              		.cfi_def_cfa_register 7
+  45:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_Init();
+ 1850              		.loc 1 45 0
+ 1851 0004 FFF7FEFF 		bl	LF_DAC_2_VDAC8_Init
+  46:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_SetSpeed(LF_DAC_2_HIGHSPEED);
+ 1852              		.loc 1 46 0
+ 1853 0008 0220     		movs	r0, #2
+ 1854 000a FFF7FEFF 		bl	LF_DAC_2_VDAC8_SetSpeed
+  47:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_SetRange(LF_DAC_2_DAC_RANGE);
+ 1855              		.loc 1 47 0
+ 1856 000e 0020     		movs	r0, #0
+ 1857 0010 FFF7FEFF 		bl	LF_DAC_2_VDAC8_SetRange
+  48:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  49:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_DAC_MODE == LF_DAC_2_CURRENT_MODE)
+  50:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_IDAC8_SetPolarity(LF_DAC_2_DAC_POL);
+  51:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_DAC_MODE == LF_DAC_2_CURRENT_MODE */
+  52:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  53:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE)
+  54:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_BuffAmp_Init();
+  55:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE */
+  56:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  57:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Get the TD Number for the DMA channel 1 and 2   */
+  58:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave1TD = CyDmaTdAllocate();
+ 1858              		.loc 1 58 0
+ 1859 0014 FFF7FEFF 		bl	CyDmaTdAllocate
+ 1860 0018 0346     		mov	r3, r0
+ 1861 001a 1A46     		mov	r2, r3
+ 1862 001c 094B     		ldr	r3, .L2
+ 1863 001e 1A70     		strb	r2, [r3]
+  59:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave2TD = CyDmaTdAllocate();
+ 1864              		.loc 1 59 0
+ 1865 0020 FFF7FEFF 		bl	CyDmaTdAllocate
+ 1866 0024 0346     		mov	r3, r0
+ 1867 0026 1A46     		mov	r2, r3
+ 1868 0028 074B     		ldr	r3, .L2+4
+ 1869 002a 1A70     		strb	r2, [r3]
+  60:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+  61:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Initialize waveform pointers  */
+  62:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave1Setup(LF_DAC_2_wave1, LF_DAC_2_WAVE1_LENGTH) ;
+ 1870              		.loc 1 62 0
+ 1871 002c 40F2A931 		movw	r1, #937
+ 1872 0030 0648     		ldr	r0, .L2+8
+ 1873 0032 FFF7FEFF 		bl	LF_DAC_2_Wave1Setup
+  63:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave2Setup(LF_DAC_2_wave2, LF_DAC_2_WAVE2_LENGTH) ;
+ 1874              		.loc 1 63 0
+ 1875 0036 40F25131 		movw	r1, #849
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 35
+
+
+ 1876 003a 0548     		ldr	r0, .L2+12
+ 1877 003c FFF7FEFF 		bl	LF_DAC_2_Wave2Setup
+  64:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+  65:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Initialize the internal clock if one present  */
+  66:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if defined(LF_DAC_2_DacClk_PHASE)
+  67:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_DacClk_SetPhase(LF_DAC_2_CLK_PHASE_0nS);
+  68:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* defined(LF_DAC_2_DacClk_PHASE) */
+  69:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 1878              		.loc 1 69 0
+ 1879 0040 00BF     		nop
+ 1880 0042 80BD     		pop	{r7, pc}
+ 1881              	.L3:
+ 1882              		.align	2
+ 1883              	.L2:
+ 1884 0044 03000000 		.word	LF_DAC_2_Wave1TD
+ 1885 0048 04000000 		.word	LF_DAC_2_Wave2TD
+ 1886 004c 00000000 		.word	LF_DAC_2_wave1
+ 1887 0050 00000000 		.word	LF_DAC_2_wave2
+ 1888              		.cfi_endproc
+ 1889              	.LFE0:
+ 1890              		.size	LF_DAC_2_Init, .-LF_DAC_2_Init
+ 1891              		.section	.text.LF_DAC_2_Enable,"ax",%progbits
+ 1892              		.align	2
+ 1893              		.global	LF_DAC_2_Enable
+ 1894              		.thumb
+ 1895              		.thumb_func
+ 1896              		.type	LF_DAC_2_Enable, %function
+ 1897              	LF_DAC_2_Enable:
+ 1898              	.LFB1:
+  70:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  71:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  72:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+  73:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Enable
+  74:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+  75:Generated_Source\PSoC5/LF_DAC_2.c **** *  
+  76:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary: 
+  77:Generated_Source\PSoC5/LF_DAC_2.c **** *  Enables the DAC block and DMA operation.
+  78:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  79:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+  80:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  81:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  82:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+  83:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+  84:Generated_Source\PSoC5/LF_DAC_2.c **** *
+  85:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+  86:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Enable(void) 
+  87:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1899              		.loc 1 87 0
+ 1900              		.cfi_startproc
+ 1901              		@ args = 0, pretend = 0, frame = 0
+ 1902              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1903 0000 80B5     		push	{r7, lr}
+ 1904              		.cfi_def_cfa_offset 8
+ 1905              		.cfi_offset 7, -8
+ 1906              		.cfi_offset 14, -4
+ 1907 0002 00AF     		add	r7, sp, #0
+ 1908              		.cfi_def_cfa_register 7
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 36
+
+
+  88:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_Enable();
+ 1909              		.loc 1 88 0
+ 1910 0004 FFF7FEFF 		bl	LF_DAC_2_VDAC8_Enable
+  89:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  90:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE)
+  91:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_BuffAmp_Enable();
+  92:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_OUT_MODE == LF_DAC_2_BUFFER_MODE */
+  93:Generated_Source\PSoC5/LF_DAC_2.c **** 
+  94:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* 
+  95:Generated_Source\PSoC5/LF_DAC_2.c **** 	* Enable the channel. It is configured to remember the TD value so that
+  96:Generated_Source\PSoC5/LF_DAC_2.c **** 	* it can be restored from the place where it has been stopped.
+  97:Generated_Source\PSoC5/LF_DAC_2.c **** 	*/
+  98:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChEnable(LF_DAC_2_Wave1Chan, 1u);
+ 1911              		.loc 1 98 0
+ 1912 0008 094B     		ldr	r3, .L5
+ 1913 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1914 000c 0121     		movs	r1, #1
+ 1915 000e 1846     		mov	r0, r3
+ 1916 0010 FFF7FEFF 		bl	CyDmaChEnable
+  99:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChEnable(LF_DAC_2_Wave2Chan, 1u);
+ 1917              		.loc 1 99 0
+ 1918 0014 074B     		ldr	r3, .L5+4
+ 1919 0016 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1920 0018 0121     		movs	r1, #1
+ 1921 001a 1846     		mov	r0, r3
+ 1922 001c FFF7FEFF 		bl	CyDmaChEnable
+ 100:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 101:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* set the initial value */
+ 102:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_SetValue(0u);
+ 1923              		.loc 1 102 0
+ 1924 0020 0020     		movs	r0, #0
+ 1925 0022 FFF7FEFF 		bl	LF_DAC_2_VDAC8_SetValue
+ 103:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 104:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT)  	
+ 105:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_DacClk_Start();
+ 1926              		.loc 1 105 0
+ 1927 0026 FFF7FEFF 		bl	LF_DAC_2_DacClk_Start
+ 106:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT */
+ 107:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 1928              		.loc 1 107 0
+ 1929 002a 00BF     		nop
+ 1930 002c 80BD     		pop	{r7, pc}
+ 1931              	.L6:
+ 1932 002e 00BF     		.align	2
+ 1933              	.L5:
+ 1934 0030 01000000 		.word	LF_DAC_2_Wave1Chan
+ 1935 0034 02000000 		.word	LF_DAC_2_Wave2Chan
+ 1936              		.cfi_endproc
+ 1937              	.LFE1:
+ 1938              		.size	LF_DAC_2_Enable, .-LF_DAC_2_Enable
+ 1939              		.section	.text.LF_DAC_2_Start,"ax",%progbits
+ 1940              		.align	2
+ 1941              		.global	LF_DAC_2_Start
+ 1942              		.thumb
+ 1943              		.thumb_func
+ 1944              		.type	LF_DAC_2_Start, %function
+ 1945              	LF_DAC_2_Start:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 37
+
+
+ 1946              	.LFB2:
+ 108:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 109:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 110:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 111:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Start
+ 112:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 113:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 114:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 115:Generated_Source\PSoC5/LF_DAC_2.c **** *  The start function initializes the voltage DAC with the default values, 
+ 116:Generated_Source\PSoC5/LF_DAC_2.c **** *  and sets the power to the given level.  A power level of 0, is the same as 
+ 117:Generated_Source\PSoC5/LF_DAC_2.c **** *  executing the stop function.
+ 118:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 119:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 120:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 121:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 122:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 123:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 124:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 125:Generated_Source\PSoC5/LF_DAC_2.c **** * Reentrant:
+ 126:Generated_Source\PSoC5/LF_DAC_2.c **** *  No
+ 127:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 128:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 129:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Start(void) 
+ 130:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1947              		.loc 1 130 0
+ 1948              		.cfi_startproc
+ 1949              		@ args = 0, pretend = 0, frame = 0
+ 1950              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1951 0000 80B5     		push	{r7, lr}
+ 1952              		.cfi_def_cfa_offset 8
+ 1953              		.cfi_offset 7, -8
+ 1954              		.cfi_offset 14, -4
+ 1955 0002 00AF     		add	r7, sp, #0
+ 1956              		.cfi_def_cfa_register 7
+ 131:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* If not Initialized then initialize all required hardware and software */
+ 132:Generated_Source\PSoC5/LF_DAC_2.c **** 	if(LF_DAC_2_initVar == 0u)
+ 1957              		.loc 1 132 0
+ 1958 0004 064B     		ldr	r3, .L9
+ 1959 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1960 0008 002B     		cmp	r3, #0
+ 1961 000a 04D1     		bne	.L8
+ 133:Generated_Source\PSoC5/LF_DAC_2.c **** 	{
+ 134:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Init();
+ 1962              		.loc 1 134 0
+ 1963 000c FFF7FEFF 		bl	LF_DAC_2_Init
+ 135:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_initVar = 1u;
+ 1964              		.loc 1 135 0
+ 1965 0010 034B     		ldr	r3, .L9
+ 1966 0012 0122     		movs	r2, #1
+ 1967 0014 1A70     		strb	r2, [r3]
+ 1968              	.L8:
+ 136:Generated_Source\PSoC5/LF_DAC_2.c **** 	}
+ 137:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 138:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Enable();
+ 1969              		.loc 1 138 0
+ 1970 0016 FFF7FEFF 		bl	LF_DAC_2_Enable
+ 139:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 38
+
+
+ 1971              		.loc 1 139 0
+ 1972 001a 00BF     		nop
+ 1973 001c 80BD     		pop	{r7, pc}
+ 1974              	.L10:
+ 1975 001e 00BF     		.align	2
+ 1976              	.L9:
+ 1977 0020 00000000 		.word	LF_DAC_2_initVar
+ 1978              		.cfi_endproc
+ 1979              	.LFE2:
+ 1980              		.size	LF_DAC_2_Start, .-LF_DAC_2_Start
+ 1981              		.section	.text.LF_DAC_2_StartEx,"ax",%progbits
+ 1982              		.align	2
+ 1983              		.global	LF_DAC_2_StartEx
+ 1984              		.thumb
+ 1985              		.thumb_func
+ 1986              		.type	LF_DAC_2_StartEx, %function
+ 1987              	LF_DAC_2_StartEx:
+ 1988              	.LFB3:
+ 140:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 141:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 142:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 143:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_StartEx
+ 144:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 145:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 146:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 147:Generated_Source\PSoC5/LF_DAC_2.c **** *  The StartEx function sets pointers and sizes for both waveforms
+ 148:Generated_Source\PSoC5/LF_DAC_2.c **** *  and then starts the component.
+ 149:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 150:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 151:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint8 * wavePtr1:     Pointer to the waveform 1 array.
+ 152:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint16  sampleSize1:  The amount of samples in the waveform 1.
+ 153:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint8 * wavePtr2:     Pointer to the waveform 2 array.
+ 154:Generated_Source\PSoC5/LF_DAC_2.c **** *   uint16  sampleSize2:  The amount of samples in the waveform 2.
+ 155:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 156:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 157:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 158:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 159:Generated_Source\PSoC5/LF_DAC_2.c **** * Reentrant:
+ 160:Generated_Source\PSoC5/LF_DAC_2.c **** *  No
+ 161:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 162:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 163:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_StartEx(const uint8 * wavePtr1, uint16 sampleSize1, const uint8 * wavePtr2, uint16 sa
+ 164:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 165:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 1989              		.loc 1 165 0
+ 1990              		.cfi_startproc
+ 1991              		@ args = 0, pretend = 0, frame = 16
+ 1992              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1993 0000 80B5     		push	{r7, lr}
+ 1994              		.cfi_def_cfa_offset 8
+ 1995              		.cfi_offset 7, -8
+ 1996              		.cfi_offset 14, -4
+ 1997 0002 84B0     		sub	sp, sp, #16
+ 1998              		.cfi_def_cfa_offset 24
+ 1999 0004 00AF     		add	r7, sp, #0
+ 2000              		.cfi_def_cfa_register 7
+ 2001 0006 F860     		str	r0, [r7, #12]
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 39
+
+
+ 2002 0008 7A60     		str	r2, [r7, #4]
+ 2003 000a 1A46     		mov	r2, r3
+ 2004 000c 0B46     		mov	r3, r1	@ movhi
+ 2005 000e 7B81     		strh	r3, [r7, #10]	@ movhi
+ 2006 0010 1346     		mov	r3, r2	@ movhi
+ 2007 0012 3B81     		strh	r3, [r7, #8]	@ movhi
+ 166:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave1Setup(wavePtr1, sampleSize1);
+ 2008              		.loc 1 166 0
+ 2009 0014 7B89     		ldrh	r3, [r7, #10]
+ 2010 0016 1946     		mov	r1, r3
+ 2011 0018 F868     		ldr	r0, [r7, #12]
+ 2012 001a FFF7FEFF 		bl	LF_DAC_2_Wave1Setup
+ 167:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Wave2Setup(wavePtr2, sampleSize2);
+ 2013              		.loc 1 167 0
+ 2014 001e 3B89     		ldrh	r3, [r7, #8]
+ 2015 0020 1946     		mov	r1, r3
+ 2016 0022 7868     		ldr	r0, [r7, #4]
+ 2017 0024 FFF7FEFF 		bl	LF_DAC_2_Wave2Setup
+ 168:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_Start();
+ 2018              		.loc 1 168 0
+ 2019 0028 FFF7FEFF 		bl	LF_DAC_2_Start
+ 169:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2020              		.loc 1 169 0
+ 2021 002c 00BF     		nop
+ 2022 002e 1037     		adds	r7, r7, #16
+ 2023              		.cfi_def_cfa_offset 8
+ 2024 0030 BD46     		mov	sp, r7
+ 2025              		.cfi_def_cfa_register 13
+ 2026              		@ sp needed
+ 2027 0032 80BD     		pop	{r7, pc}
+ 2028              		.cfi_endproc
+ 2029              	.LFE3:
+ 2030              		.size	LF_DAC_2_StartEx, .-LF_DAC_2_StartEx
+ 2031              		.section	.text.LF_DAC_2_Stop,"ax",%progbits
+ 2032              		.align	2
+ 2033              		.global	LF_DAC_2_Stop
+ 2034              		.thumb
+ 2035              		.thumb_func
+ 2036              		.type	LF_DAC_2_Stop, %function
+ 2037              	LF_DAC_2_Stop:
+ 2038              	.LFB4:
+ 170:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 171:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 172:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 173:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Stop
+ 174:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 175:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 176:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 177:Generated_Source\PSoC5/LF_DAC_2.c **** *  Stops the clock (if internal), disables the DMA channels
+ 178:Generated_Source\PSoC5/LF_DAC_2.c **** *  and powers down the DAC.
+ 179:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 180:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 181:Generated_Source\PSoC5/LF_DAC_2.c **** *  None  
+ 182:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 183:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 184:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 185:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 40
+
+
+ 186:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 187:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Stop(void) 
+ 188:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 2039              		.loc 1 188 0
+ 2040              		.cfi_startproc
+ 2041              		@ args = 0, pretend = 0, frame = 0
+ 2042              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2043 0000 80B5     		push	{r7, lr}
+ 2044              		.cfi_def_cfa_offset 8
+ 2045              		.cfi_offset 7, -8
+ 2046              		.cfi_offset 14, -4
+ 2047 0002 00AF     		add	r7, sp, #0
+ 2048              		.cfi_def_cfa_register 7
+ 189:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Turn off internal clock, if one present */
+ 190:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if(LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT)  	
+ 191:Generated_Source\PSoC5/LF_DAC_2.c **** 	   LF_DAC_2_DacClk_Stop();
+ 2049              		.loc 1 191 0
+ 2050 0004 FFF7FEFF 		bl	LF_DAC_2_DacClk_Stop
+ 192:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* LF_DAC_2_CLOCK_SRC == LF_DAC_2_CLOCK_INT */
+ 193:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 194:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Disble DMA channels */
+ 195:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChDisable(LF_DAC_2_Wave1Chan);
+ 2051              		.loc 1 195 0
+ 2052 0008 064B     		ldr	r3, .L13
+ 2053 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2054 000c 1846     		mov	r0, r3
+ 2055 000e FFF7FEFF 		bl	CyDmaChDisable
+ 196:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChDisable(LF_DAC_2_Wave2Chan);
+ 2056              		.loc 1 196 0
+ 2057 0012 054B     		ldr	r3, .L13+4
+ 2058 0014 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2059 0016 1846     		mov	r0, r3
+ 2060 0018 FFF7FEFF 		bl	CyDmaChDisable
+ 197:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 198:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Disable power to DAC */
+ 199:Generated_Source\PSoC5/LF_DAC_2.c **** 	LF_DAC_2_VDAC8_Stop();
+ 2061              		.loc 1 199 0
+ 2062 001c FFF7FEFF 		bl	LF_DAC_2_VDAC8_Stop
+ 200:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2063              		.loc 1 200 0
+ 2064 0020 00BF     		nop
+ 2065 0022 80BD     		pop	{r7, pc}
+ 2066              	.L14:
+ 2067              		.align	2
+ 2068              	.L13:
+ 2069 0024 01000000 		.word	LF_DAC_2_Wave1Chan
+ 2070 0028 02000000 		.word	LF_DAC_2_Wave2Chan
+ 2071              		.cfi_endproc
+ 2072              	.LFE4:
+ 2073              		.size	LF_DAC_2_Stop, .-LF_DAC_2_Stop
+ 2074              		.section	.text.LF_DAC_2_Wave1Setup,"ax",%progbits
+ 2075              		.align	2
+ 2076              		.global	LF_DAC_2_Wave1Setup
+ 2077              		.thumb
+ 2078              		.thumb_func
+ 2079              		.type	LF_DAC_2_Wave1Setup, %function
+ 2080              	LF_DAC_2_Wave1Setup:
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 41
+
+
+ 2081              	.LFB5:
+ 201:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 202:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 203:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 204:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Wave1Setup
+ 205:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 206:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 207:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 208:Generated_Source\PSoC5/LF_DAC_2.c **** *  Sets pointer and size for waveform 1.                                    
+ 209:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 210:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 211:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint8 * WavePtr:     Pointer to the waveform array.
+ 212:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint16  SampleSize:  The amount of samples in the waveform.
+ 213:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 214:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 215:Generated_Source\PSoC5/LF_DAC_2.c **** *  None 
+ 216:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 217:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 218:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Wave1Setup(const uint8 * wavePtr, uint16 sampleSize)
+ 219:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 220:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 2082              		.loc 1 220 0
+ 2083              		.cfi_startproc
+ 2084              		@ args = 0, pretend = 0, frame = 8
+ 2085              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2086 0000 80B5     		push	{r7, lr}
+ 2087              		.cfi_def_cfa_offset 8
+ 2088              		.cfi_offset 7, -8
+ 2089              		.cfi_offset 14, -4
+ 2090 0002 82B0     		sub	sp, sp, #8
+ 2091              		.cfi_def_cfa_offset 16
+ 2092 0004 00AF     		add	r7, sp, #0
+ 2093              		.cfi_def_cfa_register 7
+ 2094 0006 7860     		str	r0, [r7, #4]
+ 2095 0008 0B46     		mov	r3, r1
+ 2096 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 221:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if (CY_PSOC3)
+ 222:Generated_Source\PSoC5/LF_DAC_2.c **** 		uint16 memoryType; /* determining the source memory type */
+ 223:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType = (LF_DAC_2_HI16FLASHPTR == HI16(wavePtr)) ? HI16(CYDEV_FLS_BASE) : HI16(CYDEV_SRAM_BA
+ 224:Generated_Source\PSoC5/LF_DAC_2.c **** 		
+ 225:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1Chan = LF_DAC_2_Wave1_DMA_DmaInitialize(
+ 226:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1_DMA_BYTES_PER_BURST, LF_DAC_2_Wave1_DMA_REQUEST_PER_BURST,
+ 227:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType, HI16(CYDEV_PERIPH_BASE));
+ 228:Generated_Source\PSoC5/LF_DAC_2.c **** 	#else /* PSoC 5 */
+ 229:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1Chan = LF_DAC_2_Wave1_DMA_DmaInitialize(
+ 230:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1_DMA_BYTES_PER_BURST, LF_DAC_2_Wave1_DMA_REQUEST_PER_BURST,
+ 231:Generated_Source\PSoC5/LF_DAC_2.c **** 		HI16(wavePtr), HI16(LF_DAC_2_DAC8__D));
+ 2097              		.loc 1 231 0
+ 2098 000c 7B68     		ldr	r3, [r7, #4]
+ 2099 000e 1B0C     		lsrs	r3, r3, #16
+ 229:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave1_DMA_BYTES_PER_BURST, LF_DAC_2_Wave1_DMA_REQUEST_PER_BURST,
+ 2100              		.loc 1 229 0
+ 2101 0010 9AB2     		uxth	r2, r3
+ 2102 0012 4FF48043 		mov	r3, #16384
+ 2103 0016 0121     		movs	r1, #1
+ 2104 0018 0120     		movs	r0, #1
+ 2105 001a FFF7FEFF 		bl	LF_DAC_2_Wave1_DMA_DmaInitialize
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 42
+
+
+ 2106 001e 0346     		mov	r3, r0
+ 2107 0020 1A46     		mov	r2, r3
+ 2108 0022 0F4B     		ldr	r3, .L16
+ 2109 0024 1A70     		strb	r2, [r3]
+ 232:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* CY_PSOC3 */
+ 233:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 234:Generated_Source\PSoC5/LF_DAC_2.c **** 	/*
+ 235:Generated_Source\PSoC5/LF_DAC_2.c **** 	* TD is looping on itself. 
+ 236:Generated_Source\PSoC5/LF_DAC_2.c ****     * Increment the source address, but not the destination address. 
+ 237:Generated_Source\PSoC5/LF_DAC_2.c **** 	*/
+ 238:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetConfiguration(LF_DAC_2_Wave1TD, sampleSize, LF_DAC_2_Wave1TD, 
+ 2110              		.loc 1 238 0
+ 2111 0026 0F4B     		ldr	r3, .L16+4
+ 2112 0028 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 2113 002a 0E4B     		ldr	r3, .L16+4
+ 2114 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2115 002e 7988     		ldrh	r1, [r7, #2]
+ 2116 0030 0123     		movs	r3, #1
+ 2117 0032 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 239:Generated_Source\PSoC5/LF_DAC_2.c ****                                     (uint8)CY_DMA_TD_INC_SRC_ADR | (uint8)LF_DAC_2_Wave1_DMA__TD_TE
+ 240:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 241:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Set the TD source and destination address */
+ 242:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetAddress(LF_DAC_2_Wave1TD, LO16((uint32)wavePtr), LO16(LF_DAC_2_DAC8__D));
+ 2118              		.loc 1 242 0
+ 2119 0036 0B4B     		ldr	r3, .L16+4
+ 2120 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2121 003a 7A68     		ldr	r2, [r7, #4]
+ 2122 003c 91B2     		uxth	r1, r2
+ 2123 003e 45F68232 		movw	r2, #23426
+ 2124 0042 1846     		mov	r0, r3
+ 2125 0044 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 243:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 244:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Associate the TD with the channel */
+ 245:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChSetInitialTd(LF_DAC_2_Wave1Chan, LF_DAC_2_Wave1TD);
+ 2126              		.loc 1 245 0
+ 2127 0048 054B     		ldr	r3, .L16
+ 2128 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2129 004c 054B     		ldr	r3, .L16+4
+ 2130 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2131 0050 1946     		mov	r1, r3
+ 2132 0052 1046     		mov	r0, r2
+ 2133 0054 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 246:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2134              		.loc 1 246 0
+ 2135 0058 00BF     		nop
+ 2136 005a 0837     		adds	r7, r7, #8
+ 2137              		.cfi_def_cfa_offset 8
+ 2138 005c BD46     		mov	sp, r7
+ 2139              		.cfi_def_cfa_register 13
+ 2140              		@ sp needed
+ 2141 005e 80BD     		pop	{r7, pc}
+ 2142              	.L17:
+ 2143              		.align	2
+ 2144              	.L16:
+ 2145 0060 01000000 		.word	LF_DAC_2_Wave1Chan
+ 2146 0064 03000000 		.word	LF_DAC_2_Wave1TD
+ 2147              		.cfi_endproc
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 43
+
+
+ 2148              	.LFE5:
+ 2149              		.size	LF_DAC_2_Wave1Setup, .-LF_DAC_2_Wave1Setup
+ 2150              		.section	.text.LF_DAC_2_Wave2Setup,"ax",%progbits
+ 2151              		.align	2
+ 2152              		.global	LF_DAC_2_Wave2Setup
+ 2153              		.thumb
+ 2154              		.thumb_func
+ 2155              		.type	LF_DAC_2_Wave2Setup, %function
+ 2156              	LF_DAC_2_Wave2Setup:
+ 2157              	.LFB6:
+ 247:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 248:Generated_Source\PSoC5/LF_DAC_2.c **** 
+ 249:Generated_Source\PSoC5/LF_DAC_2.c **** /*******************************************************************************
+ 250:Generated_Source\PSoC5/LF_DAC_2.c **** * Function Name: LF_DAC_2_Wave2Setup
+ 251:Generated_Source\PSoC5/LF_DAC_2.c **** ********************************************************************************
+ 252:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 253:Generated_Source\PSoC5/LF_DAC_2.c **** * Summary:
+ 254:Generated_Source\PSoC5/LF_DAC_2.c **** *  Sets pointer and size for waveform 2.                                    
+ 255:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 256:Generated_Source\PSoC5/LF_DAC_2.c **** * Parameters:  
+ 257:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint8 * WavePtr:     Pointer to the waveform array.
+ 258:Generated_Source\PSoC5/LF_DAC_2.c **** *  uint16  SampleSize:  The amount of samples in the waveform.
+ 259:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 260:Generated_Source\PSoC5/LF_DAC_2.c **** * Return: 
+ 261:Generated_Source\PSoC5/LF_DAC_2.c **** *  None
+ 262:Generated_Source\PSoC5/LF_DAC_2.c **** *
+ 263:Generated_Source\PSoC5/LF_DAC_2.c **** *******************************************************************************/
+ 264:Generated_Source\PSoC5/LF_DAC_2.c **** void LF_DAC_2_Wave2Setup(const uint8 * wavePtr, uint16 sampleSize)
+ 265:Generated_Source\PSoC5/LF_DAC_2.c ****  
+ 266:Generated_Source\PSoC5/LF_DAC_2.c **** {
+ 2158              		.loc 1 266 0
+ 2159              		.cfi_startproc
+ 2160              		@ args = 0, pretend = 0, frame = 8
+ 2161              		@ frame_needed = 1, uses_anonymous_args = 0
+ 2162 0000 80B5     		push	{r7, lr}
+ 2163              		.cfi_def_cfa_offset 8
+ 2164              		.cfi_offset 7, -8
+ 2165              		.cfi_offset 14, -4
+ 2166 0002 82B0     		sub	sp, sp, #8
+ 2167              		.cfi_def_cfa_offset 16
+ 2168 0004 00AF     		add	r7, sp, #0
+ 2169              		.cfi_def_cfa_register 7
+ 2170 0006 7860     		str	r0, [r7, #4]
+ 2171 0008 0B46     		mov	r3, r1
+ 2172 000a 7B80     		strh	r3, [r7, #2]	@ movhi
+ 267:Generated_Source\PSoC5/LF_DAC_2.c **** 	#if (CY_PSOC3)
+ 268:Generated_Source\PSoC5/LF_DAC_2.c **** 		uint16 memoryType; /* determining the source memory type */
+ 269:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType = (LF_DAC_2_HI16FLASHPTR == HI16(wavePtr)) ? HI16(CYDEV_FLS_BASE) : HI16(CYDEV_SRAM_BA
+ 270:Generated_Source\PSoC5/LF_DAC_2.c **** 			
+ 271:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2Chan = LF_DAC_2_Wave2_DMA_DmaInitialize(
+ 272:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2_DMA_BYTES_PER_BURST, LF_DAC_2_Wave2_DMA_REQUEST_PER_BURST,
+ 273:Generated_Source\PSoC5/LF_DAC_2.c **** 		memoryType, HI16(CYDEV_PERIPH_BASE));
+ 274:Generated_Source\PSoC5/LF_DAC_2.c **** 	#else /* PSoC 5 */
+ 275:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2Chan = LF_DAC_2_Wave2_DMA_DmaInitialize(
+ 276:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2_DMA_BYTES_PER_BURST, LF_DAC_2_Wave2_DMA_REQUEST_PER_BURST,
+ 277:Generated_Source\PSoC5/LF_DAC_2.c **** 		HI16(wavePtr), HI16(LF_DAC_2_DAC8__D));
+ 2173              		.loc 1 277 0
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 44
+
+
+ 2174 000c 7B68     		ldr	r3, [r7, #4]
+ 2175 000e 1B0C     		lsrs	r3, r3, #16
+ 275:Generated_Source\PSoC5/LF_DAC_2.c **** 		LF_DAC_2_Wave2_DMA_BYTES_PER_BURST, LF_DAC_2_Wave2_DMA_REQUEST_PER_BURST,
+ 2176              		.loc 1 275 0
+ 2177 0010 9AB2     		uxth	r2, r3
+ 2178 0012 4FF48043 		mov	r3, #16384
+ 2179 0016 0121     		movs	r1, #1
+ 2180 0018 0120     		movs	r0, #1
+ 2181 001a FFF7FEFF 		bl	LF_DAC_2_Wave2_DMA_DmaInitialize
+ 2182 001e 0346     		mov	r3, r0
+ 2183 0020 1A46     		mov	r2, r3
+ 2184 0022 0F4B     		ldr	r3, .L19
+ 2185 0024 1A70     		strb	r2, [r3]
+ 278:Generated_Source\PSoC5/LF_DAC_2.c **** 	#endif /* CY_PSOC3 */
+ 279:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 280:Generated_Source\PSoC5/LF_DAC_2.c **** 	/*
+ 281:Generated_Source\PSoC5/LF_DAC_2.c **** 	* TD is looping on itself. 
+ 282:Generated_Source\PSoC5/LF_DAC_2.c **** 	* Increment the source address, but not the destination address. 
+ 283:Generated_Source\PSoC5/LF_DAC_2.c **** 	*/
+ 284:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetConfiguration(LF_DAC_2_Wave2TD, sampleSize, LF_DAC_2_Wave2TD, 
+ 2186              		.loc 1 284 0
+ 2187 0026 0F4B     		ldr	r3, .L19+4
+ 2188 0028 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 2189 002a 0E4B     		ldr	r3, .L19+4
+ 2190 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2191 002e 7988     		ldrh	r1, [r7, #2]
+ 2192 0030 0123     		movs	r3, #1
+ 2193 0032 FFF7FEFF 		bl	CyDmaTdSetConfiguration
+ 285:Generated_Source\PSoC5/LF_DAC_2.c ****                                     (uint8)CY_DMA_TD_INC_SRC_ADR | (uint8)LF_DAC_2_Wave2_DMA__TD_TE
+ 286:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 287:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Set the TD source and destination address */
+ 288:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaTdSetAddress(LF_DAC_2_Wave2TD, LO16((uint32)wavePtr), LO16(LF_DAC_2_DAC8__D));
+ 2194              		.loc 1 288 0
+ 2195 0036 0B4B     		ldr	r3, .L19+4
+ 2196 0038 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2197 003a 7A68     		ldr	r2, [r7, #4]
+ 2198 003c 91B2     		uxth	r1, r2
+ 2199 003e 45F68232 		movw	r2, #23426
+ 2200 0042 1846     		mov	r0, r3
+ 2201 0044 FFF7FEFF 		bl	CyDmaTdSetAddress
+ 289:Generated_Source\PSoC5/LF_DAC_2.c **** 	
+ 290:Generated_Source\PSoC5/LF_DAC_2.c **** 	/* Associate the TD with the channel */
+ 291:Generated_Source\PSoC5/LF_DAC_2.c **** 	(void)CyDmaChSetInitialTd(LF_DAC_2_Wave2Chan, LF_DAC_2_Wave2TD);
+ 2202              		.loc 1 291 0
+ 2203 0048 054B     		ldr	r3, .L19
+ 2204 004a 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 2205 004c 054B     		ldr	r3, .L19+4
+ 2206 004e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 2207 0050 1946     		mov	r1, r3
+ 2208 0052 1046     		mov	r0, r2
+ 2209 0054 FFF7FEFF 		bl	CyDmaChSetInitialTd
+ 292:Generated_Source\PSoC5/LF_DAC_2.c **** }
+ 2210              		.loc 1 292 0
+ 2211 0058 00BF     		nop
+ 2212 005a 0837     		adds	r7, r7, #8
+ 2213              		.cfi_def_cfa_offset 8
+ 2214 005c BD46     		mov	sp, r7
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 45
+
+
+ 2215              		.cfi_def_cfa_register 13
+ 2216              		@ sp needed
+ 2217 005e 80BD     		pop	{r7, pc}
+ 2218              	.L20:
+ 2219              		.align	2
+ 2220              	.L19:
+ 2221 0060 02000000 		.word	LF_DAC_2_Wave2Chan
+ 2222 0064 04000000 		.word	LF_DAC_2_Wave2TD
+ 2223              		.cfi_endproc
+ 2224              	.LFE6:
+ 2225              		.size	LF_DAC_2_Wave2Setup, .-LF_DAC_2_Wave2Setup
+ 2226              		.text
+ 2227              	.Letext0:
+ 2228              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 2229              		.section	.debug_info,"",%progbits
+ 2230              	.Ldebug_info0:
+ 2231 0000 56020000 		.4byte	0x256
+ 2232 0004 0400     		.2byte	0x4
+ 2233 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 2234 000a 04       		.byte	0x4
+ 2235 000b 01       		.uleb128 0x1
+ 2236 000c 00000000 		.4byte	.LASF37
+ 2237 0010 0C       		.byte	0xc
+ 2238 0011 CF000000 		.4byte	.LASF38
+ 2239 0015 48010000 		.4byte	.LASF39
+ 2240 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 2241 001d 00000000 		.4byte	0
+ 2242 0021 00000000 		.4byte	.Ldebug_line0
+ 2243 0025 02       		.uleb128 0x2
+ 2244 0026 01       		.byte	0x1
+ 2245 0027 06       		.byte	0x6
+ 2246 0028 20010000 		.4byte	.LASF0
+ 2247 002c 02       		.uleb128 0x2
+ 2248 002d 01       		.byte	0x1
+ 2249 002e 08       		.byte	0x8
+ 2250 002f 2D020000 		.4byte	.LASF1
+ 2251 0033 02       		.uleb128 0x2
+ 2252 0034 02       		.byte	0x2
+ 2253 0035 05       		.byte	0x5
+ 2254 0036 D5020000 		.4byte	.LASF2
+ 2255 003a 02       		.uleb128 0x2
+ 2256 003b 02       		.byte	0x2
+ 2257 003c 07       		.byte	0x7
+ 2258 003d BC000000 		.4byte	.LASF3
+ 2259 0041 02       		.uleb128 0x2
+ 2260 0042 04       		.byte	0x4
+ 2261 0043 05       		.byte	0x5
+ 2262 0044 EF020000 		.4byte	.LASF4
+ 2263 0048 02       		.uleb128 0x2
+ 2264 0049 04       		.byte	0x4
+ 2265 004a 07       		.byte	0x7
+ 2266 004b F5010000 		.4byte	.LASF5
+ 2267 004f 02       		.uleb128 0x2
+ 2268 0050 08       		.byte	0x8
+ 2269 0051 05       		.byte	0x5
+ 2270 0052 B9020000 		.4byte	.LASF6
+ 2271 0056 02       		.uleb128 0x2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 46
+
+
+ 2272 0057 08       		.byte	0x8
+ 2273 0058 07       		.byte	0x7
+ 2274 0059 7E020000 		.4byte	.LASF7
+ 2275 005d 03       		.uleb128 0x3
+ 2276 005e 04       		.byte	0x4
+ 2277 005f 05       		.byte	0x5
+ 2278 0060 696E7400 		.ascii	"int\000"
+ 2279 0064 02       		.uleb128 0x2
+ 2280 0065 04       		.byte	0x4
+ 2281 0066 07       		.byte	0x7
+ 2282 0067 63020000 		.4byte	.LASF8
+ 2283 006b 04       		.uleb128 0x4
+ 2284 006c 0F020000 		.4byte	.LASF9
+ 2285 0070 02       		.byte	0x2
+ 2286 0071 9201     		.2byte	0x192
+ 2287 0073 2C000000 		.4byte	0x2c
+ 2288 0077 04       		.uleb128 0x4
+ 2289 0078 55020000 		.4byte	.LASF10
+ 2290 007c 02       		.byte	0x2
+ 2291 007d 9301     		.2byte	0x193
+ 2292 007f 3A000000 		.4byte	0x3a
+ 2293 0083 04       		.uleb128 0x4
+ 2294 0084 5C020000 		.4byte	.LASF11
+ 2295 0088 02       		.byte	0x2
+ 2296 0089 9401     		.2byte	0x194
+ 2297 008b 48000000 		.4byte	0x48
+ 2298 008f 02       		.uleb128 0x2
+ 2299 0090 04       		.byte	0x4
+ 2300 0091 04       		.byte	0x4
+ 2301 0092 A2000000 		.4byte	.LASF12
+ 2302 0096 02       		.uleb128 0x2
+ 2303 0097 08       		.byte	0x8
+ 2304 0098 04       		.byte	0x4
+ 2305 0099 4E020000 		.4byte	.LASF13
+ 2306 009d 02       		.uleb128 0x2
+ 2307 009e 01       		.byte	0x1
+ 2308 009f 08       		.byte	0x8
+ 2309 00a0 D0020000 		.4byte	.LASF14
+ 2310 00a4 02       		.uleb128 0x2
+ 2311 00a5 08       		.byte	0x8
+ 2312 00a6 04       		.byte	0x4
+ 2313 00a7 F8020000 		.4byte	.LASF15
+ 2314 00ab 02       		.uleb128 0x2
+ 2315 00ac 04       		.byte	0x4
+ 2316 00ad 07       		.byte	0x7
+ 2317 00ae C7020000 		.4byte	.LASF16
+ 2318 00b2 05       		.uleb128 0x5
+ 2319 00b3 03010000 		.4byte	.LASF17
+ 2320 00b7 01       		.byte	0x1
+ 2321 00b8 2B       		.byte	0x2b
+ 2322 00b9 00000000 		.4byte	.LFB0
+ 2323 00bd 54000000 		.4byte	.LFE0-.LFB0
+ 2324 00c1 01       		.uleb128 0x1
+ 2325 00c2 9C       		.byte	0x9c
+ 2326 00c3 05       		.uleb128 0x5
+ 2327 00c4 DF020000 		.4byte	.LASF18
+ 2328 00c8 01       		.byte	0x1
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 47
+
+
+ 2329 00c9 56       		.byte	0x56
+ 2330 00ca 00000000 		.4byte	.LFB1
+ 2331 00ce 38000000 		.4byte	.LFE1-.LFB1
+ 2332 00d2 01       		.uleb128 0x1
+ 2333 00d3 9C       		.byte	0x9c
+ 2334 00d4 05       		.uleb128 0x5
+ 2335 00d5 11010000 		.4byte	.LASF19
+ 2336 00d9 01       		.byte	0x1
+ 2337 00da 81       		.byte	0x81
+ 2338 00db 00000000 		.4byte	.LFB2
+ 2339 00df 24000000 		.4byte	.LFE2-.LFB2
+ 2340 00e3 01       		.uleb128 0x1
+ 2341 00e4 9C       		.byte	0x9c
+ 2342 00e5 06       		.uleb128 0x6
+ 2343 00e6 22030000 		.4byte	.LASF25
+ 2344 00ea 01       		.byte	0x1
+ 2345 00eb A3       		.byte	0xa3
+ 2346 00ec 00000000 		.4byte	.LFB3
+ 2347 00f0 34000000 		.4byte	.LFE3-.LFB3
+ 2348 00f4 01       		.uleb128 0x1
+ 2349 00f5 9C       		.byte	0x9c
+ 2350 00f6 33010000 		.4byte	0x133
+ 2351 00fa 07       		.uleb128 0x7
+ 2352 00fb F1000000 		.4byte	.LASF20
+ 2353 00ff 01       		.byte	0x1
+ 2354 0100 A3       		.byte	0xa3
+ 2355 0101 33010000 		.4byte	0x133
+ 2356 0105 02       		.uleb128 0x2
+ 2357 0106 91       		.byte	0x91
+ 2358 0107 74       		.sleb128 -12
+ 2359 0108 07       		.uleb128 0x7
+ 2360 0109 15020000 		.4byte	.LASF21
+ 2361 010d 01       		.byte	0x1
+ 2362 010e A3       		.byte	0xa3
+ 2363 010f 77000000 		.4byte	0x77
+ 2364 0113 02       		.uleb128 0x2
+ 2365 0114 91       		.byte	0x91
+ 2366 0115 72       		.sleb128 -14
+ 2367 0116 07       		.uleb128 0x7
+ 2368 0117 FA000000 		.4byte	.LASF22
+ 2369 011b 01       		.byte	0x1
+ 2370 011c A3       		.byte	0xa3
+ 2371 011d 33010000 		.4byte	0x133
+ 2372 0121 02       		.uleb128 0x2
+ 2373 0122 91       		.byte	0x91
+ 2374 0123 6C       		.sleb128 -20
+ 2375 0124 07       		.uleb128 0x7
+ 2376 0125 21020000 		.4byte	.LASF23
+ 2377 0129 01       		.byte	0x1
+ 2378 012a A3       		.byte	0xa3
+ 2379 012b 77000000 		.4byte	0x77
+ 2380 012f 02       		.uleb128 0x2
+ 2381 0130 91       		.byte	0x91
+ 2382 0131 70       		.sleb128 -16
+ 2383 0132 00       		.byte	0
+ 2384 0133 08       		.uleb128 0x8
+ 2385 0134 04       		.byte	0x4
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 48
+
+
+ 2386 0135 39010000 		.4byte	0x139
+ 2387 0139 09       		.uleb128 0x9
+ 2388 013a 6B000000 		.4byte	0x6b
+ 2389 013e 05       		.uleb128 0x5
+ 2390 013f 70020000 		.4byte	.LASF24
+ 2391 0143 01       		.byte	0x1
+ 2392 0144 BB       		.byte	0xbb
+ 2393 0145 00000000 		.4byte	.LFB4
+ 2394 0149 2C000000 		.4byte	.LFE4-.LFB4
+ 2395 014d 01       		.uleb128 0x1
+ 2396 014e 9C       		.byte	0x9c
+ 2397 014f 06       		.uleb128 0x6
+ 2398 0150 8E000000 		.4byte	.LASF26
+ 2399 0154 01       		.byte	0x1
+ 2400 0155 DA       		.byte	0xda
+ 2401 0156 00000000 		.4byte	.LFB5
+ 2402 015a 68000000 		.4byte	.LFE5-.LFB5
+ 2403 015e 01       		.uleb128 0x1
+ 2404 015f 9C       		.byte	0x9c
+ 2405 0160 81010000 		.4byte	0x181
+ 2406 0164 07       		.uleb128 0x7
+ 2407 0165 07020000 		.4byte	.LASF27
+ 2408 0169 01       		.byte	0x1
+ 2409 016a DA       		.byte	0xda
+ 2410 016b 33010000 		.4byte	0x133
+ 2411 016f 02       		.uleb128 0x2
+ 2412 0170 91       		.byte	0x91
+ 2413 0171 74       		.sleb128 -12
+ 2414 0172 07       		.uleb128 0x7
+ 2415 0173 2C010000 		.4byte	.LASF28
+ 2416 0177 01       		.byte	0x1
+ 2417 0178 DA       		.byte	0xda
+ 2418 0179 77000000 		.4byte	0x77
+ 2419 017d 02       		.uleb128 0x2
+ 2420 017e 91       		.byte	0x91
+ 2421 017f 72       		.sleb128 -14
+ 2422 0180 00       		.byte	0
+ 2423 0181 0A       		.uleb128 0xa
+ 2424 0182 A8000000 		.4byte	.LASF29
+ 2425 0186 01       		.byte	0x1
+ 2426 0187 0801     		.2byte	0x108
+ 2427 0189 00000000 		.4byte	.LFB6
+ 2428 018d 68000000 		.4byte	.LFE6-.LFB6
+ 2429 0191 01       		.uleb128 0x1
+ 2430 0192 9C       		.byte	0x9c
+ 2431 0193 B6010000 		.4byte	0x1b6
+ 2432 0197 0B       		.uleb128 0xb
+ 2433 0198 07020000 		.4byte	.LASF27
+ 2434 019c 01       		.byte	0x1
+ 2435 019d 0801     		.2byte	0x108
+ 2436 019f 33010000 		.4byte	0x133
+ 2437 01a3 02       		.uleb128 0x2
+ 2438 01a4 91       		.byte	0x91
+ 2439 01a5 74       		.sleb128 -12
+ 2440 01a6 0B       		.uleb128 0xb
+ 2441 01a7 2C010000 		.4byte	.LASF28
+ 2442 01ab 01       		.byte	0x1
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 49
+
+
+ 2443 01ac 0801     		.2byte	0x108
+ 2444 01ae 77000000 		.4byte	0x77
+ 2445 01b2 02       		.uleb128 0x2
+ 2446 01b3 91       		.byte	0x91
+ 2447 01b4 72       		.sleb128 -14
+ 2448 01b5 00       		.byte	0
+ 2449 01b6 0C       		.uleb128 0xc
+ 2450 01b7 3B020000 		.4byte	.LASF30
+ 2451 01bb 01       		.byte	0x1
+ 2452 01bc 17       		.byte	0x17
+ 2453 01bd 6B000000 		.4byte	0x6b
+ 2454 01c1 05       		.uleb128 0x5
+ 2455 01c2 03       		.byte	0x3
+ 2456 01c3 01000000 		.4byte	LF_DAC_2_Wave1Chan
+ 2457 01c7 0C       		.uleb128 0xc
+ 2458 01c8 95020000 		.4byte	.LASF31
+ 2459 01cc 01       		.byte	0x1
+ 2460 01cd 18       		.byte	0x18
+ 2461 01ce 6B000000 		.4byte	0x6b
+ 2462 01d2 05       		.uleb128 0x5
+ 2463 01d3 03       		.byte	0x3
+ 2464 01d4 02000000 		.4byte	LF_DAC_2_Wave2Chan
+ 2465 01d8 0C       		.uleb128 0xc
+ 2466 01d9 33030000 		.4byte	.LASF32
+ 2467 01dd 01       		.byte	0x1
+ 2468 01de 19       		.byte	0x19
+ 2469 01df 6B000000 		.4byte	0x6b
+ 2470 01e3 05       		.uleb128 0x5
+ 2471 01e4 03       		.byte	0x3
+ 2472 01e5 03000000 		.4byte	LF_DAC_2_Wave1TD
+ 2473 01e9 0C       		.uleb128 0xc
+ 2474 01ea 37010000 		.4byte	.LASF33
+ 2475 01ee 01       		.byte	0x1
+ 2476 01ef 1A       		.byte	0x1a
+ 2477 01f0 6B000000 		.4byte	0x6b
+ 2478 01f4 05       		.uleb128 0x5
+ 2479 01f5 03       		.byte	0x3
+ 2480 01f6 04000000 		.4byte	LF_DAC_2_Wave2TD
+ 2481 01fa 0D       		.uleb128 0xd
+ 2482 01fb A8020000 		.4byte	.LASF34
+ 2483 01ff 01       		.byte	0x1
+ 2484 0200 12       		.byte	0x12
+ 2485 0201 6B000000 		.4byte	0x6b
+ 2486 0205 05       		.uleb128 0x5
+ 2487 0206 03       		.byte	0x3
+ 2488 0207 00000000 		.4byte	LF_DAC_2_initVar
+ 2489 020b 0E       		.uleb128 0xe
+ 2490 020c 39010000 		.4byte	0x139
+ 2491 0210 1C020000 		.4byte	0x21c
+ 2492 0214 0F       		.uleb128 0xf
+ 2493 0215 AB000000 		.4byte	0xab
+ 2494 0219 A803     		.2byte	0x3a8
+ 2495 021b 00       		.byte	0
+ 2496 021c 0D       		.uleb128 0xd
+ 2497 021d 04030000 		.4byte	.LASF35
+ 2498 0221 01       		.byte	0x1
+ 2499 0222 14       		.byte	0x14
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 50
+
+
+ 2500 0223 2D020000 		.4byte	0x22d
+ 2501 0227 05       		.uleb128 0x5
+ 2502 0228 03       		.byte	0x3
+ 2503 0229 00000000 		.4byte	LF_DAC_2_wave1
+ 2504 022d 09       		.uleb128 0x9
+ 2505 022e 0B020000 		.4byte	0x20b
+ 2506 0232 0E       		.uleb128 0xe
+ 2507 0233 39010000 		.4byte	0x139
+ 2508 0237 43020000 		.4byte	0x243
+ 2509 023b 0F       		.uleb128 0xf
+ 2510 023c AB000000 		.4byte	0xab
+ 2511 0240 5003     		.2byte	0x350
+ 2512 0242 00       		.byte	0
+ 2513 0243 0D       		.uleb128 0xd
+ 2514 0244 13030000 		.4byte	.LASF36
+ 2515 0248 01       		.byte	0x1
+ 2516 0249 15       		.byte	0x15
+ 2517 024a 54020000 		.4byte	0x254
+ 2518 024e 05       		.uleb128 0x5
+ 2519 024f 03       		.byte	0x3
+ 2520 0250 00000000 		.4byte	LF_DAC_2_wave2
+ 2521 0254 09       		.uleb128 0x9
+ 2522 0255 32020000 		.4byte	0x232
+ 2523 0259 00       		.byte	0
+ 2524              		.section	.debug_abbrev,"",%progbits
+ 2525              	.Ldebug_abbrev0:
+ 2526 0000 01       		.uleb128 0x1
+ 2527 0001 11       		.uleb128 0x11
+ 2528 0002 01       		.byte	0x1
+ 2529 0003 25       		.uleb128 0x25
+ 2530 0004 0E       		.uleb128 0xe
+ 2531 0005 13       		.uleb128 0x13
+ 2532 0006 0B       		.uleb128 0xb
+ 2533 0007 03       		.uleb128 0x3
+ 2534 0008 0E       		.uleb128 0xe
+ 2535 0009 1B       		.uleb128 0x1b
+ 2536 000a 0E       		.uleb128 0xe
+ 2537 000b 55       		.uleb128 0x55
+ 2538 000c 17       		.uleb128 0x17
+ 2539 000d 11       		.uleb128 0x11
+ 2540 000e 01       		.uleb128 0x1
+ 2541 000f 10       		.uleb128 0x10
+ 2542 0010 17       		.uleb128 0x17
+ 2543 0011 00       		.byte	0
+ 2544 0012 00       		.byte	0
+ 2545 0013 02       		.uleb128 0x2
+ 2546 0014 24       		.uleb128 0x24
+ 2547 0015 00       		.byte	0
+ 2548 0016 0B       		.uleb128 0xb
+ 2549 0017 0B       		.uleb128 0xb
+ 2550 0018 3E       		.uleb128 0x3e
+ 2551 0019 0B       		.uleb128 0xb
+ 2552 001a 03       		.uleb128 0x3
+ 2553 001b 0E       		.uleb128 0xe
+ 2554 001c 00       		.byte	0
+ 2555 001d 00       		.byte	0
+ 2556 001e 03       		.uleb128 0x3
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 51
+
+
+ 2557 001f 24       		.uleb128 0x24
+ 2558 0020 00       		.byte	0
+ 2559 0021 0B       		.uleb128 0xb
+ 2560 0022 0B       		.uleb128 0xb
+ 2561 0023 3E       		.uleb128 0x3e
+ 2562 0024 0B       		.uleb128 0xb
+ 2563 0025 03       		.uleb128 0x3
+ 2564 0026 08       		.uleb128 0x8
+ 2565 0027 00       		.byte	0
+ 2566 0028 00       		.byte	0
+ 2567 0029 04       		.uleb128 0x4
+ 2568 002a 16       		.uleb128 0x16
+ 2569 002b 00       		.byte	0
+ 2570 002c 03       		.uleb128 0x3
+ 2571 002d 0E       		.uleb128 0xe
+ 2572 002e 3A       		.uleb128 0x3a
+ 2573 002f 0B       		.uleb128 0xb
+ 2574 0030 3B       		.uleb128 0x3b
+ 2575 0031 05       		.uleb128 0x5
+ 2576 0032 49       		.uleb128 0x49
+ 2577 0033 13       		.uleb128 0x13
+ 2578 0034 00       		.byte	0
+ 2579 0035 00       		.byte	0
+ 2580 0036 05       		.uleb128 0x5
+ 2581 0037 2E       		.uleb128 0x2e
+ 2582 0038 00       		.byte	0
+ 2583 0039 3F       		.uleb128 0x3f
+ 2584 003a 19       		.uleb128 0x19
+ 2585 003b 03       		.uleb128 0x3
+ 2586 003c 0E       		.uleb128 0xe
+ 2587 003d 3A       		.uleb128 0x3a
+ 2588 003e 0B       		.uleb128 0xb
+ 2589 003f 3B       		.uleb128 0x3b
+ 2590 0040 0B       		.uleb128 0xb
+ 2591 0041 27       		.uleb128 0x27
+ 2592 0042 19       		.uleb128 0x19
+ 2593 0043 11       		.uleb128 0x11
+ 2594 0044 01       		.uleb128 0x1
+ 2595 0045 12       		.uleb128 0x12
+ 2596 0046 06       		.uleb128 0x6
+ 2597 0047 40       		.uleb128 0x40
+ 2598 0048 18       		.uleb128 0x18
+ 2599 0049 9642     		.uleb128 0x2116
+ 2600 004b 19       		.uleb128 0x19
+ 2601 004c 00       		.byte	0
+ 2602 004d 00       		.byte	0
+ 2603 004e 06       		.uleb128 0x6
+ 2604 004f 2E       		.uleb128 0x2e
+ 2605 0050 01       		.byte	0x1
+ 2606 0051 3F       		.uleb128 0x3f
+ 2607 0052 19       		.uleb128 0x19
+ 2608 0053 03       		.uleb128 0x3
+ 2609 0054 0E       		.uleb128 0xe
+ 2610 0055 3A       		.uleb128 0x3a
+ 2611 0056 0B       		.uleb128 0xb
+ 2612 0057 3B       		.uleb128 0x3b
+ 2613 0058 0B       		.uleb128 0xb
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 52
+
+
+ 2614 0059 27       		.uleb128 0x27
+ 2615 005a 19       		.uleb128 0x19
+ 2616 005b 11       		.uleb128 0x11
+ 2617 005c 01       		.uleb128 0x1
+ 2618 005d 12       		.uleb128 0x12
+ 2619 005e 06       		.uleb128 0x6
+ 2620 005f 40       		.uleb128 0x40
+ 2621 0060 18       		.uleb128 0x18
+ 2622 0061 9642     		.uleb128 0x2116
+ 2623 0063 19       		.uleb128 0x19
+ 2624 0064 01       		.uleb128 0x1
+ 2625 0065 13       		.uleb128 0x13
+ 2626 0066 00       		.byte	0
+ 2627 0067 00       		.byte	0
+ 2628 0068 07       		.uleb128 0x7
+ 2629 0069 05       		.uleb128 0x5
+ 2630 006a 00       		.byte	0
+ 2631 006b 03       		.uleb128 0x3
+ 2632 006c 0E       		.uleb128 0xe
+ 2633 006d 3A       		.uleb128 0x3a
+ 2634 006e 0B       		.uleb128 0xb
+ 2635 006f 3B       		.uleb128 0x3b
+ 2636 0070 0B       		.uleb128 0xb
+ 2637 0071 49       		.uleb128 0x49
+ 2638 0072 13       		.uleb128 0x13
+ 2639 0073 02       		.uleb128 0x2
+ 2640 0074 18       		.uleb128 0x18
+ 2641 0075 00       		.byte	0
+ 2642 0076 00       		.byte	0
+ 2643 0077 08       		.uleb128 0x8
+ 2644 0078 0F       		.uleb128 0xf
+ 2645 0079 00       		.byte	0
+ 2646 007a 0B       		.uleb128 0xb
+ 2647 007b 0B       		.uleb128 0xb
+ 2648 007c 49       		.uleb128 0x49
+ 2649 007d 13       		.uleb128 0x13
+ 2650 007e 00       		.byte	0
+ 2651 007f 00       		.byte	0
+ 2652 0080 09       		.uleb128 0x9
+ 2653 0081 26       		.uleb128 0x26
+ 2654 0082 00       		.byte	0
+ 2655 0083 49       		.uleb128 0x49
+ 2656 0084 13       		.uleb128 0x13
+ 2657 0085 00       		.byte	0
+ 2658 0086 00       		.byte	0
+ 2659 0087 0A       		.uleb128 0xa
+ 2660 0088 2E       		.uleb128 0x2e
+ 2661 0089 01       		.byte	0x1
+ 2662 008a 3F       		.uleb128 0x3f
+ 2663 008b 19       		.uleb128 0x19
+ 2664 008c 03       		.uleb128 0x3
+ 2665 008d 0E       		.uleb128 0xe
+ 2666 008e 3A       		.uleb128 0x3a
+ 2667 008f 0B       		.uleb128 0xb
+ 2668 0090 3B       		.uleb128 0x3b
+ 2669 0091 05       		.uleb128 0x5
+ 2670 0092 27       		.uleb128 0x27
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 53
+
+
+ 2671 0093 19       		.uleb128 0x19
+ 2672 0094 11       		.uleb128 0x11
+ 2673 0095 01       		.uleb128 0x1
+ 2674 0096 12       		.uleb128 0x12
+ 2675 0097 06       		.uleb128 0x6
+ 2676 0098 40       		.uleb128 0x40
+ 2677 0099 18       		.uleb128 0x18
+ 2678 009a 9642     		.uleb128 0x2116
+ 2679 009c 19       		.uleb128 0x19
+ 2680 009d 01       		.uleb128 0x1
+ 2681 009e 13       		.uleb128 0x13
+ 2682 009f 00       		.byte	0
+ 2683 00a0 00       		.byte	0
+ 2684 00a1 0B       		.uleb128 0xb
+ 2685 00a2 05       		.uleb128 0x5
+ 2686 00a3 00       		.byte	0
+ 2687 00a4 03       		.uleb128 0x3
+ 2688 00a5 0E       		.uleb128 0xe
+ 2689 00a6 3A       		.uleb128 0x3a
+ 2690 00a7 0B       		.uleb128 0xb
+ 2691 00a8 3B       		.uleb128 0x3b
+ 2692 00a9 05       		.uleb128 0x5
+ 2693 00aa 49       		.uleb128 0x49
+ 2694 00ab 13       		.uleb128 0x13
+ 2695 00ac 02       		.uleb128 0x2
+ 2696 00ad 18       		.uleb128 0x18
+ 2697 00ae 00       		.byte	0
+ 2698 00af 00       		.byte	0
+ 2699 00b0 0C       		.uleb128 0xc
+ 2700 00b1 34       		.uleb128 0x34
+ 2701 00b2 00       		.byte	0
+ 2702 00b3 03       		.uleb128 0x3
+ 2703 00b4 0E       		.uleb128 0xe
+ 2704 00b5 3A       		.uleb128 0x3a
+ 2705 00b6 0B       		.uleb128 0xb
+ 2706 00b7 3B       		.uleb128 0x3b
+ 2707 00b8 0B       		.uleb128 0xb
+ 2708 00b9 49       		.uleb128 0x49
+ 2709 00ba 13       		.uleb128 0x13
+ 2710 00bb 02       		.uleb128 0x2
+ 2711 00bc 18       		.uleb128 0x18
+ 2712 00bd 00       		.byte	0
+ 2713 00be 00       		.byte	0
+ 2714 00bf 0D       		.uleb128 0xd
+ 2715 00c0 34       		.uleb128 0x34
+ 2716 00c1 00       		.byte	0
+ 2717 00c2 03       		.uleb128 0x3
+ 2718 00c3 0E       		.uleb128 0xe
+ 2719 00c4 3A       		.uleb128 0x3a
+ 2720 00c5 0B       		.uleb128 0xb
+ 2721 00c6 3B       		.uleb128 0x3b
+ 2722 00c7 0B       		.uleb128 0xb
+ 2723 00c8 49       		.uleb128 0x49
+ 2724 00c9 13       		.uleb128 0x13
+ 2725 00ca 3F       		.uleb128 0x3f
+ 2726 00cb 19       		.uleb128 0x19
+ 2727 00cc 02       		.uleb128 0x2
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 54
+
+
+ 2728 00cd 18       		.uleb128 0x18
+ 2729 00ce 00       		.byte	0
+ 2730 00cf 00       		.byte	0
+ 2731 00d0 0E       		.uleb128 0xe
+ 2732 00d1 01       		.uleb128 0x1
+ 2733 00d2 01       		.byte	0x1
+ 2734 00d3 49       		.uleb128 0x49
+ 2735 00d4 13       		.uleb128 0x13
+ 2736 00d5 01       		.uleb128 0x1
+ 2737 00d6 13       		.uleb128 0x13
+ 2738 00d7 00       		.byte	0
+ 2739 00d8 00       		.byte	0
+ 2740 00d9 0F       		.uleb128 0xf
+ 2741 00da 21       		.uleb128 0x21
+ 2742 00db 00       		.byte	0
+ 2743 00dc 49       		.uleb128 0x49
+ 2744 00dd 13       		.uleb128 0x13
+ 2745 00de 2F       		.uleb128 0x2f
+ 2746 00df 05       		.uleb128 0x5
+ 2747 00e0 00       		.byte	0
+ 2748 00e1 00       		.byte	0
+ 2749 00e2 00       		.byte	0
+ 2750              		.section	.debug_aranges,"",%progbits
+ 2751 0000 4C000000 		.4byte	0x4c
+ 2752 0004 0200     		.2byte	0x2
+ 2753 0006 00000000 		.4byte	.Ldebug_info0
+ 2754 000a 04       		.byte	0x4
+ 2755 000b 00       		.byte	0
+ 2756 000c 0000     		.2byte	0
+ 2757 000e 0000     		.2byte	0
+ 2758 0010 00000000 		.4byte	.LFB0
+ 2759 0014 54000000 		.4byte	.LFE0-.LFB0
+ 2760 0018 00000000 		.4byte	.LFB1
+ 2761 001c 38000000 		.4byte	.LFE1-.LFB1
+ 2762 0020 00000000 		.4byte	.LFB2
+ 2763 0024 24000000 		.4byte	.LFE2-.LFB2
+ 2764 0028 00000000 		.4byte	.LFB3
+ 2765 002c 34000000 		.4byte	.LFE3-.LFB3
+ 2766 0030 00000000 		.4byte	.LFB4
+ 2767 0034 2C000000 		.4byte	.LFE4-.LFB4
+ 2768 0038 00000000 		.4byte	.LFB5
+ 2769 003c 68000000 		.4byte	.LFE5-.LFB5
+ 2770 0040 00000000 		.4byte	.LFB6
+ 2771 0044 68000000 		.4byte	.LFE6-.LFB6
+ 2772 0048 00000000 		.4byte	0
+ 2773 004c 00000000 		.4byte	0
+ 2774              		.section	.debug_ranges,"",%progbits
+ 2775              	.Ldebug_ranges0:
+ 2776 0000 00000000 		.4byte	.LFB0
+ 2777 0004 54000000 		.4byte	.LFE0
+ 2778 0008 00000000 		.4byte	.LFB1
+ 2779 000c 38000000 		.4byte	.LFE1
+ 2780 0010 00000000 		.4byte	.LFB2
+ 2781 0014 24000000 		.4byte	.LFE2
+ 2782 0018 00000000 		.4byte	.LFB3
+ 2783 001c 34000000 		.4byte	.LFE3
+ 2784 0020 00000000 		.4byte	.LFB4
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 55
+
+
+ 2785 0024 2C000000 		.4byte	.LFE4
+ 2786 0028 00000000 		.4byte	.LFB5
+ 2787 002c 68000000 		.4byte	.LFE5
+ 2788 0030 00000000 		.4byte	.LFB6
+ 2789 0034 68000000 		.4byte	.LFE6
+ 2790 0038 00000000 		.4byte	0
+ 2791 003c 00000000 		.4byte	0
+ 2792              		.section	.debug_line,"",%progbits
+ 2793              	.Ldebug_line0:
+ 2794 0000 EE000000 		.section	.debug_str,"MS",%progbits,1
+ 2794      02004500 
+ 2794      00000201 
+ 2794      FB0E0D00 
+ 2794      01010101 
+ 2795              	.LASF37:
+ 2796 0000 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 2796      43313120 
+ 2796      352E342E 
+ 2796      31203230 
+ 2796      31363036 
+ 2797 0033 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 2797      20726576 
+ 2797      6973696F 
+ 2797      6E203233 
+ 2797      37373135 
+ 2798 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 2798      66756E63 
+ 2798      74696F6E 
+ 2798      2D736563 
+ 2798      74696F6E 
+ 2799              	.LASF26:
+ 2800 008e 4C465F44 		.ascii	"LF_DAC_2_Wave1Setup\000"
+ 2800      41435F32 
+ 2800      5F576176 
+ 2800      65315365 
+ 2800      74757000 
+ 2801              	.LASF12:
+ 2802 00a2 666C6F61 		.ascii	"float\000"
+ 2802      7400
+ 2803              	.LASF29:
+ 2804 00a8 4C465F44 		.ascii	"LF_DAC_2_Wave2Setup\000"
+ 2804      41435F32 
+ 2804      5F576176 
+ 2804      65325365 
+ 2804      74757000 
+ 2805              	.LASF3:
+ 2806 00bc 73686F72 		.ascii	"short unsigned int\000"
+ 2806      7420756E 
+ 2806      7369676E 
+ 2806      65642069 
+ 2806      6E7400
+ 2807              	.LASF38:
+ 2808 00cf 47656E65 		.ascii	"Generated_Source\\PSoC5\\LF_DAC_2.c\000"
+ 2808      72617465 
+ 2808      645F536F 
+ 2808      75726365 
+ 2808      5C50536F 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 56
+
+
+ 2809              	.LASF20:
+ 2810 00f1 77617665 		.ascii	"wavePtr1\000"
+ 2810      50747231 
+ 2810      00
+ 2811              	.LASF22:
+ 2812 00fa 77617665 		.ascii	"wavePtr2\000"
+ 2812      50747232 
+ 2812      00
+ 2813              	.LASF17:
+ 2814 0103 4C465F44 		.ascii	"LF_DAC_2_Init\000"
+ 2814      41435F32 
+ 2814      5F496E69 
+ 2814      7400
+ 2815              	.LASF19:
+ 2816 0111 4C465F44 		.ascii	"LF_DAC_2_Start\000"
+ 2816      41435F32 
+ 2816      5F537461 
+ 2816      727400
+ 2817              	.LASF0:
+ 2818 0120 7369676E 		.ascii	"signed char\000"
+ 2818      65642063 
+ 2818      68617200 
+ 2819              	.LASF28:
+ 2820 012c 73616D70 		.ascii	"sampleSize\000"
+ 2820      6C655369 
+ 2820      7A6500
+ 2821              	.LASF33:
+ 2822 0137 4C465F44 		.ascii	"LF_DAC_2_Wave2TD\000"
+ 2822      41435F32 
+ 2822      5F576176 
+ 2822      65325444 
+ 2822      00
+ 2823              	.LASF39:
+ 2824 0148 433A5C55 		.ascii	"C:\\Users\\herreral\\Documents\\Masters\\Tecnicas d"
+ 2824      73657273 
+ 2824      5C686572 
+ 2824      72657261 
+ 2824      6C5C446F 
+ 2825 0176 65204164 		.ascii	"e Adquisicion y Procesamiento de Datos\\Proyecto1_D"
+ 2825      71756973 
+ 2825      6963696F 
+ 2825      6E207920 
+ 2825      50726F63 
+ 2826 01a8 75616C54 		.ascii	"ualToneCoder\\DualToneMultiFrequencyCoder\\DualTone"
+ 2826      6F6E6543 
+ 2826      6F646572 
+ 2826      5C447561 
+ 2826      6C546F6E 
+ 2827 01d9 204D756C 		.ascii	" MultiFrequency Coder.cydsn\000"
+ 2827      74694672 
+ 2827      65717565 
+ 2827      6E637920 
+ 2827      436F6465 
+ 2828              	.LASF5:
+ 2829 01f5 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2829      20756E73 
+ 2829      69676E65 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 57
+
+
+ 2829      6420696E 
+ 2829      7400
+ 2830              	.LASF27:
+ 2831 0207 77617665 		.ascii	"wavePtr\000"
+ 2831      50747200 
+ 2832              	.LASF9:
+ 2833 020f 75696E74 		.ascii	"uint8\000"
+ 2833      3800
+ 2834              	.LASF21:
+ 2835 0215 73616D70 		.ascii	"sampleSize1\000"
+ 2835      6C655369 
+ 2835      7A653100 
+ 2836              	.LASF23:
+ 2837 0221 73616D70 		.ascii	"sampleSize2\000"
+ 2837      6C655369 
+ 2837      7A653200 
+ 2838              	.LASF1:
+ 2839 022d 756E7369 		.ascii	"unsigned char\000"
+ 2839      676E6564 
+ 2839      20636861 
+ 2839      7200
+ 2840              	.LASF30:
+ 2841 023b 4C465F44 		.ascii	"LF_DAC_2_Wave1Chan\000"
+ 2841      41435F32 
+ 2841      5F576176 
+ 2841      65314368 
+ 2841      616E00
+ 2842              	.LASF13:
+ 2843 024e 646F7562 		.ascii	"double\000"
+ 2843      6C6500
+ 2844              	.LASF10:
+ 2845 0255 75696E74 		.ascii	"uint16\000"
+ 2845      313600
+ 2846              	.LASF11:
+ 2847 025c 75696E74 		.ascii	"uint32\000"
+ 2847      333200
+ 2848              	.LASF8:
+ 2849 0263 756E7369 		.ascii	"unsigned int\000"
+ 2849      676E6564 
+ 2849      20696E74 
+ 2849      00
+ 2850              	.LASF24:
+ 2851 0270 4C465F44 		.ascii	"LF_DAC_2_Stop\000"
+ 2851      41435F32 
+ 2851      5F53746F 
+ 2851      7000
+ 2852              	.LASF7:
+ 2853 027e 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2853      206C6F6E 
+ 2853      6720756E 
+ 2853      7369676E 
+ 2853      65642069 
+ 2854              	.LASF31:
+ 2855 0295 4C465F44 		.ascii	"LF_DAC_2_Wave2Chan\000"
+ 2855      41435F32 
+ 2855      5F576176 
+ 2855      65324368 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 58
+
+
+ 2855      616E00
+ 2856              	.LASF34:
+ 2857 02a8 4C465F44 		.ascii	"LF_DAC_2_initVar\000"
+ 2857      41435F32 
+ 2857      5F696E69 
+ 2857      74566172 
+ 2857      00
+ 2858              	.LASF6:
+ 2859 02b9 6C6F6E67 		.ascii	"long long int\000"
+ 2859      206C6F6E 
+ 2859      6720696E 
+ 2859      7400
+ 2860              	.LASF16:
+ 2861 02c7 73697A65 		.ascii	"sizetype\000"
+ 2861      74797065 
+ 2861      00
+ 2862              	.LASF14:
+ 2863 02d0 63686172 		.ascii	"char\000"
+ 2863      00
+ 2864              	.LASF2:
+ 2865 02d5 73686F72 		.ascii	"short int\000"
+ 2865      7420696E 
+ 2865      7400
+ 2866              	.LASF18:
+ 2867 02df 4C465F44 		.ascii	"LF_DAC_2_Enable\000"
+ 2867      41435F32 
+ 2867      5F456E61 
+ 2867      626C6500 
+ 2868              	.LASF4:
+ 2869 02ef 6C6F6E67 		.ascii	"long int\000"
+ 2869      20696E74 
+ 2869      00
+ 2870              	.LASF15:
+ 2871 02f8 6C6F6E67 		.ascii	"long double\000"
+ 2871      20646F75 
+ 2871      626C6500 
+ 2872              	.LASF35:
+ 2873 0304 4C465F44 		.ascii	"LF_DAC_2_wave1\000"
+ 2873      41435F32 
+ 2873      5F776176 
+ 2873      653100
+ 2874              	.LASF36:
+ 2875 0313 4C465F44 		.ascii	"LF_DAC_2_wave2\000"
+ 2875      41435F32 
+ 2875      5F776176 
+ 2875      653200
+ 2876              	.LASF25:
+ 2877 0322 4C465F44 		.ascii	"LF_DAC_2_StartEx\000"
+ 2877      41435F32 
+ 2877      5F537461 
+ 2877      72744578 
+ 2877      00
+ 2878              	.LASF32:
+ 2879 0333 4C465F44 		.ascii	"LF_DAC_2_Wave1TD\000"
+ 2879      41435F32 
+ 2879      5F576176 
+ 2879      65315444 
+ARM GAS  C:\Users\herreral\AppData\Local\Temp\ccFMvsBV.s 			page 59
+
+
+ 2879      00
+ 2880              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran
