@@ -391,7 +391,7 @@ uint16 getMaxValue(double *arrayData, uint8 size)
 *******************************************************************************/
 void DecodeInput(int lo, int hi)
 {
-    
+    // Since the frecuencies are unique adding them provides an unique identifier
     int dataFreq = lo + hi;
     switch(dataFreq)
     {
