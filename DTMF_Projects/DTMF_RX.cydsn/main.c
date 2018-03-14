@@ -12,7 +12,7 @@
 #define FALSE  0
 #define TRUE   1
 #define TRANSMIT_BUFFER_SIZE  16
-#define NUMBER_OF_SAMPLES 650
+#define NUMBER_OF_SAMPLES 150
 #define SAMPLING_RATE 10000
 #define LOW_FREQ_DAC_NUMBER_OF_SAMPLES 200
 #define HIGH_FREQ_DAC_NUMBER_OF_SAMPLES 300
@@ -28,6 +28,8 @@ int16 array[NUMBER_OF_SAMPLES];
 // DualTone Frequencies
 int loFrequency[LOW_FREQUENCIES_ANALIZED] = {150, 697, 770, 852, 941};
 int hiFrequency[HIGH_FREQUENCIES_ANALIZED] = {150, 1209, 1336, 1477};
+// Terminal output enable
+int8 terminalOutputEnable = TRUE;
 
 // Function prototypes
 void InitSettings(void);
@@ -392,49 +394,116 @@ uint16 getMaxValue(double *arrayData, uint8 size)
 void DecodeInput(int lo, int hi)
 {
     // Keys 1,2,3
-    int dataFreq = lo + hi;
-    switch(dataFreq)
+    if ( (lo == loFrequency[1]) && (hi == hiFrequency[1]))
     {
-        case (loFrequency[1] + hiFrequency[1]):
-            UART_1_PutString("1 \n\r");
-            break;
-        case (loFrequency[1] + hiFrequency[2]):
-            UART_1_PutString("2 \n\r");
-            break;
-        case (loFrequency[1] + hiFrequency[3]):
-            UART_1_PutString("3 \n\r");
-            break;
-        case (loFrequency[2] + hiFrequency[1]):
-            UART_1_PutString("4 \n\r");
-            break;
-        case (loFrequency[2] + hiFrequency[2]):
-            UART_1_PutString("5 \n\r");
-            break;
-        case (loFrequency[2] + hiFrequency[3]):
-            UART_1_PutString("6 \n\r");
-            break;
-        case (loFrequency[3] + hiFrequency[1]):
-            UART_1_PutString("7 \n\r");
-            break;
-        case (loFrequency[3] + hiFrequency[2]):
-            UART_1_PutString("8 \n\r");
-            break;
-        case (loFrequency[3] + hiFrequency[3]):
-            UART_1_PutString("9 \n\r");
-            break;
-        case (loFrequency[4] + hiFrequency[1]):
-            UART_1_PutString("0 \n\r");
-            break;
-        case (loFrequency[4] + hiFrequency[2]):
-            UART_1_PutString("* \n\r");
-            break;
-        case (loFrequency[4] + hiFrequency[3]):
-            UART_1_PutString("# \n\r");
-            break;
-        default:
-            UART_1_PutString(".");
-            break;
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("1");
+            terminalOutputEnable = FALSE;
+        }
     }
+    if ( (lo == loFrequency[1]) && (hi == hiFrequency[2]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("2");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[1]) && (hi == hiFrequency[3]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("3");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    
+    // Keys 4,5,6    
+    if ( (lo == loFrequency[2]) && (hi == hiFrequency[1]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("4");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[2]) && (hi == hiFrequency[2]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("5");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[2]) && (hi == hiFrequency[3]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("6");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    
+    // Keys 7,8,9   
+    if ( (lo == loFrequency[3]) && (hi == hiFrequency[1]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("7");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[3]) && (hi == hiFrequency[2]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("8");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[3]) && (hi == hiFrequency[3]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("9");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    
+    // Keys *,0,#    
+    if ( (lo == loFrequency[4]) && (hi == hiFrequency[1]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("*");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[4]) && (hi == hiFrequency[2]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("0");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    if ( (lo == loFrequency[4]) && (hi == hiFrequency[3]))
+    {
+        if (terminalOutputEnable == TRUE)
+        {
+            UART_1_PutString("#");
+            terminalOutputEnable = FALSE;
+        }
+    }
+    
+    // Dummy Frequencies    
+    if ( (lo == loFrequency[0]) || (hi == hiFrequency[0]) )
+    {
+        //UART_1_PutString(".");
+        terminalOutputEnable = TRUE;
+    }
+ 
 }
 
 

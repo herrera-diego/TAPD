@@ -20,9 +20,10 @@
       <Data key="1425177d-0d0e-4468-8bcc-e638e5509a9b" value="Rx_12_6" />
       <Data key="07672062-7566-4181-a4f6-c7a88dcfdafd" value="Input_Flag" />
       <Data key="77715107-f8d5-47e5-a629-0fb83101ac6b" value="TX_Output" />
+      <Data key="a71382a3-9199-409c-8afd-12a069ce6c85" value="LED" />
       <Data key="beafeb0b-b3e0-4269-a32c-53cb912a09c9" value="HF_SW2" />
       <Data key="cc3bcd7e-5dc0-48ea-9bf6-6aa082be1ada" value="Vin" />
-      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="LED" />
+      <Data key="e851a3b9-efb8-48be-bbb8-b303b216c393" value="Blue_LED" />
       <Data key="ed092b9b-d398-4703-be89-cebf998501f6" value="Tx_P12_7" />
     </Group>
   </Group>
@@ -93,14 +94,14 @@
         <Data key="Port Format" value="3,0" />
       </Group>
     </Group>
+    <Group key="a71382a3-9199-409c-8afd-12a069ce6c85">
+      <Group key="0">
+        <Data key="Port Format" value="2,1" />
+      </Group>
+    </Group>
     <Group key="cc3bcd7e-5dc0-48ea-9bf6-6aa082be1ada">
       <Group key="0">
         <Data key="Port Format" value="0,0" />
-      </Group>
-    </Group>
-    <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
-      <Group key="0">
-        <Data key="Port Format" value="2,1" />
       </Group>
     </Group>
     <Group key="ed092b9b-d398-4703-be89-cebf998501f6">
@@ -108,6 +109,12 @@
         <Data key="Port Format" value="12,7" />
       </Group>
     </Group>
+    <Group key="UnAssigned Pins">
+      <Group key="e851a3b9-efb8-48be-bbb8-b303b216c393">
+        <Data key="0" value="131647682099596619" />
+      </Group>
+    </Group>
+    <Group key="Unlocked Pins" />
   </Group>
   <Group key="System3">
     <Data key="CYDEV_CONFIG_FASTBOOT_ENABLED" value="True" />

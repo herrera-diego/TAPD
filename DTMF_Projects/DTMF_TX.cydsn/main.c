@@ -19,6 +19,14 @@
 #define MASTER_CLOCK_FREQUENCY 24000000
 #define LOW_FREQUENCIES_ANALIZED 5
 #define HIGH_FREQUENCIES_ANALIZED 4
+#define WAIT_CYCLES 13 // 5ms*13=65ms
+
+// FSM
+#define STATE_INIT 0
+#define STATE_READ_INPUT 1
+#define STATE_WAIT_WITH_SIGNAL_ON 2
+#define STATE_WAIT_WITH_SIGNAL_OFF 3
+#define STATE_DISABLE_OUTPUT 4
 
 /* Transmit Buffer */
 char TransmitBuffer[TRANSMIT_BUFFER_SIZE];
@@ -28,6 +36,13 @@ int16 array[NUMBER_OF_SAMPLES];
 // DualTone Frequencies
 int loFrequency[LOW_FREQUENCIES_ANALIZED] = {150, 697, 770, 852, 941};
 int hiFrequency[HIGH_FREQUENCIES_ANALIZED] = {150, 1209, 1336, 1477};
+// FSM
+uint8 currentState = 0;
+uint8 Ch;
+// Wait loop
+uint8 counterEnable = FALSE;
+uint8 counter = 0;
+
 
 // Function prototypes
 void InitSettings(void);
@@ -42,18 +57,12 @@ void DecodeInput(int loFrequency, int hiFrecuency);
 /*******************************************************************************
 * Interrupt routine
 *******************************************************************************/
-CY_ISR(Transmit)
+CY_ISR(SignalON)
 {
-    // Not used
-}
-
-
-/*******************************************************************************
-* Interrupt routine
-*******************************************************************************/
-CY_ISR(UserInput)
-{
-    //UART_1_PutString("Input Detected!\r\n");
+    if (counterEnable == TRUE)
+    {
+        counter++;
+    }
 }
 
 
@@ -62,181 +71,291 @@ CY_ISR(UserInput)
 *******************************************************************************/
 int main()
 {
-    /* Variable to store UART received character */
-    uint8 Ch;
-    
-    /* Start the components */
-    ADC_DelSig_1_Start();
-    UART_1_Start();
-        
-    /* Start the ADC conversion */
-    ADC_DelSig_1_StartConvert();
-    
-    /* Send message to verify COM port is connected properly */
-    UART_1_PutString("TX - Ready\r\n");
-    
-    // Enable Interrupts
-    CyGlobalIntEnable;
-    
-    // Init Settings
-    // - Output dummy 4KHz sine wave
-    // - Turn off blue LED
-    InitSettings();  
-    
-    for(;;)
-    {        
-        /* Non-blocking call to get the latest data recieved  */
-        Ch = UART_1_GetChar();
-        
-        /* Set flags based on UART command */
-        switch(Ch)
-        {
-            case '0':
-                UART_1_PutString("0\r\n");
-                SetLowFrequencyDacOutput(941);
-                SetHighFrequencyDacOutput(1336);
+    currentState = STATE_INIT;
+    while(TRUE)
+    {
+        switch (currentState)
+        {    
+            //-----------------------------------------------------//
+            //-----------------------------------------------------//
+            case STATE_INIT:
                 
-                break;
+                /* Start the components */
+                ADC_DelSig_1_Start();
+                UART_1_Start();
+                    
+                /* Start the ADC conversion */
+                ADC_DelSig_1_StartConvert();
                 
-            case '1':
-                UART_1_PutString("1\r\n");
-                SetLowFrequencyDacOutput(697);
-                SetHighFrequencyDacOutput(1209);
+                // Init Timer
+                Timer_Start();
                 
-                break;
+                // Enable Interrupts
+                isr_StartEx(SignalON);
+                CyGlobalIntEnable;
                 
-            case '2':
-                UART_1_PutString("2\r\n");
-                SetLowFrequencyDacOutput(697);
-                SetHighFrequencyDacOutput(1336);
+                // Init Settings
+                // - Output dummy 4KHz sine wave
+                // - Turn off blue LED
+                InitSettings(); 
                 
-                break;
+                // Set state
+                currentState = STATE_READ_INPUT;
                 
-            case '3':
-                UART_1_PutString("3\r\n");
-                SetLowFrequencyDacOutput(697);
-                SetHighFrequencyDacOutput(1477);
+                /* Send message to verify COM port is connected properly */
+                UART_1_PutString("TX - Ready\r\n");
                 
-                break;
+            break;
                 
-            case '4':
-                UART_1_PutString("4\r\n");
-                SetLowFrequencyDacOutput(770);
-                SetHighFrequencyDacOutput(1209);
+            //-----------------------------------------------------//
+            //-----------------------------------------------------//
+            case STATE_READ_INPUT:
+
+                //Non-blocking call to get the latest data recieved  */
+                Ch = UART_1_GetChar();
                 
-                break;
-                
-            case '5':
-                UART_1_PutString("5\r\n");
-                SetLowFrequencyDacOutput(770);
-                SetHighFrequencyDacOutput(1336);
-                
-                break;
-                
-            case '6':
-                UART_1_PutString("6\r\n");
-                SetLowFrequencyDacOutput(770);
-                SetHighFrequencyDacOutput(1477);
-                
-                break;
-                
-            case '7':
-                UART_1_PutString("7\r\n");
-                SetLowFrequencyDacOutput(852);
-                SetHighFrequencyDacOutput(1209);
-                
-                break;
-                
-            case '8':
-                UART_1_PutString("8\r\n");
-                SetLowFrequencyDacOutput(852);
-                SetHighFrequencyDacOutput(1336);
-                
-                break;
-                
-            case '9':
-                UART_1_PutString("9\r\n");
-                SetLowFrequencyDacOutput(852);
-                SetHighFrequencyDacOutput(1477);
-                
-                break;
-                
-            case '*':
-                UART_1_PutString("*\r\n");
-                SetLowFrequencyDacOutput(941);
-                SetHighFrequencyDacOutput(1209);
-                
-                break;
-                
-            case '#':
-                UART_1_PutString("#\r\n");
-                SetLowFrequencyDacOutput(941);
-                SetHighFrequencyDacOutput(1477);
-                
-                break;
-            
-            case 'D':
-            case 'd':
-                //Get Samples
-                for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
-                {                 
-                    /* Check to see if an ADC conversion has completed */
-                    if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
-                    {
-                        Output = ADC_DelSig_1_GetResult16();
-                        array[sampleNumber] = Output;                       
-                        sampleNumber ++;
-                    }
-                }
-                
-                // Print samples
-                UART_1_PutString("-----> Samples Init\r\n");
-                for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber ++)
+                /* Set flags based on UART command */
+                switch(Ch)
                 {
-                    sprintf(TransmitBuffer, "%d\r\n", array[sampleNumber]);
-                    UART_1_PutString(TransmitBuffer);
+                    case '0':
+                        UART_1_PutString("0");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(941);
+                        SetHighFrequencyDacOutput(1336);                       
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;                        
+                    break;
+                        
+                    case '1':
+                        UART_1_PutString("1");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(697);
+                        SetHighFrequencyDacOutput(1209);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '2':
+                        UART_1_PutString("2");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(697);
+                        SetHighFrequencyDacOutput(1336);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '3':
+                        UART_1_PutString("3");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(697);
+                        SetHighFrequencyDacOutput(1477);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '4':
+                        UART_1_PutString("4");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(770);
+                        SetHighFrequencyDacOutput(1209);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '5':
+                        UART_1_PutString("5");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(770);
+                        SetHighFrequencyDacOutput(1336);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '6':
+                        UART_1_PutString("6");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(770);
+                        SetHighFrequencyDacOutput(1477);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '7':
+                        UART_1_PutString("7");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(852);
+                        SetHighFrequencyDacOutput(1209);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '8':
+                        UART_1_PutString("8");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(852);
+                        SetHighFrequencyDacOutput(1336);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '9':
+                        UART_1_PutString("9");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(852);
+                        SetHighFrequencyDacOutput(1477);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '*':
+                        UART_1_PutString("*");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(941);
+                        SetHighFrequencyDacOutput(1209);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    break;
+                        
+                    case '#':
+                        UART_1_PutString("#");
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(941);
+                        SetHighFrequencyDacOutput(1477);
+                        // Set next state
+                        currentState = STATE_WAIT_WITH_SIGNAL_ON;
+                    
+                    break;
+                    
+                    case 'D':
+                    case 'd':
+                        //Get Samples
+                        for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
+                        {                 
+                            /* Check to see if an ADC conversion has completed */
+                            if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
+                            {
+                                Output = ADC_DelSig_1_GetResult16();
+                                array[sampleNumber] = Output;                       
+                                sampleNumber ++;
+                            }
+                        }
+                        
+                        // Print samples
+                        UART_1_PutString("-----> Samples Init\r\n");
+                        for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber ++)
+                        {
+                            sprintf(TransmitBuffer, "%d\r\n", array[sampleNumber]);
+                            UART_1_PutString(TransmitBuffer);
+                        }
+                        UART_1_PutString("-----> Samples End\r\n");
+                        
+                        // Decode data              
+                        DTMF(); 
+                        
+                        // Set next state
+                        currentState = STATE_READ_INPUT;
+                    break;
+                        
+                    case 'S':
+                    case 's':
+                        //Get Samples
+                        for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
+                        {                 
+                            /* Check to see if an ADC conversion has completed */
+                            if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
+                            {
+                                Output = ADC_DelSig_1_GetResult16();
+                                array[sampleNumber] = Output;                       
+                                sampleNumber ++;
+                            }
+                        }
+                        
+                        // Decode data              
+                        DTMF(); 
+                        
+                        // Set next state
+                        currentState = STATE_READ_INPUT;
+                        
+                    break;
+                    
+                    case 'X':    
+                    case 'x':
+                        UART_1_PutString("Dummy Frequency ...\r\n");  
+                        // Configure Output frequency
+                        SetLowFrequencyDacOutput(150);
+                        SetHighFrequencyDacOutput(150);
+                        // Turn Off blue LED
+                        Blue_LED_Write(0);
+                        // Set next state
+                        currentState = STATE_READ_INPUT;
+                    break;
+                        
+                    default:
+                        /* Place error handling code here */
+                        currentState = STATE_READ_INPUT;
+                    break;    
                 }
-                UART_1_PutString("-----> Samples End\r\n");
                 
-                // Decode data              
-                DTMF();            
-                
-                break;
-                
-            case 'S':
-            case 's':
-                //Get Samples
-                for (int16 sampleNumber = 0; sampleNumber < NUMBER_OF_SAMPLES; sampleNumber += 0)
-                {                 
-                    /* Check to see if an ADC conversion has completed */
-                    if(ADC_DelSig_1_IsEndConversion(ADC_DelSig_1_RETURN_STATUS))
-                    {
-                        Output = ADC_DelSig_1_GetResult16();
-                        array[sampleNumber] = Output;                       
-                        sampleNumber ++;
-                    }
-                }
-                
-                // Decode data              
-                DTMF();              
-                
-                break;
+            break;
             
-            case 'X':    
-            case 'x':
-                UART_1_PutString("Dummy Frequency ...\r\n");                             
+            //-----------------------------------------------------//
+            //-----------------------------------------------------//
+            case STATE_WAIT_WITH_SIGNAL_ON:
+                // Turn on BLUE LED
+                Blue_LED_Write(1);
+                
+                counterEnable = TRUE;
+                while (counter < WAIT_CYCLES)
+                {
+                    // Wait here to prevent new input commands
+                }
+                
+                // Restart counter variables
+                counterEnable = FALSE;
+                counter = 0;
+                
+                // Set next state
+                currentState = STATE_DISABLE_OUTPUT;
+                
+            break;
+            
+            //-----------------------------------------------------//
+            //-----------------------------------------------------//
+            case STATE_DISABLE_OUTPUT:
+                
+                // Configure Output frequency
                 SetLowFrequencyDacOutput(150);
                 SetHighFrequencyDacOutput(150);
+                // Turn Off blue LED
+                Blue_LED_Write(0);               
                 
-                break;
+                // Set next state
+                currentState = STATE_WAIT_WITH_SIGNAL_OFF;
                 
-            default:
-                /* Place error handling code here */
-                break;    
-        }
-        
-    }
-}
+            break;
+            
+            //-----------------------------------------------------//
+            //-----------------------------------------------------//
+            case STATE_WAIT_WITH_SIGNAL_OFF:
+                
+                counterEnable = TRUE;
+                while (counter < WAIT_CYCLES)
+                {
+                    // Wait here to prevent new input commands
+                }
+                
+                // Restart counter variables
+                counterEnable = FALSE;
+                counter = 0;
+                
+                // Set next state
+                currentState = STATE_READ_INPUT;
+                
+            break;
+
+        } // End "Switch(currentState)"
+    } // End "While(TRUE)"
+} // End "Main(void)"
 
 /*******************************************************************************
 * Function - Init Settings

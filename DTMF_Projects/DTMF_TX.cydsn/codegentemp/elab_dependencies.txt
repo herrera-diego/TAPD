@@ -207,6 +207,32 @@ C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrim
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cydff_v1_30\cydff_v1_30.cystate
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cydff_v1_30
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cydff_v1_30\Custom\custom.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Timer_v2_80.cycdx
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Timer_v2_80.cysym
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Timer_v2_80.pdf
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Timer_v2_80.cystate
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\API\Timer.c
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\API\Timer.h
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\API\Timer_PM.c
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\cycustomizer.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\cyparameters.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Resources.Designer.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Utils\cyutils.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Utils\cyenums.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Utils\cyclock.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Utils\cyconstants.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Tabs\cytabbase.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Tabs\cytimercontrol.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Tabs\cytimercontrol.Designer.cs
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Resources.resx
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\Custom\Tabs\cytimercontrol.resx
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80\PSoC5\Timer_v2_80.cysch
+C:\Users\riveraes\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Timer_v2_80
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_psoc3_timer_v1_0\cy_psoc3_timer_v1_0.cyprimitive
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_psoc3_timer_v1_0\cy_psoc3_timer_v1_0.cysym
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.cysym
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.pdf
+C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v
 C:\Users\riveraes\Documents\LaptopPublic\Maestria\MP6157_Adquisicion y procesamiento de datos\DualToneMultiFrequency\DTMF_Projects\DTMF_TX.cydsn\DTMF_TX.cydwr
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_60\PSoC5\API\cm3gcc.ld
 C:\Program Files (x86)\Cypress\PSoC Creator\4.1\PSoC Creator\psoc\content\CyComponentLibrary\CyComponentLibrary.cylib\cy_boot_v5_60\PSoC5\API\Cm3RealView.scat
